@@ -6,4 +6,4 @@
  * @datetime 2016-10-08 17:17
  */
 require __DIR__ . '/vendor/autoload.php';
-return \Notadd\Content\Module::class;
+return \Notadd\Content\Extension::class;
