@@ -9,8 +9,6 @@ namespace Notadd\Content\Managers;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Collection;
-use Notadd\Content\Events\RegisterArticleTemplate;
-use Notadd\Content\Events\RegisterArticleType;
 use Notadd\Content\Templates\ArticleTemplate;
 use Notadd\Content\Types\ArticleType;
 /**
@@ -44,8 +42,6 @@ class ArticleManager {
         $this->events = $events;
         $this->templates = new Collection();
         $this->type = new Collection();
-        $this->events->fire(new RegisterArticleTemplate($container, $this));
-        $this->events->fire(new RegisterArticleType($container, $this));
     }
     /**
      * @param string $name

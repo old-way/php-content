@@ -9,8 +9,6 @@ namespace Notadd\Content\Managers;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Collection;
-use Notadd\Content\Events\RegisterPageTemplate;
-use Notadd\Content\Events\RegisterPageType;
 use Notadd\Content\Templates\PageTemplate;
 use Notadd\Content\Types\PageType;
 /**
@@ -44,8 +42,6 @@ class PageManager {
         $this->events = $events;
         $this->templates = new Collection();
         $this->type = new Collection();
-        $this->events->fire(new RegisterPageTemplate($container, $this));
-        $this->events->fire(new RegisterPageType($container, $this));
     }
     /**
      * @param string $name

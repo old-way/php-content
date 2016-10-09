@@ -9,8 +9,6 @@ namespace Notadd\Content\Managers;
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Collection;
-use Notadd\Content\Events\RegisterCategoryTemplate;
-use Notadd\Content\Events\RegisterCategoryType;
 use Notadd\Content\Templates\CategoryTemplate;
 use Notadd\Content\Types\CategoryType;
 /**
@@ -44,8 +42,6 @@ class CategoryManager {
         $this->events = $events;
         $this->templates = new Collection();
         $this->type = new Collection();
-        $this->events->fire(new RegisterCategoryTemplate($container, $this));
-        $this->events->fire(new RegisterCategoryType($container, $this));
     }
     /**
      * @param string $name

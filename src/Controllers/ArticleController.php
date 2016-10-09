@@ -6,6 +6,7 @@
  * @datetime 2016-10-08 17:26
  */
 namespace Notadd\Content\Controllers;
+use Notadd\Content\Managers\ArticleManager;
 use Notadd\Foundation\Routing\Abstracts\AbstractController;
 /**
  * Class ArticleController
@@ -13,9 +14,11 @@ use Notadd\Foundation\Routing\Abstracts\AbstractController;
  */
 class ArticleController extends AbstractController {
     /**
+     * @param \Notadd\Content\Managers\ArticleManager $manager
      * @return \Illuminate\Contracts\View\View
      */
-    public function index() {
+    public function index(ArticleManager $manager) {
+        dd($manager);
         return $this->view('');
     }
     /**
