@@ -6,6 +6,7 @@
  * @datetime 2016-10-08 17:12
  */
 namespace Notadd\Content;
+use Notadd\Content\Listeners\RouteRegister;
 use Notadd\Extension\Abstracts\ExtensionRegistrar;
 /**
  * Class Module
@@ -28,5 +29,6 @@ class Extension extends ExtensionRegistrar  {
      * @return void
      */
     public function register() {
+        $this->events->subscribe(RouteRegister::class);
     }
 }
