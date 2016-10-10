@@ -8,6 +8,7 @@
 namespace Notadd\Content\Events;
 use Illuminate\Container\Container;
 use Notadd\Content\Managers\CategoryManager;
+use Notadd\Content\Types\CategoryType;
 /**
  * Class RegisterCategoryType
  * @package Notadd\Content\Events
@@ -29,5 +30,12 @@ class RegisterCategoryType {
     public function __construct(Container $container, CategoryManager $manager) {
         $this->container = $container;
         $this->manager = $manager;
+    }
+    /**
+     * @param string $name
+     * @param \Notadd\Content\Types\CategoryType $type
+     */
+    public function registerTemplate($name, CategoryType $type) {
+        $this->manager->registerType($name, $type);
     }
 }

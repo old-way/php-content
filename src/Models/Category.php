@@ -7,9 +7,30 @@
  */
 namespace Notadd\Content\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Category
  * @package Notadd\Content\Models
  */
 class Category extends Model {
+    use SoftDeletes;
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'parent_id',
+        'title',
+        'alias',
+        'description',
+        'type',
+        'background_color',
+        'seo_title',
+        'seo_keyword',
+        'seo_description',
+        'background_image',
+        'top_image',
+        'pagination',
+        'enabled',
+        'deleted_at'
+    ];
 }

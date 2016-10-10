@@ -8,6 +8,7 @@
 namespace Notadd\Content\Events;
 use Illuminate\Container\Container;
 use Notadd\Content\Managers\CategoryManager;
+use Notadd\Content\Templates\CategoryTemplate;
 /**
  * Class RegisterCategoryTemplate
  * @package Notadd\Content\Events
@@ -29,5 +30,12 @@ class RegisterCategoryTemplate {
     public function __construct(Container $container, CategoryManager $manager) {
         $this->container = $container;
         $this->manager = $manager;
+    }
+    /**
+     * @param string $name
+     * @param \Notadd\Content\Templates\CategoryTemplate $template
+     */
+    public function registerTemplate($name, CategoryTemplate $template) {
+        $this->manager->registerTemplate($name, $template);
     }
 }

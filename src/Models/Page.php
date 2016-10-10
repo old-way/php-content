@@ -7,9 +7,28 @@
  */
 namespace Notadd\Content\Models;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 /**
  * Class Page
  * @package Notadd\Content\Models
  */
 class Page extends Model {
+    use SoftDeletes;
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'parent_id',
+        'title',
+        'thumb_image',
+        'alias',
+        'keyword',
+        'description',
+        'template',
+        'content',
+        'enabled',
+        'order_id',
+        'hits',
+        'deleted_at'
+    ];
 }

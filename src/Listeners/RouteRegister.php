@@ -9,12 +9,12 @@ namespace Notadd\Content\Listeners;
 use Notadd\Content\Controllers\ArticleController;
 use Notadd\Content\Controllers\CategoryController;
 use Notadd\Content\Controllers\PageController;
-use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegister;
+use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegistrar;
 /**
  * Class RouteRegister
  * @package Notadd\Content\Listeners
  */
-class RouteRegister extends AbstractRouteRegister {
+class RouteRegister extends AbstractRouteRegistrar  {
     /**
      * @return void
      */

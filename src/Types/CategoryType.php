@@ -6,5 +6,9 @@
  * @datetime 2016-10-09 17:35
  */
 namespace Notadd\Content\Types;
+/**
+ * Class CategoryType
+ * @package Notadd\Content\Types
+ */
 class CategoryType {
 }

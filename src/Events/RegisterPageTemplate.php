@@ -8,6 +8,7 @@
 namespace Notadd\Content\Events;
 use Illuminate\Container\Container;
 use Notadd\Content\Managers\PageManager;
+use Notadd\Content\Templates\PageTemplate;
 /**
  * Class RegisterPageTemplate
  * @package Notadd\Content\Events
@@ -29,5 +30,12 @@ class RegisterPageTemplate {
     public function __construct(Container $container, PageManager $manager) {
         $this->container = $container;
         $this->manager = $manager;
+    }
+    /**
+     * @param string $name
+     * @param \Notadd\Content\Templates\PageTemplate $template
+     */
+    public function registerTemplate($name, PageTemplate $template) {
+        $this->manager->registerTemplate($name, $template);
     }
 }

@@ -8,6 +8,7 @@
 namespace Notadd\Content\Events;
 use Illuminate\Container\Container;
 use Notadd\Content\Managers\ArticleManager;
+use Notadd\Content\Types\ArticleType;
 /**
  * Class RegisterArticleType
  * @package Notadd\Content\Events
@@ -29,5 +30,12 @@ class RegisterArticleType {
     public function __construct(Container $container, ArticleManager $manager) {
         $this->container = $container;
         $this->manager = $manager;
+    }
+    /**
+     * @param string $name
+     * @param \Notadd\Content\Types\ArticleType $type
+     */
+    public function registerTemplate($name, ArticleType $type) {
+        $this->manager->registerType($name, $type);
     }
 }
