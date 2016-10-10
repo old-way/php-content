@@ -10,12 +10,12 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Notadd\Content\Events\RegisterPageType as RegisterTypeEvent;
 use Notadd\Content\Managers\PageManager;
-use Notadd\Foundation\Abstracts\AbstractEventSubscriber;
+use Notadd\Foundation\Abstracts\EventSubscriber;
 /**
  * Class PageTypeRegistrar
  * @package Notadd\Content\Abstracts
  */
-abstract class PageTypeRegistrar extends AbstractEventSubscriber {
+abstract class PageTypeRegistrar extends EventSubscriber {
     /**
      * @var \Notadd\Content\Managers\PageManager
      */

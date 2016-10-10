@@ -10,12 +10,12 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Notadd\Content\Events\RegisterArticleType as RegisterTypeEvent;
 use Notadd\Content\Managers\ArticleManager;
-use Notadd\Foundation\Abstracts\AbstractEventSubscriber;
+use Notadd\Foundation\Abstracts\EventSubscriber;
 /**
  * Class ArticleTypeRegistrar
  * @package Notadd\Content\Abstracts
  */
-abstract class ArticleTypeRegistrar extends AbstractEventSubscriber {
+abstract class ArticleTypeRegistrar extends EventSubscriber {
     /**
      * @var \Notadd\Content\Managers\ArticleManager
      */

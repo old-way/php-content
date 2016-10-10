@@ -10,12 +10,12 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Notadd\Content\Events\RegisterCategoryTemplate as RegisterTemplateEvent;
 use Notadd\Content\Managers\CategoryManager;
-use Notadd\Foundation\Abstracts\AbstractEventSubscriber;
+use Notadd\Foundation\Abstracts\EventSubscriber;
 /**
  * Class AbstractCategoryTemplateRegistrar
  * @package Notadd\Content\Abstracts
  */
-abstract class CategoryTemplateRegistrar extends AbstractEventSubscriber {
+abstract class CategoryTemplateRegistrar extends EventSubscriber {
     /**
      * @var \Notadd\Content\Managers\CategoryManager
      */

@@ -6,10 +6,10 @@
  * @datetime 2016-10-08 17:27
  */
 namespace Notadd\Content\Handlers;
-use Notadd\Foundation\Passport\Abstracts\AbstractHandler;
+use Notadd\Foundation\Passport\Abstracts\Handler;
 /**
  * Class CategoryHandler
  * @package Notadd\Content\Handlers
  */
-class CategoryHandler extends AbstractHandler {
+class CategoryHandler extends Handler {
 }

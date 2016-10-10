@@ -7,12 +7,12 @@
  */
 namespace Notadd\Content\Controllers;
 use Notadd\Content\Managers\ArticleManager;
-use Notadd\Foundation\Routing\Abstracts\AbstractController;
+use Notadd\Foundation\Routing\Abstracts\Controller;
 /**
  * Class ArticleController
  * @package Notadd\Content\Controllers
  */
-class ArticleController extends AbstractController {
+class ArticleController extends Controller {
     /**
      * @param \Notadd\Content\Managers\ArticleManager $manager
      * @return \Illuminate\Contracts\View\View

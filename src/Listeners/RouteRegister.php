@@ -9,7 +9,7 @@ namespace Notadd\Content\Listeners;
 use Notadd\Content\Controllers\ArticleController;
 use Notadd\Content\Controllers\CategoryController;
 use Notadd\Content\Controllers\PageController;
-use Notadd\Foundation\Routing\Abstracts\AbstractRouteRegistrar;
+use Notadd\Foundation\Routing\Abstracts\RouteRegistrar as AbstractRouteRegistrar;
 /**
  * Class RouteRegister
  * @package Notadd\Content\Listeners

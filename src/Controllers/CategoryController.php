@@ -6,12 +6,12 @@
  * @datetime 2016-10-08 17:26
  */
 namespace Notadd\Content\Controllers;
-use Notadd\Foundation\Routing\Abstracts\AbstractController;
+use Notadd\Foundation\Routing\Abstracts\Controller;
 /**
  * Class CategoryController
  * @package Notadd\Content\Controllers
  */
-class CategoryController extends AbstractController {
+class CategoryController extends Controller {
     /**
      * @return \Illuminate\Contracts\View\View
      */
