@@ -4,7 +4,7 @@
     "keywords": ["notadd", "cms", "framework", "content"],
     "homepage": "https://notadd.com",
     "license": "Apache-2.0",
-    "type": "notadd-module",
+    "type": "notadd-extension",
     "authors": [
         {
             "name": "twilroad",

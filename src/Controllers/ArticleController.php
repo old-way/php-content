@@ -18,7 +18,6 @@ class ArticleController extends Controller {
      * @return \Illuminate\Contracts\View\View
      */
     public function index(ArticleManager $manager) {
-        dd($manager);
         return $this->view('');
     }
     /**
