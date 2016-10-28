@@ -16,7 +16,7 @@ use Notadd\Content\Listeners\RouteRegister;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
 use Notadd\Content\Managers\PageManager;
-use Notadd\Extension\Abstracts\ExtensionRegistrar;
+use Notadd\Foundation\Extension\Abstracts\ExtensionRegistrar;
 /**
  * Class Module
  * @package Notadd\Content
@@ -25,13 +25,13 @@ class Extension extends ExtensionRegistrar {
     /**
      * @return string
      */
-    protected function getExtensionName() {
+    public function getExtensionName() {
         return 'notadd/content';
     }
     /**
      * @return string
      */
-    protected function getExtensionPath() {
+    public function getExtensionPath() {
         return realpath(__DIR__ . '/../');
     }
     /**
