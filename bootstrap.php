@@ -5,4 +5,4 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-10-08 17:17
  */
-//return \Notadd\Content\Extension::class;
+return \Notadd\Content\Extension::class;
