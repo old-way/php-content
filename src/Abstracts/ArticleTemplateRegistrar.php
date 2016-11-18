@@ -12,7 +12,7 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Notadd\Content\Events\RegisterArticleTemplate as RegisterTemplateEvent;
 use Notadd\Content\Managers\ArticleManager;
-use Notadd\Foundation\Abstracts\EventSubscriber;
+use Notadd\Foundation\Event\Abstracts\EventSubscriber;
 
 /**
  * Class AbstractArticleTemplateRegistrar.

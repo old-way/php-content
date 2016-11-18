@@ -8,11 +8,9 @@
  */
 namespace Notadd\Content\Handlers;
 
-use Notadd\Foundation\Passport\Abstracts\Handler;
-
 /**
  * Class ArticleHandler.
  */
-class ArticleHandler extends Handler
+class ArticleHandler
 {
 }

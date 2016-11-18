@@ -12,7 +12,7 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Notadd\Content\Events\RegisterPageTemplate as RegisterTemplateEvent;
 use Notadd\Content\Managers\PageManager;
-use Notadd\Foundation\Abstracts\EventSubscriber;
+use Notadd\Foundation\Event\Abstracts\EventSubscriber;
 
 /**
  * Class PageTemplateRegistrar.

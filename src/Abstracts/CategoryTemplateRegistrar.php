@@ -12,7 +12,7 @@ use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher;
 use Notadd\Content\Events\RegisterCategoryTemplate as RegisterTemplateEvent;
 use Notadd\Content\Managers\CategoryManager;
-use Notadd\Foundation\Abstracts\EventSubscriber;
+use Notadd\Foundation\Event\Abstracts\EventSubscriber;
 
 /**
  * Class AbstractCategoryTemplateRegistrar.
