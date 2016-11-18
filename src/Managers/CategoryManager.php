@@ -1,21 +1,26 @@
 <?php
 /**
  * This file is part of Notadd.
+ *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-10-09 15:38
  */
 namespace Notadd\Content\Managers;
+
 use Illuminate\Container\Container;
 use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Collection;
 use Notadd\Content\Templates\CategoryTemplate;
 use Notadd\Content\Types\CategoryType;
+
 /**
  * Class CategoryManager
+ *
  * @package Notadd\Content\Managers
  */
-class CategoryManager {
+class CategoryManager
+{
     /**
      * @var \Illuminate\Container\Container
      */
@@ -32,29 +37,36 @@ class CategoryManager {
      * @var \Illuminate\Support\Collection
      */
     protected $type;
+
     /**
      * Article constructor.
+     *
      * @param \Illuminate\Container\Container $container
-     * @param \Illuminate\Events\Dispatcher $events
+     * @param \Illuminate\Events\Dispatcher   $events
      */
-    public function __construct(Container $container, EventsDispatcher $events) {
+    public function __construct(Container $container, EventsDispatcher $events)
+    {
         $this->container = $container;
         $this->events = $events;
         $this->templates = new Collection();
         $this->type = new Collection();
     }
+
     /**
-     * @param string $name
+     * @param string                                     $name
      * @param \Notadd\Content\Templates\CategoryTemplate $template
      */
-    public function registerTemplate($name, CategoryTemplate $template) {
+    public function registerTemplate($name, CategoryTemplate $template)
+    {
         $this->templates->put($name, $template);
     }
+
     /**
-     * @param string $name
+     * @param string                             $name
      * @param \Notadd\Content\Types\CategoryType $type
      */
-    public function registerType($name, CategoryType $type) {
+    public function registerType($name, CategoryType $type)
+    {
         $this->type->put($name, $type);
     }
 }

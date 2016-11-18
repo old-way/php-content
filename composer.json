@@ -1,7 +1,12 @@
 {
     "name": "notadd/content",
     "description": "The Notadd Module.",
-    "keywords": ["notadd", "cms", "framework", "content"],
+    "keywords": [
+        "notadd",
+        "cms",
+        "framework",
+        "content"
+    ],
     "homepage": "https://notadd.com",
     "license": "Apache-2.0",
     "type": "notadd-extension",

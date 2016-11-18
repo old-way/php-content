@@ -1,17 +1,22 @@
 <?php
 /**
  * This file is part of Notadd.
+ *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-10-09 15:37
  */
 namespace Notadd\Content\Templates;
+
 use Illuminate\Support\Str;
+
 /**
  * Class ArticleTemplate
+ *
  * @package Notadd\Content\Templates
  */
-class ArticleTemplate {
+class ArticleTemplate
+{
     /**
      * @var string
      */
@@ -28,38 +33,49 @@ class ArticleTemplate {
      * @var string
      */
     protected $relation;
+
     /**
      * ArticleTemplate constructor.
+     *
      * @param string $key
      * @param string $hit
      * @param string $path
      */
-    public function __construct($key, $hit, $path) {
+    public function __construct($key, $hit, $path)
+    {
         $this->hit = $hit;
         $this->key = $key;
         $this->path = $path;
     }
+
     /**
      * @param string $key
      * @param string $location
+     *
      * @return \Notadd\Content\Templates\ArticleTemplate
      */
-    public static function create($key, $location) {
-        if(Str::contains($location, ':')) {
+    public static function create($key, $location)
+    {
+        if (Str::contains($location, ':')) {
             list($hit, $path) = explode(':', $location);
         } else {
             $hit = 'default';
             $path = $location;
         }
+
         return new static($key, $hit, $path);
     }
+
     /**
      * @param string $relation
+     *
      * @return \Notadd\Content\Templates\ArticleTemplate
      */
-    public function withRelation($relation) {
+    public function withRelation($relation)
+    {
         $instance = clone $this;
         $instance->relation = $relation;
+
         return $instance;
     }
 }
