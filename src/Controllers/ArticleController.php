@@ -12,9 +12,7 @@ use Notadd\Content\Managers\ArticleManager;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
- * Class ArticleController
- *
- * @package Notadd\Content\Controllers
+ * Class ArticleController.
  */
 class ArticleController extends Controller
 {

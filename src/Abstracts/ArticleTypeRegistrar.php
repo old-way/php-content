@@ -15,9 +15,7 @@ use Notadd\Content\Managers\ArticleManager;
 use Notadd\Foundation\Abstracts\EventSubscriber;
 
 /**
- * Class ArticleTypeRegistrar
- *
- * @package Notadd\Content\Abstracts
+ * Class ArticleTypeRegistrar.
  */
 abstract class ArticleTypeRegistrar extends EventSubscriber
 {

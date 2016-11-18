@@ -15,9 +15,7 @@ use Notadd\Content\Managers\PageManager;
 use Notadd\Foundation\Abstracts\EventSubscriber;
 
 /**
- * Class PageTypeRegistrar
- *
- * @package Notadd\Content\Abstracts
+ * Class PageTypeRegistrar.
  */
 abstract class PageTypeRegistrar extends EventSubscriber
 {

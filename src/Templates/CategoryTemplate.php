@@ -11,9 +11,7 @@ namespace Notadd\Content\Templates;
 use Illuminate\Support\Str;
 
 /**
- * Class CategoryTemplate
- *
- * @package Notadd\Content\Templates
+ * Class CategoryTemplate.
  */
 class CategoryTemplate
 {

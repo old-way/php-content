@@ -9,9 +9,7 @@
 namespace Notadd\Content\Jobs;
 
 /**
- * Class PageJob
- *
- * @package Notadd\Content\Jobs
+ * Class PageJob.
  */
 class PageJob
 {

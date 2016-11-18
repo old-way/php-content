@@ -13,9 +13,7 @@ use Notadd\Content\Managers\CategoryManager;
 use Notadd\Content\Types\CategoryType;
 
 /**
- * Class RegisterCategoryType
- *
- * @package Notadd\Content\Events
+ * Class RegisterCategoryType.
  */
 class RegisterCategoryType
 {

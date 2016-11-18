@@ -21,9 +21,7 @@ use Notadd\Content\Managers\PageManager;
 use Notadd\Foundation\Extension\Abstracts\ExtensionRegistrar;
 
 /**
- * Class Module
- *
- * @package Notadd\Content
+ * Class Module.
  */
 class Extension extends ExtensionRegistrar
 {

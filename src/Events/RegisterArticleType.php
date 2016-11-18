@@ -13,9 +13,7 @@ use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Types\ArticleType;
 
 /**
- * Class RegisterArticleType
- *
- * @package Notadd\Content\Events
+ * Class RegisterArticleType.
  */
 class RegisterArticleType
 {

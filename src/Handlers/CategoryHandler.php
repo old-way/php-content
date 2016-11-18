@@ -11,9 +11,7 @@ namespace Notadd\Content\Handlers;
 use Notadd\Foundation\Passport\Abstracts\Handler;
 
 /**
- * Class CategoryHandler
- *
- * @package Notadd\Content\Handlers
+ * Class CategoryHandler.
  */
 class CategoryHandler extends Handler
 {

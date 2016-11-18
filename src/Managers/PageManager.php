@@ -15,9 +15,7 @@ use Notadd\Content\Templates\PageTemplate;
 use Notadd\Content\Types\PageType;
 
 /**
- * Class PageManager
- *
- * @package Notadd\Content\Managers
+ * Class PageManager.
  */
 class PageManager
 {

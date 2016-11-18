@@ -13,9 +13,7 @@ use Notadd\Content\Managers\CategoryManager;
 use Notadd\Content\Templates\CategoryTemplate;
 
 /**
- * Class RegisterCategoryTemplate
- *
- * @package Notadd\Content\Events
+ * Class RegisterCategoryTemplate.
  */
 class RegisterCategoryTemplate
 {

@@ -13,9 +13,7 @@ use Notadd\Content\Managers\PageManager;
 use Notadd\Content\Templates\PageTemplate;
 
 /**
- * Class RegisterPageTemplate
- *
- * @package Notadd\Content\Events
+ * Class RegisterPageTemplate.
  */
 class RegisterPageTemplate
 {

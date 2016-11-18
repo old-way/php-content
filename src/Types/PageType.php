@@ -9,9 +9,7 @@
 namespace Notadd\Content\Types;
 
 /**
- * Class PageType
- *
- * @package Notadd\Content\Types
+ * Class PageType.
  */
 class PageType
 {

@@ -12,9 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class Article
- *
- * @package Notadd\Content\Models
+ * Class Article.
  */
 class Article extends Model
 {

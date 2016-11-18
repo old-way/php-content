@@ -9,9 +9,7 @@
 namespace Notadd\Content\Types;
 
 /**
- * Class ArticleType
- *
- * @package Notadd\Content\Types
+ * Class ArticleType.
  */
 class ArticleType
 {

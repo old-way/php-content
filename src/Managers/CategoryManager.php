@@ -15,9 +15,7 @@ use Notadd\Content\Templates\CategoryTemplate;
 use Notadd\Content\Types\CategoryType;
 
 /**
- * Class CategoryManager
- *
- * @package Notadd\Content\Managers
+ * Class CategoryManager.
  */
 class CategoryManager
 {

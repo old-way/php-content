@@ -13,9 +13,7 @@ use Notadd\Content\Managers\PageManager;
 use Notadd\Content\Types\PageType;
 
 /**
- * Class RegisterPageType
- *
- * @package Notadd\Content\Events
+ * Class RegisterPageType.
  */
 class RegisterPageType
 {

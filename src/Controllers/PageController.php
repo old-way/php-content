@@ -11,9 +11,7 @@ namespace Notadd\Content\Controllers;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
- * Class PageController
- *
- * @package Notadd\Content\Controllers
+ * Class PageController.
  */
 class PageController extends Controller
 {

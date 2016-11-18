@@ -11,9 +11,7 @@ namespace Notadd\Content\Templates;
 use Illuminate\Support\Str;
 
 /**
- * Class PageTemplate
- *
- * @package Notadd\Content\Templates
+ * Class PageTemplate.
  */
 class PageTemplate
 {

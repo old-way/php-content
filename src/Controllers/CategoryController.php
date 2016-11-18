@@ -11,9 +11,7 @@ namespace Notadd\Content\Controllers;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
- * Class CategoryController
- *
- * @package Notadd\Content\Controllers
+ * Class CategoryController.
  */
 class CategoryController extends Controller
 {

@@ -14,9 +14,7 @@ use Notadd\Content\Controllers\PageController;
 use Notadd\Foundation\Routing\Abstracts\RouteRegistrar as AbstractRouteRegistrar;
 
 /**
- * Class RouteRegister
- *
- * @package Notadd\Content\Listeners
+ * Class RouteRegister.
  */
 class RouteRegister extends AbstractRouteRegistrar
 {

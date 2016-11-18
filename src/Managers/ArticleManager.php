@@ -15,9 +15,7 @@ use Notadd\Content\Templates\ArticleTemplate;
 use Notadd\Content\Types\ArticleType;
 
 /**
- * Class ArticleManager
- *
- * @package Notadd\Content\Managers
+ * Class ArticleManager.
  */
 class ArticleManager
 {

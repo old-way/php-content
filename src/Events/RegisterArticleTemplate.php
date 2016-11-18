@@ -13,9 +13,7 @@ use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Templates\ArticleTemplate;
 
 /**
- * Class RegisterArticleTemplate
- *
- * @package Notadd\Content\Events
+ * Class RegisterArticleTemplate.
  */
 class RegisterArticleTemplate
 {

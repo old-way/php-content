@@ -11,9 +11,7 @@ namespace Notadd\Content\Templates;
 use Illuminate\Support\Str;
 
 /**
- * Class ArticleTemplate
- *
- * @package Notadd\Content\Templates
+ * Class ArticleTemplate.
  */
 class ArticleTemplate
 {

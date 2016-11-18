@@ -15,9 +15,7 @@ use Notadd\Content\Managers\CategoryManager;
 use Notadd\Foundation\Abstracts\EventSubscriber;
 
 /**
- * Class AbstractCategoryTemplateRegistrar
- *
- * @package Notadd\Content\Abstracts
+ * Class AbstractCategoryTemplateRegistrar.
  */
 abstract class CategoryTemplateRegistrar extends EventSubscriber
 {

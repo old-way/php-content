@@ -9,9 +9,7 @@
 namespace Notadd\Content\Jobs;
 
 /**
- * Class CategoryJob
- *
- * @package Notadd\Content\Jobs
+ * Class CategoryJob.
  */
 class CategoryJob
 {
