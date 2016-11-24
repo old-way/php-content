@@ -5,7 +5,7 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-24 18:31
  */
-namespace Handlers;
+namespace Notadd\Content\Handlers;
 
 /**
  * Class ArticleEditHandler.
