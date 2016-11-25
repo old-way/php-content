@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers;
 
+use Notadd\Content\Handlers\Creators\ArticleCreatorHandler;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
@@ -24,6 +25,12 @@ class ArticleController extends Controller
     public function index(ArticleManager $manager)
     {
         return $this->view('');
+    }
+
+    public function create(ArticleCreatorHandler $handler)
+    {
+        $response = $handler->toResponse($this->request);
+        return $response->generateHttpResponse();
     }
 
     /**
