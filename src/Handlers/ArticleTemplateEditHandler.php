@@ -6,12 +6,13 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-25 15:13
  */
-
 namespace Notadd\Content\Handlers;
+
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
  * Class ArticleTemplateEditHandler.
  */
-class ArticleTemplateEditHandler
+class ArticleTemplateEditHandler extends SetHandler
 {
 }

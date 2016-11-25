@@ -6,12 +6,13 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-25 15:23
  */
-
 namespace Notadd\Content\Handlers;
+
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
  * Class PageTypeFindHandler.
  */
-class PageTypeFindHandler
+class PageTypeFindHandler extends DataHandler
 {
 }

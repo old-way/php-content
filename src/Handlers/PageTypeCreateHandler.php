@@ -9,9 +9,11 @@
 
 namespace Notadd\Content\Handlers;
 
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
+
 /**
  * Class PageTypeCreateHandler.
  */
-class PageTypeCreateHandler
+class PageTypeCreateHandler extends SetHandler
 {
 }

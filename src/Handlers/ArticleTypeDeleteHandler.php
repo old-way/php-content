@@ -6,12 +6,13 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-25 15:19
  */
-
 namespace Notadd\Content\Handlers;
+
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
  * Class ArticleTypeDeleteHandler.
  */
-class ArticleTypeDeleteHandler
+class ArticleTypeDeleteHandler extends SetHandler
 {
 }

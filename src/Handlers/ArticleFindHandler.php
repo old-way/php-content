@@ -7,9 +7,11 @@
  */
 namespace Notadd\Content\Handlers;
 
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
+
 /**
  * Class ArticleFindHandler.
  */
-class ArticleFindHandler
+class ArticleFindHandler extends DataHandler
 {
 }
