@@ -7,6 +7,7 @@
  */
 namespace Notadd\Content\Handlers;
 
+use Illuminate\Http\Request;
 use Notadd\Foundation\Debug\Handlers\SetHandler;
 
 /**
@@ -14,4 +15,49 @@ use Notadd\Foundation\Debug\Handlers\SetHandler;
  */
 class ArticleTemplateCreateHandler extends SetHandler
 {
+    /**
+     * @return int
+     */
+    public function code()
+    {
+        return 200;
+    }
+
+    /**
+     * @return array
+     */
+    public function data()
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function errors()
+    {
+        return [
+            $this->translator->trans(''),
+        ];
+    }
+
+    /**
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return bool
+     */
+    public function execute(Request $request)
+    {
+        return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            $this->translator->trans(''),
+        ];
+    }
 }
