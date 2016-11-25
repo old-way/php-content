@@ -23,6 +23,12 @@ class RouteRegister extends AbstractRouteRegistrar
      */
     public function handle()
     {
+        $this->router->group(['middleware' => ['auth:api', 'web'], 'prefix' => 'api/article'], function () {
+        });
+        $this->router->group(['middleware' => ['auth:api', 'web'], 'prefix' => 'api/category'], function () {
+        });
+        $this->router->group(['middleware' => ['auth:api', 'web'], 'prefix' => 'api/page'], function () {
+        });
         $this->router->group(['middleware' => 'web', 'prefix' => 'article'], function () {
             $this->router->resource('/', ArticleController::class);
         });
