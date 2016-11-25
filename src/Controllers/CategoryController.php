@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers;
 
+use Notadd\Content\Handlers\Creators\CategoryCreatorHandler;
 use Notadd\Content\Handlers\Finders\CategoryFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
@@ -16,6 +17,16 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class CategoryController extends Controller
 {
+    /**
+     * @param \Notadd\Content\Handlers\Creators\CategoryCreatorHandler $handler
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function create(CategoryCreatorHandler $handler)
+    {
+        return $handler->toResponse($this->request)->generateHttpResponse();
+    }
+
     /**
      * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
      *
