@@ -12,5 +12,4 @@ namespace Notadd\Content\Handlers;
  */
 class ArticleEditHandler
 {
-
 }
