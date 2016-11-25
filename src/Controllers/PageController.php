@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers;
 
+use Notadd\Content\Handlers\Creators\PageCreatorHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -15,6 +16,13 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class PageController extends Controller
 {
+    public function create(PageCreatorHandler $handler)
+    {
+        $response = $handler->toResponse($this->request);
+
+        return $response->generateHttpResponse();
+    }
+
     /**
      * @param $id
      *
