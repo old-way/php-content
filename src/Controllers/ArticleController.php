@@ -9,6 +9,7 @@
 namespace Notadd\Content\Controllers;
 
 use Notadd\Content\Handlers\Creators\ArticleCreatorHandler;
+use Notadd\Content\Handlers\Deleters\ArticleDeleterHandler;
 use Notadd\Content\Handlers\Finders\ArticleFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
@@ -17,6 +18,13 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class ArticleController extends Controller
 {
+    public function destroy(ArticleDeleterHandler $handler)
+    {
+        $response = $handler->toResponse($this->request);
+
+        return $response->generateHttpResponse();
+    }
+
     /**
      * @param \Notadd\Content\Handlers\Finders\ArticleFinderHandler $handler
      *
