@@ -17,14 +17,6 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 class CategoryController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function index()
-    {
-        return $this->view('');
-    }
-
-    /**
      * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
      *
      * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response

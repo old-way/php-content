@@ -26,17 +26,6 @@ class ArticleController extends Controller
     }
 
     /**
-     * @param \Notadd\Content\Handlers\Finders\ArticleFinderHandler $handler
-     *
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function index(ArticleFinderHandler $handler)
-    {
-
-        return $this->view('');
-    }
-
-    /**
      * @param \Notadd\Content\Handlers\Creators\ArticleCreatorHandler $handler
      *
      * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response

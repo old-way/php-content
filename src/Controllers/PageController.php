@@ -16,14 +16,6 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 class PageController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\View\View
-     */
-    public function index()
-    {
-        return $this->view('');
-    }
-
-    /**
      * @param $id
      *
      * @return \Illuminate\Contracts\View\View
