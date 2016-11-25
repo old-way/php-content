@@ -7,6 +7,9 @@
  */
 namespace Notadd\Content\Handlers\Finders;
 
+use Illuminate\Container\Container;
+use Illuminate\Http\Request;
+use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
@@ -14,6 +17,30 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
  */
 class CategoryFinderHandler extends DataHandler
 {
+    /**
+     * @var \Notadd\Content\Models\Category
+     */
+    protected $category;
+
+    /**
+     * @var \Illuminate\Http\Request
+     */
+    protected $request;
+
+    /**
+     * CategoryFinderHandler constructor.
+     *
+     * @param \Notadd\Content\Models\Category $category
+     * @param \Illuminate\Container\Container $container
+     * @param \Illuminate\Http\Request        $request
+     */
+    public function __construct(Category $category, Container $container, Request $request)
+    {
+        parent::__construct($container);
+        $this->category = $category;
+        $this->request = $request;
+    }
+
     /**
      * @return int
      */
@@ -27,7 +54,9 @@ class CategoryFinderHandler extends DataHandler
      */
     public function data()
     {
-        return [];
+        $category = $this->category->newQuery()->find($this->request->input('id'));
+
+        return $category->getAttributes();
     }
 
     /**

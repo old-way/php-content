@@ -22,6 +22,7 @@ class ArticleFinderHandler extends DataHandler
      * @var \Notadd\Content\Models\Article
      */
     protected $article;
+
     /**
      * @var \Illuminate\Http\Request
      */
@@ -55,6 +56,7 @@ class ArticleFinderHandler extends DataHandler
     public function data()
     {
         $article = $this->article->newQuery()->find($this->request->input('id'));
+
         return $article->getAttributes();
     }
 

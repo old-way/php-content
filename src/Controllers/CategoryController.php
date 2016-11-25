@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers;
 
+use Notadd\Content\Handlers\Finders\CategoryFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -24,12 +25,14 @@ class CategoryController extends Controller
     }
 
     /**
-     * @param $id
+     * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
-    public function show($id)
+    public function show(CategoryFinderHandler $handler)
     {
-        return $this->view('');
+        $response = $handler->toResponse();
+
+        return $response->generateHttpResponse();
     }
 }
