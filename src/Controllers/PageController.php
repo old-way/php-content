@@ -9,6 +9,7 @@
 namespace Notadd\Content\Controllers;
 
 use Notadd\Content\Handlers\Creators\PageCreatorHandler;
+use Notadd\Content\Handlers\Finders\PageFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -16,6 +17,11 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class PageController extends Controller
 {
+    /**
+     * @param \Notadd\Content\Handlers\Creators\PageCreatorHandler $handler
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
     public function create(PageCreatorHandler $handler)
     {
         $response = $handler->toResponse($this->request);
@@ -24,12 +30,14 @@ class PageController extends Controller
     }
 
     /**
-     * @param $id
+     * @param \Notadd\Content\Handlers\Finders\PageFinderHandler $handler
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
-    public function show($id)
+    public function show(PageFinderHandler $handler)
     {
-        return $this->view('');
+        $response = $handler->toResponse();
+
+        return $response->generateHttpResponse();
     }
 }

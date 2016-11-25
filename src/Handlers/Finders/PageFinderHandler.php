@@ -7,6 +7,9 @@
  */
 namespace Notadd\Content\Handlers\Finders;
 
+use Illuminate\Container\Container;
+use Illuminate\Http\Request;
+use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
@@ -14,6 +17,30 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
  */
 class PageFinderHandler extends DataHandler
 {
+    /**
+     * @var \Illuminate\Http\Request
+     */
+    protected $request;
+
+    /**
+     * @var \Notadd\Content\Models\Page
+     */
+    protected $page;
+
+    /**
+     * PageFinderHandler constructor.
+     *
+     * @param \Illuminate\Container\Container $container
+     * @param \Notadd\Content\Models\Page     $page
+     * @param \Illuminate\Http\Request        $request
+     */
+    public function __construct(Container $container, Page $page, Request $request)
+    {
+        parent::__construct($container);
+        $this->page = $page;
+        $this->request = $request;
+    }
+
     /**
      * @return int
      */
@@ -27,7 +54,9 @@ class PageFinderHandler extends DataHandler
      */
     public function data()
     {
-        return [];
+        $page = $this->page->newQuery()->find($this->request->input('id'));
+
+        return $page->getAttributes();
     }
 
     /**
