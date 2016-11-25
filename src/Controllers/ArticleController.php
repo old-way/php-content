@@ -18,7 +18,12 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class ArticleController extends Controller
 {
-    public function destroy(ArticleDeleterHandler $handler)
+    /**
+     * @param \Notadd\Content\Handlers\Creators\ArticleCreatorHandler $handler
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function create(ArticleCreatorHandler $handler)
     {
         $response = $handler->toResponse($this->request);
 
@@ -26,11 +31,11 @@ class ArticleController extends Controller
     }
 
     /**
-     * @param \Notadd\Content\Handlers\Creators\ArticleCreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Deleters\ArticleDeleterHandler $handler
      *
      * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
-    public function create(ArticleCreatorHandler $handler)
+    public function destroy(ArticleDeleterHandler $handler)
     {
         $response = $handler->toResponse($this->request);
 

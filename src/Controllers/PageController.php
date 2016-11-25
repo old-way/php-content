@@ -9,6 +9,7 @@
 namespace Notadd\Content\Controllers;
 
 use Notadd\Content\Handlers\Creators\PageCreatorHandler;
+use Notadd\Content\Handlers\Deleters\PageDeleterHandler;
 use Notadd\Content\Handlers\Finders\PageFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
@@ -27,6 +28,16 @@ class PageController extends Controller
         $response = $handler->toResponse($this->request);
 
         return $response->generateHttpResponse();
+    }
+
+    /**
+     * @param \Notadd\Content\Handlers\Deleters\PageDeleterHandler $handler
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function destroy(PageDeleterHandler $handler)
+    {
+        return $handler->toResponse($this->request)->generateHttpResponse();
     }
 
     /**
