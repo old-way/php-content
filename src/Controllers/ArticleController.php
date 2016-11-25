@@ -9,7 +9,7 @@
 namespace Notadd\Content\Controllers;
 
 use Notadd\Content\Handlers\Creators\ArticleCreatorHandler;
-use Notadd\Content\Managers\ArticleManager;
+use Notadd\Content\Handlers\Finders\ArticleFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -18,28 +18,37 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 class ArticleController extends Controller
 {
     /**
-     * @param \Notadd\Content\Managers\ArticleManager $manager
+     * @param \Notadd\Content\Handlers\Finders\ArticleFinderHandler $handler
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(ArticleManager $manager)
+    public function index(ArticleFinderHandler $handler)
     {
+
         return $this->view('');
     }
 
+    /**
+     * @param \Notadd\Content\Handlers\Creators\ArticleCreatorHandler $handler
+     *
+     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
     public function create(ArticleCreatorHandler $handler)
     {
         $response = $handler->toResponse($this->request);
+
         return $response->generateHttpResponse();
     }
 
     /**
-     * @param $id
+     * @param \Notadd\Content\Handlers\Finders\ArticleFinderHandler $handler
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
-    public function show($id)
+    public function show(ArticleFinderHandler $handler)
     {
-        return $this->view('');
+        $response = $handler->toResponse();
+
+        return $response->generateHttpResponse();
     }
 }
