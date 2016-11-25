@@ -15,4 +15,39 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
  */
 class PageTypeFindHandler extends DataHandler
 {
+    /**
+     * @return int
+     */
+    public function code()
+    {
+        return 200;
+    }
+
+    /**
+     * @return array
+     */
+    public function data()
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function errors()
+    {
+        return [
+            $this->translator->trans(''),
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            $this->translator->trans(''),
+        ];
+    }
 }
