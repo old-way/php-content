@@ -15,5 +15,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PageTemplate extends Model
 {
-
+    protected $fillable = [];
 }

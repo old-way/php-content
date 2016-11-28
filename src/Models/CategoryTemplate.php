@@ -8,10 +8,12 @@
  */
 namespace Notadd\Content\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 /**
  * Class CategoryTemplate.
  */
-class CategoryTemplate
+class CategoryTemplate extends Model
 {
-
+    protected $fillable = [];
 }
