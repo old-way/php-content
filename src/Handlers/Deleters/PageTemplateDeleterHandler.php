@@ -26,14 +26,6 @@ class PageTemplateDeleterHandler extends SetHandler
     /**
      * @return array
      */
-    public function data()
-    {
-        return [];
-    }
-
-    /**
-     * @return array
-     */
     public function errors()
     {
         return [
