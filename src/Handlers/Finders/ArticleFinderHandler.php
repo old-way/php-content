@@ -32,7 +32,12 @@ class ArticleFinderHandler extends DataHandler
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Article $article, Container $container, Request $request, Translator $translator)
+    public function __construct(
+        Article $article,
+        Container $container,
+        Request $request,
+        Translator $translator
+    )
     {
         parent::__construct($container, $request, $translator);
         $this->article = $article;

@@ -26,17 +26,19 @@ class ArticleEditorHandler extends SetHandler
     /**
      * ArticleEditorHandler constructor.
      *
+     * @param \Notadd\Content\Models\Article     $article
      * @param \Illuminate\Container\Container    $container
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
+        Article $article,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->article = new Article();
+        $this->article = $article;
     }
 
     /**

@@ -32,7 +32,12 @@ class PageFinderHandler extends DataHandler
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Container $container, Page $page, Request $request, Translator $translator)
+    public function __construct(
+        Container $container,
+        Page $page,
+        Request $request,
+        Translator $translator
+    )
     {
         parent::__construct($container, $request, $translator);
         $this->page = $page;

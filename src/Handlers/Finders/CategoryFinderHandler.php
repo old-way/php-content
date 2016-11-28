@@ -26,11 +26,17 @@ class CategoryFinderHandler extends DataHandler
     /**
      * CategoryFinderHandler constructor.
      *
-     * @param \Notadd\Content\Models\Category $category
-     * @param \Illuminate\Container\Container $container
-     * @param \Illuminate\Http\Request        $request
+     * @param \Notadd\Content\Models\Category    $category
+     * @param \Illuminate\Container\Container    $container
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Category $category, Container $container, Request $request, Translator $translator)
+    public function __construct(
+        Category $category,
+        Container $container,
+        Request $request,
+        Translator $translator
+    )
     {
         parent::__construct($container, $request, $translator);
         $this->category = $category;

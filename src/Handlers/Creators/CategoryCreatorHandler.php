@@ -30,11 +30,6 @@ class CategoryCreatorHandler extends SetHandler
     protected $id;
 
     /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
-    /**
      * CategoryCreatorHandler constructor.
      *
      * @param \Notadd\Content\Models\Category    $category
@@ -42,11 +37,15 @@ class CategoryCreatorHandler extends SetHandler
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Category $category, Container $container, Request $request, Translator $translator)
+    public function __construct(
+        Category $category,
+        Container $container,
+        Request $request,
+        Translator $translator
+    )
     {
         parent::__construct($container, $request, $translator);
         $this->category = $category;
-        $this->request = $request;
     }
 
     /**
