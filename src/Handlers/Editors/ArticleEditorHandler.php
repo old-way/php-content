@@ -7,6 +7,10 @@
  */
 namespace Notadd\Content\Handlers\Editors;
 
+use Illuminate\Container\Container;
+use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
+use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
@@ -14,6 +18,27 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
  */
 class ArticleEditorHandler extends SetHandler
 {
+    /**
+     * @var \Notadd\Content\Models\Article
+     */
+    protected $article;
+
+    /**
+     * ArticleEditorHandler constructor.
+     *
+     * @param \Illuminate\Container\Container    $container
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
+     */
+    public function __construct(
+        Container $container,
+        Request $request,
+        Translator $translator
+    ) {
+        parent::__construct($container, $request, $translator);
+        $this->article = new Article();
+    }
+
     /**
      * @return int
      */
@@ -45,6 +70,9 @@ class ArticleEditorHandler extends SetHandler
      */
     public function execute()
     {
+        $article = $this->article->newQuery()->find($this->request->input('id'));
+        $article->update($this->request->all());
+
         return true;
     }
 
