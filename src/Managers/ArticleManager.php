@@ -23,14 +23,17 @@ class ArticleManager
      * @var \Illuminate\Container\Container
      */
     protected $container;
+
     /**
      * @var \Illuminate\Events\Dispatcher
      */
     protected $events;
+
     /**
      * @var \Illuminate\Support\Collection
      */
     protected $templates;
+
     /**
      * @var \Illuminate\Support\Collection
      */
