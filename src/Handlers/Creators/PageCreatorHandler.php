@@ -10,6 +10,7 @@ namespace Notadd\Content\Handlers\Creators;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -33,9 +34,17 @@ class PageCreatorHandler extends SetHandler
      */
     protected $request;
 
-    public function __construct(Container $container, Page $page, Request $request)
+    /**
+     * PageCreatorHandler constructor.
+     *
+     * @param \Illuminate\Container\Container    $container
+     * @param \Notadd\Content\Models\Page        $page
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
+     */
+    public function __construct(Container $container, Page $page, Request $request, Translator $translator)
     {
-        parent::__construct($container);
+        parent::__construct($container, $request, $translator);
         $this->page = $page;
         $this->request = $request;
     }
@@ -67,11 +76,9 @@ class PageCreatorHandler extends SetHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @return bool
      */
-    public function execute(Request $request)
+    public function execute()
     {
         $this->id = $this->page->create($this->request->all());
 

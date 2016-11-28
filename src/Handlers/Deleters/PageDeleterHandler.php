@@ -10,6 +10,7 @@ namespace Notadd\Content\Handlers\Deleters;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -24,22 +25,17 @@ class PageDeleterHandler extends SetHandler
     protected $page;
 
     /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
-    /**
      * PageDeleterHandler constructor.
      *
-     * @param \Illuminate\Container\Container $container
-     * @param \Notadd\Content\Models\Page     $page
-     * @param \Illuminate\Http\Request        $request
+     * @param \Illuminate\Container\Container    $container
+     * @param \Notadd\Content\Models\Page        $page
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Container $container, Page $page, Request $request)
+    public function __construct(Container $container, Page $page, Request $request, Translator $translator)
     {
-        parent::__construct($container);
+        parent::__construct($container, $request, $translator);
         $this->page = $page;
-        $this->request = $request;
     }
 
     /**
@@ -69,11 +65,9 @@ class PageDeleterHandler extends SetHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @return bool
      */
-    public function execute(Request $request)
+    public function execute()
     {
         $page = $this->page->newQuery()->find($this->request->input('id'));
         if($page === null) {

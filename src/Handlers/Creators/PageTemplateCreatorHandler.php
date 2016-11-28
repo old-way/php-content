@@ -43,11 +43,9 @@ class PageTemplateCreatorHandler extends SetHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @return bool
      */
-    public function execute(Request $request)
+    public function execute()
     {
         return true;
     }

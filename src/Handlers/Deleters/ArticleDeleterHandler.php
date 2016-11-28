@@ -10,6 +10,7 @@ namespace Notadd\Content\Handlers\Deleters;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -24,21 +25,17 @@ class ArticleDeleterHandler extends SetHandler
     protected $article;
 
     /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
-    /**
      * ArticleDeleterHandler constructor.
      *
-     * @param \Notadd\Content\Models\Article  $article
-     * @param \Illuminate\Container\Container $container
+     * @param \Notadd\Content\Models\Article     $article
+     * @param \Illuminate\Container\Container    $container
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Article $article, Container $container, Request $request)
+    public function __construct(Article $article, Container $container, Request $request, Translator $translator)
     {
-        parent::__construct($container);
+        parent::__construct($container, $request, $translator);
         $this->article = $article;
-        $this->request = $request;
     }
 
     /**
@@ -70,11 +67,9 @@ class ArticleDeleterHandler extends SetHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @return bool
      */
-    public function execute(Request $request)
+    public function execute()
     {
         $article = $this->article->newQuery()->find($this->request->input('id'));
         if ($article === null) {

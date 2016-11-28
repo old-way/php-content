@@ -9,6 +9,7 @@ namespace Notadd\Content\Handlers\Finders;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
@@ -17,10 +18,6 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
  */
 class PageFinderHandler extends DataHandler
 {
-    /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
 
     /**
      * @var \Notadd\Content\Models\Page
@@ -30,15 +27,15 @@ class PageFinderHandler extends DataHandler
     /**
      * PageFinderHandler constructor.
      *
-     * @param \Illuminate\Container\Container $container
-     * @param \Notadd\Content\Models\Page     $page
-     * @param \Illuminate\Http\Request        $request
+     * @param \Illuminate\Container\Container    $container
+     * @param \Notadd\Content\Models\Page        $page
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Container $container, Page $page, Request $request)
+    public function __construct(Container $container, Page $page, Request $request, Translator $translator)
     {
-        parent::__construct($container);
+        parent::__construct($container, $request, $translator);
         $this->page = $page;
-        $this->request = $request;
     }
 
     /**

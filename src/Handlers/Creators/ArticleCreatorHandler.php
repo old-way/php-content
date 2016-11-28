@@ -9,6 +9,7 @@ namespace Notadd\Content\Handlers\Creators;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -30,11 +31,13 @@ class ArticleCreatorHandler extends SetHandler
     /**
      * ArticleCreatorHandler constructor.
      *
-     * @param \Illuminate\Container\Container $container
+     * @param \Illuminate\Container\Container    $container
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Container $container)
+    public function __construct(Container $container, Request $request, Translator $translator)
     {
-        parent::__construct($container);
+        parent::__construct($container, $request, $translator);
         $this->article = new Article();
     }
 
@@ -67,14 +70,13 @@ class ArticleCreatorHandler extends SetHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @return bool
      */
-    public function execute(Request $request)
+    public function execute()
     {
-        $this->article = $this->article->create($request->all());
+        $this->article = $this->article->create($this->request->all());
         $this->id = $this->article->getAttribute('id');
+
         return true;
     }
 

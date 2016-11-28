@@ -10,6 +10,7 @@ namespace Notadd\Content\Handlers\Creators;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -36,13 +37,14 @@ class CategoryCreatorHandler extends SetHandler
     /**
      * CategoryCreatorHandler constructor.
      *
-     * @param \Notadd\Content\Models\Category $category
-     * @param \Illuminate\Container\Container $container
-     * @param \Illuminate\Http\Request        $request
+     * @param \Notadd\Content\Models\Category    $category
+     * @param \Illuminate\Container\Container    $container
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
      */
-    public function __construct(Category $category, Container $container, Request $request)
+    public function __construct(Category $category, Container $container, Request $request, Translator $translator)
     {
-        parent::__construct($container);
+        parent::__construct($container, $request, $translator);
         $this->category = $category;
         $this->request = $request;
     }
@@ -76,11 +78,9 @@ class CategoryCreatorHandler extends SetHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @return bool
      */
-    public function execute(Request $request)
+    public function execute()
     {
         $this->id = $this->category->create($this->request->all());
 

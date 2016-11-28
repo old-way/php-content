@@ -7,7 +7,6 @@
  */
 namespace Notadd\Content\Handlers\Editors;
 
-use Illuminate\Http\Request;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
@@ -42,11 +41,9 @@ class CategoryEditorHandler extends SetHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @return bool
      */
-    public function execute(Request $request)
+    public function execute()
     {
         return true;
     }

@@ -8,7 +8,6 @@
  */
 namespace Notadd\Content\Handlers\Deleters;
 
-use Illuminate\Http\Request;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
@@ -43,11 +42,9 @@ class PageTemplateDeleterHandler extends SetHandler
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
-     *
      * @return bool
      */
-    public function execute(Request $request)
+    public function execute()
     {
         return true;
     }

@@ -9,6 +9,7 @@ namespace Notadd\Content\Handlers\Finders;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
@@ -23,22 +24,16 @@ class CategoryFinderHandler extends DataHandler
     protected $category;
 
     /**
-     * @var \Illuminate\Http\Request
-     */
-    protected $request;
-
-    /**
      * CategoryFinderHandler constructor.
      *
      * @param \Notadd\Content\Models\Category $category
      * @param \Illuminate\Container\Container $container
      * @param \Illuminate\Http\Request        $request
      */
-    public function __construct(Category $category, Container $container, Request $request)
+    public function __construct(Category $category, Container $container, Request $request, Translator $translator)
     {
-        parent::__construct($container);
+        parent::__construct($container, $request, $translator);
         $this->category = $category;
-        $this->request = $request;
     }
 
     /**
