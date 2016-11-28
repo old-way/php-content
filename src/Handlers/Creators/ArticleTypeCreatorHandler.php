@@ -8,6 +8,10 @@
  */
 namespace Notadd\Content\Handlers\Creators;
 
+use Illuminate\Container\Container;
+use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
+use Notadd\Content\Models\ArticleType;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
@@ -15,6 +19,34 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
  */
 class ArticleTypeCreatorHandler extends SetHandler
 {
+    /**
+     * @var \Notadd\Content\Models\ArticleType
+     */
+    protected $articleType;
+
+    /**
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * ArticleTypeCreatorHandler constructor.
+     *
+     * @param \Notadd\Content\Models\ArticleType $articleType
+     * @param \Illuminate\Container\Container    $container
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
+     */
+    public function __construct(
+        ArticleType $articleType,
+        Container $container,
+        Request $request,
+        Translator $translator
+    ) {
+        parent::__construct($container, $request, $translator);
+        $this->articleType = $articleType;
+    }
+
     /**
      * @return int
      */
@@ -38,6 +70,8 @@ class ArticleTypeCreatorHandler extends SetHandler
      */
     public function execute()
     {
+        $this->id = $this->articleType->create($this->request->all());
+
         return true;
     }
 
