@@ -7,7 +7,6 @@
  */
 namespace Notadd\Content\Handlers\Creators;
 
-use Illuminate\Http\Request;
 use Notadd\Foundation\Debug\Handlers\SetHandler;
 
 /**
