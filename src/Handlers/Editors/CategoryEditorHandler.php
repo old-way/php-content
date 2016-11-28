@@ -7,6 +7,10 @@
  */
 namespace Notadd\Content\Handlers\Editors;
 
+use Illuminate\Container\Container;
+use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
+use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
@@ -14,6 +18,27 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
  */
 class CategoryEditorHandler extends SetHandler
 {
+    /**
+     * @var \Notadd\Content\Models\Category
+     */
+    protected $category;
+
+    /**
+     * CategoryEditorHandler constructor.
+     *
+     * @param \Illuminate\Container\Container    $container
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
+     */
+    public function __construct(
+        Container $container,
+        Request $request,
+        Translator $translator
+    ) {
+        parent::__construct($container, $request, $translator);
+        $this->category = new Category();
+    }
+
     /**
      * @return int
      */
@@ -45,6 +70,9 @@ class CategoryEditorHandler extends SetHandler
      */
     public function execute()
     {
+        $category = $this->category->newQuery()->find($this->request->input('id'));
+        $category->update($this->request->all());
+
         return true;
     }
 
