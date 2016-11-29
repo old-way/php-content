@@ -37,8 +37,7 @@ class PageFinderHandler extends DataHandler
         Page $page,
         Request $request,
         Translator $translator
-    )
-    {
+    ) {
         parent::__construct($container, $request, $translator);
         $this->page = $page;
     }

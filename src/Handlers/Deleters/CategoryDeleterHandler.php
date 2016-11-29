@@ -63,7 +63,7 @@ class CategoryDeleterHandler extends SetHandler
     public function execute()
     {
         $category = $this->category->newQuery()->find($this->request->input('id'));
-        if($category === null) {
+        if ($category === null) {
             return false;
         }
         $category->delete();

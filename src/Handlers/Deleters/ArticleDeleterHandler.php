@@ -37,8 +37,7 @@ class ArticleDeleterHandler extends SetHandler
         Container $container,
         Request $request,
         Translator $translator
-    )
-    {
+    ) {
         parent::__construct($container, $request, $translator);
         $this->article = $article;
     }

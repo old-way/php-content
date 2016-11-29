@@ -37,8 +37,7 @@ class ArticleFinderHandler extends DataHandler
         Container $container,
         Request $request,
         Translator $translator
-    )
-    {
+    ) {
         parent::__construct($container, $request, $translator);
         $this->article = $article;
     }

@@ -37,8 +37,7 @@ class PageDeleterHandler extends SetHandler
         Page $page,
         Request $request,
         Translator $translator
-    )
-    {
+    ) {
         parent::__construct($container, $request, $translator);
         $this->page = $page;
     }
@@ -67,7 +66,7 @@ class PageDeleterHandler extends SetHandler
     public function execute()
     {
         $page = $this->page->newQuery()->find($this->request->input('id'));
-        if($page === null) {
+        if ($page === null) {
             return false;
         }
         $page->delete();
