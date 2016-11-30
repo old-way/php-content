@@ -8,6 +8,10 @@
  */
 namespace Notadd\Content\Handlers\Editors;
 
+use Illuminate\Container\Container;
+use Illuminate\Http\Request;
+use Illuminate\Translation\Translator;
+use Notadd\Content\Models\PageTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
@@ -15,6 +19,29 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
  */
 class PageTemplateEditorHandler extends SetHandler
 {
+    /**
+     * @var \Notadd\Content\Models\PageTemplate
+     */
+    protected $pageTemplate;
+
+    /**
+     * PageTemplateEditorHandler constructor.
+     *
+     * @param \Illuminate\Container\Container     $container
+     * @param \Notadd\Content\Models\PageTemplate $pageTemplate
+     * @param \Illuminate\Http\Request            $request
+     * @param \Illuminate\Translation\Translator  $translator
+     */
+    public function __construct(
+        Container $container,
+        PageTemplate $pageTemplate,
+        Request $request,
+        Translator $translator
+    ) {
+        parent::__construct($container, $request, $translator);
+        $this->pageTemplate = $pageTemplate;
+    }
+
     /**
      * @return int
      */
@@ -38,6 +65,12 @@ class PageTemplateEditorHandler extends SetHandler
      */
     public function execute()
     {
+        $pageTemplate = $this->pageTemplate->newQuery()->find($this->request->input('id'));
+        if ($pageTemplate === null) {
+            return false;
+        }
+        $pageTemplate->update($this->request->all());
+
         return true;
     }
 
