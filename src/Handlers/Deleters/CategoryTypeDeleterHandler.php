@@ -65,7 +65,7 @@ class CategoryTypeDeleterHandler extends SetHandler
     }
 
     /**
-     * TODO: Method execute Description
+     * Execute Handler.
      *
      * @return bool
      */

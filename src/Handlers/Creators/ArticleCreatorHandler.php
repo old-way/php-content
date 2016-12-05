@@ -82,7 +82,7 @@ class ArticleCreatorHandler extends SetHandler
     }
 
     /**
-     * TODO: Method execute Description
+     * Execute Handler.
      *
      * @return bool
      */

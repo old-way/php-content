@@ -65,7 +65,7 @@ class PageTemplateDeleterHandler extends SetHandler
     }
 
     /**
-     * TODO: Method execute Description
+     * Execute Handler.
      *
      * @return bool
      */
