@@ -65,7 +65,7 @@ class PageTypeFinderHandler extends DataHandler
     }
 
     /**
-     * TODO: Method errors Description
+     * Errors for handler.
      *
      * @return array
      */

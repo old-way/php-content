@@ -51,7 +51,7 @@ class CategoryEditorHandler extends SetHandler
     }
 
     /**
-     * TODO: Method errors Description
+     * Errors for handler.
      *
      * @return array
      */

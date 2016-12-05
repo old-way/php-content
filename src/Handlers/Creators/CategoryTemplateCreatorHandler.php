@@ -58,7 +58,7 @@ class CategoryTemplateCreatorHandler extends SetHandler
     }
 
     /**
-     * TODO: Method errors Description
+     * Errors for handler.
      *
      * @return array
      */
