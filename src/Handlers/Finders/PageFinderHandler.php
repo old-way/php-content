@@ -1,6 +1,7 @@
 <?php
 /**
  * This file is part of Notadd.
+ *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-24 18:51
@@ -43,6 +44,8 @@ class PageFinderHandler extends DataHandler
     }
 
     /**
+     * TODO: Method code Description
+     *
      * @return int
      */
     public function code()
@@ -51,6 +54,8 @@ class PageFinderHandler extends DataHandler
     }
 
     /**
+     * TODO: Method data Description
+     *
      * @return array
      */
     public function data()
@@ -61,6 +66,8 @@ class PageFinderHandler extends DataHandler
     }
 
     /**
+     * TODO: Method errors Description
+     *
      * @return array
      */
     public function errors()
@@ -71,6 +78,8 @@ class PageFinderHandler extends DataHandler
     }
 
     /**
+     * TODO: Method messages Description
+     *
      * @return array
      */
     public function messages()

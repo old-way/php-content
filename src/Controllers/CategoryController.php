@@ -18,6 +18,8 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 class CategoryController extends Controller
 {
     /**
+     * TODO: Method create Description
+     *
      * @param \Notadd\Content\Handlers\Creators\CategoryCreatorHandler $handler
      *
      * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
@@ -28,6 +30,8 @@ class CategoryController extends Controller
     }
 
     /**
+     * TODO: Method show Description
+     *
      * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
      *
      * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response

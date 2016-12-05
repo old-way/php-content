@@ -21,6 +21,7 @@ class RegisterArticleType
      * @var \Illuminate\Container\Container
      */
     protected $container;
+
     /**
      * @var \Notadd\Content\Managers\PageManager
      */
@@ -39,7 +40,9 @@ class RegisterArticleType
     }
 
     /**
-     * @param string                            $name
+     * TODO: Method registerTemplate Description
+     *
+     * @param                                   $name
      * @param \Notadd\Content\Types\ArticleType $type
      */
     public function registerTemplate($name, ArticleType $type)

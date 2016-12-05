@@ -23,14 +23,17 @@ class PageManager
      * @var \Illuminate\Container\Container
      */
     protected $container;
+
     /**
      * @var \Illuminate\Events\Dispatcher
      */
     protected $events;
+
     /**
      * @var \Illuminate\Support\Collection
      */
     protected $templates;
+
     /**
      * @var \Illuminate\Support\Collection
      */
@@ -51,7 +54,9 @@ class PageManager
     }
 
     /**
-     * @param string                                 $name
+     * TODO: Method registerTemplate Description
+     *
+     * @param                                        $name
      * @param \Notadd\Content\Templates\PageTemplate $template
      */
     public function registerTemplate($name, PageTemplate $template)
@@ -60,7 +65,9 @@ class PageManager
     }
 
     /**
-     * @param string                         $name
+     * TODO: Method registerType Description
+     *
+     * @param                                $name
      * @param \Notadd\Content\Types\PageType $type
      */
     public function registerType($name, PageType $type)

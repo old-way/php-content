@@ -26,17 +26,21 @@ use Notadd\Foundation\Extension\Abstracts\ExtensionRegistrar;
 class Extension extends ExtensionRegistrar
 {
     /**
+     * TODO: Method getExtensionInfo Description
+     *
      * @return array
      */
     public function getExtensionInfo()
     {
         return [
-            'author' => 'twilroad <269044570@qq.com>',
+            'author'      => 'twilroad <269044570@qq.com>',
             'description' => 'A module for Notadd',
         ];
     }
 
     /**
+     * TODO: Method getExtensionName Description
+     *
      * @return string
      */
     public function getExtensionName()
@@ -45,6 +49,8 @@ class Extension extends ExtensionRegistrar
     }
 
     /**
+     * TODO: Method getExtensionPath Description
+     *
      * @return string
      */
     public function getExtensionPath()
@@ -53,7 +59,7 @@ class Extension extends ExtensionRegistrar
     }
 
     /**
-     * @return void
+     * TODO: Method register Description
      */
     public function register()
     {

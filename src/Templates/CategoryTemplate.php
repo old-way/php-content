@@ -19,14 +19,17 @@ class CategoryTemplate
      * @var string
      */
     protected $hit;
+
     /**
      * @var string
      */
     protected $key;
+
     /**
      * @var string
      */
     protected $path;
+
     /**
      * @var string
      */
@@ -47,10 +50,12 @@ class CategoryTemplate
     }
 
     /**
-     * @param string $key
-     * @param string $location
+     * TODO: Method create Description
      *
-     * @return \Notadd\Content\Templates\CategoryTemplate
+     * @param $key
+     * @param $location
+     *
+     * @return static
      */
     public static function create($key, $location)
     {
@@ -65,7 +70,9 @@ class CategoryTemplate
     }
 
     /**
-     * @param string $relation
+     * TODO: Method withRelation Description
+     *
+     * @param $relation
      *
      * @return \Notadd\Content\Templates\CategoryTemplate
      */

@@ -21,6 +21,7 @@ class RegisterPageType
      * @var \Illuminate\Container\Container
      */
     protected $container;
+
     /**
      * @var \Notadd\Content\Managers\PageManager
      */
@@ -39,7 +40,9 @@ class RegisterPageType
     }
 
     /**
-     * @param string                         $name
+     * TODO: Method registerTemplate Description
+     *
+     * @param                                $name
      * @param \Notadd\Content\Types\PageType $type
      */
     public function registerTemplate($name, PageType $type)

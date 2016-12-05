@@ -17,6 +17,8 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class PageTypeCreatorHandler extends SetHandler
 {
     /**
+     * TODO: Method code Description
+     *
      * @return int
      */
     public function code()
@@ -25,6 +27,8 @@ class PageTypeCreatorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method errors Description
+     *
      * @return array
      */
     public function errors()
@@ -35,6 +39,8 @@ class PageTypeCreatorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method execute Description
+     *
      * @return bool
      */
     public function execute()
@@ -43,6 +49,8 @@ class PageTypeCreatorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method messages Description
+     *
      * @return array
      */
     public function messages()

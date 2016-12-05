@@ -43,6 +43,8 @@ class ArticleTypeFinderHandler extends DataHandler
     }
 
     /**
+     * TODO: Method code Description
+     *
      * @return int
      */
     public function code()
@@ -51,6 +53,8 @@ class ArticleTypeFinderHandler extends DataHandler
     }
 
     /**
+     * TODO: Method data Description
+     *
      * @return array
      */
     public function data()
@@ -61,6 +65,8 @@ class ArticleTypeFinderHandler extends DataHandler
     }
 
     /**
+     * TODO: Method errors Description
+     *
      * @return array
      */
     public function errors()
@@ -71,6 +77,8 @@ class ArticleTypeFinderHandler extends DataHandler
     }
 
     /**
+     * TODO: Method messages Description
+     *
      * @return array
      */
     public function messages()

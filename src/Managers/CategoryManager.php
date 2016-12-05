@@ -23,14 +23,17 @@ class CategoryManager
      * @var \Illuminate\Container\Container
      */
     protected $container;
+
     /**
      * @var \Illuminate\Events\Dispatcher
      */
     protected $events;
+
     /**
      * @var \Illuminate\Support\Collection
      */
     protected $templates;
+
     /**
      * @var \Illuminate\Support\Collection
      */
@@ -51,7 +54,9 @@ class CategoryManager
     }
 
     /**
-     * @param string                                     $name
+     * TODO: Method registerTemplate Description
+     *
+     * @param                                            $name
      * @param \Notadd\Content\Templates\CategoryTemplate $template
      */
     public function registerTemplate($name, CategoryTemplate $template)
@@ -60,7 +65,9 @@ class CategoryManager
     }
 
     /**
-     * @param string                             $name
+     * TODO: Method registerType Description
+     *
+     * @param                                    $name
      * @param \Notadd\Content\Types\CategoryType $type
      */
     public function registerType($name, CategoryType $type)

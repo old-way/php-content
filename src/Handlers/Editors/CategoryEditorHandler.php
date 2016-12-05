@@ -1,6 +1,7 @@
 <?php
 /**
  * This file is part of Notadd.
+ *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-24 18:33
@@ -40,6 +41,8 @@ class CategoryEditorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method code Description
+     *
      * @return int
      */
     public function code()
@@ -48,6 +51,8 @@ class CategoryEditorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method errors Description
+     *
      * @return array
      */
     public function errors()
@@ -58,6 +63,8 @@ class CategoryEditorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method execute Description
+     *
      * @return bool
      */
     public function execute()
@@ -69,6 +76,8 @@ class CategoryEditorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method messages Description
+     *
      * @return array
      */
     public function messages()

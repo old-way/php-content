@@ -38,7 +38,9 @@ abstract class CategoryTypeRegistrar extends EventSubscriber
     }
 
     /**
-     * @return string
+     * TODO: Method getEvent Description
+     *
+     * @return mixed
      */
     protected function getEvent()
     {
@@ -46,6 +48,8 @@ abstract class CategoryTypeRegistrar extends EventSubscriber
     }
 
     /**
+     * TODO: Method handle Description
+     *
      * @return void
      */
     abstract public function handle();

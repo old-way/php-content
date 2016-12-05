@@ -21,6 +21,7 @@ class RegisterCategoryTemplate
      * @var \Illuminate\Container\Container
      */
     protected $container;
+
     /**
      * @var \Notadd\Content\Managers\PageManager
      */
@@ -39,7 +40,9 @@ class RegisterCategoryTemplate
     }
 
     /**
-     * @param string                                     $name
+     * TODO: Method registerTemplate Description
+     *
+     * @param                                            $name
      * @param \Notadd\Content\Templates\CategoryTemplate $template
      */
     public function registerTemplate($name, CategoryTemplate $template)

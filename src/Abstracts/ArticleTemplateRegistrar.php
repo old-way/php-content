@@ -38,7 +38,9 @@ abstract class ArticleTemplateRegistrar extends EventSubscriber
     }
 
     /**
-     * @return string
+     * TODO: Method getEvent Description
+     *
+     * @return mixed
      */
     protected function getEvent()
     {
@@ -46,6 +48,8 @@ abstract class ArticleTemplateRegistrar extends EventSubscriber
     }
 
     /**
+     * TODO: Method handle Description
+     *
      * @return void
      */
     abstract public function handle();

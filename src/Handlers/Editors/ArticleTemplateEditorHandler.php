@@ -43,6 +43,8 @@ class ArticleTemplateEditorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method code Description
+     *
      * @return int
      */
     public function code()
@@ -51,6 +53,8 @@ class ArticleTemplateEditorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method errors Description
+     *
      * @return array
      */
     public function errors()
@@ -61,12 +65,14 @@ class ArticleTemplateEditorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method execute Description
+     *
      * @return bool
      */
     public function execute()
     {
         $articleTemplate = $this->articleTemplate->newQuery()->find($this->request->input('id'));
-        if($articleTemplate === null) {
+        if ($articleTemplate === null) {
             return false;
         }
         $articleTemplate->update($this->request->all());
@@ -75,6 +81,8 @@ class ArticleTemplateEditorHandler extends SetHandler
     }
 
     /**
+     * TODO: Method messages Description
+     *
      * @return array
      */
     public function messages()
