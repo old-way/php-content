@@ -26,7 +26,7 @@ use Notadd\Foundation\Extension\Abstracts\ExtensionRegistrar;
 class Extension extends ExtensionRegistrar
 {
     /**
-     * TODO: Method getExtensionInfo Description
+     * Info for extension.
      *
      * @return array
      */
