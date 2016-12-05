@@ -59,7 +59,7 @@ class Extension extends ExtensionRegistrar
     }
 
     /**
-     * TODO: Method register Description
+     * Extension's register.
      */
     public function register()
     {
