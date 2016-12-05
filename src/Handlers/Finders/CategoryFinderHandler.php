@@ -53,7 +53,7 @@ class CategoryFinderHandler extends DataHandler
     }
 
     /**
-     * TODO: Method data Description
+     * Data for handler.
      *
      * @return array
      */

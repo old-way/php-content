@@ -53,7 +53,7 @@ class ArticleDeleterHandler extends SetHandler
     }
 
     /**
-     * TODO: Method data Description
+     * Data for handler.
      *
      * @return array
      */
