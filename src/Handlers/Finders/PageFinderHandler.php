@@ -78,7 +78,7 @@ class PageFinderHandler extends DataHandler
     }
 
     /**
-     * TODO: Method messages Description
+     * Messages for handler.
      *
      * @return array
      */

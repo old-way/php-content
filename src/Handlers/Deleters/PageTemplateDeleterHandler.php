@@ -81,7 +81,7 @@ class PageTemplateDeleterHandler extends SetHandler
     }
 
     /**
-     * TODO: Method messages Description
+     * Messages for handler.
      *
      * @return array
      */

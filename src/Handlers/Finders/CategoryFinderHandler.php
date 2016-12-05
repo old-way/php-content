@@ -77,7 +77,7 @@ class CategoryFinderHandler extends DataHandler
     }
 
     /**
-     * TODO: Method messages Description
+     * Messages for handler.
      *
      * @return array
      */
