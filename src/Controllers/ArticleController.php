@@ -19,11 +19,12 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 class ArticleController extends Controller
 {
     /**
-     * TODO: Method create Description
+     * Article create.
      *
      * @param \Notadd\Content\Handlers\Creators\ArticleCreatorHandler $handler
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
      */
     public function create(ArticleCreatorHandler $handler)
     {
@@ -33,11 +34,12 @@ class ArticleController extends Controller
     }
 
     /**
-     * TODO: Method destroy Description
+     * Article destroy.
      *
      * @param \Notadd\Content\Handlers\Deleters\ArticleDeleterHandler $handler
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
      */
     public function destroy(ArticleDeleterHandler $handler)
     {
@@ -47,11 +49,12 @@ class ArticleController extends Controller
     }
 
     /**
-     * TODO: Method show Description
+     * Article show.
      *
      * @param \Notadd\Content\Handlers\Finders\ArticleFinderHandler $handler
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
      */
     public function show(ArticleFinderHandler $handler)
     {

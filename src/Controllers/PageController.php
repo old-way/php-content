@@ -19,11 +19,12 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 class PageController extends Controller
 {
     /**
-     * TODO: Method create Description
+     * Page create.
      *
      * @param \Notadd\Content\Handlers\Creators\PageCreatorHandler $handler
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
      */
     public function create(PageCreatorHandler $handler)
     {
@@ -33,11 +34,12 @@ class PageController extends Controller
     }
 
     /**
-     * TODO: Method destroy Description
+     * Page destroy.
      *
      * @param \Notadd\Content\Handlers\Deleters\PageDeleterHandler $handler
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
      */
     public function destroy(PageDeleterHandler $handler)
     {
@@ -45,11 +47,12 @@ class PageController extends Controller
     }
 
     /**
-     * TODO: Method show Description
+     * Page show.
      *
      * @param \Notadd\Content\Handlers\Finders\PageFinderHandler $handler
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
      */
     public function show(PageFinderHandler $handler)
     {

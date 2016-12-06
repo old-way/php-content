@@ -38,7 +38,7 @@ abstract class CategoryTypeRegistrar extends EventSubscriber
     }
 
     /**
-     * TODO: Method getEvent Description
+     * Name of event.
      *
      * @return mixed
      */

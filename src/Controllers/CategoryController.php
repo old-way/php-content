@@ -22,7 +22,8 @@ class CategoryController extends Controller
      *
      * @param \Notadd\Content\Handlers\Creators\CategoryCreatorHandler $handler
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
      */
     public function create(CategoryCreatorHandler $handler)
     {
@@ -34,7 +35,8 @@ class CategoryController extends Controller
      *
      * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
      *
-     * @return \Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
      */
     public function show(CategoryFinderHandler $handler)
     {
