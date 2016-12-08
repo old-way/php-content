@@ -48,7 +48,7 @@ abstract class PageTypeRegistrar extends EventSubscriber
     }
 
     /**
-     * TODO: Method handle Description
+     * Registrar handler.
      *
      * @return void
      */

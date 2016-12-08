@@ -48,7 +48,7 @@ abstract class ArticleTypeRegistrar extends EventSubscriber
     }
 
     /**
-     * TODO: Method handle Description
+     * Registrar handler.
      *
      * @return mixed
      */

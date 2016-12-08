@@ -48,7 +48,7 @@ abstract class CategoryTemplateRegistrar extends EventSubscriber
     }
 
     /**
-     * TODO: Method handle Description
+     * Registrar handler.
      *
      * @return void
      */
