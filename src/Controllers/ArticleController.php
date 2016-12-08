@@ -28,7 +28,7 @@ class ArticleController extends Controller
      */
     public function create(ArticleCreatorHandler $handler)
     {
-        $response = $handler->toResponse($this->request);
+        $response = $handler->toResponse();
 
         return $response->generateHttpResponse();
     }
@@ -43,7 +43,7 @@ class ArticleController extends Controller
      */
     public function destroy(ArticleDeleterHandler $handler)
     {
-        $response = $handler->toResponse($this->request);
+        $response = $handler->toResponse();
 
         return $response->generateHttpResponse();
     }
