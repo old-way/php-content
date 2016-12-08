@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers\Api;
 
+use Notadd\Content\Handlers\Finders\CategoryTemplateFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -15,4 +16,18 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class CategoryTemplateController extends Controller
 {
+    /**
+     * Add a category template show handler.
+     *
+     * @param \Notadd\Content\Handlers\Finders\CategoryTemplateFinderHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
+     * @throws \Exception
+     */
+    public function show(CategoryTemplateFinderHandler $handler)
+    {
+        $response = $handler->toResponse();
+
+        return $response->generateHttpResponse();
+    }
 }
