@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers\Api;
 
+use Notadd\Content\Handlers\Finders\ArticleTemplateFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -15,4 +16,18 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class ArticleTemplateController extends Controller
 {
+    /**
+     * Add a article template show handler.
+     *
+     * @param \Notadd\Content\Handlers\Finders\ArticleTemplateFinderHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
+     * @throws \Exception
+     */
+    public function show(ArticleTemplateFinderHandler $handler)
+    {
+        $response = $handler->toResponse();
+
+        return $response->generateHttpResponse();
+    }
 }
