@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers\Api;
 
+use Notadd\Content\Handlers\Finders\CategoryTypeFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -15,4 +16,17 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class CategoryTypeController extends Controller
 {
+    /**
+     * Add a category type show handler.
+     *
+     * @param \Notadd\Content\Handlers\Finders\CategoryTypeFinderHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
+     * @throws \Exception
+     */
+    public function show(CategoryTypeFinderHandler $handler)
+    {
+        $response = $handler->toResponse();
+        return $response->generateHttpResponse();
+    }
 }
