@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers\Api;
 
+use Notadd\Content\Handlers\Finders\PageFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -15,4 +16,18 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class PageController extends Controller
 {
+    /**
+     * Add a page show handler.
+     *
+     * @param \Notadd\Content\Handlers\Finders\PageFinderHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
+     * @throws \Exception
+     */
+    public function show(PageFinderHandler $handler)
+    {
+        $response = $handler->toResponse();
+
+        return $response->generateHttpResponse();
+    }
 }
