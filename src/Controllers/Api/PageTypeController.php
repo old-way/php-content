@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers\Api;
 
+use Notadd\Content\Handlers\Finders\PageTypeFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -15,4 +16,18 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class PageTypeController extends Controller
 {
+    /**
+     * Add a page type show handler.
+     *
+     * @param \Notadd\Content\Handlers\Finders\PageTypeFinderHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
+     * @throws \Exception
+     */
+    public function show(PageTypeFinderHandler $handler)
+    {
+        $response = $handler->toResponse();
+
+        return $response->generateHttpResponse();
+    }
 }
