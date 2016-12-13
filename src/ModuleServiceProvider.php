@@ -23,7 +23,7 @@ use Notadd\Foundation\Extension\Abstracts\ExtensionRegistrar;
 /**
  * Class Module.
  */
-class Extension extends ExtensionRegistrar
+class ModuleServiceProvider extends ExtensionRegistrar
 {
     /**
      * Info for extension.
