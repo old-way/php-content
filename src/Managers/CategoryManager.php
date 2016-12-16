@@ -54,7 +54,7 @@ class CategoryManager
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a category template.
      *
      * @param                                            $name
      * @param \Notadd\Content\Templates\CategoryTemplate $template
@@ -65,7 +65,7 @@ class CategoryManager
     }
 
     /**
-     * TODO: Method registerType Description
+     * Register a category type.
      *
      * @param                                    $name
      * @param \Notadd\Content\Types\CategoryType $type

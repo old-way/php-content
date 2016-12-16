@@ -40,12 +40,12 @@ class RegisterArticleType
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a article type.
      *
      * @param                                   $name
      * @param \Notadd\Content\Types\ArticleType $type
      */
-    public function registerTemplate($name, ArticleType $type)
+    public function registerType($name, ArticleType $type)
     {
         $this->manager->registerType($name, $type);
     }

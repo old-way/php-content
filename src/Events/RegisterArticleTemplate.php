@@ -40,7 +40,7 @@ class RegisterArticleTemplate
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a template.
      *
      * @param                                           $name
      * @param \Notadd\Content\Templates\ArticleTemplate $template

@@ -40,12 +40,12 @@ class RegisterPageType
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a page type.
      *
      * @param                                $name
      * @param \Notadd\Content\Types\PageType $type
      */
-    public function registerTemplate($name, PageType $type)
+    public function registerType($name, PageType $type)
     {
         $this->manager->registerType($name, $type);
     }

@@ -17,7 +17,7 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class PageTypeCreatorHandler extends SetHandler
 {
     /**
-     * TODO: Method code Description
+     * Http code.
      *
      * @return int
      */

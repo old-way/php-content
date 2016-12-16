@@ -54,7 +54,7 @@ class ArticleManager
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a article template.
      *
      * @param                                           $name
      * @param \Notadd\Content\Templates\ArticleTemplate $template
@@ -65,7 +65,7 @@ class ArticleManager
     }
 
     /**
-     * TODO: Method registerType Description
+     * Register a article type.
      *
      * @param                                   $name
      * @param \Notadd\Content\Types\ArticleType $type

@@ -40,7 +40,7 @@ class RegisterPageTemplate
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a page template.
      *
      * @param                                        $name
      * @param \Notadd\Content\Templates\PageTemplate $template

@@ -50,7 +50,7 @@ class ArticleTemplate
     }
 
     /**
-     * TODO: Method create Description
+     * Create a instance.
      *
      * @param $key
      * @param $location
@@ -70,7 +70,7 @@ class ArticleTemplate
     }
 
     /**
-     * TODO: Method withRelation Description
+     * Return a instance with relation.
      *
      * @param $relation
      *

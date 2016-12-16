@@ -18,7 +18,7 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 class CategoryController extends Controller
 {
     /**
-     * TODO: Method create Description
+     * Create handler.
      *
      * @param \Notadd\Content\Handlers\Creators\CategoryCreatorHandler $handler
      *
@@ -27,11 +27,11 @@ class CategoryController extends Controller
      */
     public function create(CategoryCreatorHandler $handler)
     {
-        return $handler->toResponse($this->request)->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
-     * TODO: Method show Description
+     * Show handler.
      *
      * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
      *

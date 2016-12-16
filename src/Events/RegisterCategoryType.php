@@ -40,12 +40,12 @@ class RegisterCategoryType
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a category type.
      *
      * @param                                    $name
      * @param \Notadd\Content\Types\CategoryType $type
      */
-    public function registerTemplate($name, CategoryType $type)
+    public function registerType($name, CategoryType $type)
     {
         $this->manager->registerType($name, $type);
     }

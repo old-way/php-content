@@ -43,7 +43,7 @@ class CategoryTypeEditorHandler extends SetHandler
     }
 
     /**
-     * TODO: Method code Description
+     * Http code.
      *
      * @return int
      */

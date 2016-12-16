@@ -43,7 +43,7 @@ class CategoryTemplateFinderHandler extends DataHandler
     }
 
     /**
-     * TODO: Method code Description
+     * Http code.
      *
      * @return int
      */

@@ -40,7 +40,7 @@ class RegisterCategoryTemplate
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a category template.
      *
      * @param                                            $name
      * @param \Notadd\Content\Templates\CategoryTemplate $template

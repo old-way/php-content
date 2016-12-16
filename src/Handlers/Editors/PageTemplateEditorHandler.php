@@ -43,7 +43,7 @@ class PageTemplateEditorHandler extends SetHandler
     }
 
     /**
-     * TODO: Method code Description
+     * Http code.
      *
      * @return int
      */

@@ -54,7 +54,7 @@ class PageManager
     }
 
     /**
-     * TODO: Method registerTemplate Description
+     * Register a page template.
      *
      * @param                                        $name
      * @param \Notadd\Content\Templates\PageTemplate $template
@@ -65,7 +65,7 @@ class PageManager
     }
 
     /**
-     * TODO: Method registerType Description
+     * Register a page type.
      *
      * @param                                $name
      * @param \Notadd\Content\Types\PageType $type

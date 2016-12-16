@@ -43,7 +43,7 @@ class ArticleTypeFinderHandler extends DataHandler
     }
 
     /**
-     * TODO: Method code Description
+     * Http code.
      *
      * @return int
      */
