@@ -8,9 +8,11 @@
  */
 namespace Notadd\Content\Handlers\Fetchers;
 
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
+
 /**
  * Class ArticleTemplateFetcherHandler.
  */
-class ArticleTemplateFetcherHandler
+class ArticleTemplateFetcherHandler extends DataHandler
 {
 }
