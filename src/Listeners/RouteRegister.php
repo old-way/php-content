@@ -32,29 +32,76 @@ class RouteRegister extends AbstractRouteRegistrar
      */
     public function handle()
     {
-        $this->router->group(['middleware' => ['auth:api', 'web'], 'prefix' => 'api/article'], function () {
-            $this->router->resource('template', ArticleTemplateApiController::class);
-            $this->router->resource('type', ArticleTypeApiController::class);
-            $this->router->resource('/', ArticleApiController::class);
+        $this->router->group(['middleware' => ['auth:api', 'web']], function () {
+            $this->router->group(['prefix' => 'api/article'], function () {
+                $this->router->post('create', ArticleApiController::class . '@create');
+                $this->router->post('delete', ArticleApiController::class . '@delete');
+                $this->router->post('edit', ArticleApiController::class . '@edit');
+                $this->router->post('find', ArticleApiController::class . '@find');
+                $this->router->post('fetch', ArticleApiController::class . '@fetch');
+                $this->router->group(['prefix' => 'template'], function () {
+                    $this->router->post('create', ArticleTemplateApiController::class . '@create');
+                    $this->router->post('delete', ArticleTemplateApiController::class . '@delete');
+                    $this->router->post('edit', ArticleTemplateApiController::class . '@edit');
+                    $this->router->post('find', ArticleTemplateApiController::class . '@find');
+                    $this->router->post('fetch', ArticleTemplateApiController::class . '@fetch');
+                });
+                $this->router->group(['prefix' => 'type'], function () {
+                    $this->router->post('create', ArticleTypeApiController::class . '@create');
+                    $this->router->post('delete', ArticleTypeApiController::class . '@delete');
+                    $this->router->post('edit', ArticleTypeApiController::class . '@edit');
+                    $this->router->post('find', ArticleTypeApiController::class . '@find');
+                    $this->router->post('fetch', ArticleTypeApiController::class . '@fetch');
+                });
+            });
+            $this->router->group(['prefix' => 'api/category'], function () {
+                $this->router->post('create', CategoryApiController::class . '@create');
+                $this->router->post('delete', CategoryApiController::class . '@delete');
+                $this->router->post('edit', CategoryApiController::class . '@edit');
+                $this->router->post('find', CategoryApiController::class . '@find');
+                $this->router->post('fetch', CategoryApiController::class . '@fetch');
+                $this->router->group(['prefix' => 'template'], function () {
+                    $this->router->post('create', CategoryTemplateApiController::class . '@create');
+                    $this->router->post('delete', CategoryTemplateApiController::class . '@delete');
+                    $this->router->post('edit', CategoryTemplateApiController::class . '@edit');
+                    $this->router->post('find', CategoryTemplateApiController::class . '@find');
+                    $this->router->post('fetch', CategoryTemplateApiController::class . '@fetch');
+                });
+                $this->router->group(['prefix' => 'type'], function () {
+                    $this->router->post('create', CategoryTypeApiController::class . '@create');
+                    $this->router->post('delete', CategoryTypeApiController::class . '@delete');
+                    $this->router->post('edit', CategoryTypeApiController::class . '@edit');
+                    $this->router->post('find', CategoryTypeApiController::class . '@find');
+                    $this->router->post('fetch', CategoryTypeApiController::class . '@fetch');
+                });
+            });
+            $this->router->group(['prefix' => 'api/page'], function () {
+                $this->router->post('create', PageApiController::class . '@create');
+                $this->router->post('delete', PageApiController::class . '@delete');
+                $this->router->post('edit', PageApiController::class . '@edit');
+                $this->router->post('find', PageApiController::class . '@find');
+                $this->router->post('fetch', PageApiController::class . '@fetch');
+                $this->router->group(['prefix' => 'template'], function () {
+                    $this->router->post('create', PageTemplateApiController::class . '@create');
+                    $this->router->post('delete', PageTemplateApiController::class . '@delete');
+                    $this->router->post('edit', PageTemplateApiController::class . '@edit');
+                    $this->router->post('find', PageTemplateApiController::class . '@find');
+                    $this->router->post('fetch', PageTemplateApiController::class . '@fetch');
+                });
+                $this->router->group(['prefix' => 'type'], function () {
+                    $this->router->post('create', PageTypeApiController::class . '@create');
+                    $this->router->post('delete', PageTypeApiController::class . '@delete');
+                    $this->router->post('edit', PageTypeApiController::class . '@edit');
+                    $this->router->post('find', PageTypeApiController::class . '@find');
+                    $this->router->post('fetch', PageTypeApiController::class . '@fetch');
+                });
+            });
         });
-        $this->router->group(['middleware' => ['auth:api', 'web'], 'prefix' => 'api/category'], function () {
-            $this->router->resource('template', CategoryTemplateApiController::class);
-            $this->router->resource('type', CategoryTypeApiController::class);
-            $this->router->resource('/', CategoryApiController::class);
-        });
-        $this->router->group(['middleware' => ['auth:api', 'web'], 'prefix' => 'api/page'], function () {
-            $this->router->resource('template', PageTemplateApiController::class);
-            $this->router->resource('type', PageTypeApiController::class);
-            $this->router->resource('/', PageApiController::class);
-        });
-        $this->router->group(['middleware' => 'web', 'prefix' => 'article'], function () {
-            $this->router->resource('/', ArticleController::class);
-        });
-        $this->router->group(['middleware' => 'web', 'prefix' => 'category'], function () {
-            $this->router->resource('/', CategoryController::class);
-        });
-        $this->router->group(['middleware' => 'web', 'prefix' => 'page'], function () {
-            $this->router->resource('/', PageController::class);
+
+        $this->router->group(['middleware' => 'web'], function () {
+            $this->router->resource('article', ArticleController::class);
+            $this->router->resource('category', CategoryController::class);
+            $this->router->resource('page', PageController::class);
         });
     }
 }
