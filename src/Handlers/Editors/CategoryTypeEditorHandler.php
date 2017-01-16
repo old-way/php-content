@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class CategoryTypeEditorHandler extends SetHandler
 {
     /**
-     * @var \Notadd\Content\Models\CategoryType
-     */
-    protected $categoryType;
-
-    /**
      * CategoryTypeEditorHandler constructor.
      *
      * @param \Notadd\Content\Models\CategoryType $categoryType
@@ -39,7 +34,7 @@ class CategoryTypeEditorHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->categoryType = $categoryType;
+        $this->model = $categoryType;
     }
 
     /**
@@ -71,7 +66,7 @@ class CategoryTypeEditorHandler extends SetHandler
      */
     public function execute()
     {
-        $categoryType = $this->categoryType->newQuery()->find($this->request->input('id'));
+        $categoryType = $this->model->newQuery()->find($this->request->input('id'));
         if ($categoryType === null) {
             return false;
         }

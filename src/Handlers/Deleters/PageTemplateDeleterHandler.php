@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class PageTemplateDeleterHandler extends SetHandler
 {
     /**
-     * @var \Notadd\Content\Models\PageTemplate
-     */
-    protected $pageTemplate;
-
-    /**
      * PageTemplateDeleterHandler constructor.
      *
      * @param \Illuminate\Container\Container     $container
@@ -39,7 +34,7 @@ class PageTemplateDeleterHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->pageTemplate = $pageTemplate;
+        $this->model = $pageTemplate;
     }
 
     /**
@@ -71,7 +66,7 @@ class PageTemplateDeleterHandler extends SetHandler
      */
     public function execute()
     {
-        $pageTemplate = $this->pageTemplate->newQuery()->find($this->request->input('id'));
+        $pageTemplate = $this->model->newQuery()->find($this->request->input('id'));
         if ($pageTemplate === null) {
             return false;
         }

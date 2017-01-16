@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class ArticleEditorHandler extends SetHandler
 {
     /**
-     * @var \Notadd\Content\Models\Article
-     */
-    protected $article;
-
-    /**
      * ArticleEditorHandler constructor.
      *
      * @param \Notadd\Content\Models\Article     $article
@@ -39,7 +34,7 @@ class ArticleEditorHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->article = $article;
+        $this->model = $article;
     }
 
     /**
@@ -71,7 +66,7 @@ class ArticleEditorHandler extends SetHandler
      */
     public function execute()
     {
-        $article = $this->article->newQuery()->find($this->request->input('id'));
+        $article = $this->model->newQuery()->find($this->request->input('id'));
         $article->update($this->request->all());
 
         return true;

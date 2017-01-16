@@ -25,11 +25,6 @@ class PageCreatorHandler extends SetHandler
     protected $id;
 
     /**
-     * @var \Notadd\Content\Models\Page
-     */
-    protected $page;
-
-    /**
      * PageCreatorHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
@@ -44,7 +39,7 @@ class PageCreatorHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->page = $page;
+        $this->model = $page;
     }
 
     /**
@@ -76,7 +71,7 @@ class PageCreatorHandler extends SetHandler
      */
     public function execute()
     {
-        $this->id = $this->page->create($this->request->all());
+        $this->id = $this->model->create($this->request->all());
 
         return true;
     }

@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
 class PageTypeFetcherHandler extends DataHandler
 {
     /**
-     * @var \Notadd\Content\Models\PageType
-     */
-    protected $pageType;
-
-    /**
      * PageTypeFinderHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
@@ -39,7 +34,7 @@ class PageTypeFetcherHandler extends DataHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->pageType = $pageType;
+        $this->model = $pageType;
     }
 
     /**

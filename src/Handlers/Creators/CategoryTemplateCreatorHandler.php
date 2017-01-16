@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class CategoryTemplateCreatorHandler extends SetHandler
 {
     /**
-     * @var \Notadd\Content\Models\CategoryTemplate
-     */
-    protected $categoryTemplate;
-
-    /**
      * @var int
      */
     protected $id;
@@ -44,7 +39,7 @@ class CategoryTemplateCreatorHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->categoryTemplate = $categoryTemplate;
+        $this->model = $categoryTemplate;
     }
 
     /**
@@ -76,7 +71,7 @@ class CategoryTemplateCreatorHandler extends SetHandler
      */
     public function execute()
     {
-        $this->id = $this->categoryTemplate->create($this->request->all());
+        $this->id = $this->model->create($this->request->all());
 
         return true;
     }

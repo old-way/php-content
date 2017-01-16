@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class CategoryDeleterHandler extends SetHandler
 {
     /**
-     * @var \Notadd\Content\Models\Category
-     */
-    protected $category;
-
-    /**
      * CategoryDeleterHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
@@ -37,7 +32,7 @@ class CategoryDeleterHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->category = new Category();
+        $this->model = new Category();
     }
 
     /**
@@ -69,7 +64,7 @@ class CategoryDeleterHandler extends SetHandler
      */
     public function execute()
     {
-        $category = $this->category->newQuery()->find($this->request->input('id'));
+        $category = $this->model->newQuery()->find($this->request->input('id'));
         if ($category === null) {
             return false;
         }

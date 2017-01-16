@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
 class CategoryFetcherHandler extends DataHandler
 {
     /**
-     * @var \Notadd\Content\Models\Category
-     */
-    protected $category;
-
-    /**
      * CategoryFinderHandler constructor.
      *
      * @param \Notadd\Content\Models\Category    $category
@@ -39,7 +34,7 @@ class CategoryFetcherHandler extends DataHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->category = $category;
+        $this->model = $category;
     }
 
     /**

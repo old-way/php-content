@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
 class ArticleTemplateFetcherHandler extends DataHandler
 {
     /**
-     * @var \Notadd\Content\Models\ArticleTemplate
-     */
-    protected $articleTemplate;
-
-    /**
      * ArticleTemplateFinderHandler constructor.
      *
      * @param \Notadd\Content\Models\ArticleTemplate $articleTemplate
@@ -39,7 +34,7 @@ class ArticleTemplateFetcherHandler extends DataHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->articleTemplate = $articleTemplate;
+        $this->model = $articleTemplate;
     }
 
     /**

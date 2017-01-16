@@ -19,12 +19,6 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
  */
 class PageFinderHandler extends DataHandler
 {
-
-    /**
-     * @var \Notadd\Content\Models\Page
-     */
-    protected $page;
-
     /**
      * PageFinderHandler constructor.
      *
@@ -40,7 +34,7 @@ class PageFinderHandler extends DataHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->page = $page;
+        $this->model = $page;
     }
 
     /**
@@ -60,7 +54,7 @@ class PageFinderHandler extends DataHandler
      */
     public function data()
     {
-        $page = $this->page->newQuery()->find($this->request->input('id'));
+        $page = $this->model->newQuery()->find($this->request->input('id'));
 
         return $page->getAttributes();
     }

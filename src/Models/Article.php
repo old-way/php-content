@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Article extends Model
 {
     use SoftDeletes;
+
     /**
      * @var array
      */
@@ -33,6 +34,6 @@ class Article extends Model
         'user_id',
         'hits',
         'is_sticky',
-        'deleted_at'
+        'deleted_at',
     ];
 }

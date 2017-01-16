@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
 class CategoryTemplateFinderHandler extends DataHandler
 {
     /**
-     * @var \Notadd\Content\Models\CategoryTemplate
-     */
-    protected $categoryTemplate;
-
-    /**
      * CategoryTemplateFinderHandler constructor.
      *
      * @param \Notadd\Content\Models\CategoryTemplate $categoryTemplate
@@ -39,7 +34,7 @@ class CategoryTemplateFinderHandler extends DataHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->categoryTemplate = $categoryTemplate;
+        $this->model = $categoryTemplate;
     }
 
     /**
@@ -59,7 +54,7 @@ class CategoryTemplateFinderHandler extends DataHandler
      */
     public function data()
     {
-        $categoryTemplate = $this->categoryTemplate->newQuery()->find($this->request->input('id'));
+        $categoryTemplate = $this->model->newQuery()->find($this->request->input('id'));
 
         return $categoryTemplate->getAttributes();
     }

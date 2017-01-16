@@ -25,11 +25,6 @@ class PageTemplateCreatorHandler extends SetHandler
     protected $id;
 
     /**
-     * @var \Notadd\Content\Models\PageTemplate
-     */
-    protected $pageTemplate;
-
-    /**
      * PageTemplateCreatorHandler constructor.
      *
      * @param \Illuminate\Container\Container     $container
@@ -44,7 +39,7 @@ class PageTemplateCreatorHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->pageTemplate = $pageTemplate;
+        $this->model = $pageTemplate;
     }
 
     /**
@@ -88,7 +83,7 @@ class PageTemplateCreatorHandler extends SetHandler
      */
     public function execute()
     {
-        $this->id = $this->pageTemplate->create($this->request->all());
+        $this->id = $this->model->create($this->request->all());
 
         return true;
     }

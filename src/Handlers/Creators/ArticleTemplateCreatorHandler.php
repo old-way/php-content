@@ -21,11 +21,6 @@ use Notadd\Foundation\Setting\Contracts\SettingsRepository;
 class ArticleTemplateCreatorHandler extends SetHandler
 {
     /**
-     * @var \Notadd\Content\Models\ArticleTemplate
-     */
-    protected $articleTemplate;
-
-    /**
      * @var int
      */
     protected $id;
@@ -47,7 +42,7 @@ class ArticleTemplateCreatorHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $settings, $translator);
-        $this->articleTemplate = $articleTemplate;
+        $this->model = $articleTemplate;
     }
 
     /**
@@ -79,7 +74,7 @@ class ArticleTemplateCreatorHandler extends SetHandler
      */
     public function execute()
     {
-        $this->id = $this->articleTemplate->create($this->request->all());
+        $this->id = $this->model->create($this->request->all());
 
         return true;
     }

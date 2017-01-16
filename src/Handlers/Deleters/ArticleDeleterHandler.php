@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class ArticleDeleterHandler extends SetHandler
 {
     /**
-     * @var \Notadd\Content\Models\Article
-     */
-    protected $article;
-
-    /**
      * ArticleDeleterHandler constructor.
      *
      * @param \Notadd\Content\Models\Article     $article
@@ -39,7 +34,7 @@ class ArticleDeleterHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->article = $article;
+        $this->model = $article;
     }
 
     /**
@@ -83,7 +78,7 @@ class ArticleDeleterHandler extends SetHandler
      */
     public function execute()
     {
-        $article = $this->article->newQuery()->find($this->request->input('id'));
+        $article = $this->model->newQuery()->find($this->request->input('id'));
         if ($article === null) {
             return false;
         }

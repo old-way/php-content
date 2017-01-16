@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class PageEditorHandler extends SetHandler
 {
     /**
-     * @var \Notadd\Content\Models\Page
-     */
-    protected $page;
-
-    /**
      * PageEditorHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
@@ -37,7 +32,7 @@ class PageEditorHandler extends SetHandler
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->page = new Page();
+        $this->model = new Page();
     }
 
     /**
@@ -69,7 +64,7 @@ class PageEditorHandler extends SetHandler
      */
     public function execute()
     {
-        $page = $this->page->newQuery()->find($this->request->input('id'));
+        $page = $this->model->newQuery()->find($this->request->input('id'));
         $page->update($this->request->all());
 
         return true;
