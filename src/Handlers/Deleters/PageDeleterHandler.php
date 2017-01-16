@@ -55,7 +55,7 @@ class PageDeleterHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::page.delete.fail'),
         ];
     }
 
@@ -83,7 +83,7 @@ class PageDeleterHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::page.delete.success'),
         ];
     }
 }

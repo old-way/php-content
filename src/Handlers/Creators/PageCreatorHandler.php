@@ -60,7 +60,7 @@ class PageCreatorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::page.create.fail'),
         ];
     }
 
@@ -84,7 +84,7 @@ class PageCreatorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::page.create.success'),
         ];
     }
 }
