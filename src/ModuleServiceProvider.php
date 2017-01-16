@@ -32,6 +32,7 @@ class ModuleServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->make(Dispatcher::class)->subscribe(RouteRegister::class);
+        $this->loadTranslationsFrom(__DIR__ . '/../resources/translations', 'content');
     }
 
     /**
