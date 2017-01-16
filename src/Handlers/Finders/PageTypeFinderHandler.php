@@ -67,7 +67,7 @@ class PageTypeFinderHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::page_type.find.fail'),
         ];
     }
 
@@ -79,7 +79,7 @@ class PageTypeFinderHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::page_type.find.success'),
         ];
     }
 }

@@ -55,7 +55,7 @@ class PageTypeEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::page_type.update.fail'),
         ];
     }
 
@@ -83,7 +83,7 @@ class PageTypeEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::page_type.update.success'),
         ];
     }
 }
