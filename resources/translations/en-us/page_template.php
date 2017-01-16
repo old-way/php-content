@@ -10,22 +10,22 @@
 return [
     'create' => [
         'success' => 'Page Template has been created!',
-        'fail' => 'Page Template create fail!',
+        'fail'    => 'Page Template create fail!',
     ],
     'delete' => [
         'success' => 'Page Template has been deleted!',
-        'fail' => 'Page Template delete fail!',
+        'fail'    => 'Page Template delete fail!',
     ],
-    'fetch' => [
+    'fetch'  => [
         'success' => 'Page Template has been fetched!',
-        'fail' => 'Page Template fetch fail!',
+        'fail'    => 'Page Template fetch fail!',
     ],
-    'find' => [
+    'find'   => [
         'success' => 'Page Template has been found!',
-        'fail' => 'Page Template find fail!',
+        'fail'    => 'Page Template find fail!',
     ],
     'update' => [
         'success' => 'Page Template has been updated!',
-        'fail' => 'Page Template update fail!',
+        'fail'    => 'Page Template update fail!',
     ],
 ];

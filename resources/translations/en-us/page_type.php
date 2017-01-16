@@ -10,22 +10,22 @@
 return [
     'create' => [
         'success' => 'Page Type has been created!',
-        'fail' => 'Page Type create fail!',
+        'fail'    => 'Page Type create fail!',
     ],
     'delete' => [
         'success' => 'Page Type has been deleted!',
-        'fail' => 'Page Type delete fail!',
+        'fail'    => 'Page Type delete fail!',
     ],
-    'fetch' => [
+    'fetch'  => [
         'success' => 'Page Type has been fetched!',
-        'fail' => 'Page Type fetch fail!',
+        'fail'    => 'Page Type fetch fail!',
     ],
-    'find' => [
+    'find'   => [
         'success' => 'Page Type has been found!',
-        'fail' => 'Page Type find fail!',
+        'fail'    => 'Page Type find fail!',
     ],
     'update' => [
         'success' => 'Page Type has been updated!',
-        'fail' => 'Page Type update fail!',
+        'fail'    => 'Page Type update fail!',
     ],
 ];

@@ -10,22 +10,22 @@
 return [
     'create' => [
         'success' => 'Article has been created!',
-        'fail' => 'Article create fail!',
+        'fail'    => 'Article create fail!',
     ],
     'delete' => [
         'success' => 'Article has been deleted!',
-        'fail' => 'Article delete fail!',
+        'fail'    => 'Article delete fail!',
     ],
-    'fetch' => [
+    'fetch'  => [
         'success' => 'Article has been fetched!',
-        'fail' => 'Article fetch fail!',
+        'fail'    => 'Article fetch fail!',
     ],
-    'find' => [
+    'find'   => [
         'success' => 'Article has been found!',
-        'fail' => 'Article find fail!',
+        'fail'    => 'Article find fail!',
     ],
     'update' => [
         'success' => 'Article has been updated!',
-        'fail' => 'Article update fail!',
+        'fail'    => 'Article update fail!',
     ],
 ];

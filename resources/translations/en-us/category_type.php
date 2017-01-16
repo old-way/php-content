@@ -10,22 +10,22 @@
 return [
     'create' => [
         'success' => 'Category Type has been created!',
-        'fail' => 'Category Type create fail!',
+        'fail'    => 'Category Type create fail!',
     ],
     'delete' => [
         'success' => 'Category Type has been deleted!',
-        'fail' => 'Category Type delete fail!',
+        'fail'    => 'Category Type delete fail!',
     ],
-    'fetch' => [
+    'fetch'  => [
         'success' => 'Category Type has been fetched!',
-        'fail' => 'Category Type fetch fail!',
+        'fail'    => 'Category Type fetch fail!',
     ],
-    'find' => [
+    'find'   => [
         'success' => 'Category Type has been found!',
-        'fail' => 'Category Type find fail!',
+        'fail'    => 'Category Type find fail!',
     ],
     'update' => [
         'success' => 'Category Type has been updated!',
-        'fail' => 'Category Type update fail!',
+        'fail'    => 'Category Type update fail!',
     ],
 ];

@@ -10,22 +10,22 @@
 return [
     'create' => [
         'success' => 'Article Template has been created!',
-        'fail' => 'Article Template create fail!',
+        'fail'    => 'Article Template create fail!',
     ],
     'delete' => [
         'success' => 'Article Template has been deleted!',
-        'fail' => 'Article Template delete fail!',
+        'fail'    => 'Article Template delete fail!',
     ],
-    'fetch' => [
+    'fetch'  => [
         'success' => 'Article Template has been fetched!',
-        'fail' => 'Article Template fetch fail!',
+        'fail'    => 'Article Template fetch fail!',
     ],
-    'find' => [
+    'find'   => [
         'success' => 'Article Template has been found!',
-        'fail' => 'Article Template find fail!',
+        'fail'    => 'Article Template find fail!',
     ],
     'update' => [
         'success' => 'Article Template has been updated!',
-        'fail' => 'Article Template update fail!',
+        'fail'    => 'Article Template update fail!',
     ],
 ];

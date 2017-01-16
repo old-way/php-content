@@ -10,22 +10,22 @@
 return [
     'create' => [
         'success' => 'Category Template has been created!',
-        'fail' => 'Category Template create fail!',
+        'fail'    => 'Category Template create fail!',
     ],
     'delete' => [
         'success' => 'Category Template has been deleted!',
-        'fail' => 'Category Template delete fail!',
+        'fail'    => 'Category Template delete fail!',
     ],
-    'fetch' => [
+    'fetch'  => [
         'success' => 'Category Template has been fetched!',
-        'fail' => 'Category Template fetch fail!',
+        'fail'    => 'Category Template fetch fail!',
     ],
-    'find' => [
+    'find'   => [
         'success' => 'Category Template has been found!',
-        'fail' => 'Category Template find fail!',
+        'fail'    => 'Category Template find fail!',
     ],
     'update' => [
         'success' => 'Category Template has been updated!',
-        'fail' => 'Category Template update fail!',
+        'fail'    => 'Category Template update fail!',
     ],
 ];
