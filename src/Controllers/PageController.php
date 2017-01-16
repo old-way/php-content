@@ -8,9 +8,9 @@
  */
 namespace Notadd\Content\Controllers;
 
-use Notadd\Content\Handlers\Creators\PageCreatorHandler;
-use Notadd\Content\Handlers\Deleters\PageDeleterHandler;
-use Notadd\Content\Handlers\Finders\PageFinderHandler;
+use Notadd\Content\Handlers\Page\CreatorHandler;
+use Notadd\Content\Handlers\Page\DeleterHandler;
+use Notadd\Content\Handlers\Page\FinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -21,12 +21,12 @@ class PageController extends Controller
     /**
      * Page create.
      *
-     * @param \Notadd\Content\Handlers\Creators\PageCreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Page\CreatorHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function create(PageCreatorHandler $handler)
+    public function create(CreatorHandler $handler)
     {
         $response = $handler->toResponse($this->request);
 
@@ -36,12 +36,12 @@ class PageController extends Controller
     /**
      * Page destroy.
      *
-     * @param \Notadd\Content\Handlers\Deleters\PageDeleterHandler $handler
+     * @param \Notadd\Content\Handlers\Page\DeleterHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function destroy(PageDeleterHandler $handler)
+    public function destroy(DeleterHandler $handler)
     {
         return $handler->toResponse($this->request)->generateHttpResponse();
     }
@@ -49,12 +49,12 @@ class PageController extends Controller
     /**
      * Page show.
      *
-     * @param \Notadd\Content\Handlers\Finders\PageFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Page\FinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function show(PageFinderHandler $handler)
+    public function show(FinderHandler $handler)
     {
         $response = $handler->toResponse();
 

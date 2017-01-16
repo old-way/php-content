@@ -3,24 +3,29 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2017, iBenchu.org
- * @datetime 2017-01-15 20:36
+ * @copyright (c) 2016, iBenchu.org
+ * @datetime 2016-10-08 17:28
  */
-namespace Notadd\Content\Handlers\Fetchers;
+namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Page;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class PageFetcherHandler.
+ * Class PageHandler.
  */
-class PageFetcherHandler extends DataHandler
+class CreatorHandler extends SetHandler
 {
     /**
-     * PageFinderHandler constructor.
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * PageCreatorHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
      * @param \Notadd\Content\Models\Page        $page
@@ -48,20 +53,6 @@ class PageFetcherHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        if($this->hasFilter) {
-            return $this->model->get();
-        } else {
-            return $this->model->all();
-        }
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -69,8 +60,20 @@ class PageFetcherHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page.fetch.fail'),
+            $this->translator->trans('content::page.create.fail'),
         ];
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return bool
+     */
+    public function execute()
+    {
+        $this->id = $this->model->create($this->request->all());
+
+        return true;
     }
 
     /**
@@ -81,7 +84,7 @@ class PageFetcherHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page.fetch.success'),
+            $this->translator->trans('content::page.create.success'),
         ];
     }
 }

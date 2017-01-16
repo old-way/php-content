@@ -3,38 +3,38 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2017, iBenchu.org
- * @datetime 2017-01-15 20:37
+ * @copyright (c) 2016, iBenchu.org
+ * @datetime 2016-11-24 18:34
  */
-namespace Notadd\Content\Handlers\Fetchers;
+namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\PageType;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Content\Models\Page;
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class PageTypeFetcherHandler.
+ * Class PageDeleteHandler.
  */
-class PageTypeFetcherHandler extends DataHandler
+class DeleterHandler extends SetHandler
 {
     /**
-     * PageTypeFinderHandler constructor.
+     * PageDeleterHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
-     * @param \Notadd\Content\Models\PageType    $pageType
+     * @param \Notadd\Content\Models\Page        $page
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
         Container $container,
-        PageType $pageType,
+        Page $page,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $pageType;
+        $this->model = $page;
     }
 
     /**
@@ -48,20 +48,6 @@ class PageTypeFetcherHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        if($this->hasFilter) {
-            return $this->model->get();
-        } else {
-            return $this->model->all();
-        }
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -69,8 +55,24 @@ class PageTypeFetcherHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page_type.fetch.fail'),
+            $this->translator->trans('content::page.delete.fail'),
         ];
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return bool
+     */
+    public function execute()
+    {
+        $page = $this->model->newQuery()->find($this->request->input('id'));
+        if ($page === null) {
+            return false;
+        }
+        $page->delete();
+
+        return true;
     }
 
     /**
@@ -81,7 +83,7 @@ class PageTypeFetcherHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page_type.fetch.success'),
+            $this->translator->trans('content::page.delete.success'),
         ];
     }
 }

@@ -4,23 +4,23 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:16
+ * @datetime 2016-11-25 15:23
  */
-namespace Notadd\Content\Handlers\Editors;
+namespace Notadd\Content\Handlers\Page\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\PageTemplate;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class PageTemplateEditHandler.
+ * Class PageTemplateFindHandler.
  */
-class PageTemplateEditorHandler extends SetHandler
+class FinderHandler extends DataHandler
 {
     /**
-     * PageTemplateEditorHandler constructor.
+     * PageTemplateFinderHandler constructor.
      *
      * @param \Illuminate\Container\Container     $container
      * @param \Notadd\Content\Models\PageTemplate $pageTemplate
@@ -48,6 +48,18 @@ class PageTemplateEditorHandler extends SetHandler
     }
 
     /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+        $pageTemplate = $this->model->newQuery()->find($this->request->input('id'));
+
+        return $pageTemplate->getAttributes();
+    }
+
+    /**
      * Errors for handler.
      *
      * @return array
@@ -55,24 +67,8 @@ class PageTemplateEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page_template.update.fail'),
+            $this->translator->trans('content::page_template.find.fail'),
         ];
-    }
-
-    /**
-     * Execute Handler.
-     *
-     * @return bool
-     */
-    public function execute()
-    {
-        $pageTemplate = $this->model->newQuery()->find($this->request->input('id'));
-        if ($pageTemplate === null) {
-            return false;
-        }
-        $pageTemplate->update($this->request->all());
-
-        return true;
     }
 
     /**
@@ -83,7 +79,7 @@ class PageTemplateEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page_template.update.success'),
+            $this->translator->trans('content::page_template.find.success'),
         ];
     }
 }

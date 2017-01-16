@@ -6,7 +6,7 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-25 15:17
  */
-namespace Notadd\Content\Handlers\Deleters;
+namespace Notadd\Content\Handlers\Page\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 /**
  * Class PageTemplateDeleteHandler.
  */
-class PageTemplateDeleterHandler extends SetHandler
+class DeleterHandler extends SetHandler
 {
     /**
      * PageTemplateDeleterHandler constructor.

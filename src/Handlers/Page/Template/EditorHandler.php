@@ -4,37 +4,37 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-24 18:34
+ * @datetime 2016-11-25 15:16
  */
-namespace Notadd\Content\Handlers\Deleters;
+namespace Notadd\Content\Handlers\Page\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\Page;
+use Notadd\Content\Models\PageTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class PageDeleteHandler.
+ * Class PageTemplateEditHandler.
  */
-class PageDeleterHandler extends SetHandler
+class EditorHandler extends SetHandler
 {
     /**
-     * PageDeleterHandler constructor.
+     * PageTemplateEditorHandler constructor.
      *
-     * @param \Illuminate\Container\Container    $container
-     * @param \Notadd\Content\Models\Page        $page
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Container\Container     $container
+     * @param \Notadd\Content\Models\PageTemplate $pageTemplate
+     * @param \Illuminate\Http\Request            $request
+     * @param \Illuminate\Translation\Translator  $translator
      */
     public function __construct(
         Container $container,
-        Page $page,
+        PageTemplate $pageTemplate,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $page;
+        $this->model = $pageTemplate;
     }
 
     /**
@@ -55,7 +55,7 @@ class PageDeleterHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page.delete.fail'),
+            $this->translator->trans('content::page_template.update.fail'),
         ];
     }
 
@@ -66,11 +66,11 @@ class PageDeleterHandler extends SetHandler
      */
     public function execute()
     {
-        $page = $this->model->newQuery()->find($this->request->input('id'));
-        if ($page === null) {
+        $pageTemplate = $this->model->newQuery()->find($this->request->input('id'));
+        if ($pageTemplate === null) {
             return false;
         }
-        $page->delete();
+        $pageTemplate->update($this->request->all());
 
         return true;
     }
@@ -83,7 +83,7 @@ class PageDeleterHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page.delete.success'),
+            $this->translator->trans('content::page_template.update.success'),
         ];
     }
 }

@@ -8,11 +8,11 @@
  */
 namespace Notadd\Content\Controllers\Api\Page;
 
-use Notadd\Content\Handlers\Creators\PageCreatorHandler;
-use Notadd\Content\Handlers\Deleters\PageDeleterHandler;
-use Notadd\Content\Handlers\Editors\PageEditorHandler;
-use Notadd\Content\Handlers\Fetchers\PageFetcherHandler;
-use Notadd\Content\Handlers\Finders\PageFinderHandler;
+use Notadd\Content\Handlers\Page\CreatorHandler;
+use Notadd\Content\Handlers\Page\DeleterHandler;
+use Notadd\Content\Handlers\Page\EditorHandler;
+use Notadd\Content\Handlers\Page\FetcherHandler;
+use Notadd\Content\Handlers\Page\FinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -23,12 +23,12 @@ class PageController extends Controller
     /**
      * Create handler.
      *
-     * @param \Notadd\Content\Handlers\Creators\PageCreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Page\CreatorHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function create(PageCreatorHandler $handler)
+    public function create(CreatorHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -38,12 +38,12 @@ class PageController extends Controller
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Deleters\PageDeleterHandler $handler
+     * @param \Notadd\Content\Handlers\Page\DeleterHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(PageDeleterHandler $handler)
+    public function delete(DeleterHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -53,12 +53,12 @@ class PageController extends Controller
     /**
      * Edit handler.
      *
-     * @param \Notadd\Content\Handlers\Editors\PageEditorHandler $handler
+     * @param \Notadd\Content\Handlers\Page\EditorHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function edit(PageEditorHandler $handler)
+    public function edit(EditorHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -68,12 +68,12 @@ class PageController extends Controller
     /**
      * Fetch handler.
      *
-     * @param \Notadd\Content\Handlers\Fetchers\PageFetcherHandler $handler
+     * @param \Notadd\Content\Handlers\Page\FetcherHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function fetch(PageFetcherHandler $handler)
+    public function fetch(FetcherHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -83,12 +83,12 @@ class PageController extends Controller
     /**
      * Find handler.
      *
-     * @param \Notadd\Content\Handlers\Finders\PageFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Page\FinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function find(PageFinderHandler $handler)
+    public function find(FinderHandler $handler)
     {
         $response = $handler->toResponse();
 

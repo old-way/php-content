@@ -4,35 +4,37 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-24 18:34
+ * @datetime 2016-11-25 15:20
  */
-namespace Notadd\Content\Handlers\Editors;
+namespace Notadd\Content\Handlers\Page\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\Page;
+use Notadd\Content\Models\PageType;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class PageEditHandler.
+ * Class PageTypeEditHandler.
  */
-class PageEditorHandler extends SetHandler
+class EditorHandler extends SetHandler
 {
     /**
-     * PageEditorHandler constructor.
+     * PageTypeEditorHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
+     * @param \Notadd\Content\Models\PageType    $pageType
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
         Container $container,
+        PageType $pageType,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = new Page();
+        $this->model = $pageType;
     }
 
     /**
@@ -53,7 +55,7 @@ class PageEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page.update.fail'),
+            $this->translator->trans('content::page_type.update.fail'),
         ];
     }
 
@@ -64,8 +66,11 @@ class PageEditorHandler extends SetHandler
      */
     public function execute()
     {
-        $page = $this->model->newQuery()->find($this->request->input('id'));
-        $page->update($this->request->all());
+        $pageType = $this->model->newQuery()->find($this->request->input('id'));
+        if ($pageType === null) {
+            return false;
+        }
+        $pageType->update($this->request->all());
 
         return true;
     }
@@ -78,7 +83,7 @@ class PageEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page.update.success'),
+            $this->translator->trans('content::page_type.update.success'),
         ];
     }
 }

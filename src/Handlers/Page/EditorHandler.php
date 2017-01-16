@@ -4,37 +4,35 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:23
+ * @datetime 2016-11-24 18:34
  */
-namespace Notadd\Content\Handlers\Finders;
+namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\PageType;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Content\Models\Page;
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class PageTypeFindHandler.
+ * Class PageEditHandler.
  */
-class PageTypeFinderHandler extends DataHandler
+class EditorHandler extends SetHandler
 {
     /**
-     * PageTypeFinderHandler constructor.
+     * PageEditorHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
-     * @param \Notadd\Content\Models\PageType    $pageType
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
         Container $container,
-        PageType $pageType,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $pageType;
+        $this->model = new Page();
     }
 
     /**
@@ -48,18 +46,6 @@ class PageTypeFinderHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        $pageType = $this->model->newQuery()->find($this->request->input('id'));
-
-        return $pageType->getAttributes();
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -67,8 +53,21 @@ class PageTypeFinderHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page_type.find.fail'),
+            $this->translator->trans('content::page.update.fail'),
         ];
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return bool
+     */
+    public function execute()
+    {
+        $page = $this->model->newQuery()->find($this->request->input('id'));
+        $page->update($this->request->all());
+
+        return true;
     }
 
     /**
@@ -79,7 +78,7 @@ class PageTypeFinderHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page_type.find.success'),
+            $this->translator->trans('content::page.update.success'),
         ];
     }
 }

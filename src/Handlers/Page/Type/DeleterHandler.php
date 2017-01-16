@@ -4,9 +4,9 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:20
+ * @datetime 2016-11-25 15:21
  */
-namespace Notadd\Content\Handlers\Editors;
+namespace Notadd\Content\Handlers\Page\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -15,12 +15,12 @@ use Notadd\Content\Models\PageType;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class PageTypeEditHandler.
+ * Class PageTypeDeleteHandler.
  */
-class PageTypeEditorHandler extends SetHandler
+class DeleterHandler extends SetHandler
 {
     /**
-     * PageTypeEditorHandler constructor.
+     * PageTypeDeleterHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
      * @param \Notadd\Content\Models\PageType    $pageType
@@ -55,7 +55,7 @@ class PageTypeEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page_type.update.fail'),
+            $this->translator->trans('content::page_type.delete.fail'),
         ];
     }
 
@@ -70,7 +70,7 @@ class PageTypeEditorHandler extends SetHandler
         if ($pageType === null) {
             return false;
         }
-        $pageType->update($this->request->all());
+        $pageType->delete();
 
         return true;
     }
@@ -83,7 +83,7 @@ class PageTypeEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page_type.update.success'),
+            $this->translator->trans('content::page_type.delete.success'),
         ];
     }
 }

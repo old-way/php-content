@@ -4,37 +4,37 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-24 18:51
+ * @datetime 2016-11-25 15:23
  */
-namespace Notadd\Content\Handlers\Finders;
+namespace Notadd\Content\Handlers\Page\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\Page;
+use Notadd\Content\Models\PageType;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class PageFindHandler.
+ * Class PageTypeFindHandler.
  */
-class PageFinderHandler extends DataHandler
+class FinderHandler extends DataHandler
 {
     /**
-     * PageFinderHandler constructor.
+     * PageTypeFinderHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
-     * @param \Notadd\Content\Models\Page        $page
+     * @param \Notadd\Content\Models\PageType    $pageType
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
         Container $container,
-        Page $page,
+        PageType $pageType,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $page;
+        $this->model = $pageType;
     }
 
     /**
@@ -54,9 +54,9 @@ class PageFinderHandler extends DataHandler
      */
     public function data()
     {
-        $page = $this->model->newQuery()->find($this->request->input('id'));
+        $pageType = $this->model->newQuery()->find($this->request->input('id'));
 
-        return $page->getAttributes();
+        return $pageType->getAttributes();
     }
 
     /**
@@ -67,7 +67,7 @@ class PageFinderHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page.find.fail'),
+            $this->translator->trans('content::page_type.find.fail'),
         ];
     }
 
@@ -79,7 +79,7 @@ class PageFinderHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page.find.success'),
+            $this->translator->trans('content::page_type.find.success'),
         ];
     }
 }

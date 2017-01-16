@@ -4,20 +4,20 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:16
+ * @datetime 2016-11-25 15:20
  */
-namespace Notadd\Content\Handlers\Creators;
+namespace Notadd\Content\Handlers\Page\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\PageTemplate;
+use Notadd\Content\Models\PageType;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class PageTemplateCreateHandler.
+ * Class PageTypeCreateHandler.
  */
-class PageTemplateCreatorHandler extends SetHandler
+class CreatorHandler extends SetHandler
 {
     /**
      * @var int
@@ -28,13 +28,13 @@ class PageTemplateCreatorHandler extends SetHandler
      * PageTemplateCreatorHandler constructor.
      *
      * @param \Illuminate\Container\Container     $container
-     * @param \Notadd\Content\Models\PageTemplate $pageTemplate
+     * @param \Notadd\Content\Models\PageType $pageTemplate
      * @param \Illuminate\Http\Request            $request
      * @param \Illuminate\Translation\Translator  $translator
      */
     public function __construct(
         Container $container,
-        PageTemplate $pageTemplate,
+        PageType $pageTemplate,
         Request $request,
         Translator $translator
     ) {
@@ -53,18 +53,6 @@ class PageTemplateCreatorHandler extends SetHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        return [
-            'id' => $this->id,
-        ];
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -72,7 +60,7 @@ class PageTemplateCreatorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::page_template.create.fail'),
+            $this->translator->trans('content::page_type.create.fail'),
         ];
     }
 
@@ -96,7 +84,7 @@ class PageTemplateCreatorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::page_template.create.success'),
+            $this->translator->trans('content::page_type.create.success'),
         ];
     }
 }
