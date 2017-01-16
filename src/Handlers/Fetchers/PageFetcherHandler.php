@@ -54,6 +54,11 @@ class PageFetcherHandler extends DataHandler
      */
     public function data()
     {
+        if($this->hasFilter) {
+            return $this->model->get();
+        } else {
+            return $this->model->all();
+        }
     }
 
     /**
