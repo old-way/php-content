@@ -73,4 +73,16 @@ class PageFetcherHandler extends DataHandler
             $this->translator->trans(''),
         ];
     }
+
+    /**
+     * Messages for handler.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            $this->translator->trans(''),
+        ];
+    }
 }
