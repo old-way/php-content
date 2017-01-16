@@ -67,7 +67,7 @@ class ArticleTemplateFinderHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article_template.find.fail'),
         ];
     }
 
@@ -79,7 +79,7 @@ class ArticleTemplateFinderHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article_template.find.success'),
         ];
     }
 }
