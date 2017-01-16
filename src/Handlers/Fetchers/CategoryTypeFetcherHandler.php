@@ -51,4 +51,13 @@ class CategoryTypeFetcherHandler extends DataHandler
     {
         return 200;
     }
+
+    /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+    }
 }

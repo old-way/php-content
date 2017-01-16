@@ -52,4 +52,13 @@ class PageFetcherHandler extends DataHandler
     {
         return 200;
     }
+
+    /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+    }
 }
