@@ -8,11 +8,11 @@
  */
 namespace Notadd\Content\Controllers\Api\Category;
 
-use Notadd\Content\Handlers\Category\Template\CreatorHandler;
-use Notadd\Content\Handlers\Category\Template\DeleterHandler;
-use Notadd\Content\Handlers\Category\Template\EditorHandler;
-use Notadd\Content\Handlers\Category\Template\FetcherHandler;
-use Notadd\Content\Handlers\Category\Template\FinderHandler;
+use Notadd\Content\Handlers\Category\Template\CreateHandler;
+use Notadd\Content\Handlers\Category\Template\DeleteHandler;
+use Notadd\Content\Handlers\Category\Template\EditHandler;
+use Notadd\Content\Handlers\Category\Template\FetchHandler;
+use Notadd\Content\Handlers\Category\Template\FindHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -23,12 +23,12 @@ class TemplateController extends Controller
     /**
      * Create handler.
      *
-     * @param \Notadd\Content\Handlers\Category\Template\CreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Category\Template\CreateHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function create(CreatorHandler $handler)
+    public function create(CreateHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -38,12 +38,12 @@ class TemplateController extends Controller
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Category\Template\DeleterHandler $handler
+     * @param \Notadd\Content\Handlers\Category\Template\DeleteHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(DeleterHandler $handler)
+    public function delete(DeleteHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -53,12 +53,12 @@ class TemplateController extends Controller
     /**
      * Edit handler.
      *
-     * @param \Notadd\Content\Handlers\Category\Template\EditorHandler $handler
+     * @param \Notadd\Content\Handlers\Category\Template\EditHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function edit(EditorHandler $handler)
+    public function edit(EditHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -68,12 +68,12 @@ class TemplateController extends Controller
     /**
      * Fetch handler.
      *
-     * @param \Notadd\Content\Handlers\Category\Template\FetcherHandler $handler
+     * @param \Notadd\Content\Handlers\Category\Template\FetchHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function fetch(FetcherHandler $handler)
+    public function fetch(FetchHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -83,12 +83,12 @@ class TemplateController extends Controller
     /**
      * Find handler.
      *
-     * @param \Notadd\Content\Handlers\Category\Template\FinderHandler $handler
+     * @param \Notadd\Content\Handlers\Category\Template\FindHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function find(FinderHandler $handler)
+    public function find(FindHandler $handler)
     {
         $response = $handler->toResponse();
 

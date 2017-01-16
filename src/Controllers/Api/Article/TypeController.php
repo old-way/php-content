@@ -8,11 +8,11 @@
  */
 namespace Notadd\Content\Controllers\Api\Article;
 
-use Notadd\Content\Handlers\Article\Type\CreatorHandler;
+use Notadd\Content\Handlers\Article\Type\CreateHandler;
 use Notadd\Content\Handlers\Deleters\ArticleTypeDeleterHandler;
-use Notadd\Content\Handlers\Article\Type\EditorHandler;
-use Notadd\Content\Handlers\Article\Type\FetcherHandler;
-use Notadd\Content\Handlers\Article\Type\FinderHandler;
+use Notadd\Content\Handlers\Article\Type\EditHandler;
+use Notadd\Content\Handlers\Article\Type\FetchHandler;
+use Notadd\Content\Handlers\Article\Type\FindHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -23,12 +23,12 @@ class TypeController extends Controller
     /**
      * Create handler.
      *
-     * @param \Notadd\Content\Handlers\Article\Type\CreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Article\Type\CreateHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function create(CreatorHandler $handler)
+    public function create(CreateHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -53,12 +53,12 @@ class TypeController extends Controller
     /**
      * Edit handler.
      *
-     * @param \Notadd\Content\Handlers\Article\Type\EditorHandler $handler
+     * @param \Notadd\Content\Handlers\Article\Type\EditHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function edit(EditorHandler $handler)
+    public function edit(EditHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -68,12 +68,12 @@ class TypeController extends Controller
     /**
      * Fetch handler.
      *
-     * @param \Notadd\Content\Handlers\Article\Type\FetcherHandler $handler
+     * @param \Notadd\Content\Handlers\Article\Type\FetchHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function fetch(FetcherHandler $handler)
+    public function fetch(FetchHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -83,12 +83,12 @@ class TypeController extends Controller
     /**
      * Find handler.
      *
-     * @param \Notadd\Content\Handlers\Article\Type\FinderHandler $handler
+     * @param \Notadd\Content\Handlers\Article\Type\FindHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function find(FinderHandler $handler)
+    public function find(FindHandler $handler)
     {
         $response = $handler->toResponse();
 

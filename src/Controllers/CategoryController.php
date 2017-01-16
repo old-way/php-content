@@ -8,8 +8,8 @@
  */
 namespace Notadd\Content\Controllers;
 
-use Notadd\Content\Handlers\Category\CreatorHandler;
-use Notadd\Content\Handlers\Category\FinderHandler;
+use Notadd\Content\Handlers\Category\CreateHandler;
+use Notadd\Content\Handlers\Category\FindHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -20,12 +20,12 @@ class CategoryController extends Controller
     /**
      * Create handler.
      *
-     * @param \Notadd\Content\Handlers\Category\CreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Category\CreateHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function create(CreatorHandler $handler)
+    public function create(CreateHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -33,12 +33,12 @@ class CategoryController extends Controller
     /**
      * Show handler.
      *
-     * @param \Notadd\Content\Handlers\Category\FinderHandler $handler
+     * @param \Notadd\Content\Handlers\Category\FindHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function show(FinderHandler $handler)
+    public function show(FindHandler $handler)
     {
         $response = $handler->toResponse();
 

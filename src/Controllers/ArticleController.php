@@ -8,9 +8,9 @@
  */
 namespace Notadd\Content\Controllers;
 
-use Notadd\Content\Handlers\Article\CreatorHandler;
-use Notadd\Content\Handlers\Article\DeleterHandler;
-use Notadd\Content\Handlers\Article\FinderHandler;
+use Notadd\Content\Handlers\Article\CreateHandler;
+use Notadd\Content\Handlers\Article\DeleteHandler;
+use Notadd\Content\Handlers\Article\FindHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -21,12 +21,12 @@ class ArticleController extends Controller
     /**
      * Article create.
      *
-     * @param \Notadd\Content\Handlers\Article\CreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Article\CreateHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function create(CreatorHandler $handler)
+    public function create(CreateHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -36,12 +36,12 @@ class ArticleController extends Controller
     /**
      * Article destroy.
      *
-     * @param \Notadd\Content\Handlers\Article\DeleterHandler $handler
+     * @param \Notadd\Content\Handlers\Article\DeleteHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function destroy(DeleterHandler $handler)
+    public function destroy(DeleteHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -51,12 +51,12 @@ class ArticleController extends Controller
     /**
      * Article show.
      *
-     * @param \Notadd\Content\Handlers\Article\FinderHandler $handler
+     * @param \Notadd\Content\Handlers\Article\FindHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function show(FinderHandler $handler)
+    public function show(FindHandler $handler)
     {
         $response = $handler->toResponse();
 
