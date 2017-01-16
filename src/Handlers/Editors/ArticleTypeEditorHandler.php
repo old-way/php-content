@@ -55,7 +55,7 @@ class ArticleTypeEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article_type.update.fail'),
         ];
     }
 
@@ -83,7 +83,7 @@ class ArticleTypeEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article_type.update.success'),
         ];
     }
 }

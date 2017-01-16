@@ -69,7 +69,7 @@ class ArticleTypeFetcherHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article_type.fetch.fail'),
         ];
     }
 
@@ -81,7 +81,7 @@ class ArticleTypeFetcherHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article_type.fetch.success'),
         ];
     }
 }
