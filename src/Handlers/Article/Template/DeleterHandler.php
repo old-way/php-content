@@ -4,23 +4,23 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:21
+ * @datetime 2016-11-25 15:14
  */
-namespace Notadd\Content\Handlers\Finders;
+namespace Notadd\Content\Handlers\Article\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\ArticleTemplate;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class ArticleTemplateFindHandler.
+ * Class ArticleTemplateDeleteHandler.
  */
-class ArticleTemplateFinderHandler extends DataHandler
+class DeleterHandler extends SetHandler
 {
     /**
-     * ArticleTemplateFinderHandler constructor.
+     * ArticleTemplateDeleterHandler constructor.
      *
      * @param \Notadd\Content\Models\ArticleTemplate $articleTemplate
      * @param \Illuminate\Container\Container        $container
@@ -48,18 +48,6 @@ class ArticleTemplateFinderHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        $articleTemplate = $this->model->newQuery()->find($this->request->input('id'));
-
-        return $articleTemplate->getAttributes();
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -67,8 +55,24 @@ class ArticleTemplateFinderHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::article_template.find.fail'),
+            $this->translator->trans('content::article_template.delete.fail'),
         ];
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return bool
+     */
+    public function execute()
+    {
+        $articleTemplate = $this->model->newQuery()->find($this->request->input('id'));
+        if ($articleTemplate === null) {
+            return false;
+        }
+        $articleTemplate->delete();
+
+        return true;
     }
 
     /**
@@ -79,7 +83,7 @@ class ArticleTemplateFinderHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::article_template.find.success'),
+            $this->translator->trans('content::article_template.delete.success'),
         ];
     }
 }

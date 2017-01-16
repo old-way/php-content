@@ -6,7 +6,7 @@
  * @copyright (c) 2017, iBenchu.org
  * @datetime 2017-01-15 20:31
  */
-namespace Notadd\Content\Handlers\Fetchers;
+namespace Notadd\Content\Handlers\Article\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
 /**
  * Class ArticleTemplateFetcherHandler.
  */
-class ArticleTemplateFetcherHandler extends DataHandler
+class FetcherHandler extends DataHandler
 {
     /**
      * ArticleTemplateFinderHandler constructor.

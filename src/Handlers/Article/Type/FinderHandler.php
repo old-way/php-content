@@ -6,7 +6,7 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-25 15:22
  */
-namespace Notadd\Content\Handlers\Finders;
+namespace Notadd\Content\Handlers\Article\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
 /**
  * Class ArticleTypeFindHandler.
  */
-class ArticleTypeFinderHandler extends DataHandler
+class FinderHandler extends DataHandler
 {
     /**
      * ArticleTypeFinderHandler constructor.

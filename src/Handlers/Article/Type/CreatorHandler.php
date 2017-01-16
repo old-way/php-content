@@ -3,24 +3,29 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2017, iBenchu.org
- * @datetime 2017-01-15 20:32
+ * @copyright (c) 2016, iBenchu.org
+ * @datetime 2016-11-25 15:18
  */
-namespace Notadd\Content\Handlers\Fetchers;
+namespace Notadd\Content\Handlers\Article\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\ArticleType;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class ArticleTypeFetcherHandler.
+ * Class ArticleTypeCreateHandler.
  */
-class ArticleTypeFetcherHandler extends DataHandler
+class CreatorHandler extends SetHandler
 {
     /**
-     * ArticleTypeFinderHandler constructor.
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * ArticleTypeCreatorHandler constructor.
      *
      * @param \Notadd\Content\Models\ArticleType $articleType
      * @param \Illuminate\Container\Container    $container
@@ -48,20 +53,6 @@ class ArticleTypeFetcherHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        if($this->hasFilter) {
-            return $this->model->get();
-        } else {
-            return $this->model->all();
-        }
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -69,8 +60,20 @@ class ArticleTypeFetcherHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::article_type.fetch.fail'),
+            $this->translator->trans('content::article_type.create.fail'),
         ];
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return bool
+     */
+    public function execute()
+    {
+        $this->id = $this->model->create($this->request->all());
+
+        return true;
     }
 
     /**
@@ -81,7 +84,7 @@ class ArticleTypeFetcherHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::article_type.fetch.success'),
+            $this->translator->trans('content::article_type.create.success'),
         ];
     }
 }

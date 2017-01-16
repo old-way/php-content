@@ -3,43 +3,38 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:18
+ * @copyright (c) 2017, iBenchu.org
+ * @datetime 2017-01-15 20:31
  */
-namespace Notadd\Content\Handlers\Creators;
+namespace Notadd\Content\Handlers\Article;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\ArticleType;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Content\Models\Article;
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class ArticleTypeCreateHandler.
+ * Class ArticleFetcherHandler.
  */
-class ArticleTypeCreatorHandler extends SetHandler
+class FetcherHandler extends DataHandler
 {
     /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * ArticleTypeCreatorHandler constructor.
+     * ArticleFinderHandler constructor.
      *
-     * @param \Notadd\Content\Models\ArticleType $articleType
+     * @param \Notadd\Content\Models\Article     $article
      * @param \Illuminate\Container\Container    $container
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
-        ArticleType $articleType,
+        Article $article,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $articleType;
+        $this->model = $article;
     }
 
     /**
@@ -53,6 +48,20 @@ class ArticleTypeCreatorHandler extends SetHandler
     }
 
     /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+        if($this->hasFilter) {
+            return $this->model->get();
+        } else {
+            return $this->model->all();
+        }
+    }
+
+    /**
      * Errors for handler.
      *
      * @return array
@@ -60,20 +69,8 @@ class ArticleTypeCreatorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::article_type.create.fail'),
+            $this->translator->trans('content::article.fetch.fail'),
         ];
-    }
-
-    /**
-     * Execute Handler.
-     *
-     * @return bool
-     */
-    public function execute()
-    {
-        $this->id = $this->model->create($this->request->all());
-
-        return true;
     }
 
     /**
@@ -84,7 +81,7 @@ class ArticleTypeCreatorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::article_type.create.success'),
+            $this->translator->trans('content::article.fetch.success'),
         ];
     }
 }

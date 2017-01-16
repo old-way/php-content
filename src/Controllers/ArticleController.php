@@ -8,9 +8,9 @@
  */
 namespace Notadd\Content\Controllers;
 
-use Notadd\Content\Handlers\Creators\ArticleCreatorHandler;
-use Notadd\Content\Handlers\Deleters\ArticleDeleterHandler;
-use Notadd\Content\Handlers\Finders\ArticleFinderHandler;
+use Notadd\Content\Handlers\Article\CreatorHandler;
+use Notadd\Content\Handlers\Article\DeleterHandler;
+use Notadd\Content\Handlers\Article\FinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -21,12 +21,12 @@ class ArticleController extends Controller
     /**
      * Article create.
      *
-     * @param \Notadd\Content\Handlers\Creators\ArticleCreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Article\CreatorHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function create(ArticleCreatorHandler $handler)
+    public function create(CreatorHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -36,12 +36,12 @@ class ArticleController extends Controller
     /**
      * Article destroy.
      *
-     * @param \Notadd\Content\Handlers\Deleters\ArticleDeleterHandler $handler
+     * @param \Notadd\Content\Handlers\Article\DeleterHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function destroy(ArticleDeleterHandler $handler)
+    public function destroy(DeleterHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -51,12 +51,12 @@ class ArticleController extends Controller
     /**
      * Article show.
      *
-     * @param \Notadd\Content\Handlers\Finders\ArticleFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Article\FinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function show(ArticleFinderHandler $handler)
+    public function show(FinderHandler $handler)
     {
         $response = $handler->toResponse();
 

@@ -6,7 +6,7 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-24 18:31
  */
-namespace Notadd\Content\Handlers\Editors;
+namespace Notadd\Content\Handlers\Article;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -17,7 +17,7 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 /**
  * Class ArticleEditHandler.
  */
-class ArticleEditorHandler extends SetHandler
+class EditorHandler extends SetHandler
 {
     /**
      * ArticleEditorHandler constructor.

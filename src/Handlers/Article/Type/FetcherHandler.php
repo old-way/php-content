@@ -3,24 +3,24 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:18
+ * @copyright (c) 2017, iBenchu.org
+ * @datetime 2017-01-15 20:32
  */
-namespace Notadd\Content\Handlers\Editors;
+namespace Notadd\Content\Handlers\Article\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\ArticleType;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class ArticleTypeEditHandler.
+ * Class ArticleTypeFetcherHandler.
  */
-class ArticleTypeEditorHandler extends SetHandler
+class FetcherHandler extends DataHandler
 {
     /**
-     * ArticleTypeEditorHandler constructor.
+     * ArticleTypeFinderHandler constructor.
      *
      * @param \Notadd\Content\Models\ArticleType $articleType
      * @param \Illuminate\Container\Container    $container
@@ -48,6 +48,20 @@ class ArticleTypeEditorHandler extends SetHandler
     }
 
     /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+        if($this->hasFilter) {
+            return $this->model->get();
+        } else {
+            return $this->model->all();
+        }
+    }
+
+    /**
      * Errors for handler.
      *
      * @return array
@@ -55,24 +69,8 @@ class ArticleTypeEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::article_type.update.fail'),
+            $this->translator->trans('content::article_type.fetch.fail'),
         ];
-    }
-
-    /**
-     * Execute Handler.
-     *
-     * @return bool
-     */
-    public function execute()
-    {
-        $articleType = $this->model->newQuery()->find($this->request->input('id'));
-        if ($articleType === null) {
-            return false;
-        }
-        $articleType->update($this->request->all());
-
-        return true;
     }
 
     /**
@@ -83,7 +81,7 @@ class ArticleTypeEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::article_type.update.success'),
+            $this->translator->trans('content::article_type.fetch.success'),
         ];
     }
 }

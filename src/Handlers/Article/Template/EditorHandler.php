@@ -4,37 +4,37 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:19
+ * @datetime 2016-11-25 15:13
  */
-namespace Notadd\Content\Handlers\Deleters;
+namespace Notadd\Content\Handlers\Article\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\ArticleType;
+use Notadd\Content\Models\ArticleTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class ArticleTypeDeleteHandler.
+ * Class ArticleTemplateEditHandler.
  */
-class ArticleTypeDeleterHandler extends SetHandler
+class EditorHandler extends SetHandler
 {
     /**
-     * ArticleTypeDeleterHandler constructor.
+     * ArticleTemplateEditorHandler constructor.
      *
-     * @param \Notadd\Content\Models\ArticleType $articleType
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Notadd\Content\Models\ArticleTemplate $articleTemplate
+     * @param \Illuminate\Container\Container        $container
+     * @param \Illuminate\Http\Request               $request
+     * @param \Illuminate\Translation\Translator     $translator
      */
     public function __construct(
-        ArticleType $articleType,
+        ArticleTemplate $articleTemplate,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $articleType;
+        $this->model = $articleTemplate;
     }
 
     /**
@@ -55,7 +55,7 @@ class ArticleTypeDeleterHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::article_type.delete.fail'),
+            $this->translator->trans('content::article_template.update.fail'),
         ];
     }
 
@@ -66,11 +66,11 @@ class ArticleTypeDeleterHandler extends SetHandler
      */
     public function execute()
     {
-        $articleType = $this->model->newQuery()->find($this->request->input('id'));
-        if ($articleType === null) {
+        $articleTemplate = $this->model->newQuery()->find($this->request->input('id'));
+        if ($articleTemplate === null) {
             return false;
         }
-        $articleType->delete();
+        $articleTemplate->update($this->request->all());
 
         return true;
     }
@@ -83,7 +83,7 @@ class ArticleTypeDeleterHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::article_type.delete.success'),
+            $this->translator->trans('content::article_template.update.success'),
         ];
     }
 }

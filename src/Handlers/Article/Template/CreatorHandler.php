@@ -6,34 +6,42 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-25 15:13
  */
-namespace Notadd\Content\Handlers\Editors;
+namespace Notadd\Content\Handlers\Article\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\ArticleTemplate;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Debug\Handlers\SetHandler;
+use Notadd\Foundation\Setting\Contracts\SettingsRepository;
 
 /**
- * Class ArticleTemplateEditHandler.
+ * Class ArticleTemplateCreateHandler.
  */
-class ArticleTemplateEditorHandler extends SetHandler
+class CreatorHandler extends SetHandler
 {
     /**
-     * ArticleTemplateEditorHandler constructor.
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * ArticleTemplateCreatorHandler constructor.
      *
-     * @param \Notadd\Content\Models\ArticleTemplate $articleTemplate
-     * @param \Illuminate\Container\Container        $container
-     * @param \Illuminate\Http\Request               $request
-     * @param \Illuminate\Translation\Translator     $translator
+     * @param \Notadd\Content\Models\ArticleTemplate                  $articleTemplate
+     * @param \Illuminate\Container\Container                         $container
+     * @param \Illuminate\Http\Request                                $request
+     * @param \Notadd\Foundation\Setting\Contracts\SettingsRepository $settings
+     * @param \Illuminate\Translation\Translator                      $translator
      */
     public function __construct(
         ArticleTemplate $articleTemplate,
         Container $container,
         Request $request,
+        SettingsRepository $settings,
         Translator $translator
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container, $request, $settings, $translator);
         $this->model = $articleTemplate;
     }
 
@@ -55,7 +63,7 @@ class ArticleTemplateEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::article_template.update.fail'),
+            $this->translator->trans('content::article_template.create.fail'),
         ];
     }
 
@@ -66,11 +74,7 @@ class ArticleTemplateEditorHandler extends SetHandler
      */
     public function execute()
     {
-        $articleTemplate = $this->model->newQuery()->find($this->request->input('id'));
-        if ($articleTemplate === null) {
-            return false;
-        }
-        $articleTemplate->update($this->request->all());
+        $this->id = $this->model->create($this->request->all());
 
         return true;
     }
@@ -83,7 +87,7 @@ class ArticleTemplateEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::article_template.update.success'),
+            $this->translator->trans('content::article_template.create.success'),
         ];
     }
 }

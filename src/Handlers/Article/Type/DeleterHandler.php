@@ -4,37 +4,37 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-24 18:50
+ * @datetime 2016-11-25 15:19
  */
-namespace Notadd\Content\Handlers\Finders;
+namespace Notadd\Content\Handlers\Article\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\Article;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Content\Models\ArticleType;
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class ArticleFindHandler.
+ * Class ArticleTypeDeleteHandler.
  */
-class ArticleFinderHandler extends DataHandler
+class DeleterHandler extends SetHandler
 {
     /**
-     * ArticleFinderHandler constructor.
+     * ArticleTypeDeleterHandler constructor.
      *
-     * @param \Notadd\Content\Models\Article     $article
+     * @param \Notadd\Content\Models\ArticleType $articleType
      * @param \Illuminate\Container\Container    $container
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
-        Article $article,
+        ArticleType $articleType,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $article;
+        $this->model = $articleType;
     }
 
     /**
@@ -48,18 +48,6 @@ class ArticleFinderHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        $article = $this->model->newQuery()->find($this->request->input('id'));
-
-        return $article->getAttributes();
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -67,8 +55,24 @@ class ArticleFinderHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::article.find.fail'),
+            $this->translator->trans('content::article_type.delete.fail'),
         ];
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return bool
+     */
+    public function execute()
+    {
+        $articleType = $this->model->newQuery()->find($this->request->input('id'));
+        if ($articleType === null) {
+            return false;
+        }
+        $articleType->delete();
+
+        return true;
     }
 
     /**
@@ -79,7 +83,7 @@ class ArticleFinderHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::article.find.success'),
+            $this->translator->trans('content::article_type.delete.success'),
         ];
     }
 }

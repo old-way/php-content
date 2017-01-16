@@ -4,23 +4,23 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-24 18:32
+ * @datetime 2016-11-24 18:50
  */
-namespace Notadd\Content\Handlers\Deleters;
+namespace Notadd\Content\Handlers\Article;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Article;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class ArticleDeleteHandler.
+ * Class ArticleFindHandler.
  */
-class ArticleDeleterHandler extends SetHandler
+class FinderHandler extends DataHandler
 {
     /**
-     * ArticleDeleterHandler constructor.
+     * ArticleFinderHandler constructor.
      *
      * @param \Notadd\Content\Models\Article     $article
      * @param \Illuminate\Container\Container    $container
@@ -54,9 +54,9 @@ class ArticleDeleterHandler extends SetHandler
      */
     public function data()
     {
-        return [
-            'id' => $this->request->input('id'),
-        ];
+        $article = $this->model->newQuery()->find($this->request->input('id'));
+
+        return $article->getAttributes();
     }
 
     /**
@@ -67,24 +67,8 @@ class ArticleDeleterHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::article.delete.fail'),
+            $this->translator->trans('content::article.find.fail'),
         ];
-    }
-
-    /**
-     * Execute Handler.
-     *
-     * @return bool
-     */
-    public function execute()
-    {
-        $article = $this->model->newQuery()->find($this->request->input('id'));
-        if ($article === null) {
-            return false;
-        }
-        $article->delete();
-
-        return true;
     }
 
     /**
@@ -95,7 +79,7 @@ class ArticleDeleterHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::article.delete.success'),
+            $this->translator->trans('content::article.find.success'),
         ];
     }
 }
