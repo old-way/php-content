@@ -3,10 +3,10 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-24 18:50
+ * @copyright (c) 2017, iBenchu.org
+ * @datetime 2017-01-15 20:34
  */
-namespace Notadd\Content\Handlers\Finders;
+namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -15,9 +15,9 @@ use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class CategoryFindHandler.
+ * Class CategoryFetcherHandler.
  */
-class CategoryFinderHandler extends DataHandler
+class FetcherHandler extends DataHandler
 {
     /**
      * CategoryFinderHandler constructor.
@@ -54,9 +54,11 @@ class CategoryFinderHandler extends DataHandler
      */
     public function data()
     {
-        $category = $this->model->newQuery()->find($this->request->input('id'));
-
-        return $category->getAttributes();
+        if($this->hasFilter) {
+            return $this->model->get();
+        } else {
+            return $this->model->all();
+        }
     }
 
     /**
@@ -67,7 +69,7 @@ class CategoryFinderHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category.find.fail'),
+            $this->translator->trans('content::category.fetch.fail'),
         ];
     }
 
@@ -79,7 +81,7 @@ class CategoryFinderHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category.find.success'),
+            $this->translator->trans('content::category.fetch.success'),
         ];
     }
 }

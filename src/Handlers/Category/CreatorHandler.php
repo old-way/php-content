@@ -4,9 +4,9 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-24 18:33
+ * @datetime 2016-10-08 17:27
  */
-namespace Notadd\Content\Handlers\Deleters;
+namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -15,24 +15,31 @@ use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryDeleteHandler.
+ * Class CategoryHandler.
  */
-class CategoryDeleterHandler extends SetHandler
+class CreatorHandler extends SetHandler
 {
     /**
-     * CategoryDeleterHandler constructor.
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * CategoryCreatorHandler constructor.
      *
+     * @param \Notadd\Content\Models\Category    $category
      * @param \Illuminate\Container\Container    $container
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
+        Category $category,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = new Category();
+        $this->model = $category;
     }
 
     /**
@@ -46,6 +53,18 @@ class CategoryDeleterHandler extends SetHandler
     }
 
     /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+        return [
+            'id' => $this->id,
+        ];
+    }
+
+    /**
      * Errors for handler.
      *
      * @return array
@@ -53,7 +72,7 @@ class CategoryDeleterHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category.delete.fail'),
+            $this->translator->trans('content::category.create.fail'),
         ];
     }
 
@@ -64,11 +83,7 @@ class CategoryDeleterHandler extends SetHandler
      */
     public function execute()
     {
-        $category = $this->model->newQuery()->find($this->request->input('id'));
-        if ($category === null) {
-            return false;
-        }
-        $category->delete();
+        $this->id = $this->model->create($this->request->all());
 
         return true;
     }
@@ -81,7 +96,7 @@ class CategoryDeleterHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category.delete.success'),
+            $this->translator->trans('content::category.create.success'),
         ];
     }
 }

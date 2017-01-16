@@ -3,38 +3,36 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2017, iBenchu.org
- * @datetime 2017-01-15 20:34
+ * @copyright (c) 2016, iBenchu.org
+ * @datetime 2016-11-24 18:33
  */
-namespace Notadd\Content\Handlers\Fetchers;
+namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryFetcherHandler.
+ * Class CategoryEditHandler.
  */
-class CategoryFetcherHandler extends DataHandler
+class EditorHandler extends SetHandler
 {
     /**
-     * CategoryFinderHandler constructor.
+     * CategoryEditorHandler constructor.
      *
-     * @param \Notadd\Content\Models\Category    $category
      * @param \Illuminate\Container\Container    $container
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
-        Category $category,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $category;
+        $this->model = new Category();
     }
 
     /**
@@ -48,20 +46,6 @@ class CategoryFetcherHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        if($this->hasFilter) {
-            return $this->model->get();
-        } else {
-            return $this->model->all();
-        }
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -69,8 +53,21 @@ class CategoryFetcherHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category.fetch.fail'),
+            $this->translator->trans('content::category.update.fail'),
         ];
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return bool
+     */
+    public function execute()
+    {
+        $category = $this->model->newQuery()->find($this->request->input('id'));
+        $category->update($this->request->all());
+
+        return true;
     }
 
     /**
@@ -81,7 +78,7 @@ class CategoryFetcherHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category.fetch.success'),
+            $this->translator->trans('content::category.update.success'),
         ];
     }
 }

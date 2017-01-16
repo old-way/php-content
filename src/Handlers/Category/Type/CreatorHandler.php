@@ -4,37 +4,42 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:16
+ * @datetime 2016-11-25 15:19
  */
-namespace Notadd\Content\Handlers\Editors;
+namespace Notadd\Content\Handlers\Category\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\CategoryTemplate;
+use Notadd\Content\Models\CategoryType;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryTemplateEditHandler.
+ * Class CategoryTypeCreateHandler.
  */
-class CategoryTemplateEditorHandler extends SetHandler
+class CreatorHandler extends SetHandler
 {
     /**
-     * CategoryTemplateEditorHandler constructor.
+     * @var int
+     */
+    protected $id;
+
+    /**
+     * CategoryTypeCreatorHandler constructor.
      *
-     * @param \Notadd\Content\Models\CategoryTemplate $categoryTemplate
-     * @param \Illuminate\Container\Container         $container
-     * @param \Illuminate\Http\Request                $request
-     * @param \Illuminate\Translation\Translator      $translator
+     * @param \Notadd\Content\Models\CategoryType $categoryType
+     * @param \Illuminate\Container\Container     $container
+     * @param \Illuminate\Http\Request            $request
+     * @param \Illuminate\Translation\Translator  $translator
      */
     public function __construct(
-        CategoryTemplate $categoryTemplate,
+        CategoryType $categoryType,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $categoryTemplate;
+        $this->model = $categoryType;
     }
 
     /**
@@ -55,7 +60,7 @@ class CategoryTemplateEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category_template.update.fail'),
+            $this->translator->trans('content::category_type.create.fail'),
         ];
     }
 
@@ -66,11 +71,7 @@ class CategoryTemplateEditorHandler extends SetHandler
      */
     public function execute()
     {
-        $categoryTemplate = $this->model->newQuery()->find($this->request->input('id'));
-        if ($categoryTemplate === null) {
-            return false;
-        }
-        $categoryTemplate->update($this->request->all());
+        $this->id = $this->model->create($this->request->all());
 
         return true;
     }
@@ -83,7 +84,7 @@ class CategoryTemplateEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category_template.update.success'),
+            $this->translator->trans('content::category_type.create.success'),
         ];
     }
 }

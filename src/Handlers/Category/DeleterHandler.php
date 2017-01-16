@@ -4,37 +4,35 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:16
+ * @datetime 2016-11-24 18:33
  */
-namespace Notadd\Content\Handlers\Deleters;
+namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\CategoryTemplate;
+use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryTemplateDeleteHandler.
+ * Class CategoryDeleteHandler.
  */
-class CategoryTemplateDeleterHandler extends SetHandler
+class DeleterHandler extends SetHandler
 {
     /**
-     * CategoryTemplateDeleterHandler constructor.
+     * CategoryDeleterHandler constructor.
      *
-     * @param \Notadd\Content\Models\CategoryTemplate $categoryTemplate
-     * @param \Illuminate\Container\Container         $container
-     * @param \Illuminate\Http\Request                $request
-     * @param \Illuminate\Translation\Translator      $translator
+     * @param \Illuminate\Container\Container    $container
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
-        CategoryTemplate $categoryTemplate,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $categoryTemplate;
+        $this->model = new Category();
     }
 
     /**
@@ -55,7 +53,7 @@ class CategoryTemplateDeleterHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category_template.delete.fail'),
+            $this->translator->trans('content::category.delete.fail'),
         ];
     }
 
@@ -66,11 +64,11 @@ class CategoryTemplateDeleterHandler extends SetHandler
      */
     public function execute()
     {
-        $categoryTemplate = $this->model->newQuery()->find($this->request->input('id'));
-        if ($categoryTemplate === null) {
+        $category = $this->model->newQuery()->find($this->request->input('id'));
+        if ($category === null) {
             return false;
         }
-        $categoryTemplate->delete();
+        $category->delete();
 
         return true;
     }
@@ -83,7 +81,7 @@ class CategoryTemplateDeleterHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category_template.delete.success'),
+            $this->translator->trans('content::category.delete.success'),
         ];
     }
 }

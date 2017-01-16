@@ -4,35 +4,37 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-24 18:33
+ * @datetime 2016-11-24 18:50
  */
-namespace Notadd\Content\Handlers\Editors;
+namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class CategoryEditHandler.
+ * Class CategoryFindHandler.
  */
-class CategoryEditorHandler extends SetHandler
+class FinderHandler extends DataHandler
 {
     /**
-     * CategoryEditorHandler constructor.
+     * CategoryFinderHandler constructor.
      *
+     * @param \Notadd\Content\Models\Category    $category
      * @param \Illuminate\Container\Container    $container
      * @param \Illuminate\Http\Request           $request
      * @param \Illuminate\Translation\Translator $translator
      */
     public function __construct(
+        Category $category,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = new Category();
+        $this->model = $category;
     }
 
     /**
@@ -46,6 +48,18 @@ class CategoryEditorHandler extends SetHandler
     }
 
     /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+        $category = $this->model->newQuery()->find($this->request->input('id'));
+
+        return $category->getAttributes();
+    }
+
+    /**
      * Errors for handler.
      *
      * @return array
@@ -53,21 +67,8 @@ class CategoryEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category.update.fail'),
+            $this->translator->trans('content::category.find.fail'),
         ];
-    }
-
-    /**
-     * Execute Handler.
-     *
-     * @return bool
-     */
-    public function execute()
-    {
-        $category = $this->model->newQuery()->find($this->request->input('id'));
-        $category->update($this->request->all());
-
-        return true;
     }
 
     /**
@@ -78,7 +79,7 @@ class CategoryEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category.update.success'),
+            $this->translator->trans('content::category.find.success'),
         ];
     }
 }

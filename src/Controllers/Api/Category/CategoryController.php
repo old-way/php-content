@@ -8,11 +8,11 @@
  */
 namespace Notadd\Content\Controllers\Api\Category;
 
-use Notadd\Content\Handlers\Creators\CategoryCreatorHandler;
-use Notadd\Content\Handlers\Deleters\CategoryDeleterHandler;
-use Notadd\Content\Handlers\Editors\CategoryEditorHandler;
-use Notadd\Content\Handlers\Fetchers\CategoryFetcherHandler;
-use Notadd\Content\Handlers\Finders\CategoryFinderHandler;
+use Notadd\Content\Handlers\Category\CreatorHandler;
+use Notadd\Content\Handlers\Category\DeleterHandler;
+use Notadd\Content\Handlers\Category\EditorHandler;
+use Notadd\Content\Handlers\Category\FetcherHandler;
+use Notadd\Content\Handlers\Category\FinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -23,12 +23,12 @@ class CategoryController extends Controller
     /**
      * Create handler.
      *
-     * @param \Notadd\Content\Handlers\Creators\CategoryCreatorHandler $handler
+     * @param \Notadd\Content\Handlers\Category\CreatorHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function create(CategoryCreatorHandler $handler)
+    public function create(CreatorHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -38,12 +38,12 @@ class CategoryController extends Controller
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Deleters\CategoryDeleterHandler $handler
+     * @param \Notadd\Content\Handlers\Category\DeleterHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(CategoryDeleterHandler $handler)
+    public function delete(DeleterHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -53,12 +53,12 @@ class CategoryController extends Controller
     /**
      * Edit handler.
      *
-     * @param \Notadd\Content\Handlers\Editors\CategoryEditorHandler $handler
+     * @param \Notadd\Content\Handlers\Category\EditorHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function edit(CategoryEditorHandler $handler)
+    public function edit(EditorHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -68,12 +68,12 @@ class CategoryController extends Controller
     /**
      * Fetch handler.
      *
-     * @param \Notadd\Content\Handlers\Fetchers\CategoryFetcherHandler $handler
+     * @param \Notadd\Content\Handlers\Category\FetcherHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function fetch(CategoryFetcherHandler $handler)
+    public function fetch(FetcherHandler $handler)
     {
         $response = $handler->toResponse();
 
@@ -83,12 +83,12 @@ class CategoryController extends Controller
     /**
      * Find handler.
      *
-     * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Category\FinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function find(CategoryFinderHandler $handler)
+    public function find(FinderHandler $handler)
     {
         $response = $handler->toResponse();
 

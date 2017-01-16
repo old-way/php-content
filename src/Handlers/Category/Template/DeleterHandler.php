@@ -4,42 +4,37 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-10-08 17:27
+ * @datetime 2016-11-25 15:16
  */
-namespace Notadd\Content\Handlers\Creators;
+namespace Notadd\Content\Handlers\Category\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\CategoryTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryHandler.
+ * Class CategoryTemplateDeleteHandler.
  */
-class CategoryCreatorHandler extends SetHandler
+class DeleterHandler extends SetHandler
 {
     /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * CategoryCreatorHandler constructor.
+     * CategoryTemplateDeleterHandler constructor.
      *
-     * @param \Notadd\Content\Models\Category    $category
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Notadd\Content\Models\CategoryTemplate $categoryTemplate
+     * @param \Illuminate\Container\Container         $container
+     * @param \Illuminate\Http\Request                $request
+     * @param \Illuminate\Translation\Translator      $translator
      */
     public function __construct(
-        Category $category,
+        CategoryTemplate $categoryTemplate,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $category;
+        $this->model = $categoryTemplate;
     }
 
     /**
@@ -53,18 +48,6 @@ class CategoryCreatorHandler extends SetHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        return [
-            'id' => $this->id,
-        ];
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -72,7 +55,7 @@ class CategoryCreatorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category.create.fail'),
+            $this->translator->trans('content::category_template.delete.fail'),
         ];
     }
 
@@ -83,7 +66,11 @@ class CategoryCreatorHandler extends SetHandler
      */
     public function execute()
     {
-        $this->id = $this->model->create($this->request->all());
+        $categoryTemplate = $this->model->newQuery()->find($this->request->input('id'));
+        if ($categoryTemplate === null) {
+            return false;
+        }
+        $categoryTemplate->delete();
 
         return true;
     }
@@ -96,7 +83,7 @@ class CategoryCreatorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category.create.success'),
+            $this->translator->trans('content::category_template.delete.success'),
         ];
     }
 }

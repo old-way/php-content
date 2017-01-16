@@ -4,9 +4,9 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:22
+ * @datetime 2016-11-25 15:20
  */
-namespace Notadd\Content\Handlers\Finders;
+namespace Notadd\Content\Handlers\Category\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
@@ -15,12 +15,12 @@ use Notadd\Content\Models\CategoryType;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryTypeFindHandler.
+ * Class CategoryTypeEditHandler.
  */
-class CategoryTypeFinderHandler extends SetHandler
+class EditorHandler extends SetHandler
 {
     /**
-     * CategoryTypeFinderHandler constructor.
+     * CategoryTypeEditorHandler constructor.
      *
      * @param \Notadd\Content\Models\CategoryType $categoryType
      * @param \Illuminate\Container\Container     $container
@@ -48,18 +48,6 @@ class CategoryTypeFinderHandler extends SetHandler
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        $categoryType = $this->model->newQuery()->find($this->request->input('id'));
-
-        return $categoryType->getAttributes();
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array
@@ -67,8 +55,24 @@ class CategoryTypeFinderHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category_type.find.fail'),
+            $this->translator->trans('content::category_type.update.fail'),
         ];
+    }
+
+    /**
+     * Execute Handler.
+     *
+     * @return bool
+     */
+    public function execute()
+    {
+        $categoryType = $this->model->newQuery()->find($this->request->input('id'));
+        if ($categoryType === null) {
+            return false;
+        }
+        $categoryType->update($this->request->all());
+
+        return true;
     }
 
     /**
@@ -79,7 +83,7 @@ class CategoryTypeFinderHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category_type.find.success'),
+            $this->translator->trans('content::category_type.update.success'),
         ];
     }
 }

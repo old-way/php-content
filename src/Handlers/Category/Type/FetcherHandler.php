@@ -3,29 +3,24 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-25 15:19
+ * @copyright (c) 2017, iBenchu.org
+ * @datetime 2017-01-15 20:35
  */
-namespace Notadd\Content\Handlers\Creators;
+namespace Notadd\Content\Handlers\Category\Type;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\CategoryType;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class CategoryTypeCreateHandler.
+ * Class CategoryTypeFetcherHandler.
  */
-class CategoryTypeCreatorHandler extends SetHandler
+class FetcherHandler extends DataHandler
 {
     /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * CategoryTypeCreatorHandler constructor.
+     * CategoryTypeFinderHandler constructor.
      *
      * @param \Notadd\Content\Models\CategoryType $categoryType
      * @param \Illuminate\Container\Container     $container
@@ -53,6 +48,20 @@ class CategoryTypeCreatorHandler extends SetHandler
     }
 
     /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+        if($this->hasFilter) {
+            return $this->model->get();
+        } else {
+            return $this->model->all();
+        }
+    }
+
+    /**
      * Errors for handler.
      *
      * @return array
@@ -60,20 +69,8 @@ class CategoryTypeCreatorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category_type.create.fail'),
+            $this->translator->trans('content::category_type.fetch.fail'),
         ];
-    }
-
-    /**
-     * Execute Handler.
-     *
-     * @return bool
-     */
-    public function execute()
-    {
-        $this->id = $this->model->create($this->request->all());
-
-        return true;
     }
 
     /**
@@ -84,7 +81,7 @@ class CategoryTypeCreatorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category_type.create.success'),
+            $this->translator->trans('content::category_type.fetch.success'),
         ];
     }
 }

@@ -6,35 +6,35 @@
  * @copyright (c) 2017, iBenchu.org
  * @datetime 2017-01-15 20:35
  */
-namespace Notadd\Content\Handlers\Fetchers;
+namespace Notadd\Content\Handlers\Category\Template;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\CategoryType;
+use Notadd\Content\Models\CategoryTemplate;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class CategoryTypeFetcherHandler.
+ * Class CategoryTemplateFetcherHandler.
  */
-class CategoryTypeFetcherHandler extends DataHandler
+class FetcherHandler extends DataHandler
 {
     /**
-     * CategoryTypeFinderHandler constructor.
+     * CategoryTemplateFinderHandler constructor.
      *
-     * @param \Notadd\Content\Models\CategoryType $categoryType
-     * @param \Illuminate\Container\Container     $container
-     * @param \Illuminate\Http\Request            $request
-     * @param \Illuminate\Translation\Translator  $translator
+     * @param \Notadd\Content\Models\CategoryTemplate $categoryTemplate
+     * @param \Illuminate\Container\Container         $container
+     * @param \Illuminate\Http\Request                $request
+     * @param \Illuminate\Translation\Translator      $translator
      */
     public function __construct(
-        CategoryType $categoryType,
+        CategoryTemplate $categoryTemplate,
         Container $container,
         Request $request,
         Translator $translator
     ) {
         parent::__construct($container, $request, $translator);
-        $this->model = $categoryType;
+        $this->model = $categoryTemplate;
     }
 
     /**
@@ -69,7 +69,7 @@ class CategoryTypeFetcherHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans('content::category_type.fetch.fail'),
+            $this->translator->trans('content::category_template.fetch.fail'),
         ];
     }
 
@@ -81,7 +81,7 @@ class CategoryTypeFetcherHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans('content::category_type.fetch.success'),
+            $this->translator->trans('content::category_template.fetch.success'),
         ];
     }
 }
