@@ -60,7 +60,7 @@ class CategoryTemplateCreatorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::category_template.create.fail'),
         ];
     }
 
@@ -84,7 +84,7 @@ class CategoryTemplateCreatorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::category_template.create.success'),
         ];
     }
 }

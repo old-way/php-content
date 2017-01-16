@@ -69,7 +69,7 @@ class CategoryTemplateFetcherHandler extends DataHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::category_template.fetch.fail'),
         ];
     }
 
@@ -81,7 +81,7 @@ class CategoryTemplateFetcherHandler extends DataHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::category_template.fetch.success'),
         ];
     }
 }
