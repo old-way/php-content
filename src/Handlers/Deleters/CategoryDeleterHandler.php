@@ -53,7 +53,7 @@ class CategoryDeleterHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::category.delete.fail'),
         ];
     }
 
@@ -81,7 +81,7 @@ class CategoryDeleterHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::category.delete.success'),
         ];
     }
 }

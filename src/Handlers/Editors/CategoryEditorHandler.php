@@ -53,7 +53,7 @@ class CategoryEditorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::category.update.fail'),
         ];
     }
 
@@ -78,7 +78,7 @@ class CategoryEditorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::category.update.success'),
         ];
     }
 }
