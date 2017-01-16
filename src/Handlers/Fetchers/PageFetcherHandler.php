@@ -61,4 +61,16 @@ class PageFetcherHandler extends DataHandler
     public function data()
     {
     }
+
+    /**
+     * Errors for handler.
+     *
+     * @return array
+     */
+    public function errors()
+    {
+        return [
+            $this->translator->trans(''),
+        ];
+    }
 }
