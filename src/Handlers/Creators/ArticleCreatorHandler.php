@@ -72,7 +72,7 @@ class ArticleCreatorHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article.create.fail'),
         ];
     }
 
@@ -97,7 +97,7 @@ class ArticleCreatorHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article.create.success'),
         ];
     }
 }

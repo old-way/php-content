@@ -67,7 +67,7 @@ class ArticleDeleterHandler extends SetHandler
     public function errors()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article.delete.fail'),
         ];
     }
 
@@ -95,7 +95,7 @@ class ArticleDeleterHandler extends SetHandler
     public function messages()
     {
         return [
-            $this->translator->trans(''),
+            $this->translator->trans('content::article.delete.success'),
         ];
     }
 }
