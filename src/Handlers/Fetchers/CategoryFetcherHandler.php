@@ -41,4 +41,14 @@ class CategoryFetcherHandler extends DataHandler
         parent::__construct($container, $request, $translator);
         $this->category = $category;
     }
+
+    /**
+     * Http code.
+     *
+     * @return int
+     */
+    public function code()
+    {
+        return 200;
+    }
 }

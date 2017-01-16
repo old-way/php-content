@@ -42,4 +42,14 @@ class PageFetcherHandler extends DataHandler
         parent::__construct($container, $request, $translator);
         $this->page = $page;
     }
+
+    /**
+     * Http code.
+     *
+     * @return int
+     */
+    public function code()
+    {
+        return 200;
+    }
 }

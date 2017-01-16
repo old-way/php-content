@@ -41,4 +41,14 @@ class PageTypeFetcherHandler extends DataHandler
         parent::__construct($container, $request, $translator);
         $this->pageType = $pageType;
     }
+
+    /**
+     * Http code.
+     *
+     * @return int
+     */
+    public function code()
+    {
+        return 200;
+    }
 }

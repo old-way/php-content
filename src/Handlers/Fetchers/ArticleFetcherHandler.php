@@ -41,4 +41,14 @@ class ArticleFetcherHandler extends DataHandler
         parent::__construct($container, $request, $translator);
         $this->article = $article;
     }
+
+    /**
+     * Http code.
+     *
+     * @return int
+     */
+    public function code()
+    {
+        return 200;
+    }
 }
