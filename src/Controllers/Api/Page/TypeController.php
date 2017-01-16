@@ -6,25 +6,25 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-28 20:23
  */
-namespace Notadd\Content\Controllers\Api;
+namespace Notadd\Content\Controllers\Api\Page;
 
-use Notadd\Content\Handlers\Finders\PageTemplateFinderHandler;
+use Notadd\Content\Handlers\Finders\PageTypeFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
- * Class PageTemplateController.
+ * Class PageTypeController.
  */
-class PageTemplateController extends Controller
+class TypeController extends Controller
 {
     /**
-     * Add a page template show handler.
+     * Add a page type show handler.
      *
-     * @param \Notadd\Content\Handlers\Finders\PageTemplateFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Finders\PageTypeFinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function show(PageTemplateFinderHandler $handler)
+    public function show(PageTypeFinderHandler $handler)
     {
         $response = $handler->toResponse();
 

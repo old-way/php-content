@@ -8,16 +8,16 @@
  */
 namespace Notadd\Content\Listeners;
 
-use Notadd\Content\Controllers\Api\ArticleController as ArticleApiController;
-use Notadd\Content\Controllers\Api\ArticleTemplateController as ArticleTemplateApiController;
-use Notadd\Content\Controllers\Api\CategoryController as CategoryApiController;
-use Notadd\Content\Controllers\Api\CategoryTemplateController as CategoryTemplateApiController;
-use Notadd\Content\Controllers\Api\CategoryTypeController as CategoryTypeApiController;
-use Notadd\Content\Controllers\Api\PageController as PageApiController;
-use Notadd\Content\Controllers\Api\PageTemplateController as PageTemplateApiController;
-use Notadd\Content\Controllers\Api\PageTypeController as PageTypeApiController;
+use Notadd\Content\Controllers\Api\Article\ArticleController as ArticleApiController;
+use Notadd\Content\Controllers\Api\Article\TemplateController as ArticleTemplateApiController;
+use Notadd\Content\Controllers\Api\Category\CategoryController as CategoryApiController;
+use Notadd\Content\Controllers\Api\Category\TemplateController as CategoryTemplateApiController;
+use Notadd\Content\Controllers\Api\Category\TypeController as CategoryTypeApiController;
+use Notadd\Content\Controllers\Api\Page\PageController as PageApiController;
+use Notadd\Content\Controllers\Api\Page\TemplateController as PageTemplateApiController;
+use Notadd\Content\Controllers\Api\Page\TypeController as PageTypeApiController;
 use Notadd\Content\Controllers\ArticleController;
-use Notadd\Content\Controllers\Api\ArticleTypeController as ArticleTypeApiController;
+use Notadd\Content\Controllers\Api\Article\TypeController as ArticleTypeApiController;
 use Notadd\Content\Controllers\CategoryController;
 use Notadd\Content\Controllers\PageController;
 use Notadd\Foundation\Routing\Abstracts\RouteRegistrar as AbstractRouteRegistrar;

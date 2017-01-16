@@ -6,28 +6,27 @@
  * @copyright (c) 2016, iBenchu.org
  * @datetime 2016-11-28 20:21
  */
-namespace Notadd\Content\Controllers\Api;
+namespace Notadd\Content\Controllers\Api\Category;
 
-use Notadd\Content\Handlers\Finders\CategoryFinderHandler;
+use Notadd\Content\Handlers\Finders\CategoryTypeFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
- * Class CategoryController.
+ * Class CategoryTypeController.
  */
-class CategoryController extends Controller
+class TypeController extends Controller
 {
     /**
-     * Add a category show show handler.
+     * Add a category type show handler.
      *
-     * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Finders\CategoryTypeFinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function show(CategoryFinderHandler $handler)
+    public function show(CategoryTypeFinderHandler $handler)
     {
         $response = $handler->toResponse();
-
         return $response->generateHttpResponse();
     }
 }

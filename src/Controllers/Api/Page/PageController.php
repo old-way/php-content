@@ -4,27 +4,27 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-28 20:16
+ * @datetime 2016-11-28 20:23
  */
-namespace Notadd\Content\Controllers\Api;
+namespace Notadd\Content\Controllers\Api\Page;
 
-use Notadd\Content\Handlers\Finders\ArticleTypeFinderHandler;
+use Notadd\Content\Handlers\Finders\PageFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
- * Class ArticleType.
+ * Class PageController.
  */
-class ArticleTypeController extends Controller
+class PageController extends Controller
 {
     /**
-     * Add a article type show handler.
+     * Add a page show handler.
      *
-     * @param \Notadd\Content\Handlers\Finders\ArticleTypeFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Finders\PageFinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function show(ArticleTypeFinderHandler $handler)
+    public function show(PageFinderHandler $handler)
     {
         $response = $handler->toResponse();
 

@@ -4,27 +4,27 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-28 20:23
+ * @datetime 2016-11-28 20:21
  */
-namespace Notadd\Content\Controllers\Api;
+namespace Notadd\Content\Controllers\Api\Category;
 
-use Notadd\Content\Handlers\Finders\PageTypeFinderHandler;
+use Notadd\Content\Handlers\Finders\CategoryTemplateFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
- * Class PageTypeController.
+ * Class CategoryTemplateController.
  */
-class PageTypeController extends Controller
+class TemplateController extends Controller
 {
     /**
-     * Add a page type show handler.
+     * Add a category template show handler.
      *
-     * @param \Notadd\Content\Handlers\Finders\PageTypeFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Finders\CategoryTemplateFinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function show(PageTypeFinderHandler $handler)
+    public function show(CategoryTemplateFinderHandler $handler)
     {
         $response = $handler->toResponse();
 

@@ -4,27 +4,27 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2016, iBenchu.org
- * @datetime 2016-11-28 20:16
+ * @datetime 2016-11-28 20:21
  */
-namespace Notadd\Content\Controllers\Api;
+namespace Notadd\Content\Controllers\Api\Category;
 
-use Notadd\Content\Handlers\Finders\ArticleTemplateFinderHandler;
+use Notadd\Content\Handlers\Finders\CategoryFinderHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
- * Class ArticleTemplateController.
+ * Class CategoryController.
  */
-class ArticleTemplateController extends Controller
+class CategoryController extends Controller
 {
     /**
-     * Add a article template show handler.
+     * Add a category show show handler.
      *
-     * @param \Notadd\Content\Handlers\Finders\ArticleTemplateFinderHandler $handler
+     * @param \Notadd\Content\Handlers\Finders\CategoryFinderHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function show(ArticleTemplateFinderHandler $handler)
+    public function show(CategoryFinderHandler $handler)
     {
         $response = $handler->toResponse();
 
