@@ -9,6 +9,7 @@
 namespace Notadd\Content\Controllers\Api\Article;
 
 use Notadd\Content\Handlers\Article\Type\CreateHandler;
+use Notadd\Content\Handlers\Article\Type\DeleteHandler;
 use Notadd\Content\Handlers\Deleters\ArticleTypeDeleterHandler;
 use Notadd\Content\Handlers\Article\Type\EditHandler;
 use Notadd\Content\Handlers\Article\Type\FetchHandler;
@@ -38,12 +39,12 @@ class TypeController extends Controller
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Deleters\ArticleTypeDeleterHandler $handler
+     * @param \Notadd\Content\Handlers\Article\Type\DeleteHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(ArticleTypeDeleterHandler $handler)
+    public function delete(DeleteHandler $handler)
     {
         $response = $handler->toResponse();
 

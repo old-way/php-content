@@ -83,8 +83,8 @@ class CreateHandler extends SetHandler
      */
     public function execute()
     {
-        $this->article = $this->model->create($this->request->all());
-        $this->id = $this->article->getAttribute('id');
+        $this->model = $this->model->create($this->request->all());
+        $this->id = $this->model->getAttribute('id');
 
         return true;
     }

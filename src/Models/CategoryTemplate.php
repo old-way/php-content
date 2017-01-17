@@ -15,5 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class CategoryTemplate extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [];
 }

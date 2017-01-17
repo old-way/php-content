@@ -28,7 +28,7 @@ class PageController extends Controller
      */
     public function create(CreateHandler $handler)
     {
-        $response = $handler->toResponse($this->request);
+        $response = $handler->toResponse();
 
         return $response->generateHttpResponse();
     }
@@ -43,7 +43,7 @@ class PageController extends Controller
      */
     public function destroy(DeleteHandler $handler)
     {
-        return $handler->toResponse($this->request)->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**

@@ -15,5 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ArticleType extends Model
 {
+    /**
+     * @var array
+     */
     protected $fillable = [];
 }
