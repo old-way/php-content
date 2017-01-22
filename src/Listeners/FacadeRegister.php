@@ -1,0 +1,34 @@
+<?php
+/**
+ * This file is part of Notadd.
+ *
+ * @author TwilRoad <269044570@qq.com>
+ * @copyright (c) 2017, iBenchu.org
+ * @datetime 2017-01-22 12:20
+ */
+namespace Notadd\Content\Listeners;
+
+use Notadd\Foundation\Event\Abstracts\EventSubscriber;
+use Notadd\Foundation\Facades\FacadeRegister as FacadeRegisterEvent;
+
+class FacadeRegister extends EventSubscriber
+{
+    /**
+     * Name of event.
+     *
+     * @throws \Exception
+     * @return string|object
+     */
+    protected function getEvent()
+    {
+        return FacadeRegisterEvent::class;
+    }
+
+    /**
+     * @param $event
+     */
+    public function handle(FacadeRegisterEvent $event)
+    {
+        $event->register('djfksjdfk', 'sdfjskdfjslkdfjlkjl');
+    }
+}
