@@ -53,6 +53,18 @@ class CreateHandler extends SetHandler
     }
 
     /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+        return [
+            'id' => $this->id,
+        ];
+    }
+
+    /**
      * Errors for handler.
      *
      * @return array
@@ -71,7 +83,8 @@ class CreateHandler extends SetHandler
      */
     public function execute()
     {
-        $this->id = $this->model->create($this->request->all());
+        $this->model = $this->model->create($this->request->all());
+        $this->id = $this->model->getAttribute('id');
 
         return true;
     }
