@@ -25,15 +25,15 @@ class Article extends Model
         'category_id',
         'title',
         'author',
-        'from_author',
-        'from_url',
+        'source_author',
+        'source_link',
         'content',
         'keyword',
         'description',
         'thumb_image',
         'user_id',
         'hits',
+        'is_hidden',
         'is_sticky',
-        'deleted_at',
     ];
 }

@@ -31,6 +31,7 @@ class CreateArticlesTable extends Migration
             $table->string('keyword')->nullable();
             $table->string('description')->nullable();
             $table->integer('hits')->default(0);
+            $table->boolean('is_hidden')->default(0);
             $table->boolean('is_sticky')->default(0);
             $table->timestamps();
             $table->softDeletes();

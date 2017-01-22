@@ -16,7 +16,6 @@ use Notadd\Content\Events\RegisterCategoryTemplate;
 use Notadd\Content\Events\RegisterCategoryType;
 use Notadd\Content\Events\RegisterPageTemplate;
 use Notadd\Content\Events\RegisterPageType;
-use Notadd\Content\Listeners\FacadeRegister;
 use Notadd\Content\Listeners\RouteRegister;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
