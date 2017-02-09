@@ -60,6 +60,7 @@ class RouteRegister extends AbstractRouteRegistrar
                 $this->router->post('edit', CategoryApiController::class . '@edit');
                 $this->router->post('find', CategoryApiController::class . '@find');
                 $this->router->post('fetch', CategoryApiController::class . '@fetch');
+                $this->router->post('sort', CategoryApiController::class . '@sort');
                 $this->router->group(['prefix' => 'template'], function () {
                     $this->router->post('create', CategoryTemplateApiController::class . '@create');
                     $this->router->post('delete', CategoryTemplateApiController::class . '@delete');

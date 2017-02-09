@@ -13,6 +13,7 @@ use Notadd\Content\Handlers\Category\DeleteHandler;
 use Notadd\Content\Handlers\Category\EditHandler;
 use Notadd\Content\Handlers\Category\FetchHandler;
 use Notadd\Content\Handlers\Category\FindHandler;
+use Notadd\Content\Handlers\Category\SortHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -85,7 +86,7 @@ class CategoryController extends Controller
      *
      * @param \Notadd\Content\Handlers\Category\FindHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function find(FindHandler $handler)
@@ -93,5 +94,16 @@ class CategoryController extends Controller
         $response = $handler->toResponse();
 
         return $response->generateHttpResponse();
+    }
+
+    /**
+     * @param \Notadd\Content\Handlers\Category\SortHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @throws \Exception
+     */
+    public function sort(SortHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
     }
 }
