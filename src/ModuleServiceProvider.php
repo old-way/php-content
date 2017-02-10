@@ -16,6 +16,7 @@ use Notadd\Content\Events\RegisterCategoryTemplate;
 use Notadd\Content\Events\RegisterCategoryType;
 use Notadd\Content\Events\RegisterPageTemplate;
 use Notadd\Content\Events\RegisterPageType;
+use Notadd\Content\Listeners\CsrfTokenRegister;
 use Notadd\Content\Listeners\RouteRegister;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
@@ -31,6 +32,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->app->make(Dispatcher::class)->subscribe(CsrfTokenRegister::class);
         $this->app->make(Dispatcher::class)->subscribe(RouteRegister::class);
         $this->loadMigrationsFrom(realpath(__DIR__ . '/../databases/migrations'));
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/translations'), 'content');
