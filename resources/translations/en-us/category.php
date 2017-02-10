@@ -24,6 +24,10 @@ return [
         'success' => 'Category has been found!',
         'fail'    => 'Category find fail!',
     ],
+    'sort' => [
+        'success' => 'Category sort has been updated!',
+        'fail'    => 'Category sort update fail!',
+    ],
     'update' => [
         'success' => 'Category has been updated!',
         'fail'    => 'Category update fail!',
