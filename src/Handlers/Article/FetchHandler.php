@@ -57,7 +57,7 @@ class FetchHandler extends DataHandler
         if($this->hasFilter) {
             return $this->model->get();
         } else {
-            return $this->model->all();
+            return $this->model->newQuery()->orderBy('created_at', 'desc')->get();
         }
     }
 
