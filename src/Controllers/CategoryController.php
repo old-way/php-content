@@ -40,8 +40,6 @@ class CategoryController extends Controller
      */
     public function show(FindHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 }
