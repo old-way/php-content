@@ -76,6 +76,37 @@ class SortHandler extends SetHandler
      */
     public function execute()
     {
+        $data = collect($this->request->input('data'));
+        $data->each(function ($item) {
+            $id = $item['id'];
+            $category = $this->model->newQuery()->find($id);
+            $category->update([
+                'parent_id' => 0
+            ]);
+            $children = collect($item['children']);
+            if ($children->count()) {
+                $children->each(function ($item) use ($id) {
+                    $parentId = $id;
+                    $id = $item['id'];
+                    $category = $this->model->newQuery()->find($id);
+                    $category->update([
+                        'parent_id' => $parentId
+                    ]);
+                    $children = collect($item['children']);
+                    if ($children->count()) {
+                        $children->each(function ($item) use ($id) {
+                            $parentId = $id;
+                            $id = $item['id'];
+                            $category = $this->model->newQuery()->find($id);
+                            $category->update([
+                                'parent_id' => $parentId
+                            ]);
+                        });
+                    }
+                });
+            }
+        });
+
         return true;
     }
 
