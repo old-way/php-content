@@ -37,4 +37,27 @@ class Category extends Model
         'enabled',
         'deleted_at'
     ];
+
+    /**
+     * Get category structure list.
+     *
+     * @return array
+     */
+    public function structure() {
+        $list = $this->newQuery()->where('parent_id', 0)->get();
+        $list->transform(function (Category $category) {
+            $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+            $children->transform(function (Category $category) {
+                $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+                $category->setAttribute('children', $children);
+
+                return $category;
+            });
+            $category->setAttribute('children', $children);
+
+            return $category;
+        });
+
+        return $list;
+    }
 }

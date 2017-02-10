@@ -52,7 +52,7 @@ class DeleteHandler extends SetHandler
      */
     public function data()
     {
-        return $this->model->newQuery()->get();
+        return $this->model->structure();
     }
 
     /**

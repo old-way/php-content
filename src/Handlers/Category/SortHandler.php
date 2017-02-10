@@ -20,6 +20,11 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class SortHandler extends SetHandler
 {
     /**
+     * @var \Illuminate\Contracts\Logging\Log
+     */
+    protected $log;
+
+    /**
      * SortHandler constructor.
      *
      * @param \Notadd\Content\Models\Category    $category
@@ -54,7 +59,7 @@ class SortHandler extends SetHandler
      */
     public function data()
     {
-        return $this->model->newQuery()->get();
+        return $this->model->structure();
     }
 
     /**
