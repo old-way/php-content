@@ -28,6 +28,8 @@ class CsrfTokenRegister extends EventSubscriber
     }
 
     /**
+     * Register excepts.
+     *
      * @param $event
      */
     public function handle(CsrfTokenRegisterEvent $event)

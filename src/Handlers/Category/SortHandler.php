@@ -54,7 +54,7 @@ class SortHandler extends SetHandler
      */
     public function data()
     {
-        return [];
+        return $this->model->newQuery()->get();
     }
 
     /**
