@@ -36,6 +36,7 @@ class CsrfTokenRegister extends EventSubscriber
     {
         $event->registerExcept('api/article*');
         $event->registerExcept('api/category*');
+        $event->registerExcept('api/content*');
         $event->registerExcept('api/page*');
     }
 }
