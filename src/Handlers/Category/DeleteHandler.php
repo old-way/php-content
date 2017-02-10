@@ -46,6 +46,16 @@ class DeleteHandler extends SetHandler
     }
 
     /**
+     * Data for handler.
+     *
+     * @return array
+     */
+    public function data()
+    {
+        return $this->model->newQuery()->get();
+    }
+
+    /**
      * Errors for handler.
      *
      * @return array
