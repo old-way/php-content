@@ -60,7 +60,12 @@ class FetchHandler extends DataHandler
     public function data()
     {
         $pagination = $this->request->input('pagination') ?: 10;
-        $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+        $search = $this->request->input('search');
+        if($search) {
+            $this->pagination = $this->model->newQuery()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
+        } else {
+            $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+        }
 
         return $this->pagination->items();
     }
