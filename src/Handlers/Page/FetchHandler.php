@@ -20,6 +20,11 @@ use Notadd\Foundation\Passport\Abstracts\DataHandler;
 class FetchHandler extends DataHandler
 {
     /**
+     * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    protected $pagination;
+
+    /**
      * PageFinderHandler constructor.
      *
      * @param \Illuminate\Container\Container    $container
@@ -54,11 +59,10 @@ class FetchHandler extends DataHandler
      */
     public function data()
     {
-        if($this->hasFilter) {
-            return $this->model->get();
-        } else {
-            return $this->model->all();
-        }
+        $pagination = $this->request->input('pagination') ?: 10;
+        $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+
+        return $this->pagination->items();
     }
 
     /**
@@ -83,5 +87,29 @@ class FetchHandler extends DataHandler
         return [
             $this->translator->trans('content::page.fetch.success'),
         ];
+    }
+
+    /**
+     * Make data to response with errors or messages.
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
+     */
+    public function toResponse()
+    {
+        $response = parent::toResponse();
+
+        return $response->withParams([
+            'pagination' => [
+                'total' => $this->pagination->total(),
+                'per_page' => $this->pagination->perPage(),
+                'current_page' => $this->pagination->currentPage(),
+                'last_page' => $this->pagination->lastPage(),
+                'next_page_url' => $this->pagination->nextPageUrl(),
+                'prev_page_url' => $this->pagination->previousPageUrl(),
+                'from' => $this->pagination->firstItem(),
+                'to' => $this->pagination->lastItem(),
+            ]
+        ]);
     }
 }
