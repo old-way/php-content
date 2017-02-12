@@ -35,6 +35,7 @@ class Category extends Model
         'top_image',
         'pagination',
         'enabled',
+        'order_id',
         'deleted_at'
     ];
 
@@ -44,11 +45,11 @@ class Category extends Model
      * @return array
      */
     public function structure() {
-        $list = $this->newQuery()->where('parent_id', 0)->get();
+        $list = $this->newQuery()->where('parent_id', 0)->orderBy('order_id', 'asc')->get();
         $list->transform(function (Category $category) {
-            $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+            $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
             $children->transform(function (Category $category) {
-                $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+                $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
                 $category->setAttribute('children', $children);
 
                 return $category;
