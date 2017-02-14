@@ -84,11 +84,16 @@ class DeleteHandler extends SetHandler
      */
     public function execute()
     {
-        $article = $this->model->newQuery()->find($this->request->input('id'));
+        $article = $this->model->newQuery()->withTrashed()->find($this->request->input('id'));
         if ($article === null) {
             return false;
         }
-        $article->delete();
+        $restore = $this->request->input('restore');
+        if ($restore) {
+            $article->restore();
+        } else {
+            $article->delete();
+        }
 
         return true;
     }
