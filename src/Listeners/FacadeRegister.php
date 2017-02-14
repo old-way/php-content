@@ -25,6 +25,8 @@ class FacadeRegister extends EventSubscriber
     }
 
     /**
+     * Event handler.
+     *
      * @param $event
      */
     public function handle(FacadeRegisterEvent $event)
