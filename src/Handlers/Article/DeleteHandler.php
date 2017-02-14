@@ -20,6 +20,11 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class DeleteHandler extends SetHandler
 {
     /**
+     * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    protected $pagination;
+
+    /**
      * ArticleDeleterHandler constructor.
      *
      * @param \Notadd\Content\Models\Article     $article
@@ -54,9 +59,10 @@ class DeleteHandler extends SetHandler
      */
     public function data()
     {
-        return [
-            'id' => $this->request->input('id'),
-        ];
+        $pagination = $this->request->input('pagination') ?: 10;
+        $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+
+        return $this->pagination->items();
     }
 
     /**
@@ -97,5 +103,29 @@ class DeleteHandler extends SetHandler
         return [
             $this->translator->trans('content::article.delete.success'),
         ];
+    }
+
+    /**
+     * Make data to response with errors or messages.
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
+     */
+    public function toResponse()
+    {
+        $response = parent::toResponse();
+
+        return $response->withParams([
+            'pagination' => [
+                'total' => $this->pagination->total(),
+                'per_page' => $this->pagination->perPage(),
+                'current_page' => $this->pagination->currentPage(),
+                'last_page' => $this->pagination->lastPage(),
+                'next_page_url' => $this->pagination->nextPageUrl(),
+                'prev_page_url' => $this->pagination->previousPageUrl(),
+                'from' => $this->pagination->firstItem(),
+                'to' => $this->pagination->lastItem(),
+            ]
+        ]);
     }
 }
