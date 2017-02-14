@@ -74,7 +74,7 @@ class EditHandler extends SetHandler
             'source_author' => $this->request->input('source.author'),
             'source_link' => $this->request->input('source.link'),
             'description' => $this->request->input('summary'),
-            'keyword' => implode(',', $this->request->input('tags')),
+            'keyword' => $this->request->input('tags'),
             'title' => $this->request->input('title'),
         ]);
 
