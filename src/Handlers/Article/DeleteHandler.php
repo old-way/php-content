@@ -59,9 +59,10 @@ class DeleteHandler extends SetHandler
      */
     public function data()
     {
+        $force = $this->request->input('force');
         $pagination = $this->request->input('pagination') ?: 10;
         $restore = $this->request->input('restore');
-        if ($restore) {
+        if ($restore || $force) {
             $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at', 'desc')->paginate($pagination);
         } else {
             $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
@@ -77,7 +78,11 @@ class DeleteHandler extends SetHandler
      */
     public function errors()
     {
-        if ($this->request->input('restore')) {
+        if ($this->request->input('force')) {
+            return [
+                $this->translator->trans('content::article.force.fail')
+            ];
+        } elseif ($this->request->input('restore')) {
             return [
                 $this->translator->trans('content::article.restore.fail')
             ];
@@ -99,8 +104,11 @@ class DeleteHandler extends SetHandler
         if ($article === null) {
             return false;
         }
+        $force = $this->request->input('force');
         $restore = $this->request->input('restore');
-        if ($restore) {
+        if ($force) {
+            $article->forceDelete();
+        } elseif ($restore) {
             $article->restore();
         } else {
             $article->delete();
@@ -116,7 +124,11 @@ class DeleteHandler extends SetHandler
      */
     public function messages()
     {
-        if ($this->request->input('restore')) {
+        if ($this->request->input('force')) {
+            return [
+                $this->translator->trans('content::article.force.success')
+            ];
+        } elseif ($this->request->input('restore')) {
             return [
                 $this->translator->trans('content::article.restore.success')
             ];
