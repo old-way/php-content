@@ -60,7 +60,12 @@ class DeleteHandler extends SetHandler
     public function data()
     {
         $pagination = $this->request->input('pagination') ?: 10;
-        $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+        $restore = $this->request->input('restore');
+        if ($restore) {
+            $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at', 'desc')->paginate($pagination);
+        } else {
+            $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+        }
 
         return $this->pagination->items();
     }
@@ -72,9 +77,15 @@ class DeleteHandler extends SetHandler
      */
     public function errors()
     {
-        return [
-            $this->translator->trans('content::article.delete.fail'),
-        ];
+        if ($this->request->input('restore')) {
+            return [
+                $this->translator->trans('content::article.restore.fail')
+            ];
+        } else {
+            return [
+                $this->translator->trans('content::article.delete.fail'),
+            ];
+        }
     }
 
     /**
@@ -105,9 +116,15 @@ class DeleteHandler extends SetHandler
      */
     public function messages()
     {
-        return [
-            $this->translator->trans('content::article.delete.success'),
-        ];
+        if ($this->request->input('restore')) {
+            return [
+                $this->translator->trans('content::article.restore.success')
+            ];
+        } else {
+            return [
+                $this->translator->trans('content::article.delete.success'),
+            ];
+        }
     }
 
     /**

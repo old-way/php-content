@@ -61,10 +61,15 @@ class FetchHandler extends DataHandler
     {
         $pagination = $this->request->input('pagination') ?: 10;
         $search = $this->request->input('search');
-        if($search) {
-            $this->pagination = $this->model->newQuery()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
+        $trashed = $this->request->input('trashed');
+        if($trashed) {
+            $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at', 'desc')->paginate($pagination);
         } else {
-            $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+            if($search) {
+                $this->pagination = $this->model->newQuery()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
+            } else {
+                $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+            }
         }
 
         return $this->pagination->items();
