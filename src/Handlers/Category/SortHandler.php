@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class SortHandler extends SetHandler
 {
     /**
-     * @var \Illuminate\Contracts\Logging\Log
-     */
-    protected $log;
-
-    /**
      * SortHandler constructor.
      *
      * @param \Notadd\Content\Models\Category    $category
