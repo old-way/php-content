@@ -14,6 +14,7 @@ use Notadd\Content\Controllers\Api\Category\CategoryController as CategoryApiCon
 use Notadd\Content\Controllers\Api\Category\TemplateController as CategoryTemplateApiController;
 use Notadd\Content\Controllers\Api\Category\TypeController as CategoryTypeApiController;
 use Notadd\Content\Controllers\Api\Page\PageController as PageApiController;
+use Notadd\Content\Controllers\Api\Page\CategoryController as PageCategoryApiController;
 use Notadd\Content\Controllers\Api\Page\TemplateController as PageTemplateApiController;
 use Notadd\Content\Controllers\Api\Page\TypeController as PageTypeApiController;
 use Notadd\Content\Controllers\ArticleController;
@@ -86,6 +87,14 @@ class RouteRegister extends AbstractRouteRegistrar
                 $this->router->post('edit', PageApiController::class . '@edit');
                 $this->router->post('find', PageApiController::class . '@find');
                 $this->router->post('fetch', PageApiController::class . '@fetch');
+                $this->router->group(['prefix' => 'category'], function () {
+                    $this->router->post('create', PageCategoryApiController::class . '@create');
+                    $this->router->post('delete', PageCategoryApiController::class . '@delete');
+                    $this->router->post('edit', PageCategoryApiController::class . '@edit');
+                    $this->router->post('find', PageCategoryApiController::class . '@find');
+                    $this->router->post('fetch', PageCategoryApiController::class . '@fetch');
+                    $this->router->post('sort', PageCategoryApiController::class . '@sort');
+                });
                 $this->router->group(['prefix' => 'template'], function () {
                     $this->router->post('create', PageTemplateApiController::class . '@create');
                     $this->router->post('delete', PageTemplateApiController::class . '@delete');

@@ -4,14 +4,14 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2017, iBenchu.org
- * @datetime 2017-02-09 16:51
+ * @datetime 2017-02-15 14:50
  */
-namespace Notadd\Content\Handlers\Category;
+namespace Notadd\Content\Handlers\Page\Category;
 
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\PageCategory;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
@@ -27,14 +27,14 @@ class SortHandler extends SetHandler
     /**
      * SortHandler constructor.
      *
-     * @param \Notadd\Content\Models\Category    $category
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Container\Container     $container
+     * @param \Notadd\Content\Models\PageCategory $category
+     * @param \Illuminate\Http\Request            $request
+     * @param \Illuminate\Translation\Translator  $translator
      */
     public function __construct(
-        Category $category,
         Container $container,
+        PageCategory $category,
         Request $request,
         Translator $translator
     ) {
@@ -87,7 +87,7 @@ class SortHandler extends SetHandler
             $category = $this->model->newQuery()->find($id);
             $category->update([
                 'parent_id' => 0,
-                'order_id' => $key,
+                'order_id'  => $key,
             ]);
             $children = collect($item['children']);
             if ($children->count()) {
@@ -97,7 +97,7 @@ class SortHandler extends SetHandler
                     $category = $this->model->newQuery()->find($id);
                     $category->update([
                         'parent_id' => $parentId,
-                        'order_id' => $key,
+                        'order_id'  => $key,
                     ]);
                     $children = collect($item['children']);
                     if ($children->count()) {
@@ -107,7 +107,7 @@ class SortHandler extends SetHandler
                             $category = $this->model->newQuery()->find($id);
                             $category->update([
                                 'parent_id' => $parentId,
-                                'order_id' => $key,
+                                'order_id'  => $key,
                             ]);
                         });
                     }
