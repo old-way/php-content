@@ -20,11 +20,6 @@ use Notadd\Foundation\Passport\Abstracts\SetHandler;
 class CreateHandler extends SetHandler
 {
     /**
-     * @var int
-     */
-    protected $id;
-
-    /**
      * CategoryCreatorHandler constructor.
      *
      * @param \Notadd\Content\Models\Category    $category
@@ -81,7 +76,7 @@ class CreateHandler extends SetHandler
      */
     public function execute()
     {
-        $this->id = $this->model->create([
+        $this->model->create([
             'title' => $this->request->input('name'),
             'alias' => $this->request->input('alias'),
             'description' => $this->request->input('description'),
