@@ -34,7 +34,7 @@ class RouteRegister extends AbstractRouteRegistrar
      */
     public function handle()
     {
-        $this->router->group(['middleware' => ['auth:api', 'web']], function () {
+        $this->router->group(['middleware' => ['auth:api', 'cross', 'web']], function () {
             $this->router->group(['prefix' => 'api/article'], function () {
                 $this->router->post('create', ArticleApiController::class . '@create');
                 $this->router->post('delete', ArticleApiController::class . '@delete');
