@@ -39,8 +39,6 @@ class RouteRegister extends AbstractRouteRegistrar
                 $this->router->post('create', ArticleApiController::class . '@create');
                 $this->router->post('delete', ArticleApiController::class . '@delete');
                 $this->router->post('edit', ArticleApiController::class . '@edit');
-                $this->router->post('find', ArticleApiController::class . '@find');
-                $this->router->post('fetch', ArticleApiController::class . '@fetch');
                 $this->router->group(['prefix' => 'template'], function () {
                     $this->router->post('create', ArticleTemplateApiController::class . '@create');
                     $this->router->post('delete', ArticleTemplateApiController::class . '@delete');
@@ -109,6 +107,13 @@ class RouteRegister extends AbstractRouteRegistrar
                     $this->router->post('find', PageTypeApiController::class . '@find');
                     $this->router->post('fetch', PageTypeApiController::class . '@fetch');
                 });
+            });
+        });
+
+        $this->router->group(['middleware' => ['cross', 'web']], function () {
+            $this->router->group(['prefix' => 'api/article'], function () {
+                $this->router->post('find', ArticleApiController::class . '@find');
+                $this->router->post('fetch', ArticleApiController::class . '@fetch');
             });
         });
 
