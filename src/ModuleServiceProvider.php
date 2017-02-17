@@ -22,7 +22,9 @@ use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
 use Notadd\Content\Managers\PageManager;
 use Notadd\Content\Models\Article;
+use Notadd\Content\Models\ArticleDraft;
 use Notadd\Content\Observers\ArticleObserver;
+use Notadd\Content\Observers\DraftObserver;
 
 /**
  * Class Module.
@@ -35,6 +37,7 @@ class ModuleServiceProvider extends ServiceProvider
     public function boot()
     {
         Article::observe(ArticleObserver::class);
+        ArticleDraft::observe(DraftObserver::class);
         $this->app->make(Dispatcher::class)->subscribe(CsrfTokenRegister::class);
         $this->app->make(Dispatcher::class)->subscribe(RouteRegister::class);
         $this->loadMigrationsFrom(realpath(__DIR__ . '/../databases/migrations'));
