@@ -11,6 +11,7 @@ namespace Notadd\Content\Controllers\Api\Article;
 use Notadd\Content\Handlers\Article\Draft\CreateHandler;
 use Notadd\Content\Handlers\Article\Draft\DeleteHandler;
 use Notadd\Content\Handlers\Article\Draft\FetchHandler;
+use Notadd\Content\Handlers\Article\Draft\FindHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -53,6 +54,19 @@ class DraftController extends Controller
      * @throws \Exception
      */
     public function fetch(FetchHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * Find handler.
+     *
+     * @param \Notadd\Content\Handlers\Article\Draft\FindHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @throws \Exception
+     */
+    public function find(FindHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
