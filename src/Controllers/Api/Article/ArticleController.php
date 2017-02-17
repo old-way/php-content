@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers\Api\Article;
 
+use Notadd\Content\Handlers\Article\AutoHandler;
 use Notadd\Content\Handlers\Article\CreateHandler;
 use Notadd\Content\Handlers\Article\DeleteHandler;
 use Notadd\Content\Handlers\Article\EditHandler;
@@ -20,6 +21,19 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class ArticleController extends Controller
 {
+    /**
+     * Auto handler.
+     *
+     * @param \Notadd\Content\Handlers\Article\AutoHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @throws \Exception
+     */
+    public function auto(AutoHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
     /**
      * Create handler.
      *
