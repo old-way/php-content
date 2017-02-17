@@ -9,6 +9,7 @@
 namespace Notadd\Content\Listeners;
 
 use Notadd\Content\Controllers\Api\Article\ArticleController as ArticleApiController;
+use Notadd\Content\Controllers\Api\Article\DraftController as ArticleDraftApiController;
 use Notadd\Content\Controllers\Api\Article\TemplateController as ArticleTemplateApiController;
 use Notadd\Content\Controllers\Api\Category\CategoryController as CategoryApiController;
 use Notadd\Content\Controllers\Api\Category\TemplateController as CategoryTemplateApiController;
@@ -36,9 +37,16 @@ class RouteRegister extends AbstractRouteRegistrar
     {
         $this->router->group(['middleware' => ['auth:api', 'cross', 'web']], function () {
             $this->router->group(['prefix' => 'api/article'], function () {
+                $this->router->post('auto', ArticleApiController::class . '@auto');
                 $this->router->post('create', ArticleApiController::class . '@create');
                 $this->router->post('delete', ArticleApiController::class . '@delete');
                 $this->router->post('edit', ArticleApiController::class . '@edit');
+                $this->router->group(['prefix' => 'draft'], function () {
+                    $this->router->post('create', ArticleDraftApiController::class . '@create');
+                    $this->router->post('delete', ArticleDraftApiController::class . '@delete');
+                    $this->router->post('find', ArticleDraftApiController::class . '@find');
+                    $this->router->post('fetch', ArticleDraftApiController::class . '@fetch');
+                });
                 $this->router->group(['prefix' => 'template'], function () {
                     $this->router->post('create', ArticleTemplateApiController::class . '@create');
                     $this->router->post('delete', ArticleTemplateApiController::class . '@delete');
