@@ -9,6 +9,8 @@
 namespace Notadd\Content\Controllers\Api\Article;
 
 use Notadd\Content\Handlers\Article\Draft\CreateHandler;
+use Notadd\Content\Handlers\Article\Draft\DeleteHandler;
+use Notadd\Content\Handlers\Article\Draft\FetchHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -25,6 +27,32 @@ class DraftController extends Controller
      * @throws \Exception
      */
     public function create(CreateHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * Delete handler.
+     *
+     * @param \Notadd\Content\Handlers\Article\Draft\DeleteHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @throws \Exception
+     */
+    public function delete(DeleteHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * Fetch handler.
+     *
+     * @param \Notadd\Content\Handlers\Article\Draft\FetchHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @throws \Exception
+     */
+    public function fetch(FetchHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
