@@ -10,12 +10,7 @@ export default [
     component: Layout,
     children: [
       {
-        name: '',
-        path: '',
-        redirect: { name: 'home' }
-      },
-      {
-        path: 'home',
+        path: '/',
         name: 'home',
         component: Home
       },
