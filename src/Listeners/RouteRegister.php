@@ -126,6 +126,9 @@ class RouteRegister extends AbstractRouteRegistrar
         });
 
         $this->router->group(['middleware' => 'web'], function () {
+            $this->router->get('/', function () {
+                return $this->container->make('view')->make('content::content');
+            });
             $this->router->resource('article', ArticleController::class);
             $this->router->resource('category', CategoryController::class);
             $this->router->resource('page', PageController::class);

@@ -11,7 +11,7 @@
           <p><span>{{ new Date(created_at).toString().split(' ')[1] }}</span></p>
         </div>
         <div class="col-md-11 margin-top">
-          <img :src=" 'http://notadd.ibenchu.win/' + thumb_image" class="img-responsive" v-if=" thumb_image !== null "/>
+          <img :src="thumb_image" class="img-responsive" v-if=" thumb_image !== null "/>
           <h3>{{ title }}</h3>
           <p>{{ keyword.split(',').join(' &nbsp;&nbsp; ') }}</p>
           <div v-html="content" class="article-content"></div>
@@ -70,14 +70,14 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-      Vue.http.post('http://notadd.ibenchu.win/api/article/find', {
+      Vue.http.post(window.api + '/article/find', {
         id: to.params.id
       }).then((response) => {
         const data = response.data.data
         const id = data.id
         const title = data.title
         const content = data.content
-        const thumbImage = data.thumb_image
+        const thumbImage = data.thumb_image ? window.url + '/' + data.thumb_image : ''
         const createdAt = data.created_at
         const keyword = data.keyword
         const sourseAuthor = data.source_author

@@ -83,7 +83,14 @@ class CreateHandler extends SetHandler
      */
     public function execute()
     {
-        $this->model = $this->model->create($this->request->all());
+        $this->model = $this->model->create([
+            'alias' => $this->request->input('alias'),
+            'content' => $this->request->input('content'),
+            'enabled' => $this->request->input('enabled'),
+            'parent_id' => 0,
+            'title' => $this->request->input('title'),
+            'order_id' => 0,
+        ]);
         $this->id = $this->model->getAttribute('id');
 
         return true;

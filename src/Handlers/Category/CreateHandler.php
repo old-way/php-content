@@ -77,18 +77,20 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->model->create([
-            'title' => $this->request->input('name'),
-            'alias' => $this->request->input('alias'),
-            'description' => $this->request->input('description'),
-            'type' => $this->request->input('type') ?: 'normal',
+            'title'            => $this->request->input('name'),
+            'alias'            => $this->request->input('alias'),
+            'description'      => $this->request->input('description'),
+            'type'             => $this->request->input('type') ?: 'normal',
             'background_color' => $this->request->input('background_color'),
-            'seo_title' => $this->request->input('seo_title'),
-            'seo_keyword' => $this->request->input('seo_keyword'),
-            'seo_description' => $this->request->input('seo_description'),
+            'seo_title'        => $this->request->input('seo_title'),
+            'seo_keyword'      => $this->request->input('seo_keyword'),
+            'seo_description'  => $this->request->input('seo_description'),
             'background_image' => $this->request->input('background_image'),
-            'top_image' => $this->request->input('top_image'),
-            'pagination' => $this->request->input('pagination'),
-            'enabled' => $this->request->input('enabled'),
+            'top_image'        => $this->request->input('top_image'),
+            'pagination'       => $this->request->input('pagination'),
+            'parent_id'        => 0,
+            'enabled'          => 1,
+            'order_id'         => 0,
         ]);
 
         return true;

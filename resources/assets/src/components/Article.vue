@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-11 explain-text" v-router-link="{ name: 'article-list', params: { id: item.id } }">
               <div v-if="item.thumb_image !== null " class="col-md-5 margin-top" v-router-link="{ name: 'article-list', params: { id: item.id } }">
-                <img :src=" 'http://notadd.ibenchu.win/' + item.thumb_image" class="img-responsive" />
+                <img :src="item.thumb_image" class="img-responsive" v-if="thumb_image !== ''" />
               </div>
               <h3>{{ item.title }}</h3>
               <p>{{ (item.keyword).split(',').join(' &nbsp;&nbsp; ') }}</p>
@@ -46,8 +46,11 @@
       }
     },
     mounted () {
-      Vue.http.post('http://notadd.ibenchu.win/api/article/fetch').then((response) => {
+      Vue.http.post(window.api + '/article/fetch').then((response) => {
         this.articleList = response.data.data
+        this.articleList.forEach(article => {
+          article.thumb_image = article.thumb_image ? window.url + '/' + article.thumb_image : ''
+        })
         console.log(response)
       }, (response) => {
         console.log(response)

@@ -34,6 +34,16 @@ class ArticleController extends Controller
     }
 
     /**
+     * Index handler.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function index()
+    {
+        return $this->view('content::content');
+    }
+
+    /**
      * Article destroy.
      *
      * @param \Notadd\Content\Handlers\Article\DeleteHandler $handler
@@ -51,15 +61,10 @@ class ArticleController extends Controller
     /**
      * Article show.
      *
-     * @param \Notadd\Content\Handlers\Article\FindHandler $handler
-     *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
-     * @throws \Exception
+     * @return \Illuminate\Contracts\View\View
      */
-    public function show(FindHandler $handler)
+    public function show()
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $this->view('content::content');
     }
 }

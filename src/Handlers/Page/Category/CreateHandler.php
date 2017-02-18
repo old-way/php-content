@@ -93,7 +93,9 @@ class CreateHandler extends SetHandler
             'background_image' => $this->request->input('background_image'),
             'top_image'        => $this->request->input('top_image'),
             'pagination'       => $this->request->input('pagination'),
-            'enabled'          => $this->request->input('enabled'),
+            'parent_id'        => 0,
+            'enabled'          => 1,
+            'order_id'         => 0,
         ]);
 
         return true;

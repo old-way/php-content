@@ -84,6 +84,7 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->model = $this->model->create([
+            'category_id' => 0,
             'content' => $this->request->input('content'),
             'is_hidden' => $this->request->input('hidden'),
             'is_sticky' => $this->request->input('sticky'),

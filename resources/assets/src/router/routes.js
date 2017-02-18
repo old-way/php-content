@@ -21,12 +21,12 @@ export default [
       },
       {
         path: 'article',
-        name: 'article',
+        name: 'article-list',
         component: Article
       },
       {
         path: 'article/:id',
-        name: 'article-list',
+        name: 'article',
         component: ArticleList
       }
     ]

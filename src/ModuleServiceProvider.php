@@ -42,6 +42,10 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->make(Dispatcher::class)->subscribe(RouteRegister::class);
         $this->loadMigrationsFrom(realpath(__DIR__ . '/../databases/migrations'));
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/translations'), 'content');
+        $this->loadViewsFrom(realpath(__DIR__ . '/../resources/views'), 'content');
+        $this->publishes([
+            realpath(__DIR__ . '/../resources/assets/dist/assets/content') => public_path('assets/content'),
+        ], 'public');
     }
 
     /**
