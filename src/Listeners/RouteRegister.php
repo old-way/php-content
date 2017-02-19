@@ -132,6 +132,7 @@ class RouteRegister extends AbstractRouteRegistrar
             $this->router->resource('article', ArticleController::class);
             $this->router->resource('category', CategoryController::class);
             $this->router->resource('page', PageController::class);
+            $this->router->resource('about', PageController::class);
         });
     }
 }

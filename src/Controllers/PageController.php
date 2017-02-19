@@ -47,6 +47,16 @@ class PageController extends Controller
     }
 
     /**
+     * Index handler.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function index()
+    {
+        return $this->view('content::content');
+    }
+
+    /**
      * Page show.
      *
      * @param \Notadd\Content\Handlers\Page\FindHandler $handler

@@ -11,7 +11,7 @@
           <p><span>{{ new Date(created_at).toString().split(' ')[1] }}</span></p>
         </div>
         <div class="col-md-11 margin-top">
-          <img :src="thumb_image" class="img-responsive" v-if=" thumb_image !== null "/>
+          <img :src="thumb_image" class="img-responsive" v-if=" thumb_image !== null || thumb_image !== '' "/>
           <h3>{{ title }}</h3>
           <p>{{ keyword.split(',').join(' &nbsp;&nbsp; ') }}</p>
           <div v-html="content" class="article-content"></div>

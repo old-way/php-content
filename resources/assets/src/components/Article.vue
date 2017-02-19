@@ -12,9 +12,9 @@
               <h2>{{ new Date(item.created_at).toString().split(' ')[2] }}</h2>
               <p><span>{{ new Date(item.created_at).toString().split(' ')[1] }}</span></p>
             </div>
-            <div class="col-md-11 explain-text" v-router-link="{ name: 'article-list', params: { id: item.id } }">
+            <div class="col-md-11 explain-text" v-router-link="{ name: 'article', params: { id: item.id } }">
               <div v-if="item.thumb_image !== null " class="col-md-5 margin-top" v-router-link="{ name: 'article-list', params: { id: item.id } }">
-                <img :src="item.thumb_image" class="img-responsive" v-if="thumb_image !== ''" />
+                <img :src="item.thumb_image" class="img-responsive" v-show="item.thumb_image" />
               </div>
               <h3>{{ item.title }}</h3>
               <p>{{ (item.keyword).split(',').join(' &nbsp;&nbsp; ') }}</p>

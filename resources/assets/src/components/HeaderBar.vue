@@ -26,7 +26,7 @@
             'text': '首页'
           },
           {
-            'to': { 'name': 'article' },
+            'to': { 'name': 'article-list' },
             'text': '文章'
           },
           {
