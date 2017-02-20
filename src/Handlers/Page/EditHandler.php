@@ -65,7 +65,15 @@ class EditHandler extends SetHandler
     public function execute()
     {
         $page = $this->model->newQuery()->find($this->request->input('id'));
-        $page->update($this->request->all());
+        $page->update([
+            'alias' => $this->request->input('alias'),
+            'category_id' => $this->request->input('category_id'),
+            'content' => $this->request->input('content'),
+            'enabled' => $this->request->input('enabled'),
+            'parent_id' => 0,
+            'title' => $this->request->input('title'),
+            'order_id' => 0,
+        ]);
 
         return true;
     }
