@@ -85,6 +85,7 @@ class CreateHandler extends SetHandler
     {
         $this->model = $this->model->create([
             'alias' => $this->request->input('alias'),
+            'category_id' => $this->request->input('category_id'),
             'content' => $this->request->input('content'),
             'enabled' => $this->request->input('enabled'),
             'parent_id' => 0,

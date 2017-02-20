@@ -22,19 +22,19 @@ class Page extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id',
-        'parent_id',
-        'title',
-        'thumb_image',
         'alias',
-        'keyword',
-        'description',
-        'template',
+        'category_id',
         'content',
-        'enabled',
-        'order_id',
-        'hits',
         'deleted_at',
+        'description',
+        'enabled',
+        'hits',
+        'keyword',
+        'order_id',
+        'parent_id',
+        'thumb_image',
+        'template',
+        'title',
     ];
 
     /**
