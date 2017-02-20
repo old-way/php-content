@@ -84,11 +84,11 @@ class DeleteHandler extends SetHandler
             ];
         } elseif ($this->request->input('restore')) {
             return [
-                $this->translator->trans('content::article.restore.fail')
+                $this->translator->trans('content::article.force.fail')
             ];
         } else {
             return [
-                $this->translator->trans('content::article.delete.fail'),
+                $this->translator->trans('content::article.force.fail'),
             ];
         }
     }
@@ -130,11 +130,11 @@ class DeleteHandler extends SetHandler
             ];
         } elseif ($this->request->input('restore')) {
             return [
-                $this->translator->trans('content::article.restore.success')
+                $this->translator->trans('content::article.force.success')
             ];
         } else {
             return [
-                $this->translator->trans('content::article.delete.success'),
+                $this->translator->trans('content::article.force.success'),
             ];
         }
     }
