@@ -55,8 +55,10 @@ class FindHandler extends DataHandler
     public function data()
     {
         $article = $this->model->newQuery()->with('category')->find($this->request->input('id'));
-        $article->setAttribute('category', $article->getAttribute('category')->getAttributes());
-        $this->container->make('log')->info('article attribute', $article->getAttributes());
+        $category = $article->getAttribute('category');
+        if ($category) {
+            $article->setAttribute('category', $category->getAttributes());
+        }
 
         return $article->getAttributes();
     }
