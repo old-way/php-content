@@ -36,4 +36,14 @@ class Article extends Model
         'is_hidden',
         'is_sticky',
     ];
+
+    /**
+     * Relation of category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
