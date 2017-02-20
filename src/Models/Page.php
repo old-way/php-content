@@ -22,6 +22,7 @@ class Page extends Model
      * @var array
      */
     protected $fillable = [
+        'category_id',
         'parent_id',
         'title',
         'thumb_image',
@@ -33,6 +34,16 @@ class Page extends Model
         'enabled',
         'order_id',
         'hits',
-        'deleted_at'
+        'deleted_at',
     ];
+
+    /**
+     * Relation of category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(PageCategory::class);
+    }
 }
