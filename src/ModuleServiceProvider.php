@@ -95,9 +95,12 @@ class ModuleServiceProvider extends ServiceProvider
      * Get stylesheet of extension.
      *
      * @return array
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public static function stylesheet()
     {
-        return [];
+        return [
+            asset('assets/content/administration/css/module.css'),
+        ];
     }
 }
