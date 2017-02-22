@@ -44,7 +44,8 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/translations'), 'content');
         $this->loadViewsFrom(realpath(__DIR__ . '/../resources/views'), 'content');
         $this->publishes([
-            realpath(__DIR__ . '/../resources/assets/dist/assets/content') => public_path('assets/content'),
+            realpath(__DIR__ . '/../resources/mixes/administration/dist/assets/content/administration') => public_path('assets/content/administration'),
+            realpath(__DIR__ . '/../resources/mixes/foreground/dist/assets/content/foreground') => public_path('assets/content/foreground'),
         ], 'public');
     }
 
@@ -77,5 +78,26 @@ class ModuleServiceProvider extends ServiceProvider
 
             return $manager;
         });
+    }
+
+    /**
+     * Get script of extension.
+     *
+     * @return string
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public static function script()
+    {
+        return asset('assets/content/administration/js/module.js');
+    }
+
+    /**
+     * Get stylesheet of extension.
+     *
+     * @return array
+     */
+    public static function stylesheet()
+    {
+        return [];
     }
 }

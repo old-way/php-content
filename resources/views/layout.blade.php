@@ -15,8 +15,8 @@
   window.api = "{{ url('api') }}";
   window.url = "{{ url('') }}";
 </script>
-<script type="text/javascript" src="{{ asset('assets/content/js/manifest.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/content/js/vendor.js') }}"></script>
-<script type="text/javascript" src="{{ asset('assets/content/js/app.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/content/foreground/js/manifest.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/content/foreground/js/vendor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/content/foreground/js/app.js') }}"></script>
 </body>
 </html>

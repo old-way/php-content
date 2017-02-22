@@ -19,7 +19,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   },
   output: {
     path: config.build.assetsRoot,
-    filename: utils.assetsPath('assets/content/administration/js/extension.js'),
+    filename: utils.assetsPath('assets/content/administration/js/module.js'),
     library: 'notadd/content',
     libraryTarget: "umd"
   },
