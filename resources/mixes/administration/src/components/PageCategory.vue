@@ -269,7 +269,7 @@
     }
 
     .none-item {
-        background: url("../../../../static/images/info.svg") left center no-repeat;
+        background: url("../../static/images/info.svg") left center no-repeat;
         color: #888;
         font-size: 20px;
         height: 40px;
