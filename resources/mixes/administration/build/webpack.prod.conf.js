@@ -31,7 +31,7 @@ var webpackConfig = merge(baseWebpackConfig, {
       sourceMap: true
     }),
     new ExtractTextPlugin({
-      filename: utils.assetsPath('assets/content/administration/css/[name].css')
+      filename: utils.assetsPath('assets/content/administration/css/module.css')
     }),
     new OptimizeCSSPlugin()
   ]
