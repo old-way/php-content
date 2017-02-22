@@ -1,6 +1,6 @@
 <script>
-  import Editor from '../../libraries/Editor'
-  import Modal from '../../libraries/Modal'
+  import Editor from '../libraries/Editor'
+  import Modal from '../libraries/Modal'
   export default {
     components: {
       Editor,

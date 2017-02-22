@@ -1,5 +1,5 @@
 <script>
-  import Modal from '../../libraries/Modal'
+  import Modal from '../libraries/Modal'
   import Vue from 'vue'
   export default {
     beforeRouteEnter (to, from, next) {

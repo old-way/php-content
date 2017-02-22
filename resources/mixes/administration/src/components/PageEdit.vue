@@ -1,6 +1,6 @@
 <script>
-  import Editor from '../../libraries/Editor'
-  import Modal from '../../libraries/Modal'
+  import Editor from '../libraries/Editor'
+  import Modal from '../libraries/Modal'
   import Vue from 'vue'
   export default {
     beforeRouteEnter (to, from, next) {

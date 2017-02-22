@@ -1,5 +1,5 @@
 <script>
-  import Paginator from '../../libraries/Paginator'
+  import Paginator from '../libraries/Paginator'
   import Vue from 'vue'
   export default {
     beforeRouteEnter (to, from, next) {

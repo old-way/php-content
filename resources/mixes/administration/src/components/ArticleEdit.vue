@@ -1,8 +1,8 @@
 <script>
   import DatePicker from 'vuejs-datepicker'
-  import Editor from '../../libraries/Editor'
-  import Modal from '../../libraries/Modal'
-  import Tags from '../../libraries/InputTag'
+  import Editor from '../libraries/Editor'
+  import Modal from '../libraries/Modal'
+  import Tags from '../libraries/InputTag'
   import Vue from 'vue'
   export default {
     beforeRouteEnter (to, from, next) {
