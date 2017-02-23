@@ -1,7 +1,5 @@
 <script>
   import Core from '../main'
-  import Editor from '../libraries/Editor'
-  import Modal from '../libraries/Modal'
   export default {
     beforeRouteEnter (to, from, next) {
       Core.http.post(window.api + '/page/find', {
@@ -21,8 +19,8 @@
       })
     },
     components: {
-      Editor,
-      Modal
+      Editor: Core.instance.components.editor,
+      Modal: Core.instance.components.modal
     },
     data () {
       return {

@@ -1,6 +1,5 @@
 <script>
   import Core from '../main'
-  import Paginator from '../libraries/Paginator'
   export default {
     beforeRouteEnter (to, from, next) {
       Core.http.post(window.api + '/article/fetch', {
@@ -19,7 +18,7 @@
       })
     },
     components: {
-      Paginator
+      Paginator: Core.instance.components.paginator
     },
     data () {
       return {

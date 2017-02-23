@@ -1,8 +1,6 @@
 <script>
+  import Core from '../main'
   import DatePicker from 'vuejs-datepicker'
-  import Editor from '../libraries/Editor'
-  import Modal from '../libraries/Modal'
-  import Tags from '../libraries/InputTag'
   export default {
     beforeRouteLeave (to, from, next) {
       this.working = false
@@ -10,9 +8,9 @@
     },
     components: {
       DatePicker,
-      Editor,
-      Modal,
-      Tags
+      Editor: Core.instance.components.editor,
+      Modal: Core.instance.components.modal,
+      Tags: Core.instance.components.tag
     },
     computed: {
       auto: {

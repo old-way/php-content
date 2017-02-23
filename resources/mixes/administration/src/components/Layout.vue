@@ -1,16 +1,12 @@
 <script>
-  import LayoutContent from '../layouts/LayoutContent'
-  import LayoutFooter from '../layouts/LayoutFooter'
-  import LayoutSidebar from '../layouts/LayoutSidebar'
-  import NavbarMenu from '../libraries/NavbarMenu'
-  import SidebarMenu from '../libraries/SidebarMenu'
+  import Core from '../main'
   export default {
     components: {
-      LayoutContent,
-      LayoutFooter,
-      LayoutSidebar,
-      NavbarMenu,
-      SidebarMenu
+      LayoutContent: Core.instance.layouts.content,
+      LayoutFooter: Core.instance.layouts.footer,
+      LayoutSidebar: Core.instance.layouts.sidebar,
+      NavbarMenu: Core.instance.components.navbar,
+      SidebarMenu: Core.instance.components.sidebar
     },
     data: () => {
       return {

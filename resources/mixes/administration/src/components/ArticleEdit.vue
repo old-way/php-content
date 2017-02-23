@@ -1,9 +1,6 @@
 <script>
   import Core from '../main'
   import DatePicker from 'vuejs-datepicker'
-  import Editor from '../libraries/Editor'
-  import Modal from '../libraries/Modal'
-  import Tags from '../libraries/InputTag'
   export default {
     beforeRouteEnter (to, from, next) {
       Core.http.post(window.api + '/article/find', {
@@ -35,9 +32,9 @@
     },
     components: {
       DatePicker,
-      Editor,
-      Modal,
-      Tags
+      Editor: Core.instance.components.editor,
+      Modal: Core.instance.components.modal,
+      Tags: Core.instance.components.tag
     },
     data () {
       return {

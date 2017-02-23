@@ -1,10 +1,9 @@
 <script>
-  import Editor from '../libraries/Editor'
-  import Modal from '../libraries/Modal'
+  import Core from '../main'
   export default {
     components: {
-      Editor,
-      Modal
+      Editor: Core.instance.components.editor,
+      Modal: Core.instance.components.modal
     },
     data () {
       return {

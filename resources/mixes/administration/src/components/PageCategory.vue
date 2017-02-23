@@ -1,6 +1,5 @@
 <script>
   import Core from '../main'
-  import Modal from '../libraries/Modal'
   export default {
     beforeRouteEnter (to, from, next) {
       Core.http.post(window.api + '/page/category/fetch').then(function (response) {
@@ -12,7 +11,7 @@
       })
     },
     components: {
-      Modal
+      Modal: Core.instance.components.modal
     },
     data () {
       return {
