@@ -3,7 +3,7 @@
   import Editor from '../libraries/Editor'
   import Modal from '../libraries/Modal'
   import Tags from '../libraries/InputTag'
-  import Vue from 'vue'
+  import { Vue } from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
       Vue.http.post(window.api + '/article/find', {

@@ -1,8 +1,9 @@
 <script>
   import Paginator from '../libraries/Paginator'
-  import Vue from 'vue'
+  import { Vue } from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
+      console.log(Vue.http)
       Vue.http.post(window.api + '/page/fetch').then(function (response) {
         next((vm) => {
           vm.list = []

@@ -1,6 +1,6 @@
 <script>
   import Paginator from '../libraries/Paginator'
-  import Vue from 'vue'
+  import { Vue } from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
       Vue.http.post(window.api + '/article/fetch', {

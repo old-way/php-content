@@ -1,7 +1,7 @@
 <script>
   import Editor from '../libraries/Editor'
   import Modal from '../libraries/Modal'
-  import Vue from 'vue'
+  import { Vue } from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
       Vue.http.post(window.api + '/page/find', {

@@ -1,6 +1,6 @@
 <script>
   import Modal from '../libraries/Modal'
-  import Vue from 'vue'
+  import { Vue } from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
       Vue.http.post(window.api + '/category/fetch').then(function (response) {
