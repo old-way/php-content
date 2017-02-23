@@ -1,5 +1,5 @@
 <script>
-  import {fixStyle} from '../notadd'
+  import Core from '../main'
   export default {
     computed: {
       message: {
@@ -16,7 +16,7 @@
       }
     },
     mounted () {
-      fixStyle()
+      Core.instance.fixStyle()
     },
     watch: {
       message: {
