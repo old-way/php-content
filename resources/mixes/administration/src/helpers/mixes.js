@@ -27,6 +27,7 @@ export function headerMixin (Core) {
 }
 export function installMixin (Core) {
   Core.install = function (Vue, Notadd) {
+    Core.instance = Notadd
     vueMixin(Core, Vue)
   }
 }
