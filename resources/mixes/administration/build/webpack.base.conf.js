@@ -27,7 +27,6 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.common.js',
       'src': resolve('src'),
-      'assets': resolve('src/assets'),
       'components': resolve('src/components')
     }
   },
@@ -57,7 +56,7 @@ module.exports = {
         loader: 'url-loader',
         query: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[hash:7].[ext]')
+          name: utils.assetsPath('images/[name].[ext]')
         }
       },
       {
