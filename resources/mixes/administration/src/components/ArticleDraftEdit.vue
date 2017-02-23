@@ -1,11 +1,11 @@
 <script>
+  import Core from '../main'
   import DatePicker from 'vuejs-datepicker'
   import Editor from '../libraries/Editor'
   import Tags from '../libraries/InputTag'
-  import { Vue } from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
-      Vue.http.post(window.api + '/article/draft/find', {
+      Core.http.post(window.api + '/article/draft/find', {
         id: to.params.id
       }).then(function (response) {
         next((vm) => {

@@ -1,9 +1,9 @@
 <script>
+  import Core from '../main'
   import Paginator from '../libraries/Paginator'
-  import { Vue } from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
-      Vue.http.post(window.api + '/article/fetch', {
+      Core.http.post(window.api + '/article/fetch', {
         trashed: true
       }).then(function (response) {
         next((vm) => {
