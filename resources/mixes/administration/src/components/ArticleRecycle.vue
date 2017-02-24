@@ -2,9 +2,11 @@
   import Core from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
+      Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/article/fetch', {
         trashed: true
       }).then(function (response) {
+        Core.instance.store.commit('progress', 'done')
         next((vm) => {
           vm.list = []
           response.body.data.forEach((article) => {
@@ -14,6 +16,7 @@
           vm.pagination = response.body.pagination
         })
       }, function (response) {
+        Core.instance.store.commit('progress', 'fail')
         window.alert('初始化失败！')
       })
     },

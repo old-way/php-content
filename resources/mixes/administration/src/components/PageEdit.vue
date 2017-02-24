@@ -2,9 +2,11 @@
   import Core from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
+      Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/page/find', {
         id: to.params.id
       }).then(function (response) {
+        Core.instance.store.commit('progress', 'done')
         next((vm) => {
           let article = response.body.data
           vm.alias = article.alias
@@ -15,6 +17,7 @@
           vm.title = article.title
         })
       }, function (response) {
+        Core.instance.store.commit('progress', 'fail')
         console.log(response.body)
       })
     },

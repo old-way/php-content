@@ -2,11 +2,14 @@
   import Core from '../main'
   export default {
     beforeRouteEnter (to, from, next) {
+      Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/page/category/fetch').then(function (response) {
+        Core.instance.store.commit('progress', 'done')
         next((vm) => {
           vm.items = response.body.data
         })
       }, function (response) {
+        Core.instance.store.commit('progress', 'fail')
         window.alert('初始化失败！')
       })
     },

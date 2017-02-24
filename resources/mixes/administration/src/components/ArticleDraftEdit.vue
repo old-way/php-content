@@ -3,9 +3,11 @@
   import DatePicker from 'vuejs-datepicker'
   export default {
     beforeRouteEnter (to, from, next) {
+      Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/article/draft/find', {
         id: to.params.id
       }).then(function (response) {
+        Core.instance.store.commit('progress', 'done')
         next((vm) => {
           let article = response.body.data
           vm.title = article.title
@@ -25,6 +27,7 @@
           vm.$store.commit('title', '编辑文章：' + vm.title + ' - 文章 - Notadd Administration')
         })
       }, function (response) {
+        Core.instance.store.commit('progress', 'fail')
         window.alert('初始化失败！')
       })
     },
