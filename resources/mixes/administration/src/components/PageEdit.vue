@@ -1,6 +1,10 @@
 <script>
   import Core from '../main'
   export default {
+    beforeCreate: function () {
+      this.$options.components.Editor = Core.instance.components.editor
+      this.$options.components.Modal = Core.instance.components.modal
+    },
     beforeRouteEnter (to, from, next) {
       Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/page/find', {
@@ -20,10 +24,6 @@
         Core.instance.store.commit('progress', 'fail')
         console.log(response.body)
       })
-    },
-    components: {
-      Editor: Core.instance.components.editor,
-      Modal: Core.instance.components.modal
     },
     data () {
       return {

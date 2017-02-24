@@ -1,9 +1,9 @@
 <script>
   import Core from '../main'
   export default {
-    components: {
-      Editor: Core.instance.components.editor,
-      Modal: Core.instance.components.modal
+    beforeCreate: function () {
+      this.$options.components.Editor = Core.instance.components.editor
+      this.$options.components.Modal = Core.instance.components.modal
     },
     data () {
       return {

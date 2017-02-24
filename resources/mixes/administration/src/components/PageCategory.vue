@@ -1,6 +1,9 @@
 <script>
   import Core from '../main'
   export default {
+    beforeCreate: function () {
+      this.$options.components.Modal = Core.instance.components.modal
+    },
     beforeRouteEnter (to, from, next) {
       Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/page/category/fetch').then(function (response) {
@@ -12,9 +15,6 @@
         Core.instance.store.commit('progress', 'fail')
         window.alert('初始化失败！')
       })
-    },
-    components: {
-      Modal: Core.instance.components.modal
     },
     data () {
       return {

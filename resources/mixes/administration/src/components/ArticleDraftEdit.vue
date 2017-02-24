@@ -2,6 +2,10 @@
   import Core from '../main'
   import DatePicker from 'vuejs-datepicker'
   export default {
+    beforeCreate: function () {
+      this.$options.components.Editor = Core.instance.components.editor
+      this.$options.components.Tags = Core.instance.components.tag
+    },
     beforeRouteEnter (to, from, next) {
       Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/article/draft/find', {
@@ -31,10 +35,10 @@
         window.alert('初始化失败！')
       })
     },
-    components: {
-      DatePicker,
-      Editor: Core.instance.components.editor,
-      Tags: Core.instance.components.tag
+    components () {
+      return {
+        DatePicker
+      }
     },
     data () {
       return {

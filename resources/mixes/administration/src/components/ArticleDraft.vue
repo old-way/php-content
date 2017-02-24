@@ -19,8 +19,10 @@
         window.alert('初始化失败！')
       })
     },
-    components: {
-      Paginator: Core.instance.components.paginator
+    components () {
+      return {
+        Paginator: Core.instance.components.paginator
+      }
     },
     data () {
       return {

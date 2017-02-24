@@ -1,6 +1,9 @@
 <script>
   import Core from '../main'
   export default {
+    beforeCreate: function () {
+      this.$options.components.Paginator = Core.instance.components.paginator
+    },
     beforeRouteEnter (to, from, next) {
       Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/article/fetch').then(function (response) {
@@ -17,9 +20,6 @@
         Core.instance.store.commit('progress', 'fail')
         window.alert('初始化失败！')
       })
-    },
-    components: {
-      Paginator: Core.instance.components.paginator
     },
     data () {
       return {

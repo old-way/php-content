@@ -1,12 +1,12 @@
 <script>
   import Core from '../main'
   export default {
-    components: {
-      LayoutContent: Core.instance.layouts.content,
-      LayoutFooter: Core.instance.layouts.footer,
-      LayoutSidebar: Core.instance.layouts.sidebar,
-      NavbarMenu: Core.instance.components.navbar,
-      SidebarMenu: Core.instance.components.sidebar
+    beforeCreate: function () {
+      this.$options.components.LayoutContent = Core.instance.layouts.content
+      this.$options.components.LayoutFooter = Core.instance.layouts.footer
+      this.$options.components.LayoutSidebar = Core.instance.layouts.sidebar
+      this.$options.components.NavbarMenu = Core.instance.components.navbar
+      this.$options.components.SidebarMenu = Core.instance.components.sidebar
     },
     data: () => {
       return {

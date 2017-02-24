@@ -2,15 +2,19 @@
   import Core from '../main'
   import DatePicker from 'vuejs-datepicker'
   export default {
+    beforeCreate: function () {
+      this.$options.components.Editor = Core.instance.components.editor
+      this.$options.components.Modal = Core.instance.components.modal
+      this.$options.components.Tags = Core.instance.components.tag
+    },
     beforeRouteLeave (to, from, next) {
       this.working = false
       next()
     },
-    components: {
-      DatePicker,
-      Editor: Core.instance.components.editor,
-      Modal: Core.instance.components.modal,
-      Tags: Core.instance.components.tag
+    components () {
+      return {
+        DatePicker
+      }
     },
     computed: {
       auto: {
