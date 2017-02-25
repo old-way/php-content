@@ -7,22 +7,44 @@
     beforeRouteEnter (to, from, next) {
       Core.instance.store.commit('progress', 'start')
       Core.http.post(window.api + '/article/fetch').then(function (response) {
-        Core.instance.store.commit('progress', 'done')
-        next((vm) => {
-          vm.list = []
-          response.body.data.forEach((article) => {
-            article.checked = false
-            vm.list.push(article)
+        let list = response.data.data
+        let pagination = response.data.pagination
+        Core.http.post(window.api + '/category/fetch', {
+          'with-children': true
+        }).then(function (response) {
+          Core.instance.store.commit('progress', 'done')
+          next((vm) => {
+            vm.categories.all = response.data.data
+            vm.categories.all.forEach(category => {
+              category.parent_id === 0 && vm.categories.first.push(category)
+            })
+            vm.list = []
+            list.forEach((article) => {
+              article.checked = false
+              vm.list.push(article)
+            })
+            vm.pagination = pagination
           })
-          vm.pagination = response.body.pagination
         })
-      }, function (response) {
+      }).catch(function (response) {
         Core.instance.store.commit('progress', 'fail')
         window.alert('初始化失败！')
       })
     },
     data () {
       return {
+        categories: {
+          all: [],
+          first: [],
+          id: 0,
+          selected: {
+            first: 0,
+            second: 0,
+            third: 0
+          },
+          second: [],
+          third: []
+        },
         keyword: '',
         list: [],
         pagination: {
@@ -31,6 +53,63 @@
       }
     },
     methods: {
+      categorySelected: function (level, event) {
+        let _this = this
+        let category
+        _this.categories.id = event.target.value
+        if (_this.categories.id === '0') {
+          switch (level) {
+            case 'first':
+              _this.categories.second = []
+              _this.categories.third = []
+              break
+            case 'second':
+              _this.categories.third = []
+              _this.categories.id = _this.categories.selected.first
+              break
+            case 'third':
+              _this.categories.id = _this.categories.selected.second
+              break
+          }
+        } else {
+          switch (level) {
+            case 'first':
+              category = find()
+              _this.categories.second = category.hasOwnProperty('children') ? category.children : []
+              _this.categories.third = []
+              _this.categories.selected.first = _this.categories.id
+              break
+            case 'second':
+              category = find()
+              _this.categories.third = category.hasOwnProperty('children') ? category.children : []
+              _this.categories.selected.second = _this.categories.id
+              break
+            case 'third':
+              _this.categories.selected.third = _this.categories.id
+              break
+          }
+        }
+        _this.$http.post(window.api + '/article/fetch', {
+          category: _this.categories.id
+        }).then(response => {
+          console.log(response.data)
+          _this.list = []
+          response.data.data.forEach((article) => {
+            article.checked = false
+            _this.list.push(article)
+          })
+          _this.pagination = response.data.pagination
+        })
+        function find () {
+          let _selected
+          _this.categories.all.forEach(function (cateogry) {
+            if (cateogry.id.toString() === _this.categories.id.toString()) {
+              _selected = cateogry
+            }
+          })
+          return _selected
+        }
+      },
       check: function (article) {
         article.checked = !article.checked
       },
@@ -206,6 +285,12 @@
         padding: 6px 32px;
     }
 
+    .box-header > .box-extend > .form-control {
+        display: inline-block;
+        vertical-align: middle;
+        width: 140px;
+    }
+
     .box-body > .table > tbody > tr > td:first-child {
         background: url("../../static/images/unselected.svg") 10px center no-repeat;
         padding-left: 50px;
@@ -292,6 +377,18 @@
                 </div>
             </div>
             <div class="box-extend">
+                <select class="form-control" v-if="categories.first.length !== 0" @change="categorySelected('first', $event)">
+                    <option value="0">选择分类</option>
+                    <option v-for="category in categories.first" :value="category.id">{{ category.title }}</option>
+                </select>
+                <select class="form-control" v-if="categories.second.length !== 0" @change="categorySelected('second', $event)">
+                    <option value="0">选择分类</option>
+                    <option v-for="category in categories.second" :value="category.id">{{ category.title }}</option>
+                </select>
+                <select class="form-control" v-if="categories.third.length !== 0" @change="categorySelected('third', $event)">
+                    <option value="0">选择分类</option>
+                    <option v-for="category in categories.third" :value="category.id">{{ category.title }}</option>
+                </select>
                 <router-link to="/content/article/create" class="btn btn-primary btn-create">添加文章</router-link>
                 <button class="btn btn-primary" @click="checkNone">反选</button>
                 <button class="btn btn-danger" @click="removeSelected">删除</button>

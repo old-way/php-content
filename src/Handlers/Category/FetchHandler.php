@@ -54,6 +54,15 @@ class FetchHandler extends DataHandler
      */
     public function data()
     {
+        if ($this->request->input('with-children')) {
+            $categories = $this->model->newQuery()->orderBy('order_id', 'asc')->get();
+            $categories->transform(function (Category $category) {
+                $children = $this->model->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
+                $children->count() && $category->setAttribute('children', $children);
+                return $category;
+            });
+            return $categories;
+        }
         if($this->hasFilter) {
             return $this->model->get();
         } else {
