@@ -12,6 +12,7 @@ use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Page;
+use Notadd\Content\Models\PageCategory;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
@@ -60,11 +61,31 @@ class FetchHandler extends DataHandler
     public function data()
     {
         $pagination = $this->request->input('pagination') ?: 10;
-        $search = $this->request->input('search');
-        if($search) {
-            $this->pagination = $this->model->newQuery()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
+        if ($id = $this->request->input('category')) {
+            $categories = collect([(int)$id]);
+            $this->container->make('log')->info('has category', $categories->toArray());
+            (new PageCategory())->newQuery()->where('parent_id', $id)->get()->each(function (PageCategory $category) use ($categories) {
+                $categories->push($category->getAttribute('id'));
+                $children = (new PageCategory())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+                $children->count() && $children->each(function (PageCategory $category) use ($categories) {
+                    $categories->push($category->getAttribute('id'));
+                    $children = (new PageCategory())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+                    $children->count() && $children->each(function (PageCategory $category) use ($categories) {
+                        $categories->push($category->getAttribute('id'));
+                    });
+                });
+            });
+            $this->container->make('log')->info('get categories', $categories->toArray());
+            $categories = $categories->unique();
+            $this->container->make('log')->info('get categories', $categories->toArray());
+            $this->pagination = $this->model->newQuery()->whereIn('category_id', $categories->toArray())->orderBy('created_at', 'desc')->paginate($pagination);
         } else {
-            $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+            $search = $this->request->input('search');
+            if($search) {
+                $this->pagination = $this->model->newQuery()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
+            } else {
+                $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+            }
         }
 
         return $this->pagination->items();
