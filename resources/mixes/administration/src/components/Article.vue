@@ -120,7 +120,10 @@
       },
       paginator: function (page) {
         let _this = this
-        _this.$http.post(window.api + '/article/fetch?page=' + page).then(function (response) {
+        _this.$http.post(window.api + '/article/fetch', {
+          category: _this.categories.id,
+          page: page
+        }).then(function (response) {
           _this.list = []
           response.data.data.map(function (article) {
             article.checked = false
