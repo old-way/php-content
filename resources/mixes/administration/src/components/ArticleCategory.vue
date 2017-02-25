@@ -9,7 +9,7 @@
       Core.http.post(window.api + '/category/fetch').then(function (response) {
         Core.instance.store.commit('progress', 'done')
         next((vm) => {
-          vm.items = response.body.data
+          vm.items = response.data.data
         })
       }, function (response) {
         Core.instance.store.commit('progress', 'fail')
@@ -83,11 +83,11 @@
         }
         if (_this.modal.pattern === 'edit') {
           _this.$http.post(window.api + '/category/delete', _this.modal).then(function (response) {
-            _this.items = response.body.data
+            _this.items = response.data.data
             _this.$refs.modal.close()
           }, function (response) {
             _this.$refs.modal.close()
-            console.log(response.body)
+            console.log(response.data)
           })
         }
       },
@@ -99,7 +99,7 @@
         }
         if (_this.modal.pattern === 'create') {
           _this.$http.post(window.api + '/category/create', _this.modal).then(function (response) {
-            _this.items = response.body.data
+            _this.items = response.data.data
             _this.$refs.modal.close()
             _this.$store.commit('message', {
               show: true,
@@ -117,7 +117,7 @@
         }
         if (_this.modal.pattern === 'edit') {
           _this.$http.post(window.api + '/category/edit', _this.modal).then(function (response) {
-            _this.items = response.body.data
+            _this.items = response.data.data
             _this.$refs.modal.close()
             _this.$store.commit('message', {
               show: true,
@@ -167,7 +167,7 @@
             }).then(function (response) {
               _this.items = []
               _this.$nextTick(function () {
-                _this.items = response.body.data
+                _this.items = response.data.data
               })
             }, function (response) {
               _this.$store.commit('message', {

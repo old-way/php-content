@@ -14,7 +14,7 @@
       }).then(function (response) {
         Core.instance.store.commit('progress', 'done')
         next((vm) => {
-          let article = response.body.data
+          let article = response.data.data
           vm.category.id = article.category ? article.category.id : 0
           vm.category.text = article.category ? '选择分类[' + article.category.title + '(' + article.category.id + ')]' : '选择分类[未分类(0)]'
           vm.title = article.title
@@ -91,6 +91,7 @@
           return false
         }
         const _formData = new window.FormData()
+        _formData.append('category_id', _this.category.id)
         _formData.append('content', _this.content)
         _formData.append('date', _this.date)
         _formData.append('hidden', _this.hidden)
@@ -106,18 +107,18 @@
           _this.$store.commit('message', {
             show: true,
             type: 'notice',
-            text: response.body.message
+            text: response.data.message
           })
           _this.$router.push('/content/article/all')
         }, function (response) {
-          console.log(response.body)
+          console.log(response.data)
         })
       }
     },
     mounted () {
       let _this = this
       _this.$http.post(window.api + '/category/fetch').then(response => {
-        _this.category.list = response.body.data
+        _this.category.list = response.data.data
       })
     }
   }

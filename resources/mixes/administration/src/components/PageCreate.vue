@@ -42,16 +42,16 @@
           enabled: _this.enabled,
           title: _this.title
         }).then(function (response) {
-          if (response.body.data.id && response.body.data.id > 0) {
+          if (response.data.data.id && response.data.data.id > 0) {
             _this.$store.commit('message', {
               show: true,
               type: 'notice',
-              text: response.body.message
+              text: response.data.message
             })
             _this.$router.push('/content/page/all')
           }
         }, function (response) {
-          console.log(response.body)
+          console.log(response.data)
         })
       }
     },
@@ -59,7 +59,7 @@
       let _this = this
       _this.$store.commit('title', '添加页面 - 页面 - Notadd Administration')
       _this.$http.post(window.api + '/page/category/fetch').then(response => {
-        _this.category.list = response.body.data
+        _this.category.list = response.data.data
         console.log(_this.category.list)
       })
     }

@@ -12,7 +12,7 @@
       }).then(function (response) {
         Core.instance.store.commit('progress', 'done')
         next((vm) => {
-          let article = response.body.data
+          let article = response.data.data
           vm.alias = article.alias
           vm.category.id = article.category ? article.category.id : 0
           vm.category.text = article.category ? '选择分类[' + article.category.title + '(' + article.category.id + ')]' : '选择分类[未分类(0)]'
@@ -22,7 +22,7 @@
         })
       }, function (response) {
         Core.instance.store.commit('progress', 'fail')
-        console.log(response.body)
+        console.log(response.data)
       })
     },
     data () {
@@ -65,11 +65,11 @@
           _this.$store.commit('message', {
             show: true,
             type: 'notice',
-            text: response.body.message
+            text: response.data.message
           })
           _this.$router.push('/content/page/all')
         }, function (response) {
-          console.log(response.body)
+          console.log(response.data)
         })
       }
     },
@@ -77,7 +77,7 @@
       let _this = this
       _this.$store.commit('title', '编辑页面 - 文章 - Notadd Administration')
       _this.$http.post(window.api + '/page/category/fetch').then(response => {
-        _this.category.list = response.body.data
+        _this.category.list = response.data.data
       })
     }
   }

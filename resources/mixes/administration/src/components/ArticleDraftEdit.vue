@@ -13,7 +13,7 @@
       }).then(function (response) {
         Core.instance.store.commit('progress', 'done')
         next((vm) => {
-          let article = response.body.data
+          let article = response.data.data
           vm.title = article.title
           vm.date = article.created_at
           vm.content = article.content
@@ -89,11 +89,11 @@
           _this.$store.commit('message', {
             show: true,
             type: 'notice',
-            text: response.body.message
+            text: response.data.message
           })
           _this.$router.push('/content/article/all')
         }, function (response) {
-          console.log(response.body)
+          console.log(response.data)
         })
       }
     }

@@ -78,8 +78,8 @@
           return false
         }
         const _formData = new window.FormData()
-        _formData.append('content', _this.content)
         _formData.append('category_id', _this.category.id)
+        _formData.append('content', _this.content)
         _formData.append('date', _this.date)
         _formData.append('hidden', _this.hidden)
         _formData.append('image', _this.image)
@@ -90,16 +90,16 @@
         _formData.append('source_author', _this.source.author)
         _formData.append('source_link', _this.source.link)
         _this.$http.post(window.api + '/article/create', _formData).then(function (response) {
-          if (response.body.data.id && response.body.data.id > 0) {
+          if (response.data.data.id && response.data.data.id > 0) {
             _this.$store.commit('message', {
               show: true,
               type: 'notice',
-              text: response.body.message
+              text: response.data.message
             })
             _this.$router.push('/content/article/all')
           }
         }, function (response) {
-          console.log(response.body)
+          console.log(response.data)
         })
       }
     },
@@ -122,7 +122,7 @@
             _formData.append('source_author', _this.source.author)
             _formData.append('source_link', _this.source.link)
             _this.$http.post(window.api + '/article/draft/create', _formData).then(function (response) {
-              if (response.body.data.id && response.body.data.id > 0) {
+              if (response.data.data.id && response.data.data.id > 0) {
                 _this.$store.commit('message', {
                   show: true,
                   type: 'notice',
@@ -130,7 +130,7 @@
                 })
               }
             }, function (response) {
-              console.log(response.body)
+              console.log(response.data)
             })
           } else {
             return false
@@ -138,7 +138,7 @@
         }, 10000)
       }
       _this.$http.post(window.api + '/category/fetch').then(response => {
-        _this.category.list = response.body.data
+        _this.category.list = response.data.data
         console.log(_this.category.list)
       })
     },
@@ -149,7 +149,7 @@
           _this.$http.post(window.api + '/article/auto', {
             auto: _this.auto
           }).then(function (response) {
-            _this.$store.commit('setting', response.body.data)
+            _this.$store.commit('setting', response.data.data)
             _this.$store.commit('message', {
               show: true,
               type: 'notice',

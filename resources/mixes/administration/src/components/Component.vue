@@ -119,9 +119,9 @@
           pageKeyword: _this.pageKeyword,
           pageTitle: _this.pageTitle
         }).then(function (response) {
-          _this.$store.commit('setting', response.body.data)
+          _this.$store.commit('setting', response.data.data)
         }, function (response) {
-          console.log(response.body)
+          console.log(response.data)
         })
       }
     },

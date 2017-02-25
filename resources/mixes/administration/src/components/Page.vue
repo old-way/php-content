@@ -10,11 +10,11 @@
         Core.instance.store.commit('progress', 'done')
         next((vm) => {
           vm.list = []
-          response.body.data.forEach((page) => {
+          response.data.data.forEach((page) => {
             page.checked = false
             vm.list.push(page)
           })
-          vm.pagination = response.body.pagination
+          vm.pagination = response.data.pagination
         })
       }, function (response) {
         Core.instance.store.commit('progress', 'fail')
@@ -48,13 +48,13 @@
         let _this = this
         _this.$http.post(window.api + '/page/fetch?page=' + page).then(function (response) {
           _this.list = []
-          response.body.data.map(function (page) {
+          response.data.data.map(function (page) {
             page.checked = false
             _this.list.push(page)
           })
-          _this.pagination = response.body.pagination
+          _this.pagination = response.data.pagination
         }, function (response) {
-          console.log(response.body)
+          console.log(response.data)
         })
       },
       remove: function (id) {
@@ -63,15 +63,15 @@
           id: id
         }).then(function (response) {
           _this.list = []
-          response.body.data.map(function (page) {
+          response.data.data.map(function (page) {
             page.checked = false
             _this.list.push(page)
           })
-          _this.pagination = response.body.pagination
+          _this.pagination = response.data.pagination
           _this.$store.commit('message', {
             show: true,
             type: 'notice',
-            text: response.body.message
+            text: response.data.message
           })
         }, function (response) {
           console.log(response)
@@ -85,11 +85,11 @@
               id: page.id
             }).then(function (response) {
               _this.list = []
-              response.body.data.map(function (article) {
+              response.data.data.map(function (article) {
                 article.checked = false
                 _this.list.push(article)
               })
-              _this.pagination = response.body.pagination
+              _this.pagination = response.data.pagination
               _this.$store.commit('message', {
                 show: true,
                 type: 'notice',
@@ -109,13 +109,13 @@
           }).then(function (response) {
             console.log(response)
             _this.list = []
-            response.body.data.forEach((article) => {
+            response.data.data.forEach((article) => {
               article.checked = false
               _this.list.push(article)
             })
-            _this.pagination = response.body.pagination
+            _this.pagination = response.data.pagination
           }, function (response) {
-            console.log(response.body)
+            console.log(response.data)
           })
         } else {
           window.alert('请输入搜索关键字！')

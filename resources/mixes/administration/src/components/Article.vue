@@ -43,13 +43,13 @@
         let _this = this
         _this.$http.post(window.api + '/article/fetch?page=' + page).then(function (response) {
           _this.list = []
-          response.body.data.map(function (article) {
+          response.data.data.map(function (article) {
             article.checked = false
             _this.list.push(article)
           })
-          _this.pagination = response.body.pagination
+          _this.pagination = response.data.pagination
         }, function (response) {
-          console.log(response.body)
+          console.log(response.data)
         })
       },
       remove: function (id) {
@@ -58,15 +58,15 @@
           id: id
         }).then(function (response) {
           _this.list = []
-          response.body.data.map(function (article) {
+          response.data.data.map(function (article) {
             article.checked = false
             _this.list.push(article)
           })
-          _this.pagination = response.body.pagination
+          _this.pagination = response.data.pagination
           _this.$store.commit('message', {
             show: true,
             type: 'notice',
-            text: response.body.message
+            text: response.data.message
           })
         }, function (response) {
           console.log(response)
@@ -80,11 +80,11 @@
               id: article.id
             }).then(function (response) {
               _this.list = []
-              response.body.data.map(function (article) {
+              response.data.data.map(function (article) {
                 article.checked = false
                 _this.list.push(article)
               })
-              _this.pagination = response.body.pagination
+              _this.pagination = response.data.pagination
               _this.$store.commit('message', {
                 show: true,
                 type: 'notice',
@@ -104,13 +104,13 @@
           }).then(function (response) {
             console.log(response)
             _this.list = []
-            response.body.data.forEach((article) => {
+            response.data.data.forEach((article) => {
               article.checked = false
               _this.list.push(article)
             })
-            _this.pagination = response.body.pagination
-          }, function (response) {
-            console.log(response.body)
+            _this.pagination = response.data.pagination
+          }).catch(error => {
+            console.log(error)
           })
         } else {
           window.alert('请输入搜索关键字！')
