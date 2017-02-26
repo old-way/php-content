@@ -73,8 +73,13 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
-            'title' => 'required',
             'alias' => 'required|alpha_dash|unique:categories',
+            'title' => 'required',
+        ], [
+            'alias.required' => '必须填写分类别名',
+            'alias.alpha_dash' => '分类别名只能由字母、数字和斜杠组成',
+            'alias.unique' => '分类别名已被占用',
+            'title.required' => '必须填写分类标题',
         ]);
         $this->model->create([
             'alias'            => $this->request->input('alias'),

@@ -65,6 +65,9 @@ class EditHandler extends SetHandler
         $this->validate($this->request, [
             'content' => 'required',
             'title' => 'required',
+        ], [
+            'content.required' => '必须填写文章内容',
+            'title.required' => '必须填写文章标题',
         ]);
         $article = $this->model->newQuery()->find($this->request->input('id'));
         $article->update([

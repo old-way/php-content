@@ -82,6 +82,9 @@ class CreateHandler extends SetHandler
         $this->validate($this->request, [
             'content' => 'required',
             'title' => 'required',
+        ], [
+            'content.required' => '必须填写文章内容',
+            'title.required' => '必须填写文章标题',
         ]);
         $this->model = $this->model->create([
             'category_id'   => $this->request->input('category_id', 0),
