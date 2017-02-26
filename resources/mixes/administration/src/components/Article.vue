@@ -36,6 +36,7 @@
           all: [],
           first: [],
           id: 0,
+          none: false,
           selected: {
             first: 0,
             second: 0,
@@ -73,10 +74,15 @@
         } else {
           switch (level) {
             case 'first':
-              category = find()
-              _this.categories.second = category.hasOwnProperty('children') ? category.children : []
-              _this.categories.third = []
-              _this.categories.selected.first = _this.categories.id
+              if (_this.categories.id === 'none') {
+                _this.categories.second = []
+                _this.categories.third = []
+              } else {
+                category = find()
+                _this.categories.second = category.hasOwnProperty('children') ? category.children : []
+                _this.categories.third = []
+                _this.categories.selected.first = _this.categories.id
+              }
               break
             case 'second':
               category = find()
@@ -88,17 +94,29 @@
               break
           }
         }
-        _this.$http.post(window.api + '/article/fetch', {
-          category: _this.categories.id
-        }).then(response => {
-          console.log(response.data)
-          _this.list = []
-          response.data.data.forEach((article) => {
-            article.checked = false
-            _this.list.push(article)
+        if (_this.categories.id === 'none') {
+          _this.$http.post(window.api + '/article/fetch', {
+            'only-no-category': true
+          }).then(response => {
+            _this.list = []
+            response.data.data.forEach((article) => {
+              article.checked = false
+              _this.list.push(article)
+            })
+            _this.pagination = response.data.pagination
           })
-          _this.pagination = response.data.pagination
-        })
+        } else {
+          _this.$http.post(window.api + '/article/fetch', {
+            category: _this.categories.id
+          }).then(response => {
+            _this.list = []
+            response.data.data.forEach((article) => {
+              article.checked = false
+              _this.list.push(article)
+            })
+            _this.pagination = response.data.pagination
+          })
+        }
         function find () {
           let _selected
           _this.categories.all.forEach(function (cateogry) {
@@ -119,19 +137,31 @@
       },
       paginator: function (page) {
         let _this = this
-        _this.$http.post(window.api + '/article/fetch', {
-          category: _this.categories.id,
-          page: page
-        }).then(function (response) {
-          _this.list = []
-          response.data.data.map(function (article) {
-            article.checked = false
-            _this.list.push(article)
+        if (_this.categories.id === 'none') {
+          _this.$http.post(window.api + '/article/fetch', {
+            'only-no-category': true,
+            page: page
+          }).then(response => {
+            _this.list = []
+            response.data.data.forEach((article) => {
+              article.checked = false
+              _this.list.push(article)
+            })
+            _this.pagination = response.data.pagination
           })
-          _this.pagination = response.data.pagination
-        }, function (response) {
-          console.log(response.data)
-        })
+        } else {
+          _this.$http.post(window.api + '/article/fetch', {
+            category: _this.categories.id,
+            page: page
+          }).then(function (response) {
+            _this.list = []
+            response.data.data.map(function (article) {
+              article.checked = false
+              _this.list.push(article)
+            })
+            _this.pagination = response.data.pagination
+          })
+        }
       },
       remove: function (id) {
         let _this = this
@@ -381,6 +411,7 @@
             <div class="box-extend">
                 <select class="form-control" v-if="categories.first.length !== 0" @change="categorySelected('first', $event)">
                     <option value="0">选择分类</option>
+                    <option value="none">未分类</option>
                     <option v-for="category in categories.first" :value="category.id">{{ category.title }}</option>
                 </select>
                 <select class="form-control" v-if="categories.second.length !== 0" @change="categorySelected('second', $event)">

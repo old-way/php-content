@@ -55,7 +55,9 @@ class FetchHandler extends DataHandler
     public function data()
     {
         $pagination = $this->request->input('pagination') ?: 10;
-        if ($id = $this->request->input('category')) {
+        if ($this->request->input('only-no-category')) {
+            $this->pagination = $this->model->newQuery()->where('category_id', 0)->paginate($pagination);
+        } elseif ($id = $this->request->input('category')) {
             $categories = collect([(int)$id]);
             $this->container->make('log')->info('has category', $categories->toArray());
             (new PageCategory())->newQuery()->where('parent_id', $id)->get()->each(function (PageCategory $category) use
