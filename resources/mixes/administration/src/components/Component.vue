@@ -120,8 +120,6 @@
           pageTitle: _this.pageTitle
         }).then(function (response) {
           _this.$store.commit('setting', response.data.data)
-        }, function (response) {
-          console.log(response.data)
         })
       }
     },

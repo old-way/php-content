@@ -28,7 +28,6 @@
         })
       }).catch(function (response) {
         Core.instance.store.commit('progress', 'fail')
-        window.alert('初始化失败！')
       })
     },
     data () {
@@ -92,7 +91,6 @@
         _this.$http.post(window.api + '/article/fetch', {
           category: _this.categories.id
         }).then(response => {
-          console.log(response.data)
           _this.list = []
           response.data.data.forEach((article) => {
             article.checked = false
@@ -135,8 +133,6 @@
             _this.list.push(page)
           })
           _this.pagination = response.data.pagination
-        }).catch(function (response) {
-          console.log(response.data)
         })
       },
       remove: function (id) {
@@ -155,8 +151,6 @@
             type: 'notice',
             text: response.data.message
           })
-        }, function (response) {
-          console.log(response)
         })
       },
       removeSelected: function () {
@@ -177,8 +171,6 @@
                 type: 'notice',
                 text: '批量删除成功！'
               })
-            }, function (response) {
-              console.log(response)
             })
           }
         })
@@ -196,8 +188,6 @@
               _this.list.push(article)
             })
             _this.pagination = response.data.pagination
-          }, function (response) {
-            console.log(response.data)
           })
         } else {
           window.alert('请输入搜索关键字！')

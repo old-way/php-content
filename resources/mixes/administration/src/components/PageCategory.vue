@@ -11,9 +11,8 @@
         next((vm) => {
           vm.items = response.data.data
         })
-      }, function (response) {
+      }).catch(() => {
         Core.instance.store.commit('progress', 'fail')
-        window.alert('初始化失败！')
       })
     },
     data () {
@@ -85,9 +84,8 @@
           _this.$http.post(window.api + '/page/category/delete', _this.modal).then(function (response) {
             _this.items = response.data.data
             _this.$refs.modal.close()
-          }, function (response) {
+          }).catch(() => {
             _this.$refs.modal.close()
-            console.log(response.data)
           })
         }
       },
@@ -106,13 +104,8 @@
               type: 'notice',
               text: '创建分类成功！'
             })
-          }, function (response) {
+          }).catch(() => {
             _this.$refs.modal.close()
-            _this.$store.commit('message', {
-              show: true,
-              type: 'error',
-              text: '创建分类失败！'
-            })
           })
         }
         if (_this.modal.pattern === 'edit') {
@@ -123,13 +116,8 @@
               type: 'notice',
               text: '编辑分类成功！'
             })
-          }, function (response) {
+          }).catch(() => {
             _this.$refs.modal.close()
-            _this.$store.commit('message', {
-              show: true,
-              type: 'error',
-              text: '编辑分类失败！'
-            })
           })
         }
       }
@@ -167,12 +155,6 @@
               _this.items = []
               _this.$nextTick(function () {
                 _this.items = response.data.data
-              })
-            }, function (response) {
-              _this.$store.commit('message', {
-                show: true,
-                type: 'error',
-                text: '更新排序失败！'
               })
             })
           })

@@ -20,9 +20,8 @@
           vm.enabled = article.enabled.toString()
           vm.title = article.title
         })
-      }, function (response) {
+      }).catch(() => {
         Core.instance.store.commit('progress', 'fail')
-        console.log(response.data)
       })
     },
     data () {
@@ -68,8 +67,6 @@
             text: response.data.message
           })
           _this.$router.push('/content/page/all')
-        }, function (response) {
-          console.log(response.data)
         })
       }
     },

@@ -50,8 +50,6 @@
             })
             _this.$router.push('/content/page/all')
           }
-        }, function (response) {
-          console.log(response.data)
         })
       }
     },
@@ -60,7 +58,6 @@
       _this.$store.commit('title', '添加页面 - 页面 - Notadd Administration')
       _this.$http.post(window.api + '/page/category/fetch').then(response => {
         _this.category.list = response.data.data
-        console.log(_this.category.list)
       })
     }
   }

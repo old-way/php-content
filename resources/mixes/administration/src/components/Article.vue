@@ -26,9 +26,8 @@
             vm.pagination = pagination
           })
         })
-      }).catch(function (response) {
+      }).catch(() => {
         Core.instance.store.commit('progress', 'fail')
-        window.alert('初始化失败！')
       })
     },
     data () {

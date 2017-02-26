@@ -98,8 +98,6 @@
             })
             _this.$router.push('/content/article/all')
           }
-        }, function (response) {
-          console.log(response.data)
         })
       }
     },
@@ -129,8 +127,6 @@
                   text: '自动保存草稿成功！'
                 })
               }
-            }, function (response) {
-              console.log(response.data)
             })
           } else {
             return false
@@ -139,7 +135,6 @@
       }
       _this.$http.post(window.api + '/category/fetch').then(response => {
         _this.category.list = response.data.data
-        console.log(_this.category.list)
       })
     },
     watch: {
@@ -155,8 +150,6 @@
               type: 'notice',
               text: '更新设置成功！自动保存功能将在下次使用时生效或失效！'
             })
-          }, function (response) {
-            window.alert('更新设置失败！')
           })
         }
       }

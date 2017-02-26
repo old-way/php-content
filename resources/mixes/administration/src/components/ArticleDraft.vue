@@ -13,10 +13,8 @@
           })
           vm.pagination = response.data.pagination
         })
-      }, function (response) {
+      }).catch(() => {
         Core.instance.store.commit('progress', 'fail')
-        console.log(response.data)
-        window.alert('初始化失败！')
       })
     },
     components () {
@@ -55,8 +53,6 @@
             _this.list.push(draft)
           })
           _this.pagination = response.data.pagination
-        }, function (response) {
-          console.log(response.data)
         })
       },
       remove: function (id) {
@@ -75,8 +71,6 @@
             type: 'notice',
             text: response.data.message
           })
-        }, function (response) {
-          console.log(response)
         })
       },
       removeSelected: function () {
@@ -97,8 +91,6 @@
                 type: 'notice',
                 text: '批量删除成功！'
               })
-            }, function (response) {
-              console.log(response)
             })
           }
         })

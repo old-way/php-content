@@ -18,9 +18,8 @@
           })
           vm.pagination = response.data.pagination
         })
-      }, function (response) {
+      }).catch(() => {
         Core.instance.store.commit('progress', 'fail')
-        window.alert('初始化失败！')
       })
     },
     data () {
@@ -62,8 +61,6 @@
             type: 'notice',
             text: response.data.message
           })
-        }, function (response) {
-          console.log(response)
         })
       },
       forceDeleteSelected: function () {
@@ -85,8 +82,6 @@
                 type: 'notice',
                 text: '批量强制删除成功！'
               })
-            }, function (response) {
-              console.log(response)
             })
           }
         })
@@ -103,8 +98,6 @@
             _this.list.push(article)
           })
           _this.pagination = response.data.pagination
-        }, function (response) {
-          console.log(response.data)
         })
       },
       restore: function (id) {
@@ -124,8 +117,6 @@
             type: 'notice',
             text: response.data.message
           })
-        }, function (response) {
-          console.log(response)
         })
       },
       submit: function (e) {

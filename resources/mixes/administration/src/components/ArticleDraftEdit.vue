@@ -30,9 +30,8 @@
           }
           vm.$store.commit('title', '编辑文章：' + vm.title + ' - 文章 - Notadd Administration')
         })
-      }, function (response) {
+      }).catch(() => {
         Core.instance.store.commit('progress', 'fail')
-        window.alert('初始化失败！')
       })
     },
     components () {
@@ -92,8 +91,6 @@
             text: response.data.message
           })
           _this.$router.push('/content/article/all')
-        }, function (response) {
-          console.log(response.data)
         })
       }
     }
