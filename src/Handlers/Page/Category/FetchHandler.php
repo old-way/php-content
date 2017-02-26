@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Page\Category;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\PageCategory;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
@@ -24,16 +22,12 @@ class FetchHandler extends DataHandler
      *
      * @param \Illuminate\Container\Container     $container
      * @param \Notadd\Content\Models\PageCategory $category
-     * @param \Illuminate\Http\Request            $request
-     * @param \Illuminate\Translation\Translator  $translator
      */
     public function __construct(
         Container $container,
-        PageCategory $category,
-        Request $request,
-        Translator $translator
+        PageCategory $category
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $category;
     }
 

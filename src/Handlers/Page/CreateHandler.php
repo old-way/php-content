@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -27,18 +25,14 @@ class CreateHandler extends SetHandler
     /**
      * PageCreatorHandler constructor.
      *
-     * @param \Illuminate\Container\Container    $container
-     * @param \Notadd\Content\Models\Page        $page
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Container\Container $container
+     * @param \Notadd\Content\Models\Page     $page
      */
     public function __construct(
         Container $container,
-        Page $page,
-        Request $request,
-        Translator $translator
+        Page $page
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $page;
     }
 
@@ -84,13 +78,13 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->model = $this->model->create([
-            'alias' => $this->request->input('alias'),
+            'alias'       => $this->request->input('alias'),
             'category_id' => $this->request->input('category_id'),
-            'content' => $this->request->input('content'),
-            'enabled' => $this->request->input('enabled'),
-            'parent_id' => 0,
-            'title' => $this->request->input('title'),
-            'order_id' => 0,
+            'content'     => $this->request->input('content'),
+            'enabled'     => $this->request->input('enabled'),
+            'parent_id'   => 0,
+            'title'       => $this->request->input('title'),
+            'order_id'    => 0,
         ]);
         $this->id = $this->model->getAttribute('id');
 

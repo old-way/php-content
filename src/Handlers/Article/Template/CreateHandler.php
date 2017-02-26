@@ -9,11 +9,8 @@
 namespace Notadd\Content\Handlers\Article\Template;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\ArticleTemplate;
-use Notadd\Foundation\Debug\Handlers\SetHandler;
-use Notadd\Foundation\Setting\Contracts\SettingsRepository;
+use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
  * Class ArticleTemplateCreateHandler.
@@ -28,20 +25,14 @@ class CreateHandler extends SetHandler
     /**
      * ArticleTemplateCreatorHandler constructor.
      *
-     * @param \Notadd\Content\Models\ArticleTemplate                  $articleTemplate
-     * @param \Illuminate\Container\Container                         $container
-     * @param \Illuminate\Http\Request                                $request
-     * @param \Notadd\Foundation\Setting\Contracts\SettingsRepository $settings
-     * @param \Illuminate\Translation\Translator                      $translator
+     * @param \Notadd\Content\Models\ArticleTemplate $articleTemplate
+     * @param \Illuminate\Container\Container        $container
      */
     public function __construct(
         ArticleTemplate $articleTemplate,
-        Container $container,
-        Request $request,
-        SettingsRepository $settings,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $settings, $translator);
+        parent::__construct($container);
         $this->model = $articleTemplate;
     }
 

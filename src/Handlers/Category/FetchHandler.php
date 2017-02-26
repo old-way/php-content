@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
@@ -22,18 +20,14 @@ class FetchHandler extends DataHandler
     /**
      * CategoryFinderHandler constructor.
      *
-     * @param \Notadd\Content\Models\Category    $category
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Notadd\Content\Models\Category $category
+     * @param \Illuminate\Container\Container $container
      */
     public function __construct(
         Category $category,
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $category;
     }
 
@@ -57,13 +51,16 @@ class FetchHandler extends DataHandler
         if ($this->request->input('with-children')) {
             $categories = $this->model->newQuery()->orderBy('order_id', 'asc')->get();
             $categories->transform(function (Category $category) {
-                $children = $this->model->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
+                $children = $this->model->newQuery()->where('parent_id',
+                    $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
                 $children->count() && $category->setAttribute('children', $children);
+
                 return $category;
             });
+
             return $categories;
         }
-        if($this->hasFilter) {
+        if ($this->hasFilter) {
             return $this->model->get();
         } else {
             return $this->model->structure();

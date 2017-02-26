@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -22,16 +20,12 @@ class EditHandler extends SetHandler
     /**
      * PageEditorHandler constructor.
      *
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Container\Container $container
      */
     public function __construct(
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = new Page();
     }
 
@@ -66,13 +60,13 @@ class EditHandler extends SetHandler
     {
         $page = $this->model->newQuery()->find($this->request->input('id'));
         $page->update([
-            'alias' => $this->request->input('alias'),
+            'alias'       => $this->request->input('alias'),
             'category_id' => $this->request->input('category_id'),
-            'content' => $this->request->input('content'),
-            'enabled' => $this->request->input('enabled'),
-            'parent_id' => 0,
-            'title' => $this->request->input('title'),
-            'order_id' => 0,
+            'content'     => $this->request->input('content'),
+            'enabled'     => $this->request->input('enabled'),
+            'parent_id'   => 0,
+            'title'       => $this->request->input('title'),
+            'order_id'    => 0,
         ]);
 
         return true;

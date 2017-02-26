@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Page\Template;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\PageTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -24,16 +22,12 @@ class EditHandler extends SetHandler
      *
      * @param \Illuminate\Container\Container     $container
      * @param \Notadd\Content\Models\PageTemplate $pageTemplate
-     * @param \Illuminate\Http\Request            $request
-     * @param \Illuminate\Translation\Translator  $translator
      */
     public function __construct(
         Container $container,
-        PageTemplate $pageTemplate,
-        Request $request,
-        Translator $translator
+        PageTemplate $pageTemplate
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $pageTemplate;
     }
 

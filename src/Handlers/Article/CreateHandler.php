@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Article;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -27,18 +25,14 @@ class CreateHandler extends SetHandler
     /**
      * ArticleCreatorHandler constructor.
      *
-     * @param \Notadd\Content\Models\Article     $article
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Notadd\Content\Models\Article  $article
+     * @param \Illuminate\Container\Container $container
      */
     public function __construct(
         Article $article,
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $article;
     }
 
@@ -84,15 +78,15 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->model = $this->model->create([
-            'category_id' => $this->request->input('category_id'),
-            'content' => $this->request->input('content'),
-            'is_hidden' => $this->request->input('hidden'),
-            'is_sticky' => $this->request->input('sticky'),
+            'category_id'   => $this->request->input('category_id'),
+            'content'       => $this->request->input('content'),
+            'is_hidden'     => $this->request->input('hidden'),
+            'is_sticky'     => $this->request->input('sticky'),
             'source_author' => $this->request->input('source_author'),
-            'source_link' => $this->request->input('source_link'),
-            'description' => $this->request->input('summary'),
-            'keyword' => $this->request->input('tags'),
-            'title' => $this->request->input('title'),
+            'source_link'   => $this->request->input('source_link'),
+            'description'   => $this->request->input('summary'),
+            'keyword'       => $this->request->input('tags'),
+            'title'         => $this->request->input('title'),
         ]);
         $this->id = $this->model->getAttribute('id');
 

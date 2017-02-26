@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Article\Draft;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\ArticleDraft;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -29,16 +27,12 @@ class CreateHandler extends SetHandler
      *
      * @param \Notadd\Content\Models\ArticleDraft $article
      * @param \Illuminate\Container\Container     $container
-     * @param \Illuminate\Http\Request            $request
-     * @param \Illuminate\Translation\Translator  $translator
      */
     public function __construct(
         ArticleDraft $article,
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $article;
     }
 

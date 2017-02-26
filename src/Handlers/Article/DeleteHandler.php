@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Article;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -27,18 +25,14 @@ class DeleteHandler extends SetHandler
     /**
      * ArticleDeleterHandler constructor.
      *
-     * @param \Notadd\Content\Models\Article     $article
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Notadd\Content\Models\Article  $article
+     * @param \Illuminate\Container\Container $container
      */
     public function __construct(
         Article $article,
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $article;
     }
 
@@ -63,7 +57,8 @@ class DeleteHandler extends SetHandler
         $pagination = $this->request->input('pagination') ?: 10;
         $restore = $this->request->input('restore');
         if ($restore || $force) {
-            $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at', 'desc')->paginate($pagination);
+            $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at',
+                'desc')->paginate($pagination);
         } else {
             $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
         }
@@ -80,11 +75,11 @@ class DeleteHandler extends SetHandler
     {
         if ($this->request->input('force')) {
             return [
-                $this->translator->trans('content::article.force.fail')
+                $this->translator->trans('content::article.force.fail'),
             ];
         } elseif ($this->request->input('restore')) {
             return [
-                $this->translator->trans('content::article.force.fail')
+                $this->translator->trans('content::article.force.fail'),
             ];
         } else {
             return [
@@ -126,11 +121,11 @@ class DeleteHandler extends SetHandler
     {
         if ($this->request->input('force')) {
             return [
-                $this->translator->trans('content::article.force.success')
+                $this->translator->trans('content::article.force.success'),
             ];
         } elseif ($this->request->input('restore')) {
             return [
-                $this->translator->trans('content::article.force.success')
+                $this->translator->trans('content::article.force.success'),
             ];
         } else {
             return [
@@ -151,15 +146,15 @@ class DeleteHandler extends SetHandler
 
         return $response->withParams([
             'pagination' => [
-                'total' => $this->pagination->total(),
-                'per_page' => $this->pagination->perPage(),
-                'current_page' => $this->pagination->currentPage(),
-                'last_page' => $this->pagination->lastPage(),
+                'total'         => $this->pagination->total(),
+                'per_page'      => $this->pagination->perPage(),
+                'current_page'  => $this->pagination->currentPage(),
+                'last_page'     => $this->pagination->lastPage(),
                 'next_page_url' => $this->pagination->nextPageUrl(),
                 'prev_page_url' => $this->pagination->previousPageUrl(),
-                'from' => $this->pagination->firstItem(),
-                'to' => $this->pagination->lastItem(),
-            ]
+                'from'          => $this->pagination->firstItem(),
+                'to'            => $this->pagination->lastItem(),
+            ],
         ]);
     }
 }

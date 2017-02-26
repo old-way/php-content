@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Page\Type;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\PageType;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
@@ -22,18 +20,14 @@ class FetchHandler extends DataHandler
     /**
      * PageTypeFinderHandler constructor.
      *
-     * @param \Illuminate\Container\Container    $container
-     * @param \Notadd\Content\Models\PageType    $pageType
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Container\Container $container
+     * @param \Notadd\Content\Models\PageType $pageType
      */
     public function __construct(
         Container $container,
-        PageType $pageType,
-        Request $request,
-        Translator $translator
+        PageType $pageType
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $pageType;
     }
 
@@ -54,7 +48,7 @@ class FetchHandler extends DataHandler
      */
     public function data()
     {
-        if($this->hasFilter) {
+        if ($this->hasFilter) {
             return $this->model->get();
         } else {
             return $this->model->all();

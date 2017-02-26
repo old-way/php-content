@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Article;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Article;
 use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
@@ -28,18 +26,14 @@ class FetchHandler extends DataHandler
     /**
      * ArticleFinderHandler constructor.
      *
-     * @param \Notadd\Content\Models\Article     $article
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Notadd\Content\Models\Article  $article
+     * @param \Illuminate\Container\Container $container
      */
     public function __construct(
         Article $article,
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $article;
     }
 
@@ -64,7 +58,9 @@ class FetchHandler extends DataHandler
         if ($id = $this->request->input('category')) {
             $categories = collect([(int)$id]);
             $this->container->make('log')->info('has category', $categories->toArray());
-            (new Category())->newQuery()->where('parent_id', $id)->get()->each(function (Category $category) use ($categories) {
+            (new Category())->newQuery()->where('parent_id', $id)->get()->each(function (Category $category) use (
+                $categories
+            ) {
                 $categories->push($category->getAttribute('id'));
                 $children = (new Category())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
                 $children->count() && $children->each(function (Category $category) use ($categories) {
@@ -78,15 +74,19 @@ class FetchHandler extends DataHandler
             $this->container->make('log')->info('get categories', $categories->toArray());
             $categories = $categories->unique();
             $this->container->make('log')->info('get categories', $categories->toArray());
-            $this->pagination = $this->model->newQuery()->whereIn('category_id', $categories->toArray())->orderBy('created_at', 'desc')->paginate($pagination);
+            $this->pagination = $this->model->newQuery()->whereIn('category_id',
+                $categories->toArray())->orderBy('created_at', 'desc')->paginate($pagination);
         } else {
             $search = $this->request->input('search');
             $trashed = $this->request->input('trashed');
-            if($trashed) {
-                $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at', 'desc')->paginate($pagination);
+            if ($trashed) {
+                $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at',
+                    'desc')->paginate($pagination);
             } else {
-                if($search) {
-                    $this->pagination = $this->model->newQuery()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
+                if ($search) {
+                    $this->pagination = $this->model->newQuery()->where('title', 'like',
+                        '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at',
+                        'desc')->paginate($pagination);
                 } else {
                     $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
                 }
@@ -132,15 +132,15 @@ class FetchHandler extends DataHandler
 
         return $response->withParams([
             'pagination' => [
-                'total' => $this->pagination->total(),
-                'per_page' => $this->pagination->perPage(),
-                'current_page' => $this->pagination->currentPage(),
-                'last_page' => $this->pagination->lastPage(),
+                'total'         => $this->pagination->total(),
+                'per_page'      => $this->pagination->perPage(),
+                'current_page'  => $this->pagination->currentPage(),
+                'last_page'     => $this->pagination->lastPage(),
                 'next_page_url' => $this->pagination->nextPageUrl(),
                 'prev_page_url' => $this->pagination->previousPageUrl(),
-                'from' => $this->pagination->firstItem(),
-                'to' => $this->pagination->lastItem(),
-            ]
+                'from'          => $this->pagination->firstItem(),
+                'to'            => $this->pagination->lastItem(),
+            ],
         ]);
     }
 }

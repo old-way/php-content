@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -22,16 +20,12 @@ class EditHandler extends SetHandler
     /**
      * CategoryEditorHandler constructor.
      *
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Container\Container $container
      */
     public function __construct(
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = new Category();
     }
 
@@ -76,18 +70,18 @@ class EditHandler extends SetHandler
     {
         $category = $this->model->newQuery()->find($this->request->input('id'));
         $category->update([
-            'title' => $this->request->input('name'),
-            'alias' => $this->request->input('alias'),
-            'description' => $this->request->input('description'),
-            'type' => $this->request->input('type') ?: 'normal',
+            'title'            => $this->request->input('name'),
+            'alias'            => $this->request->input('alias'),
+            'description'      => $this->request->input('description'),
+            'type'             => $this->request->input('type') ?: 'normal',
             'background_color' => $this->request->input('background_color'),
-            'seo_title' => $this->request->input('seo_title'),
-            'seo_keyword' => $this->request->input('seo_keyword'),
-            'seo_description' => $this->request->input('seo_description'),
+            'seo_title'        => $this->request->input('seo_title'),
+            'seo_keyword'      => $this->request->input('seo_keyword'),
+            'seo_description'  => $this->request->input('seo_description'),
             'background_image' => $this->request->input('background_image'),
-            'top_image' => $this->request->input('top_image'),
-            'pagination' => $this->request->input('pagination'),
-            'enabled' => $this->request->input('enabled'),
+            'top_image'        => $this->request->input('top_image'),
+            'pagination'       => $this->request->input('pagination'),
+            'enabled'          => $this->request->input('enabled'),
         ]);
 
         return true;

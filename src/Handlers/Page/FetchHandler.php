@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Page;
 use Notadd\Content\Models\PageCategory;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
@@ -28,18 +26,14 @@ class FetchHandler extends DataHandler
     /**
      * PageFinderHandler constructor.
      *
-     * @param \Illuminate\Container\Container    $container
-     * @param \Notadd\Content\Models\Page        $page
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Container\Container $container
+     * @param \Notadd\Content\Models\Page     $page
      */
     public function __construct(
         Container $container,
-        Page $page,
-        Request $request,
-        Translator $translator
+        Page $page
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $page;
     }
 
@@ -64,12 +58,16 @@ class FetchHandler extends DataHandler
         if ($id = $this->request->input('category')) {
             $categories = collect([(int)$id]);
             $this->container->make('log')->info('has category', $categories->toArray());
-            (new PageCategory())->newQuery()->where('parent_id', $id)->get()->each(function (PageCategory $category) use ($categories) {
+            (new PageCategory())->newQuery()->where('parent_id', $id)->get()->each(function (PageCategory $category) use
+            (
+                $categories
+            ) {
                 $categories->push($category->getAttribute('id'));
                 $children = (new PageCategory())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
                 $children->count() && $children->each(function (PageCategory $category) use ($categories) {
                     $categories->push($category->getAttribute('id'));
-                    $children = (new PageCategory())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+                    $children = (new PageCategory())->newQuery()->where('parent_id',
+                        $category->getAttribute('id'))->get();
                     $children->count() && $children->each(function (PageCategory $category) use ($categories) {
                         $categories->push($category->getAttribute('id'));
                     });
@@ -78,11 +76,14 @@ class FetchHandler extends DataHandler
             $this->container->make('log')->info('get categories', $categories->toArray());
             $categories = $categories->unique();
             $this->container->make('log')->info('get categories', $categories->toArray());
-            $this->pagination = $this->model->newQuery()->whereIn('category_id', $categories->toArray())->orderBy('created_at', 'desc')->paginate($pagination);
+            $this->pagination = $this->model->newQuery()->whereIn('category_id',
+                $categories->toArray())->orderBy('created_at', 'desc')->paginate($pagination);
         } else {
             $search = $this->request->input('search');
-            if($search) {
-                $this->pagination = $this->model->newQuery()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
+            if ($search) {
+                $this->pagination = $this->model->newQuery()->where('title', 'like',
+                    '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at',
+                    'desc')->paginate($pagination);
             } else {
                 $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
             }
@@ -127,15 +128,15 @@ class FetchHandler extends DataHandler
 
         return $response->withParams([
             'pagination' => [
-                'total' => $this->pagination->total(),
-                'per_page' => $this->pagination->perPage(),
-                'current_page' => $this->pagination->currentPage(),
-                'last_page' => $this->pagination->lastPage(),
+                'total'         => $this->pagination->total(),
+                'per_page'      => $this->pagination->perPage(),
+                'current_page'  => $this->pagination->currentPage(),
+                'last_page'     => $this->pagination->lastPage(),
                 'next_page_url' => $this->pagination->nextPageUrl(),
                 'prev_page_url' => $this->pagination->previousPageUrl(),
-                'from' => $this->pagination->firstItem(),
-                'to' => $this->pagination->lastItem(),
-            ]
+                'from'          => $this->pagination->firstItem(),
+                'to'            => $this->pagination->lastItem(),
+            ],
         ]);
     }
 }

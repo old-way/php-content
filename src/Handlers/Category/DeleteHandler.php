@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -22,16 +20,12 @@ class DeleteHandler extends SetHandler
     /**
      * CategoryDeleterHandler constructor.
      *
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Illuminate\Container\Container $container
      */
     public function __construct(
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = new Category();
     }
 

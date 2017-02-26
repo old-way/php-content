@@ -258,93 +258,95 @@
             </div>
         </div>
         <div class="col-md-4">
-            <div class="box box-solid">
-                <div class="box-body article-extend">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">自动保存草稿</label>
-                            <div class="col-md-8">
-                                <div class="btn-group btn-switch">
-                                    <label class="btn btn-primary" :class="{ active: auto === '1' }">
-                                        <input type="radio" v-model="auto" value="1"> 开启
-                                    </label>
-                                    <label class="btn btn-primary" :class="{ active: auto === '0' }">
-                                        <input type="radio" v-model="auto" value="0"> 关闭
-                                    </label>
+            <div>
+                <div class="box box-solid">
+                    <div class="box-body article-extend">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">自动保存草稿</label>
+                                <div class="col-md-8">
+                                    <div class="btn-group btn-switch">
+                                        <label class="btn btn-primary" :class="{ active: auto === '1' }">
+                                            <input type="radio" v-model="auto" value="1"> 开启
+                                        </label>
+                                        <label class="btn btn-primary" :class="{ active: auto === '0' }">
+                                            <input type="radio" v-model="auto" value="0"> 关闭
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="form-group" style="color: #999999">10分钟保存一次，更改设置后，下次生效</div>
                         </div>
-                        <div class="form-group" style="color: #999999">10分钟保存一次，更改设置后，下次生效</div>
                     </div>
                 </div>
-            </div>
-            <div class="box box-solid">
-                <div class="box-body article-extend">
-                    <div class="form-horizontal">
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">分类</label>
-                            <div class="col-md-8">
-                                <button class="btn btn-file btn-primary" @click="categorySelect">
-                                    <i class="fa fa-inbox"></i> {{ category.text }}
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">上传缩略图</label>
-                            <div class="col-md-8">
-                                <button class="btn btn-file btn-primary">
-                                    <i class="fa fa-image"></i> 上传图片
-                                    <input type="file" @change="imageSelected">
-                                </button>
-                                <img class="img-responsive" :src="image" ref="image" v-show="image">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">置顶</label>
-                            <div class="col-md-8">
-                                <div class="btn-group btn-switch">
-                                    <label class="btn btn-primary" :class="{ active: hidden === '1' }">
-                                        <input type="radio" v-model="hidden" value="1"> 开启
-                                    </label>
-                                    <label class="btn btn-primary" :class="{ active: hidden === '0' }">
-                                        <input type="radio" v-model="hidden" value="0"> 关闭
-                                    </label>
+                <div class="box box-solid">
+                    <div class="box-body article-extend">
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">分类</label>
+                                <div class="col-md-8">
+                                    <button class="btn btn-file btn-primary" @click="categorySelect">
+                                        <i class="fa fa-inbox"></i> {{ category.text }}
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">隐藏</label>
-                            <div class="col-md-8">
-                                <div class="btn-group btn-switch">
-                                    <label class="btn btn-primary" :class="{ active: sticky === '1' }">
-                                        <input type="radio" v-model="sticky" value="1"> 开启
-                                    </label>
-                                    <label class="btn btn-primary" :class="{ active: sticky === '0' }">
-                                        <input type="radio" v-model="sticky" value="0"> 关闭
-                                    </label>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">上传缩略图</label>
+                                <div class="col-md-8">
+                                    <button class="btn btn-file btn-primary">
+                                        <i class="fa fa-image"></i> 上传图片
+                                        <input type="file" @change="imageSelected">
+                                    </button>
+                                    <img class="img-responsive" :src="image" ref="image" v-show="image">
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">发布时间</label>
-                            <div class="col-md-8">
-                                <date-picker format="yyyy-MM-dd" language="zh" input-class="form-control"
-                                             v-model="date"></date-picker>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">置顶</label>
+                                <div class="col-md-8">
+                                    <div class="btn-group btn-switch">
+                                        <label class="btn btn-primary" :class="{ active: hidden === '1' }">
+                                            <input type="radio" v-model="hidden" value="1"> 开启
+                                        </label>
+                                        <label class="btn btn-primary" :class="{ active: hidden === '0' }">
+                                            <input type="radio" v-model="hidden" value="0"> 关闭
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <tags placeholder="添加标签" v-model="tags" :tags="tags"></tags>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">来源</label>
-                            <div class="col-md-8">
-                                <input class="form-control" v-model="source.author">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">隐藏</label>
+                                <div class="col-md-8">
+                                    <div class="btn-group btn-switch">
+                                        <label class="btn btn-primary" :class="{ active: sticky === '1' }">
+                                            <input type="radio" v-model="sticky" value="1"> 开启
+                                        </label>
+                                        <label class="btn btn-primary" :class="{ active: sticky === '0' }">
+                                            <input type="radio" v-model="sticky" value="0"> 关闭
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-4 control-label">来源链接</label>
-                            <div class="col-md-8">
-                                <input class="form-control" v-model="source.link">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">发布时间</label>
+                                <div class="col-md-8">
+                                    <date-picker format="yyyy-MM-dd" language="zh" input-class="form-control"
+                                                 v-model="date"></date-picker>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <tags placeholder="添加标签" v-model="tags" :tags="tags"></tags>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">来源</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" v-model="source.author">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">来源链接</label>
+                                <div class="col-md-8">
+                                    <input class="form-control" v-model="source.link">
+                                </div>
                             </div>
                         </div>
                     </div>

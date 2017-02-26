@@ -9,8 +9,6 @@
 namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
-use Illuminate\Http\Request;
-use Illuminate\Translation\Translator;
 use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -22,18 +20,14 @@ class SortHandler extends SetHandler
     /**
      * SortHandler constructor.
      *
-     * @param \Notadd\Content\Models\Category    $category
-     * @param \Illuminate\Container\Container    $container
-     * @param \Illuminate\Http\Request           $request
-     * @param \Illuminate\Translation\Translator $translator
+     * @param \Notadd\Content\Models\Category $category
+     * @param \Illuminate\Container\Container $container
      */
     public function __construct(
         Category $category,
-        Container $container,
-        Request $request,
-        Translator $translator
+        Container $container
     ) {
-        parent::__construct($container, $request, $translator);
+        parent::__construct($container);
         $this->model = $category;
     }
 
@@ -82,7 +76,7 @@ class SortHandler extends SetHandler
             $category = $this->model->newQuery()->find($id);
             $category->update([
                 'parent_id' => 0,
-                'order_id' => $key,
+                'order_id'  => $key,
             ]);
             $children = collect($item['children']);
             if ($children->count()) {
@@ -92,7 +86,7 @@ class SortHandler extends SetHandler
                     $category = $this->model->newQuery()->find($id);
                     $category->update([
                         'parent_id' => $parentId,
-                        'order_id' => $key,
+                        'order_id'  => $key,
                     ]);
                     $children = collect($item['children']);
                     if ($children->count()) {
@@ -102,7 +96,7 @@ class SortHandler extends SetHandler
                             $category = $this->model->newQuery()->find($id);
                             $category->update([
                                 'parent_id' => $parentId,
-                                'order_id' => $key,
+                                'order_id'  => $key,
                             ]);
                         });
                     }
