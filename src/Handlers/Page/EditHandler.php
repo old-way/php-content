@@ -67,12 +67,12 @@ class EditHandler extends SetHandler
         $page = $this->model->newQuery()->find($this->request->input('id'));
         $page->update([
             'alias'       => $this->request->input('alias'),
-            'category_id' => $this->request->input('category_id'),
+            'category_id' => $this->request->input('category_id', 0),
             'content'     => $this->request->input('content'),
             'enabled'     => $this->request->input('enabled'),
-            'parent_id'   => 0,
+            'order_id'    => $this->request->input('order_id', 0),
+            'parent_id'   => $this->request->input('parent_id', 0),
             'title'       => $this->request->input('title'),
-            'order_id'    => 0,
         ]);
 
         return true;
