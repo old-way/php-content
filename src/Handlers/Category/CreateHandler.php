@@ -74,7 +74,7 @@ class CreateHandler extends SetHandler
     {
         $this->validate($this->request, [
             'title' => 'required',
-            'alias' => 'required|alpha_dash',
+            'alias' => 'required|alpha_dash|unique:categories',
         ]);
         $this->model->create([
             'alias'            => $this->request->input('alias'),

@@ -65,23 +65,29 @@ class EditHandler extends SetHandler
      * Execute Handler.
      *
      * @return bool
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function execute()
     {
+        $this->validate($this->request, [
+            'title' => 'required',
+            'alias' => 'required|alpha_dash|unique:categories,' . $this->request->input('id'),
+        ]);
         $category = $this->model->newQuery()->find($this->request->input('id'));
         $category->update([
-            'title'            => $this->request->input('name'),
             'alias'            => $this->request->input('alias'),
-            'description'      => $this->request->input('description'),
-            'type'             => $this->request->input('type') ?: 'normal',
             'background_color' => $this->request->input('background_color'),
+            'background_image' => $this->request->input('background_image'),
+            'description'      => $this->request->input('description'),
+            'enabled'          => $this->request->input('enabled'),
+            'pagination'       => $this->request->input('pagination'),
             'seo_title'        => $this->request->input('seo_title'),
             'seo_keyword'      => $this->request->input('seo_keyword'),
             'seo_description'  => $this->request->input('seo_description'),
-            'background_image' => $this->request->input('background_image'),
             'top_image'        => $this->request->input('top_image'),
-            'pagination'       => $this->request->input('pagination'),
-            'enabled'          => $this->request->input('enabled'),
+            'title'            => $this->request->input('name'),
+            'type'             => $this->request->input('type') ?: 'normal',
         ]);
 
         return true;

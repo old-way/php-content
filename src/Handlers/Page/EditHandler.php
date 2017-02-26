@@ -55,9 +55,15 @@ class EditHandler extends SetHandler
      * Execute Handler.
      *
      * @return bool
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function execute()
     {
+        $this->validate($this->request, [
+            'title' => 'required',
+            'alias' => 'required|alpha_dash|unique:pages,' . $this->request->input('id'),
+        ]);
         $page = $this->model->newQuery()->find($this->request->input('id'));
         $page->update([
             'alias'       => $this->request->input('alias'),

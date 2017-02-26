@@ -57,9 +57,15 @@ class EditHandler extends SetHandler
      * Execute Handler.
      *
      * @return bool
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function execute()
     {
+        $this->validate($this->request, [
+            'content' => 'required',
+            'title' => 'required',
+        ]);
         $article = $this->model->newQuery()->find($this->request->input('id'));
         $article->update([
             'category_id'   => $this->request->input('category_id'),
