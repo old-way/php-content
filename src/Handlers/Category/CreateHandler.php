@@ -67,24 +67,30 @@ class CreateHandler extends SetHandler
      * Execute Handler.
      *
      * @return bool
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function execute()
     {
+        $this->validate($this->request, [
+            'title' => 'required',
+            'alias' => 'required|alpha_dash',
+        ]);
         $this->model->create([
-            'title'            => $this->request->input('name'),
             'alias'            => $this->request->input('alias'),
-            'description'      => $this->request->input('description'),
-            'type'             => $this->request->input('type') ?: 'normal',
             'background_color' => $this->request->input('background_color'),
+            'background_image' => $this->request->input('background_image'),
+            'description'      => $this->request->input('description'),
+            'enabled'          => $this->request->input('enabled', 1),
+            'order_id'         => $this->request->input('order_id', 0),
+            'pagination'       => $this->request->input('pagination'),
+            'parent_id'        => $this->request->input('parent_id', 0),
             'seo_title'        => $this->request->input('seo_title'),
             'seo_keyword'      => $this->request->input('seo_keyword'),
             'seo_description'  => $this->request->input('seo_description'),
-            'background_image' => $this->request->input('background_image'),
+            'title'            => $this->request->input('name'),
             'top_image'        => $this->request->input('top_image'),
-            'pagination'       => $this->request->input('pagination'),
-            'parent_id'        => 0,
-            'enabled'          => 1,
-            'order_id'         => 0,
+            'type'             => $this->request->input('type') ?: 'normal',
         ]);
 
         return true;
