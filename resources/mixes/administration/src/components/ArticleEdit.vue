@@ -172,6 +172,10 @@
         width: 16px;
     }
 
+    .list-group > .list-group-item > .list-group-item-content.checked {
+        background: #dfdfdf;
+    }
+
     .list-group > .list-group-item > .list-group-item-content:hover > em {
         opacity: 0;
     }
@@ -294,23 +298,22 @@
             </div>
             <div slot="body">
                 <ul class="list-group">
-                    <li class="list-group-item clear-fix" v-for="item in category.list" @click="categorySelectDone(item)">
-                        <div class="list-group-item-content">
+                    <li class="list-group-item clear-fix" v-for="item in category.list">
+                        <div class="list-group-item-content" :class="{ 'checked': category.id === item.id }" @click="categorySelectDone(item)">
                             <em :style="{ background: item.background_color }"></em>
                             <span>{{ item.title }}</span>
                             <i class="handle"></i>
                         </div>
                         <ol class="list-group">
-                            <li class="list-group-item clear-fix" v-for="sub in item.children" @click="categorySelectDone(item)">
-                                <div class="list-group-item-content">
+                            <li class="list-group-item clear-fix" v-for="sub in item.children">
+                                <div class="list-group-item-content" :class="{ 'checked': category.id === sub.id }" @click="categorySelectDone(sub)">
                                     <em :style="{ background: sub.background_color }"></em>
                                     <span>{{ sub.title }}</span>
                                     <i class="handle"></i>
                                 </div>
                                 <ol class="list-group">
-                                    <li class="list-group-item clear-fix" v-for="child in sub.children"
-                                        @click="categorySelectDone(item)">
-                                        <div class="list-group-item-content">
+                                    <li class="list-group-item clear-fix" v-for="child in sub.children">
+                                        <div class="list-group-item-content" :class="{ 'checked': category.id === child.id }" @click="categorySelectDone(child)">
                                             <em :style="{ background: child.background_color }"></em>
                                             <span>{{ child.title }}</span>
                                             <i class="handle"></i>
