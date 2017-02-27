@@ -30,9 +30,7 @@ class TypeController extends Controller
      */
     public function create(CreateHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -45,9 +43,7 @@ class TypeController extends Controller
      */
     public function delete(DeleteHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -60,9 +56,7 @@ class TypeController extends Controller
      */
     public function edit(EditHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -75,9 +69,7 @@ class TypeController extends Controller
      */
     public function fetch(FetchHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -90,8 +82,6 @@ class TypeController extends Controller
      */
     public function find(FindHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 }

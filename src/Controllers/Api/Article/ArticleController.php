@@ -44,9 +44,7 @@ class ArticleController extends Controller
      */
     public function create(CreateHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -59,9 +57,7 @@ class ArticleController extends Controller
      */
     public function delete(DeleteHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -74,9 +70,7 @@ class ArticleController extends Controller
      */
     public function edit(EditHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -89,9 +83,7 @@ class ArticleController extends Controller
      */
     public function fetch(FetchHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -99,13 +91,11 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\FindHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
     public function find(FindHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 }

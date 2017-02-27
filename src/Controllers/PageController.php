@@ -28,9 +28,7 @@ class PageController extends Controller
      */
     public function create(CreateHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -66,8 +64,6 @@ class PageController extends Controller
      */
     public function show(FindHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 }

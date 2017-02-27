@@ -10,7 +10,6 @@ namespace Notadd\Content\Controllers;
 
 use Notadd\Content\Handlers\Article\CreateHandler;
 use Notadd\Content\Handlers\Article\DeleteHandler;
-use Notadd\Content\Handlers\Article\FindHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -28,9 +27,7 @@ class ArticleController extends Controller
      */
     public function create(CreateHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
@@ -53,9 +50,7 @@ class ArticleController extends Controller
      */
     public function destroy(DeleteHandler $handler)
     {
-        $response = $handler->toResponse();
-
-        return $response->generateHttpResponse();
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
