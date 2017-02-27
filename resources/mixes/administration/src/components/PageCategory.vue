@@ -83,8 +83,7 @@
         if (_this.modal.pattern === 'edit') {
           _this.$http.post(window.api + '/page/category/delete', _this.modal).then(function (response) {
             _this.items = response.data.data
-            _this.$refs.modal.close()
-          }).catch(() => {
+          }).finally(() => {
             _this.$refs.modal.close()
           })
         }
@@ -98,26 +97,24 @@
         if (_this.modal.pattern === 'create') {
           _this.$http.post(window.api + '/page/category/create', _this.modal).then(function (response) {
             _this.items = response.data.data
-            _this.$refs.modal.close()
             _this.$store.commit('message', {
               show: true,
               type: 'notice',
               text: '创建分类成功！'
             })
-          }).catch(() => {
+          }).finally(() => {
             _this.$refs.modal.close()
           })
         }
         if (_this.modal.pattern === 'edit') {
           _this.$http.post(window.api + '/page/category/edit', _this.modal).then(function (response) {
             _this.items = response.data.data
-            _this.$refs.modal.close()
             _this.$store.commit('message', {
               show: true,
               type: 'notice',
               text: '编辑分类成功！'
             })
-          }).catch(() => {
+          }).finally(() => {
             _this.$refs.modal.close()
           })
         }
