@@ -13,12 +13,12 @@ use Notadd\Content\Models\CategoryTemplate;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class CategoryTemplateFetcherHandler.
+ * Class FetchHandler.
  */
 class FetchHandler extends DataHandler
 {
     /**
-     * CategoryTemplateFinderHandler constructor.
+     * FetchHandler constructor.
      *
      * @param \Notadd\Content\Models\CategoryTemplate $categoryTemplate
      * @param \Illuminate\Container\Container         $container

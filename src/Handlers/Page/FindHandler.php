@@ -13,12 +13,12 @@ use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class PageFindHandler.
+ * Class FindHandler.
  */
 class FindHandler extends DataHandler
 {
     /**
-     * PageFinderHandler constructor.
+     * FindHandler constructor.
      *
      * @param \Illuminate\Container\Container $container
      * @param \Notadd\Content\Models\Page     $page

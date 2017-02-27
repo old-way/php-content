@@ -14,7 +14,7 @@ use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class ArticleFetcherHandler.
+ * Class FetchHandler.
  */
 class FetchHandler extends DataHandler
 {
@@ -24,7 +24,7 @@ class FetchHandler extends DataHandler
     protected $pagination;
 
     /**
-     * ArticleFinderHandler constructor.
+     * FetchHandler constructor.
      *
      * @param \Notadd\Content\Models\Article  $article
      * @param \Illuminate\Container\Container $container

@@ -40,7 +40,7 @@ class CategoryManager
     protected $type;
 
     /**
-     * Article constructor.
+     * CategoryManager constructor.
      *
      * @param \Illuminate\Container\Container $container
      * @param \Illuminate\Events\Dispatcher   $events

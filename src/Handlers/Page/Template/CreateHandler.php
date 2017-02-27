@@ -13,7 +13,7 @@ use Notadd\Content\Models\PageTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class PageTemplateCreateHandler.
+ * Class CreateHandler.
  */
 class CreateHandler extends SetHandler
 {
@@ -23,7 +23,7 @@ class CreateHandler extends SetHandler
     protected $id;
 
     /**
-     * PageTemplateCreatorHandler constructor.
+     * CreateHandler constructor.
      *
      * @param \Illuminate\Container\Container     $container
      * @param \Notadd\Content\Models\PageTemplate $pageTemplate

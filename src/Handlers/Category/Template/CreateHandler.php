@@ -13,7 +13,7 @@ use Notadd\Content\Models\CategoryTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryTemplateCreateHandler.
+ * Class CreateHandler.
  */
 class CreateHandler extends SetHandler
 {
@@ -23,7 +23,7 @@ class CreateHandler extends SetHandler
     protected $id;
 
     /**
-     * CategoryTemplateCreatorHandler constructor.
+     * CreateHandler constructor.
      *
      * @param \Notadd\Content\Models\CategoryTemplate $categoryTemplate
      * @param \Illuminate\Container\Container         $container

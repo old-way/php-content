@@ -13,7 +13,7 @@ use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class ArticleDeleteHandler.
+ * Class DeleteHandler.
  */
 class DeleteHandler extends SetHandler
 {
@@ -23,7 +23,7 @@ class DeleteHandler extends SetHandler
     protected $pagination;
 
     /**
-     * ArticleDeleterHandler constructor.
+     * DeleteHandler constructor.
      *
      * @param \Notadd\Content\Models\Article  $article
      * @param \Illuminate\Container\Container $container

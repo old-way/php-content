@@ -13,12 +13,12 @@ use Notadd\Content\Models\CategoryTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryTemplateEditHandler.
+ * Class EditHandler.
  */
 class EditHandler extends SetHandler
 {
     /**
-     * CategoryTemplateEditorHandler constructor.
+     * EditHandler constructor.
      *
      * @param \Notadd\Content\Models\CategoryTemplate $categoryTemplate
      * @param \Illuminate\Container\Container         $container

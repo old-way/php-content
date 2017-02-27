@@ -23,7 +23,7 @@ class FetchHandler extends DataHandler
     protected $pagination;
 
     /**
-     * ArticleFinderHandler constructor.
+     * FetchHandler constructor.
      *
      * @param \Notadd\Content\Models\ArticleDraft $article
      * @param \Illuminate\Container\Container     $container

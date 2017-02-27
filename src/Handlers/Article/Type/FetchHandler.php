@@ -13,12 +13,12 @@ use Notadd\Content\Models\ArticleType;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class ArticleTypeFetcherHandler.
+ * Class FetchHandler.
  */
 class FetchHandler extends DataHandler
 {
     /**
-     * ArticleTypeFinderHandler constructor.
+     * FetchHandler constructor.
      *
      * @param \Notadd\Content\Models\ArticleType $articleType
      * @param \Illuminate\Container\Container    $container

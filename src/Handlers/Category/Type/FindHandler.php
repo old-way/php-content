@@ -13,12 +13,12 @@ use Notadd\Content\Models\CategoryType;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class CategoryTypeFindHandler.
+ * Class FindHandler.
  */
 class FindHandler extends SetHandler
 {
     /**
-     * CategoryTypeFinderHandler constructor.
+     * FindHandler constructor.
      *
      * @param \Notadd\Content\Models\CategoryType $categoryType
      * @param \Illuminate\Container\Container     $container

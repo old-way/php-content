@@ -13,12 +13,12 @@ use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class ArticleEditHandler.
+ * Class EditHandler.
  */
 class EditHandler extends SetHandler
 {
     /**
-     * ArticleEditorHandler constructor.
+     * EditHandler constructor.
      *
      * @param \Notadd\Content\Models\Article  $article
      * @param \Illuminate\Container\Container $container

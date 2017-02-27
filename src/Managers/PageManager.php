@@ -40,7 +40,7 @@ class PageManager
     protected $type;
 
     /**
-     * Article constructor.
+     * PageManager constructor.
      *
      * @param \Illuminate\Container\Container $container
      * @param \Illuminate\Events\Dispatcher   $events

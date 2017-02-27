@@ -23,7 +23,7 @@ class ComponentHandler extends SetHandler
     protected $settings;
 
     /**
-     * SetHandler constructor.
+     * ComponentHandler constructor.
      *
      * @param \Illuminate\Container\Container                         $container
      * @param \Notadd\Foundation\Setting\Contracts\SettingsRepository $settings

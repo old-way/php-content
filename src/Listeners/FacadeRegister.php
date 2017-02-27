@@ -11,6 +11,9 @@ namespace Notadd\Content\Listeners;
 use Notadd\Foundation\Event\Abstracts\EventSubscriber;
 use Notadd\Foundation\Facades\FacadeRegister as FacadeRegisterEvent;
 
+/**
+ * Class FacadeRegister.
+ */
 class FacadeRegister extends EventSubscriber
 {
     /**

@@ -40,7 +40,7 @@ class ArticleManager
     protected $type;
 
     /**
-     * Article constructor.
+     * ArticleManager constructor.
      *
      * @param \Illuminate\Container\Container $container
      * @param \Illuminate\Events\Dispatcher   $events

@@ -23,7 +23,7 @@ class AutoHandler extends AbstractSetHandler
     protected $settings;
 
     /**
-     * SetHandler constructor.
+     * AutoHandler constructor.
      *
      * @param \Illuminate\Container\Container                         $container
      * @param \Notadd\Foundation\Setting\Contracts\SettingsRepository $settings

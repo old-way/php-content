@@ -13,12 +13,12 @@ use Notadd\Content\Models\ArticleDraft;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
- * Class ArticleFindHandler.
+ * Class FindHandler.
  */
 class FindHandler extends DataHandler
 {
     /**
-     * ArticleFinderHandler constructor.
+     * FindHandler constructor.
      *
      * @param \Notadd\Content\Models\ArticleDraft $article
      * @param \Illuminate\Container\Container     $container

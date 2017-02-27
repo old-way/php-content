@@ -13,12 +13,12 @@ use Notadd\Content\Models\ArticleTemplate;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
 /**
- * Class ArticleTemplateDeleteHandler.
+ * Class DeleteHandler.
  */
 class DeleteHandler extends SetHandler
 {
     /**
-     * ArticleTemplateDeleterHandler constructor.
+     * DeleteHandler constructor.
      *
      * @param \Notadd\Content\Models\ArticleTemplate $articleTemplate
      * @param \Illuminate\Container\Container        $container
