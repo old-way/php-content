@@ -62,7 +62,7 @@ class EditHandler extends SetHandler
     {
         $this->validate($this->request, [
             'title' => 'required',
-            'alias' => 'required|alpha_dash|unique:pages,' . $this->request->input('id'),
+            'alias' => 'required|alpha_dash|unique:pages,id,' . $this->request->input('id'),
         ], [
             'alias.required' => '必须填写页面别名',
             'alias.alpha_dash' => '页面别名只能由字母、数字和斜杠组成',

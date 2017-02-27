@@ -74,7 +74,7 @@ class EditHandler extends SetHandler
     {
         $this->validate($this->request, [
             'title' => 'required',
-            'alias' => 'required|alpha_dash|unique:page_categories,' . $this->request->input('id'),
+            'alias' => 'required|alpha_dash|unique:page_categories,id,' . $this->request->input('id'),
         ], [
             'alias.required' => '必须填写分类别名',
             'alias.alpha_dash' => '分类别名只能由字母、数字和斜杠组成',
