@@ -8,7 +8,6 @@ import ContentCategory from '../components/ArticleCategory'
 import ContentComment from '../components/Comment'
 import ContentComponent from '../components/Component'
 import ContentDashboard from '../components/Dashboard'
-import ContentExtension from '../components/Extension'
 import ContentLayout from '../components/Layout'
 import ContentPage from '../components/Page'
 import ContentPageCategory from '../components/PageCategory'
@@ -110,11 +109,6 @@ export function routerMixin (Core) {
         {
           path: 'template',
           component: ContentTemplate,
-          beforeEnter: router.auth
-        },
-        {
-          path: 'extension',
-          component: ContentExtension,
           beforeEnter: router.auth
         },
         {
