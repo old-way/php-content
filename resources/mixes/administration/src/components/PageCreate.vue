@@ -44,11 +44,17 @@
         }).then(function (response) {
           if (response.data.data.id && response.data.data.id > 0) {
             _this.$store.commit('message', {
+              callback: function () {
+                _this.$router.push('/content/page/all')
+                _this.$store.commit('message', {
+                  show: false
+                })
+              },
               show: true,
-              type: 'notice',
-              text: response.data.message
+              text: response.data.message,
+              time: 3000,
+              type: 'notice'
             })
-            _this.$router.push('/content/page/all')
           }
         })
       }

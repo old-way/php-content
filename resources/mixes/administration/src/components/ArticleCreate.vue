@@ -100,7 +100,7 @@
               },
               show: true,
               text: response.data.message,
-              time: 5000,
+              time: 3000,
               type: 'notice'
             })
           }
