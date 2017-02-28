@@ -86,11 +86,17 @@
         _formData.append('source_link', _this.source.link)
         _this.$http.post(window.api + '/article/edit', _formData).then(function (response) {
           _this.$store.commit('message', {
+            callback: function () {
+              _this.$router.push('/content/article/all')
+              _this.$store.commit('message', {
+                show: false
+              })
+            },
             show: true,
-            type: 'notice',
-            text: response.data.message
+            text: response.data.message,
+            time: 3000,
+            type: 'notice'
           })
-          _this.$router.push('/content/article/all')
         })
       }
     }
