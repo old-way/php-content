@@ -77,6 +77,7 @@
         if (_this.errors.any()) {
           return false
         }
+        _this.$store.state.commit('progress', 'start')
         const _formData = new window.FormData()
         _formData.append('category_id', _this.category.id)
         _formData.append('content', _this.content)
@@ -103,7 +104,10 @@
               time: 3000,
               type: 'notice'
             })
+            _this.$store.state.commit('progress', 'done')
           }
+        }).catch(() => {
+          _this.$store.state.commit('progress', 'fail')
         })
       }
     },
