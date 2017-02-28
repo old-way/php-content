@@ -62,11 +62,17 @@
           title: _this.title
         }).then(function (response) {
           _this.$store.commit('message', {
-            show: true,
-            type: 'notice',
-            text: response.data.message
+              callback: function () {
+                _this.$router.push('/content/page/all')
+                _this.$store.commit('message', {
+                  show: false
+                })
+              },
+              show: true,
+              text: response.data.message,
+              time: 3000,
+              type: 'notice'
           })
-          _this.$router.push('/content/page/all')
         })
       }
     },
