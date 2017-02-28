@@ -36,12 +36,12 @@
       },
       checkAll: function () {
         this.list.forEach((article) => {
-          article.checked = !article.checked
+          article.checked = true
         })
       },
       checkNone: function () {
         this.list.forEach((article) => {
-          article.checked = false
+          article.checked = !article.checked
         })
       },
       forceDelete: function (id) {
