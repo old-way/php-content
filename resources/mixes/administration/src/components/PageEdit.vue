@@ -53,6 +53,7 @@
         if (_this.errors.any()) {
           return false
         }
+        _this.$store.state.commit('progress', 'start')
         _this.$http.post(window.api + '/page/edit', {
           id: _this.$route.params.id,
           alias: _this.alias,
@@ -73,6 +74,9 @@
               time: 3000,
               type: 'notice'
           })
+          _this.$store.state.commit('progress', 'done')
+        }).catch(() => {
+          _this.$store.state.commit('progress', 'fail')
         })
       }
     },
