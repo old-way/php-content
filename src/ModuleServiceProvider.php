@@ -59,22 +59,22 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->alias('page.manager', PageManager::class);
         $this->app->singleton('article.manager', function ($app) {
             $manager = new ArticleManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->fire(new RegisterArticleTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->fire(new RegisterArticleType($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterArticleTemplate($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterArticleType($app, $manager));
 
             return $manager;
         });
         $this->app->singleton('category.manager', function ($app) {
             $manager = new CategoryManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->fire(new RegisterCategoryTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->fire(new RegisterCategoryType($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterCategoryTemplate($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterCategoryType($app, $manager));
 
             return $manager;
         });
         $this->app->singleton('page.manager', function ($app) {
             $manager = new PageManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->fire(new RegisterPageTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->fire(new RegisterPageType($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterPageTemplate($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterPageType($app, $manager));
 
             return $manager;
         });
