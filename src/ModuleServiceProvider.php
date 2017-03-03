@@ -9,7 +9,6 @@
 namespace Notadd\Content;
 
 use Illuminate\Events\Dispatcher;
-use Illuminate\Support\ServiceProvider;
 use Notadd\Content\Events\RegisterArticleTemplate;
 use Notadd\Content\Events\RegisterArticleType;
 use Notadd\Content\Events\RegisterCategoryTemplate;
@@ -25,11 +24,12 @@ use Notadd\Content\Models\Article;
 use Notadd\Content\Models\ArticleDraft;
 use Notadd\Content\Observers\ArticleObserver;
 use Notadd\Content\Observers\DraftObserver;
+use Notadd\Foundation\Module\Abstracts\Module;
 
 /**
  * Class Module.
  */
-class ModuleServiceProvider extends ServiceProvider
+class ModuleServiceProvider extends Module
 {
     /**
      * Boot service provider.
@@ -47,6 +47,16 @@ class ModuleServiceProvider extends ServiceProvider
             realpath(__DIR__ . '/../resources/mixes/administration/dist/assets/content/administration') => public_path('assets/content/administration'),
             realpath(__DIR__ . '/../resources/mixes/foreground/dist/assets/content/foreground') => public_path('assets/content/foreground'),
         ], 'public');
+    }
+
+    /**
+     * Install module.
+     *
+     * @return bool
+     */
+    public function install()
+    {
+        return true;
     }
 
     /**
@@ -102,5 +112,15 @@ class ModuleServiceProvider extends ServiceProvider
         return [
             asset('assets/content/administration/css/module.css'),
         ];
+    }
+
+    /**
+     * Uninstall module.
+     *
+     * @return mixed
+     */
+    public function uninstall()
+    {
+        return true;
     }
 }
