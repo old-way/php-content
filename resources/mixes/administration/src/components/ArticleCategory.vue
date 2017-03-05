@@ -152,18 +152,17 @@
       order: {
         deep: true,
         handler: function (val, old) {
-          console.log(JSON.stringify(val))
-          console.log(JSON.stringify(old))
-          console.log(JSON.stringify(val) !== JSON.stringify(old))
           let _this = this
           JSON.stringify(val) !== JSON.stringify(old) && _this.$nextTick(function () {
             _this.$http.post(window.api + '/category/sort', {
               data: val
             }).then(function (response) {
+              console.log('dsfjksjfkdjsk')
               _this.items = []
               _this.$nextTick(function () {
                 _this.items = response.data.data
               })
+              _this.$router.push('/content/article/category/updated')
             })
           })
         }

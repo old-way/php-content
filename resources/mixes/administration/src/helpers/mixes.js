@@ -5,12 +5,14 @@ import ContentArticleDraftEdit from '../components/ArticleDraftEdit'
 import ContentArticleEdit from '../components/ArticleEdit'
 import ContentArticleRecycle from '../components/ArticleRecycle'
 import ContentCategory from '../components/ArticleCategory'
+import ContentCategoryUpdated from '../components/ArticleCategoryUpdated'
 import ContentComment from '../components/Comment'
 import ContentComponent from '../components/Component'
 import ContentDashboard from '../components/Dashboard'
 import ContentLayout from '../components/Layout'
 import ContentPage from '../components/Page'
 import ContentPageCategory from '../components/PageCategory'
+import ContentPageCategoryUpdated from '../components/PageCategoryUpdated'
 import ContentPageCreate from '../components/PageCreate'
 import ContentPageEdit from '../components/PageEdit'
 import ContentTemplate from '../components/Template'
@@ -67,6 +69,11 @@ export function routerMixin (Core) {
           beforeEnter: router.auth
         },
         {
+          path: 'article/category/updated',
+          component: ContentCategoryUpdated,
+          beforeEnter: router.auth
+        },
+        {
           path: 'article/tag',
           component: ContentTag,
           beforeEnter: router.auth
@@ -99,6 +106,11 @@ export function routerMixin (Core) {
         {
           path: 'page/category',
           component: ContentPageCategory,
+          beforeEnter: router.auth
+        },
+        {
+          path: 'page/category/updated',
+          component: ContentPageCategoryUpdated,
           beforeEnter: router.auth
         },
         {

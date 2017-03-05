@@ -154,6 +154,7 @@
               _this.$nextTick(function () {
                 _this.items = response.data.data
               })
+              _this.$router.push('/content/page/category/updated')
             })
           })
         }
