@@ -35,7 +35,8 @@
           title: '创建分类',
           top_image: ''
         },
-        none: false
+        none: false,
+        order: {}
       }
     },
     methods: {
@@ -126,29 +127,38 @@
     },
     updated () {
       let _this = this
-      let sort = this.$jquery(this.$el).find('ul, ol').sortable({
+      _this.$jquery(_this.$el).find('ul, ol').sortable({
         connectWith: 'article-category'
       })
-      _this.$jquery(sort).each(function (key, item) {
-        if (key === 0) {
-          _this.$jquery(item).off('sortstop').on('sortstop', function () {
-            const order = _this.$jquery('ul.list-group > li').map(function () {
+      _this.$jquery('.col-md-6 > ul.list-group').off('sortstop').on('sortstop', function () {
+        _this.order = _this.$jquery('.col-md-6 > ul.list-group > li').map(function () {
+          return {
+            id: _this.$jquery(this).data('id'),
+            children: _this.$jquery(this).children('ol').children('li').map(function () {
               return {
                 id: _this.$jquery(this).data('id'),
-                children: _this.$jquery(this).children('ol').children('li').map(function () {
+                children: _this.$jquery(this).find('li').map(function () {
                   return {
-                    id: _this.$jquery(this).data('id'),
-                    children: _this.$jquery(this).find('li').map(function () {
-                      return {
-                        id: _this.$jquery(this).data('id')
-                      }
-                    }).get()
+                    id: _this.$jquery(this).data('id')
                   }
                 }).get()
               }
             }).get()
+          }
+        }).get()
+      })
+    },
+    watch: {
+      order: {
+        deep: true,
+        handler: function (val, old) {
+          console.log(JSON.stringify(val))
+          console.log(JSON.stringify(old))
+          console.log(JSON.stringify(val) !== JSON.stringify(old))
+          let _this = this
+          JSON.stringify(val) !== JSON.stringify(old) && _this.$nextTick(function () {
             _this.$http.post(window.api + '/category/sort', {
-              data: order
+              data: val
             }).then(function (response) {
               _this.items = []
               _this.$nextTick(function () {
@@ -157,7 +167,7 @@
             })
           })
         }
-      })
+      }
     }
   }
 </script>
