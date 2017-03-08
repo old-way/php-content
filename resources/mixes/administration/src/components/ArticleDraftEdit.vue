@@ -56,6 +56,9 @@
       }
     },
     methods: {
+      dataChange: function (val) {
+        this.content = val
+      },
       imageSelected: function (e) {
         let _file = e.target.files[0]
         let _this = this
@@ -72,6 +75,8 @@
         if (_this.errors.any()) {
           return false
         }
+        _this.$jquery('button.btn-submit').prop('disabled', true)
+        _this.$jquery('button.btn-submit').text('提交中...')
         const _formData = new window.FormData()
         _formData.append('content', _this.content)
         _formData.append('date', _this.date)
@@ -97,6 +102,9 @@
             time: 3000,
             type: 'notice'
           })
+        }).finally(() => {
+          _this.$jquery('button.btn-submit').prop('disabled', false)
+          _this.$jquery('button.btn-submit').text('保存')
         })
       }
     }
@@ -144,7 +152,7 @@
                     </div>
                     <div class="form-group">
                         <label>内容</label>
-                        <editor height="400" width="100%" v-model="content" :content="content"></editor>
+                        <editor height="400" width="100%" :content="content" @input="dataChange"></editor>
                     </div>
                     <button class="btn btn-primary btn-submit" @click="submit">保存</button>
                 </div>

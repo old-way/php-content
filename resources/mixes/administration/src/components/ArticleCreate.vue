@@ -61,6 +61,9 @@
         _this.category.text = '选择分类[' + category.title + '(' + category.id + ')]'
         _this.$refs.modal.close()
       },
+      dataChange: function (val) {
+        this.content = val
+      },
       imageSelected: function (e) {
         let _file = e.target.files[0]
         let _this = this
@@ -77,6 +80,8 @@
         if (_this.errors.any()) {
           return false
         }
+        _this.$jquery('button.btn-submit').prop('disabled', true)
+        _this.$jquery('button.btn-submit').text('提交中...')
         _this.$store.commit('progress', 'start')
         const _formData = new window.FormData()
         _formData.append('category_id', _this.category.id)
@@ -108,6 +113,9 @@
           }
         }).catch(() => {
           _this.$store.commit('progress', 'fail')
+        }).finally(() => {
+          _this.$jquery('button.btn-submit').prop('disabled', false)
+          _this.$jquery('button.btn-submit').text('保存')
         })
       }
     },
@@ -258,7 +266,7 @@
                     </div>
                     <div class="form-group">
                         <label>内容</label>
-                        <editor height="400" width="100%" v-model="content" :content="content"></editor>
+                        <editor height="400" width="100%" :content="content" @input="dataChange"></editor>
                     </div>
                     <button class="btn btn-primary btn-submit" @click="submit" :disabled="errors.any()">保存</button>
                 </div>

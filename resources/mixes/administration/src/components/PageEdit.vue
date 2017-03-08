@@ -47,12 +47,17 @@
         _this.category.text = '选择分类[' + category.title + '(' + category.id + ')]'
         _this.$refs.modal.close()
       },
+      dataChange: function (val) {
+        this.content = val
+      },
       submit: function (e) {
         let _this = this
         _this.$validator.validateAll()
         if (_this.errors.any()) {
           return false
         }
+        _this.$jquery('button.btn-submit').prop('disabled', true)
+        _this.$jquery('button.btn-submit').text('提交中...')
         _this.$store.commit('progress', 'start')
         _this.$http.post(window.api + '/page/edit', {
           id: _this.$route.params.id,
@@ -77,6 +82,9 @@
           _this.$store.commit('progress', 'done')
         }).catch(() => {
           _this.$store.commit('progress', 'fail')
+        }).finally(() => {
+          _this.$jquery('button.btn-submit').prop('disabled', false)
+          _this.$jquery('button.btn-submit').text('保存')
         })
       }
     },
@@ -186,7 +194,7 @@
             </div>
             <div class="form-group">
                 <label>内容</label>
-                <editor height="400" width="100%" v-model="content" :content="content"></editor>
+                <editor height="400" width="100%" :content="content" @input="dataChange"></editor>
             </div>
             <div class="btn-group">
                 <button class="btn btn-primary btn-submit" :disabled="errors.any()" @click="submit">保存</button>
