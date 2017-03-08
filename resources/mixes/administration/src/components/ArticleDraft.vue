@@ -281,7 +281,7 @@
                 <tbody>
                 <tr v-for="draft in list">
                     <td :class="{ checked: draft.checked }" @click="check(draft)">{{ draft.title }}</td>
-                    <td>{{ draft.date }}</td>
+                    <td>{{ draft.created_at }}</td>
                     <td>
                         <router-link :to="'/content/article/' + draft.id + '/draft'" class="btn btn-info btn-sm">编辑
                         </router-link>
