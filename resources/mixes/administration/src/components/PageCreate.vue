@@ -34,7 +34,7 @@
         if (_this.errors.any()) {
           return false
         }
-        _this.$store.state.commit('progress', 'start')
+        _this.$store.commit('progress', 'start')
         _this.$http.post(window.api + '/page/create', {
           alias: _this.alias,
           category: _this.category.id,
@@ -55,10 +55,10 @@
               time: 3000,
               type: 'notice'
             })
-            _this.$store.state.commit('progress', 'done')
+            _this.$store.commit('progress', 'done')
           }
         }).catch(() => {
-          _this.$store.state.commit('progress', 'fail')
+          _this.$store.commit('progress', 'fail')
         })
       }
     },
