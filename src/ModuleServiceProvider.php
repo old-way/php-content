@@ -15,6 +15,8 @@ use Notadd\Content\Events\RegisterCategoryTemplate;
 use Notadd\Content\Events\RegisterCategoryType;
 use Notadd\Content\Events\RegisterPageTemplate;
 use Notadd\Content\Events\RegisterPageType;
+use Notadd\Content\Injections\Installer;
+use Notadd\Content\Injections\Uninstaller;
 use Notadd\Content\Listeners\CsrfTokenRegister;
 use Notadd\Content\Listeners\RouteRegister;
 use Notadd\Content\Managers\ArticleManager;
@@ -62,11 +64,11 @@ class ModuleServiceProvider extends Module
     /**
      * Install module.
      *
-     * @return bool
+     * @return string
      */
-    public function install()
+    public static function install()
     {
-        return true;
+        return Installer::class;
     }
 
     /**
@@ -137,10 +139,10 @@ class ModuleServiceProvider extends Module
     /**
      * Uninstall module.
      *
-     * @return mixed
+     * @return string
      */
-    public function uninstall()
+    public static function uninstall()
     {
-        return true;
+        return Uninstaller::class;
     }
 }
