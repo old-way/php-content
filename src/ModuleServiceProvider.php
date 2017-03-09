@@ -145,4 +145,14 @@ class ModuleServiceProvider extends Module
     {
         return Uninstaller::class;
     }
+
+    /**
+     * Version of module.
+     *
+     * @return string
+     */
+    public static function version()
+    {
+        return '2.0.0';
+    }
 }
