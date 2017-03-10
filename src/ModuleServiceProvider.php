@@ -78,7 +78,7 @@ class ModuleServiceProvider extends Module
      */
     public static function name()
     {
-        return '内容管理模块';
+        return '文章CMS';
     }
 
     /**
