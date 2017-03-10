@@ -17,15 +17,11 @@
       }
     },
     computed: {
-      auto: {
+      drafted: {
         get () {
-          return this.$store.state.setting.hasOwnProperty('article.save.auto') ? this.$store.state.setting['article.save.auto'] : '0'
-        },
-        set (value) {
-          this.$store.commit('single', {
-            key: 'article.save.auto',
-            value: value
-          })
+          let _draft = window.localStorage.getItem('draft')
+          _draft = JSON.parse(_draft)
+          return _draft !== null ? _draft.hasOwnProperty('title') : false
         }
       }
     },
@@ -71,6 +67,19 @@
         _reader.readAsDataURL(_file)
         _this.image = _file
       },
+      recovery: function () {
+        let _this = this
+        let _draft = window.localStorage.getItem('draft')
+        _draft = JSON.parse(_draft)
+        _this.content = _draft.content
+        _this.date = _draft.date
+        _this.hidden = _draft.hidden
+        _this.source = _draft.source
+        _this.sticky = _draft.sticky
+        _this.summary = _draft.summary
+        _this.title = _draft.title
+        window.UE.getEditor('neditor').setContent(_draft.content)
+      },
       submit: function (e) {
         let _this = this
         _this.$validator.validateAll()
@@ -105,54 +114,33 @@
       let _this = this
       _this.working = true
       _this.$store.commit('title', '添加文章 - 文章 - Notadd Administration')
-      if (this.auto === '1') {
-        window.setInterval(function () {
-          if (_this.title && _this.working) {
-            const _formData = new window.FormData()
-            _formData.append('content', _this.content)
-            _formData.append('date', _this.date)
-            _formData.append('hidden', _this.hidden)
-            _formData.append('image', _this.image)
-            _formData.append('sticky', _this.sticky)
-            _formData.append('summary', _this.summary)
-            _formData.append('tags', _this.tags)
-            _formData.append('title', _this.title)
-            _formData.append('source_author', _this.source.author)
-            _formData.append('source_link', _this.source.link)
-            _this.$http.post(window.api + '/article/draft/create', _formData).then(function (response) {
-              if (response.data.data.id && response.data.data.id > 0) {
-                _this.$store.commit('message', {
-                  show: true,
-                  type: 'notice',
-                  text: '自动保存草稿成功！'
-                })
-              }
-            })
-          } else {
-            return false
+      window.setInterval(function () {
+        if (_this.title && _this.working) {
+          const _data = {
+            content: _this.content,
+            date: _this.date,
+            sticky: _this.sticky,
+            summary: _this.summary,
+            title: _this.title,
+            source: {
+              author: _this.source.author,
+              link: _this.source.link
+            }
           }
-        }, 10000)
-      }
+          window.localStorage.setItem('draft', JSON.stringify(_data))
+          _this.$store.commit('message', {
+            show: true,
+            type: 'notice',
+            text: '自动保存到本地草稿成功！'
+          })
+        }
+      }, 20000)
       _this.$http.post(window.api + '/category/fetch').then(response => {
         _this.category.list = response.data.data
       })
     },
-    watch: {
-      auto: {
-        handler: function (val) {
-          let _this = this
-          _this.$http.post(window.api + '/article/auto', {
-            auto: _this.auto
-          }).then(function (response) {
-            _this.$store.commit('setting', response.data.data)
-            _this.$store.commit('message', {
-              show: true,
-              type: 'notice',
-              text: '更新设置成功！自动保存功能将在下次使用时生效或失效！'
-            })
-          })
-        }
-      }
+    unmounted () {
+      this.working = false
     }
   }
 </script>
@@ -259,20 +247,13 @@
                 <div class="box box-solid">
                     <div class="box-body article-extend">
                         <div class="form-horizontal">
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">自动保存草稿</label>
+                            <div class="form-group" v-if="drafted">
+                                <label class="col-md-4 control-label">从本地草稿恢复</label>
                                 <div class="col-md-8">
-                                    <div class="btn-group btn-switch">
-                                        <label class="btn btn-primary" :class="{ active: auto === '1' }">
-                                            <input type="radio" v-model="auto" value="1"> 开启
-                                        </label>
-                                        <label class="btn btn-primary" :class="{ active: auto === '0' }">
-                                            <input type="radio" v-model="auto" value="0"> 关闭
-                                        </label>
-                                    </div>
+                                    <button class="btn btn-primary" @click="recovery">恢复</button>
                                 </div>
                             </div>
-                            <div class="form-group" style="color: #999999">10分钟保存一次，更改设置后，下次生效</div>
+                            <div class="form-group" style="color: #999999">20秒自动保存到本地草稿</div>
                         </div>
                     </div>
                 </div>
@@ -357,21 +338,25 @@
             <div slot="body">
                 <ul class="list-group">
                     <li class="list-group-item clear-fix" v-for="item in category.list">
-                        <div class="list-group-item-content" :class="{ 'checked': category.id === item.id }" @click="categorySelectDone(item)">
+                        <div class="list-group-item-content" :class="{ 'checked': category.id === item.id }"
+                             @click="categorySelectDone(item)">
                             <em :style="{ background: item.background_color }"></em>
                             <span>{{ item.title }}</span>
                             <i class="handle"></i>
                         </div>
                         <ol class="list-group">
                             <li class="list-group-item clear-fix" v-for="sub in item.children">
-                                <div class="list-group-item-content" :class="{ 'checked': category.id === sub.id }" @click="categorySelectDone(sub)">
+                                <div class="list-group-item-content" :class="{ 'checked': category.id === sub.id }"
+                                     @click="categorySelectDone(sub)">
                                     <em :style="{ background: sub.background_color }"></em>
                                     <span>{{ sub.title }}</span>
                                     <i class="handle"></i>
                                 </div>
                                 <ol class="list-group">
                                     <li class="list-group-item clear-fix" v-for="child in sub.children">
-                                        <div class="list-group-item-content" :class="{ 'checked': category.id === child.id }" @click="categorySelectDone(child)">
+                                        <div class="list-group-item-content"
+                                             :class="{ 'checked': category.id === child.id }"
+                                             @click="categorySelectDone(child)">
                                             <em :style="{ background: child.background_color }"></em>
                                             <span>{{ child.title }}</span>
                                             <i class="handle"></i>
