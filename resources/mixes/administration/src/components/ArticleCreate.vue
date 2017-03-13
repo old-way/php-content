@@ -108,6 +108,28 @@
             _this.$router.push('/content/article/all')
           }
         })
+      },
+      submitDraft: function (e) {
+        const _formData = new window.FormData()
+        _formData.append('content', _this.content)
+        _formData.append('date', _this.date)
+        _formData.append('hidden', _this.hidden)
+        _formData.append('image', _this.image)
+        _formData.append('sticky', _this.sticky)
+        _formData.append('summary', _this.summary)
+        _formData.append('tags', _this.tags)
+        _formData.append('title', _this.title)
+        _formData.append('source_author', _this.source.author)
+        _formData.append('source_link', _this.source.link)
+        _this.$http.post(window.api + '/article/draft/create', _formData).then(function (response) {
+          if (response.data.data.id && response.data.data.id > 0) {
+            _this.$store.commit('message', {
+              show: true,
+              type: 'notice',
+              text: '保存到草稿箱成功！'
+            })
+          }
+        })
       }
     },
     mounted () {
@@ -238,7 +260,10 @@
                         <label>内容</label>
                         <editor height="400" width="100%" v-model="content" :content="content"></editor>
                     </div>
-                    <button class="btn btn-primary btn-submit" @click="submit" :disabled="errors.any()">保存</button>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-submit" @click="submit" :disabled="errors.any()">保存</button>
+                        <button class="btn btn-default" @click="submitDraft" :disabled="errors.any()">保存到草稿箱</button>
+                    </div>
                 </div>
             </div>
         </div>
