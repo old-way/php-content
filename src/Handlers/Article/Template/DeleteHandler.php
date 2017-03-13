@@ -32,16 +32,6 @@ class DeleteHandler extends SetHandler
     }
 
     /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
      * Errors for handler.
      *
      * @return array

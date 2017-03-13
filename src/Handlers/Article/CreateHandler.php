@@ -37,16 +37,6 @@ class CreateHandler extends SetHandler
     }
 
     /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
      * Data for handler.
      *
      * @return array
