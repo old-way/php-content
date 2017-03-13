@@ -55,6 +55,9 @@ class FetchHandler extends DataHandler
                 $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
             }
         }
+        $this->messages = [
+            $this->translator->trans('content::article.fetch.success'),
+        ];
 
         return $this->pagination->items();
     }
@@ -68,18 +71,6 @@ class FetchHandler extends DataHandler
     {
         return [
             $this->translator->trans('content::article.fetch.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::article.fetch.success'),
         ];
     }
 

@@ -56,19 +56,10 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->id = $this->model->create($this->request->all());
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             $this->translator->trans('content::article_template.create.success'),
         ];
+
+        return true;
     }
 }

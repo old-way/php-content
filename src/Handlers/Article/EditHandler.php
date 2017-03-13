@@ -71,19 +71,10 @@ class EditHandler extends SetHandler
             'keyword'       => $this->request->input('tags'),
             'title'         => $this->request->input('title'),
         ]);
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             $this->translator->trans('content::article.update.success'),
         ];
+
+        return true;
     }
 }

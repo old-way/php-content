@@ -74,19 +74,10 @@ class ComponentHandler extends SetHandler
         $this->settings->set('content.seo.page.description', $this->request->input('pageDescription'));
         $this->settings->set('content.seo.page.keyword', $this->request->input('pageKeyword'));
         $this->settings->set('content.seo.page.title', $this->request->input('pageTitle'));
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             '修改设置成功!',
         ];
+
+        return true;
     }
 }

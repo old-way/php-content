@@ -43,6 +43,9 @@ class FindHandler extends DataHandler
         if ($category) {
             $article->setAttribute('category', $category->getAttributes());
         }
+        $this->messages = [
+            $this->translator->trans('content::article.find.success'),
+        ];
 
         return $article->getAttributes();
     }
@@ -56,18 +59,6 @@ class FindHandler extends DataHandler
     {
         return [
             $this->translator->trans('content::article.find.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::article.find.success'),
         ];
     }
 }

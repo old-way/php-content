@@ -66,19 +66,10 @@ class AutoHandler extends AbstractSetHandler
     public function execute()
     {
         $this->settings->set('article.save.auto', $this->request->input('auto'));
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             '修改设置成功!',
         ];
+
+        return true;
     }
 }

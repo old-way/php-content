@@ -84,19 +84,10 @@ class EditHandler extends SetHandler
             'title'            => $this->request->input('name'),
             'type'             => $this->request->input('type') ?: 'normal',
         ]);
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             $this->translator->trans('content::category.update.success'),
         ];
+
+        return true;
     }
 }

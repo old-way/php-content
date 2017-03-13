@@ -87,19 +87,10 @@ class CreateHandler extends SetHandler
             'top_image'        => $this->request->input('top_image'),
             'type'             => $this->request->input('type') ?: 'normal',
         ]);
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             $this->translator->trans('content::category.create.success'),
         ];
+
+        return true;
     }
 }

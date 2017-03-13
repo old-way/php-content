@@ -55,19 +55,10 @@ class EditHandler extends SetHandler
             return false;
         }
         $articleTemplate->update($this->request->all());
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             $this->translator->trans('content::article_template.update.success'),
         ];
+
+        return true;
     }
 }

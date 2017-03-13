@@ -93,35 +93,22 @@ class DeleteHandler extends SetHandler
         $restore = $this->request->input('restore');
         if ($force) {
             $article->forceDelete();
+            $this->messages = [
+                $this->translator->trans('content::article.force.success'),
+            ];
         } elseif ($restore) {
             $article->restore();
+            $this->messages = [
+                $this->translator->trans('content::article.force.success'),
+            ];
         } else {
             $article->delete();
+            $this->messages = [
+                $this->translator->trans('content::article.force.success'),
+            ];
         }
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        if ($this->request->input('force')) {
-            return [
-                $this->translator->trans('content::article.force.success'),
-            ];
-        } elseif ($this->request->input('restore')) {
-            return [
-                $this->translator->trans('content::article.force.success'),
-            ];
-        } else {
-            return [
-                $this->translator->trans('content::article.force.success'),
-            ];
-        }
     }
 
     /**

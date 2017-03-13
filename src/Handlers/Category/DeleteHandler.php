@@ -63,19 +63,10 @@ class DeleteHandler extends SetHandler
             return false;
         }
         $category->delete();
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             $this->translator->trans('content::category.delete.success'),
         ];
+
+        return true;
     }
 }

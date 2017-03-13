@@ -55,19 +55,10 @@ class DeleteHandler extends SetHandler
             return false;
         }
         $articleTemplate->delete();
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             $this->translator->trans('content::article_template.delete.success'),
         ];
+
+        return true;
     }
 }

@@ -88,19 +88,10 @@ class CreateHandler extends SetHandler
             'title'         => $this->request->input('title'),
         ]);
         $this->id = $this->model->getAttribute('id');
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
+        $this->messages = [
             $this->translator->trans('content::article.create.success'),
         ];
+
+        return true;
     }
 }

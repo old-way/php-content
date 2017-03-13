@@ -28,6 +28,12 @@ class FetchHandler extends DataHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors = [
+            $this->translator->trans('content::category.fetch.fail'),
+        ];
+        $this->messages = [
+            $this->translator->trans('content::category.fetch.success'),
+        ];
         $this->model = $category;
     }
 
@@ -55,29 +61,5 @@ class FetchHandler extends DataHandler
         } else {
             return $this->model->structure();
         }
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category.fetch.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::category.fetch.success'),
-        ];
     }
 }
