@@ -7,6 +7,9 @@ import {
 const injection = {};
 
 function install(instance) {
+    Object.assign(injection, {
+        sidebar: instance.sidebar,
+    });
     mixinNavigation(instance);
     mixinRouter(instance);
     mixinSidebar(instance);
