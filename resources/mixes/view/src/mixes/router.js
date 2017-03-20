@@ -1,5 +1,5 @@
 export default function (injection) {
-    instance.useModuleRoute([
+    injection.useModuleRoute([
         {
             path: 'content',
             children: [
@@ -9,4 +9,10 @@ export default function (injection) {
             ],
         },
     ]);
+
+    injection.useNavigation({
+        icon: 'ios-book',
+        path: '/content',
+        title: 'CMS',
+    });
 }
