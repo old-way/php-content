@@ -7,6 +7,6 @@
                 injection.sidebar.active('content');
             });
         },
-    }
+    };
 </script>
 <template></template>
