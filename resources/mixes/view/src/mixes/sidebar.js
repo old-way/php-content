@@ -7,15 +7,15 @@ export default function (injection) {
                     title: '全部文章',
                 },
                 {
-                    path: '/content/category',
+                    path: '/content/article/category',
                     title: '分类管理',
                 },
                 {
-                    path: '/content/recycle',
+                    path: '/content/article/recycle',
                     title: '回收站',
                 },
                 {
-                    path: '/content/draft',
+                    path: '/content/article/draft',
                     title: '草稿箱',
                 },
             ],
