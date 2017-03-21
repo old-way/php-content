@@ -9,4 +9,12 @@
         },
     };
 </script>
-<template></template>
+<template>
+    <div class="article-warp">
+        <div class="article-category">
+            <card>
+                <p slot="title">文章分类管理</p>
+            </card>
+        </div>
+    </div>
+</template>
