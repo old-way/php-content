@@ -3,16 +3,48 @@ export default function (injection) {
         {
             children: [
                 {
-                    path: '/setting',
-                    title: '参数配置',
+                    path: '/content/article',
+                    title: '全部文章',
                 },
                 {
-                    path: '/seo',
-                    title: 'SEO设置',
+                    path: '/content/category',
+                    title: '分类管理',
+                },
+                {
+                    path: '/content/recycle',
+                    title: '回收站',
+                },
+                {
+                    path: '/content/draft',
+                    title: '草稿箱',
                 },
             ],
-            icon: 'ios-cog',
-            title: '全局设置',
+            icon: 'plus',
+            title: '文章管理',
+        },
+        {
+            children: [
+                {
+                    path: '/content/page',
+                    title: '全部页面',
+                },
+                {
+                    path: '/content/page/category',
+                    title: '分类管理',
+                },
+            ],
+            icon: 'plus',
+            title: '页面管理',
+        },
+        {
+            children: [
+                {
+                    path: '/content/component',
+                    title: 'SEO 配置',
+                },
+            ],
+            icon: 'plus',
+            title: '模块管理',
         },
     ]);
 }
