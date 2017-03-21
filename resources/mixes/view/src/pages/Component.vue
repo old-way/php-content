@@ -9,4 +9,8 @@
         },
     };
 </script>
-<template></template>
+<template>
+    <card>
+        <p slot="title">SEO 管理</p>
+    </card>
+</template>

@@ -10,7 +10,7 @@
     };
 </script>
 <template>
-    <div class="article-warp">
+    <div class="article-wrap">
         <div class="article-edit">
             <card>
                 <p slot="title">编辑草稿</p>

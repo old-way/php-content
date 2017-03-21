@@ -10,7 +10,7 @@
     };
 </script>
 <template>
-    <div class="article-warp">
+    <div class="article-wrap">
         <div class="article-tag">
             <card>
                 <p slot="title">文章标签</p>

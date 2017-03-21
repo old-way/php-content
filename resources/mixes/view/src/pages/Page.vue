@@ -9,4 +9,26 @@
         },
     };
 </script>
-<template></template>
+<template>
+    <div class="article-wrap">
+        <div class="article-list">
+            <card>
+                <template slot="title">
+                    <i-input class="search" placeholder="请输入搜索关键字">
+                        <i-button slot="append" icon="ios-search"></i-button>
+                    </i-input>
+                    <div class="filter">
+                        <i-select clearable style="width:200px">
+                            <!--<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>-->
+                        </i-select>
+                        <router-link to="/content/article/create">
+                            <i-button type="primary">添加文章</i-button>
+                        </router-link>
+                        <i-button type="success">选择</i-button>
+                        <i-button type="error">删除</i-button>
+                    </div>
+                </template>
+            </card>
+        </div>
+    </div>
+</template>

@@ -9,4 +9,12 @@
         },
     };
 </script>
-<template></template>
+<template>
+    <div class="article-wrap">
+        <div class="article-edit">
+            <card>
+                <p slot="title">编辑页面</p>
+            </card>
+        </div>
+    </div>
+</template>
