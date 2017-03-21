@@ -7,6 +7,62 @@
                 injection.sidebar.active('content');
             });
         },
+        data() {
+            return {
+                columns: [
+                    {
+                        align: 'center',
+                        type: 'selection',
+                        width: 60,
+                    },
+                    {
+                        key: 'title',
+                        title: '文章名称',
+                    },
+                    {
+                        key: 'author',
+                        title: '作者',
+                        width: 200,
+                    },
+                    {
+                        key: 'handle',
+                        render(row, column, index) {
+                            return `<i-switch v-model="list[${index}].enabled" @on-change="statusChanged(${index})"></i-switch>`;
+                        },
+                        title: '操作',
+                        width: 200,
+                    },
+                ],
+                list: [
+                    {
+                        title: 'dsdfsdfs0',
+                        author: 'sdfsdf',
+                        enabled: true,
+                    },
+                    {
+                        title: 'dsdfsdfs0',
+                        author: 'sdfsdf',
+                        enabled: true,
+                    },
+                    {
+                        title: 'dsdfsdfs0',
+                        author: 'sdfsdf',
+                        enabled: true,
+                    },
+                    {
+                        title: 'dsdfsdfs0',
+                        author: 'sdfsdf',
+                        enabled: true,
+                    },
+                    {
+                        title: 'dsdfsdfs0',
+                        author: 'sdfsdf',
+                        enabled: true,
+                    },
+                ],
+                self: this,
+            };
+        },
     };
 </script>
 <template>
@@ -28,6 +84,7 @@
                         <i-button type="error">删除</i-button>
                     </div>
                 </template>
+                <i-table :columns="columns" :content="self" :data="list"></i-table>
             </card>
         </div>
     </div>
