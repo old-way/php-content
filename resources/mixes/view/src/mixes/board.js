@@ -22,5 +22,4 @@ export default function (injection) {
         title: '这是 Chart 标题',
         type: 'chart',
     });
-    console.log(injection);
 }
