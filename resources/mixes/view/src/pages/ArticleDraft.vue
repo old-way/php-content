@@ -27,7 +27,10 @@
                     {
                         key: 'handle',
                         render(row, column, index) {
-                            return `<i-switch v-model="list[${index}].enabled" @on-change="statusChanged(${index})"></i-switch>`;
+                            return `
+                                    <i-button type="primary" @click.native="edit(${index})">编辑</i-button>
+                                    <i-button type="error" @click.native="remove(${index})">删除</i-button>
+                                    `;
                         },
                         title: '操作',
                         width: 200,
@@ -62,6 +65,14 @@
                 ],
                 self: this,
             };
+        },
+        methods: {
+            edit(index) {
+                console.log(index);
+            },
+            remove(index) {
+                console.log(index);
+            },
         },
     };
 </script>
