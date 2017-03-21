@@ -1,3 +1,7 @@
+import Vue from 'vue';
+import camelcase from 'camelcase';
+import decamelize from 'decamelize';
+
 import {
     mixinNavigation,
     mixinRouter,
@@ -13,6 +17,10 @@ function install(instance) {
     mixinNavigation(instance);
     mixinRouter(instance);
     mixinSidebar(instance);
+
+    Object.keys(instance.components).forEach(key => {
+        Vue.component(decamelize(camelcase(key), '-'), instance.components[key]);
+    });
 }
 
 export default Object.assign(injection, {
