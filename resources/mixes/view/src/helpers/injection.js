@@ -1,6 +1,6 @@
-import Vue from 'vue';
-import camelcase from 'camelcase';
-import decamelize from 'decamelize';
+// import Vue from 'vue';
+// import camelcase from 'camelcase';
+// import decamelize from 'decamelize';
 
 import {
     mixinNavigation,
@@ -18,9 +18,9 @@ function install(instance) {
     mixinRouter(instance);
     mixinSidebar(instance);
 
-    Object.keys(instance.components).forEach(key => {
-        Vue.component(decamelize(camelcase(key), '-'), instance.components[key]);
-    });
+    // Object.keys(instance.components).forEach(key => {
+    //     Vue.component(decamelize(camelcase(key), '-'), instance.components[key]);
+    // });
 }
 
 export default Object.assign(injection, {
