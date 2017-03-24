@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Injections;
 
+use Illuminate\Container\Container;
 use Notadd\Foundation\Module\Abstracts\Installer as AbstractInstaller;
 
 /**
@@ -15,6 +16,17 @@ use Notadd\Foundation\Module\Abstracts\Installer as AbstractInstaller;
  */
 class Installer extends AbstractInstaller
 {
+    /**
+     * Installer constructor.
+     *
+     * @param \Illuminate\Container\Container $container
+     */
+    public function __construct(Container $container)
+    {
+        parent::__construct($container);
+        $this->info->put('errors', $this->translator->trans('安装文章模块失败！'));
+        $this->info->put('messages', $this->translator->trans('安装文章模块成功！'));
+    }
 
     /**
      * @return bool
@@ -25,10 +37,12 @@ class Installer extends AbstractInstaller
     }
 
     /**
-     * @return bool
+     * @return array
      */
     public function require ()
     {
-        return true;
+        return [
+            'notadd/member',
+        ];
     }
 }

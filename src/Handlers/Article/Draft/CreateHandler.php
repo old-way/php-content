@@ -33,12 +33,8 @@ class CreateHandler extends SetHandler
         Container $container
     ) {
         parent::__construct($container);
-        $this->errors = [
-            $this->translator->trans('content::article.create.fail'),
-        ];
-        $this->messages = [
-            $this->translator->trans('content::article.create.success'),
-        ];
+        $this->errors->push($this->translator->trans('content::article.create.fail'));
+        $this->messages->push($this->translator->trans('content::article.create.success'));
         $this->model = $article;
     }
 

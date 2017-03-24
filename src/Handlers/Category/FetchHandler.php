@@ -28,12 +28,8 @@ class FetchHandler extends DataHandler
         Container $container
     ) {
         parent::__construct($container);
-        $this->errors = [
-            $this->translator->trans('content::category.fetch.fail'),
-        ];
-        $this->messages = [
-            $this->translator->trans('content::category.fetch.success'),
-        ];
+        $this->errors->push($this->translator->trans('content::category.fetch.fail'));
+        $this->messages->push($this->translator->trans('content::category.fetch.success'));
         $this->model = $category;
     }
 
