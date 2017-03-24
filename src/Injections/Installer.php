@@ -41,8 +41,6 @@ class Installer extends AbstractInstaller
      */
     public function require ()
     {
-        return [
-            'notadd/member',
-        ];
+        return [];
     }
 }
