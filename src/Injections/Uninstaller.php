@@ -23,12 +23,4 @@ class Uninstaller extends AbstractUninstaller
     {
         return true;
     }
-
-    /**
-     * @return mixed
-     */
-    public function require ()
-    {
-        return true;
-    }
 }
