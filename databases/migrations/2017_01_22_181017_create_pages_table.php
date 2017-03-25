@@ -23,6 +23,7 @@ class CreatePagesTable extends Migration
         $this->schema->create('pages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id');
+            $table->integer('category_id')->default(0);
             $table->string('title');
             $table->string('thumb_image')->nullable();
             $table->string('alias')->nullable();
