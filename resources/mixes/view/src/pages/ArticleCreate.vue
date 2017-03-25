@@ -1,4 +1,5 @@
 <script>
+    import Editor from '../components/Editor';
     import injection from '../helpers/injection';
 
     export default {
@@ -7,13 +8,41 @@
                 injection.sidebar.active('content');
             });
         },
+        components: {
+            Editor,
+        },
         data() {
             return {
                 form: {
+                    category: {
+                        id: 0,
+                        list: [],
+                        text: '选择分类[未分类(0)]',
+                    },
+                    content: '',
+                    date: '',
+                    hidden: false,
+                    image: '',
+                    source: {
+                        author: '',
+                        link: '',
+                    },
+                    sticky: false,
+                    summary: '',
+                    tags: [],
                     title: '',
                 },
                 loading: false,
+                path: window.UEDITOR_HOME_URL,
                 rules: {
+                    content: [
+                        {
+                            required: true,
+                            type: 'string',
+                            message: '请输入文章内容',
+                            trigger: 'change',
+                        },
+                    ],
                     title: [
                         {
                             required: true,
@@ -25,23 +54,80 @@
                 },
             };
         },
+        methods: {
+            editor(instance) {
+                const self = this;
+                instance.setContent(self.form.content);
+                instance.addListener('contentChange', () => {
+                    self.form.content = instance.getContent();
+                });
+            },
+            submit() {
+                const self = this;
+                self.loading = true;
+            },
+        },
+        watch: {
+            'form.content': {
+                handler(val) {
+                    window.console.log(val);
+                },
+            },
+        },
     };
 </script>
 <template>
     <div class="article-wrap">
         <div class="article-edit">
-            <i-form :label-width="200" :form="form" ref="form" :rules="rules">
+            <i-form label-position="top" :model="form" ref="form" :rules="rules">
                 <row :gutter="20">
-                    <i-col span="18">
+                    <i-col span="16">
                         <card>
+                            <form-item prop="title">
+                                <i-input placeholder="请输入文章标题" v-model="form.title"></i-input>
+                            </form-item>
+                            <form-item prop="content">
+                                <editor :path="path" @ready="editor"></editor>
+                            </form-item>
                             <form-item>
-                                <i-input placeholder="请输入文章标题"></i-input>
+                                <i-button :loading="loading" type="primary" @click.native="submit">
+                                    <span v-if="!loading">确认提交</span>
+                                    <span v-else>正在提交…</span>
+                                </i-button>
                             </form-item>
                         </card>
                     </i-col>
-                    <i-col span="6">
+                    <i-col span="8">
                         <card>
-                            <p slot="title">创建文章</p>
+                            <p slot="title">草稿箱</p>
+                        </card>
+                        <card>
+                            <form-item label="缩略图" prop="image">
+                                <upload action="//jsonplaceholder.typicode.com/posts/">
+                                    <i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>
+                                </upload>
+                            </form-item>
+                            <form-item label="置顶" prop="sticky">
+                                <i-switch v-model="form.sticky" size="large">
+                                    <span slot="open">置顶</span>
+                                    <span slot="close">取消</span>
+                                </i-switch>
+                            </form-item>
+                            <form-item label="隐藏" prop="hidden">
+                                <i-switch v-model="form.hidden" size="large">
+                                    <span slot="open">隐藏</span>
+                                    <span slot="close">取消</span>
+                                </i-switch>
+                            </form-item>
+                            <form-item label="发布时间">
+                                <date-picker placeholder="请选择发布时间" type="date" v-model="form.date"></date-picker>
+                            </form-item>
+                            <form-item label="来源">
+                                <i-input placeholder="请输入来源" v-model="form.source.author"></i-input>
+                            </form-item>
+                            <form-item label="来源链接">
+                                <i-input placeholder="请输入来源链接" v-model="form.source.link"></i-input>
+                            </form-item>
                         </card>
                     </i-col>
                 </row>

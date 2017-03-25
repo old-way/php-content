@@ -1,9 +1,5 @@
-// import Vue from 'vue';
-// import VueRouter from 'vue-router';
-
+import './assets/less/main.less';
 import injection from './helpers/injection';
-//
-// Vue.use(VueRouter);
 
 const instance = injection;
 
