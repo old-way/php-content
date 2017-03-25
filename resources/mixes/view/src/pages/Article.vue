@@ -42,26 +42,6 @@
                         author: 'sdfsdf',
                         enabled: true,
                     },
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
                 ],
                 self: this,
             };

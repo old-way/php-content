@@ -31,7 +31,7 @@
     <div class="article-wrap">
         <div class="article-edit">
             <i-form :label-width="200" :form="form" ref="form" :rules="rules">
-                <row>
+                <row :gutter="20">
                     <i-col span="18">
                         <card>
                             <form-item>
