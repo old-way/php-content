@@ -9,6 +9,8 @@ const injection = {};
 
 function install(instance) {
     Object.assign(injection, {
+        http: instance.http,
+        loading: instance.loading,
         sidebar: instance.sidebar,
     });
     mixinBoard(instance);

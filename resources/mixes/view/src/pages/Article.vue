@@ -3,12 +3,36 @@
 
     export default {
         beforeRouteEnter(to, from, next) {
-            next(() => {
-                injection.sidebar.active('content');
+            injection.loading.start();
+            injection.http.post(`${window.api}/article/fetch`).then(response => {
+                const list = response.data.data;
+                const pagination = response.data.pagination;
+                next(vm => {
+                    injection.loading.finish();
+                    injection.sidebar.active('content');
+                    vm.list = list;
+                    vm.pagination = pagination;
+                    window.console.log(pagination);
+                });
+            }).catch(() => {
+                injection.loading.fail();
             });
         },
         data() {
             return {
+                categories: {
+                    all: [],
+                    first: [],
+                    id: 0,
+                    none: false,
+                    selected: {
+                        first: 0,
+                        second: 0,
+                        third: 0,
+                    },
+                    second: [],
+                    third: [],
+                },
                 columns: [
                     {
                         align: 'center',
@@ -36,13 +60,8 @@
                         width: 200,
                     },
                 ],
-                list: [
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                ],
+                list: [],
+                pagination: {},
                 self: this,
             };
         },
@@ -50,8 +69,40 @@
             edit(index) {
                 console.log(index);
             },
+            paginator(id) {
+                const self = this;
+                self.$loading.start();
+                if (self.categories.id === 'none') {
+                    self.$http.post(`${window.api}/article/fetch`, {
+                        'only-no-category': true,
+                        page: id,
+                    }).then(response => {
+                        self.list = response.data.data;
+                        self.pagination = response.data.pagination;
+                        self.$loading.finish();
+                    }).catch(() => {
+                        self.$loading.fail();
+                    });
+                } else {
+                    self.$http.post(`${window.api}/article/fetch`, {
+                        category: self.categories.id,
+                        page: id,
+                    }).then(response => {
+                        self.list = response.data.data;
+                        self.pagination = response.data.pagination;
+                        self.$loading.finish();
+                    }).catch(() => {
+                        self.$loading.fail();
+                    });
+                }
+            },
             remove(index) {
                 console.log(index);
+            },
+        },
+        watch: {
+            pagination(val) {
+                window.console.log(val);
             },
         },
     };
@@ -75,6 +126,9 @@
                     </div>
                 </template>
                 <i-table :columns="columns" :content="self" :data="list"></i-table>
+                <div class="ivu-page-wrap">
+                    <page :current="pagination.current_page" :page-size="pagination.per_page" :total="pagination.total" @on-change="paginator"></page>
+                </div>
             </card>
         </div>
     </div>
