@@ -138,26 +138,34 @@
                 const self = this;
                 self.$loading.start();
                 self.loading = true;
-                self.selections.forEach((article, key) => {
-                    self.$http.post(`${window.api}/article/delete`, {
-                        id: article.id,
-                    }).then(response => {
-                        const result = response.data;
-                        result.data.forEach(item => {
-                            item.loading = false;
-                        });
-                        self.list = result.data;
-                        self.pagination = result.pagination;
-                        self.$notice.open({
-                            title: `删除文章[${article.title}]成功！`,
-                        });
-                    }).finally(() => {
-                        if (self.selections.length === key + 1) {
-                            self.$loading.finish();
-                            self.loading = false;
-                        }
+                if (self.selections.length === 0) {
+                    self.$loading.finish();
+                    self.$notice.error({
+                        title: '尚未选择任何文章！',
                     });
-                });
+                    self.loading = false;
+                } else {
+                    self.selections.forEach((article, key) => {
+                        self.$http.post(`${window.api}/article/delete`, {
+                            id: article.id,
+                        }).then(response => {
+                            const result = response.data;
+                            result.data.forEach(item => {
+                                item.loading = false;
+                            });
+                            self.list = result.data;
+                            self.pagination = result.pagination;
+                            self.$notice.open({
+                                title: `删除文章[${article.title}]成功！`,
+                            });
+                        }).finally(() => {
+                            if (self.selections.length === key + 1) {
+                                self.$loading.finish();
+                                self.loading = false;
+                            }
+                        });
+                    });
+                }
             },
             selection(items) {
                 this.selections = items;
