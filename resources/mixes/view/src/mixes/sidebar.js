@@ -14,10 +14,10 @@ export default function (injection) {
                     path: '/content/article/recycle',
                     title: '回收站',
                 },
-                {
-                    path: '/content/article/draft',
-                    title: '草稿箱',
-                },
+                // {
+                //     path: '/content/article/draft',
+                //     title: '草稿箱',
+                // },
             ],
             icon: 'plus',
             title: '文章管理',

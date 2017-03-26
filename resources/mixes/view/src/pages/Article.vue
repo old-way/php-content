@@ -87,8 +87,12 @@
                         'only-no-category': true,
                         page: id,
                     }).then(response => {
-                        self.list = response.data.data;
-                        self.pagination = response.data.pagination;
+                        const result = response.data;
+                        result.data.forEach(item => {
+                            item.loading = false;
+                        });
+                        self.list = result.data;
+                        self.pagination = result.pagination;
                         self.$loading.finish();
                         self.$message.info('更新文章列表成功！');
                     }).catch(() => {
@@ -99,8 +103,12 @@
                         category: self.categories.id,
                         page: id,
                     }).then(response => {
-                        self.list = response.data.data;
-                        self.pagination = response.data.pagination;
+                        const result = response.data;
+                        result.data.forEach(item => {
+                            item.loading = false;
+                        });
+                        self.list = result.data;
+                        self.pagination = result.pagination;
                         self.$loading.finish();
                         self.$message.info('更新文章列表成功！');
                     }).catch(() => {
