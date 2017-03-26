@@ -36,33 +36,7 @@
                         width: 200,
                     },
                 ],
-                list: [
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                    {
-                        title: 'dsdfsdfs0',
-                        author: 'sdfsdf',
-                        enabled: true,
-                    },
-                ],
+                list: [],
                 self: this,
             };
         },
@@ -88,7 +62,7 @@
                         <i-select clearable style="width:200px">
                             <!--<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>-->
                         </i-select>
-                        <router-link to="/content/article/create">
+                        <router-link to="/content/page/create">
                             <i-button type="primary">添加文章</i-button>
                         </router-link>
                         <i-button type="success">选择</i-button>
