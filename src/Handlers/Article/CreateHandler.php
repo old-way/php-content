@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
+use function Couchbase\fastlzDecompress;
 use Illuminate\Container\Container;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
@@ -66,11 +67,12 @@ class CreateHandler extends SetHandler
             'content.required' => '必须填写文章内容',
             'title.required' => '必须填写文章标题',
         ]);
+        $this->container->make('log')->info('create article:', $this->request->all());
         $this->model = $this->model->create([
             'category_id'   => $this->request->input('category_id', 0),
             'content'       => $this->request->input('content'),
-            'is_hidden'     => $this->request->input('hidden'),
-            'is_sticky'     => $this->request->input('sticky'),
+            'is_hidden'     => $this->request->input('hidden', false),
+            'is_sticky'     => $this->request->input('sticky', false),
             'source_author' => $this->request->input('source_author'),
             'source_link'   => $this->request->input('source_link'),
             'description'   => $this->request->input('summary'),

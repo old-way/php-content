@@ -71,9 +71,9 @@
                         formData.append('category_id', self.form.category.id);
                         formData.append('content', self.form.content);
                         formData.append('date', self.form.date);
-                        formData.append('hidden', self.form.hidden);
+                        formData.append('hidden', self.form.hidden ? '1' : '0');
                         formData.append('image', self.form.image);
-                        formData.append('sticky', self.form.sticky);
+                        formData.append('sticky', self.form.sticky ? '1' : '0');
                         formData.append('summary', self.form.summary);
                         formData.append('tags', self.form.tags);
                         formData.append('title', self.form.title);

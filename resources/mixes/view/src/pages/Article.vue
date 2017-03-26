@@ -9,10 +9,9 @@
                 const pagination = response.data.pagination;
                 next(vm => {
                     injection.loading.finish();
-                    injection.sidebar.active('content');
                     vm.list = list;
                     vm.pagination = pagination;
-                    window.console.log(pagination);
+                    injection.sidebar.active('content');
                 });
             }).catch(() => {
                 injection.loading.fail();
@@ -67,7 +66,9 @@
         },
         methods: {
             edit(index) {
-                console.log(index);
+                const self = this;
+                const article = self.list[index];
+                self.$router.push(`/content/article/${article.id}/edit`);
             },
             paginator(id) {
                 const self = this;
