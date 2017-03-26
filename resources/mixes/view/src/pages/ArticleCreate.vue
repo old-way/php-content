@@ -80,7 +80,10 @@
                         formData.append('source_author', self.form.source.author);
                         formData.append('source_link', self.form.source.link);
                         self.$http.post(`${window.api}/article/create`, formData).then(response => {
-                            window.console.log(response);
+                            self.$notice.open({
+                                title: response.data.message,
+                            });
+                            self.$router.push('/content/article');
                         }).finally(() => {
                             self.loading = false;
                         });
