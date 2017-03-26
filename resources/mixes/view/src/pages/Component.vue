@@ -50,7 +50,7 @@
                 self.loading = true;
                 self.$http.post(`${window.api}/content/component/set`, self.form).then(() => {
                     self.$notice.open({
-                        title: '更新全局 SEO 设置信息成功！',
+                        title: '更新 SEO 设置信息成功！',
                     });
                 }).finally(() => {
                     self.loading = false;

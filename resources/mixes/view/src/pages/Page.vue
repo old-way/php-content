@@ -169,9 +169,9 @@
                         <i-button slot="append" icon="ios-search"></i-button>
                     </i-input>
                     <div class="filter">
-                        <i-select clearable style="width:200px">
-                            <!--<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>-->
-                        </i-select>
+                        <!--<i-select clearable style="width:200px">-->
+                            <!--&lt;!&ndash;<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>&ndash;&gt;-->
+                        <!--</i-select>-->
                         <router-link to="/content/page/create">
                             <i-button type="primary">添加页面</i-button>
                         </router-link>

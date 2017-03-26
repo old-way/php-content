@@ -195,9 +195,9 @@
             <card>
                 <template slot="title">
                     <div class="filter">
-                        <i-select clearable style="width:200px">
-                            <!--<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>-->
-                        </i-select>
+                        <!--<i-select clearable style="width:200px">-->
+                            <!--&lt;!&ndash;<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>&ndash;&gt;-->
+                        <!--</i-select>-->
                         <i-button :loading="loading" type="error" @click.native="removeSelected">
                             <span v-if="!loading">删除</span>
                             <span v-else>正在批量删除…</span>
