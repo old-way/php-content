@@ -8,9 +8,13 @@
                 const list = response.data.data;
                 const pagination = response.data.pagination;
                 next(vm => {
-                    injection.loading.finish();
+                    list.forEach(article => {
+                        article.loading = false;
+                    });
                     vm.list = list;
                     vm.pagination = pagination;
+                    injection.loading.finish();
+                    injection.message.info('获取文章列表成功！');
                     injection.sidebar.active('content');
                 });
             }).catch(() => {
@@ -43,16 +47,19 @@
                         title: '文章名称',
                     },
                     {
-                        key: 'author',
-                        title: '作者',
+                        key: 'created_at',
+                        title: '发布时间',
                         width: 200,
                     },
                     {
                         key: 'handle',
                         render(row, column, index) {
                             return `
-                                    <i-button type="primary" @click.native="edit(${index})">编辑</i-button>
-                                    <i-button type="error" @click.native="remove(${index})">删除</i-button>
+                                    <i-button size="small" type="primary" @click.native="edit(${index})">编辑</i-button>
+                                    <i-button :loading="list[${index}].loading"  size="small" type="error" @click.native="remove(${index})">
+                                        <span v-if="!list[${index}].loading">删除</span>
+                                        <span v-else>正在删除…</span>
+                                    </i-button>
                                     `;
                         },
                         title: '操作',
@@ -60,7 +67,9 @@
                     },
                 ],
                 list: [],
+                loading: false,
                 pagination: {},
+                selections: [],
                 self: this,
             };
         },
@@ -81,6 +90,7 @@
                         self.list = response.data.data;
                         self.pagination = response.data.pagination;
                         self.$loading.finish();
+                        self.$message.info('更新文章列表成功！');
                     }).catch(() => {
                         self.$loading.fail();
                     });
@@ -92,18 +102,57 @@
                         self.list = response.data.data;
                         self.pagination = response.data.pagination;
                         self.$loading.finish();
+                        self.$message.info('更新文章列表成功！');
                     }).catch(() => {
                         self.$loading.fail();
                     });
                 }
             },
             remove(index) {
-                console.log(index);
+                const self = this;
+                const article = self.list[index];
+                article.loading = true;
+                self.$http.post(`${window.api}/article/delete`, {
+                    id: article.id,
+                }).then(response => {
+                    const result = response.data;
+                    result.data.forEach(item => {
+                        item.loading = false;
+                    });
+                    self.list = result.data;
+                    self.pagination = result.pagination;
+                    self.$message.info('删除文章成功！');
+                }).finally(() => {
+                    article.loading = false;
+                });
             },
-        },
-        watch: {
-            pagination(val) {
-                window.console.log(val);
+            removeSelected() {
+                const self = this;
+                self.$loading.start();
+                self.loading = true;
+                self.selections.forEach((article, key) => {
+                    self.$http.post(`${window.api}/article/delete`, {
+                        id: article.id,
+                    }).then(response => {
+                        const result = response.data;
+                        result.data.forEach(item => {
+                            item.loading = false;
+                        });
+                        self.list = result.data;
+                        self.pagination = result.pagination;
+                        self.$notice.open({
+                            title: `删除文章[${article.title}]成功！`,
+                        });
+                    }).finally(() => {
+                        if (self.selections.length === key + 1) {
+                            self.$loading.finish();
+                            self.loading = false;
+                        }
+                    });
+                });
+            },
+            selection(items) {
+                this.selections = items;
             },
         },
     };
@@ -123,10 +172,13 @@
                         <router-link to="/content/article/create">
                             <i-button type="primary">添加文章</i-button>
                         </router-link>
-                        <i-button type="error">删除</i-button>
+                        <i-button :loading="loading" type="error" @click.native="removeSelected">
+                            <span v-if="!loading">删除</span>
+                            <span v-else>正在批量删除…</span>
+                        </i-button>
                     </div>
                 </template>
-                <i-table :columns="columns" :content="self" :data="list"></i-table>
+                <i-table :columns="columns" :content="self" :data="list" @on-selection-change="selection"></i-table>
                 <div class="ivu-page-wrap">
                     <page :current="pagination.current_page" :page-size="pagination.per_page" :total="pagination.total" @on-change="paginator"></page>
                 </div>

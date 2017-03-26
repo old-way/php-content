@@ -98,7 +98,7 @@
                         formData.append('content', self.form.content);
                         formData.append('date', self.form.date);
                         formData.append('hidden', self.form.hidden ? '1' : '0');
-                        formData.append('id', self.$route.params.id)
+                        formData.append('id', self.$route.params.id);
                         formData.append('image', self.form.image);
                         formData.append('sticky', self.form.sticky ? '1' : '0');
                         formData.append('summary', self.form.summary);

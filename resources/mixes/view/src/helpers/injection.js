@@ -11,6 +11,7 @@ function install(instance) {
     Object.assign(injection, {
         http: instance.http,
         loading: instance.loading,
+        message: instance.message,
         sidebar: instance.sidebar,
     });
     mixinBoard(instance);
