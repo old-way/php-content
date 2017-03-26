@@ -34,6 +34,8 @@ class FetchHandler extends DataHandler
         Page $page
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::page.fetch.fail'));
+        $this->messages->push($this->translator->trans('content::page.fetch.success'));
         $this->model = $page;
     }
 
@@ -82,30 +84,6 @@ class FetchHandler extends DataHandler
         }
 
         return $this->pagination->items();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::page.fetch.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::page.fetch.success'),
-        ];
     }
 
     /**

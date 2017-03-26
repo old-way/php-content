@@ -26,19 +26,9 @@ class EditHandler extends SetHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::page.update.fail'));
+        $this->messages->push($this->translator->trans('content::page.update.success'));
         $this->model = new Page();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::page.update.fail'),
-        ];
     }
 
     /**
@@ -71,17 +61,5 @@ class EditHandler extends SetHandler
         ]);
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::page.update.success'),
-        ];
     }
 }

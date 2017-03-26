@@ -28,6 +28,8 @@ class CreateHandler extends SetHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::article.find.fail'));
+        $this->messages->push($this->translator->trans('content::article.find.success'));
         $this->model = $category;
     }
 
@@ -39,18 +41,6 @@ class CreateHandler extends SetHandler
     public function data()
     {
         return $this->model->structure();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category.create.fail'),
-        ];
     }
 
     /**
@@ -87,9 +77,6 @@ class CreateHandler extends SetHandler
             'top_image'        => $this->request->input('top_image'),
             'type'             => $this->request->input('type') ?: 'normal',
         ]);
-        $this->messages = [
-            $this->translator->trans('content::category.create.success'),
-        ];
 
         return true;
     }

@@ -64,17 +64,11 @@ class DeleteHandler extends SetHandler
     public function errors()
     {
         if ($this->request->input('force')) {
-            return [
-                $this->translator->trans('content::article.force.fail'),
-            ];
+            $this->errors->push($this->translator->trans('content::article.force.fail'));
         } elseif ($this->request->input('restore')) {
-            return [
-                $this->translator->trans('content::article.force.fail'),
-            ];
+            $this->errors->push($this->translator->trans('content::article.force.fail'));
         } else {
-            return [
-                $this->translator->trans('content::article.force.fail'),
-            ];
+            $this->errors->push($this->translator->trans('content::article.force.fail'));
         }
     }
 
@@ -93,19 +87,13 @@ class DeleteHandler extends SetHandler
         $restore = $this->request->input('restore');
         if ($force) {
             $article->forceDelete();
-            $this->messages = [
-                $this->translator->trans('content::article.force.success'),
-            ];
+            $this->messages->push($this->translator->trans('content::article.force.success'));
         } elseif ($restore) {
             $article->restore();
-            $this->messages = [
-                $this->translator->trans('content::article.force.success'),
-            ];
+            $this->messages->push($this->translator->trans('content::article.force.success'));
         } else {
             $article->delete();
-            $this->messages = [
-                $this->translator->trans('content::article.force.success'),
-            ];
+            $this->messages->push($this->translator->trans('content::article.force.success'));
         }
 
         return true;

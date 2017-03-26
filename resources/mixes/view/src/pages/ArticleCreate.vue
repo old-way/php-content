@@ -65,12 +65,38 @@
             submit() {
                 const self = this;
                 self.loading = true;
+                self.$refs.form.validate(valid => {
+                    if (valid) {
+                        const formData = new window.FormData();
+                        formData.append('category_id', self.form.category.id);
+                        formData.append('content', self.form.content);
+                        formData.append('date', self.form.date);
+                        formData.append('hidden', self.form.hidden);
+                        formData.append('image', self.form.image);
+                        formData.append('sticky', self.form.sticky);
+                        formData.append('summary', self.form.summary);
+                        formData.append('tags', self.form.tags);
+                        formData.append('title', self.form.title);
+                        formData.append('source_author', self.form.source.author);
+                        formData.append('source_link', self.form.source.link);
+                        self.$http.post(`${window.api}/article/create`, formData).then(response => {
+                            window.console.log(response);
+                        }).finally(() => {
+                            self.loading = false;
+                        });
+                    } else {
+                        self.loading = false;
+                        self.$notice.error({
+                            title: '请先填写文章内容！',
+                        });
+                    }
+                });
             },
         },
         watch: {
             'form.content': {
-                handler(val) {
-                    window.console.log(val);
+                handler() {
+                    this.$refs.form.validateField('content');
                 },
             },
         },
@@ -98,15 +124,15 @@
                         </card>
                     </i-col>
                     <i-col span="8">
+                        <!--<card>-->
+                            <!--<p slot="title">草稿箱</p>-->
+                        <!--</card>-->
                         <card>
-                            <p slot="title">草稿箱</p>
-                        </card>
-                        <card>
-                            <form-item label="缩略图" prop="image">
-                                <upload action="//jsonplaceholder.typicode.com/posts/">
-                                    <i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>
-                                </upload>
-                            </form-item>
+                            <!--<form-item label="缩略图" prop="image">-->
+                                <!--<upload action="//jsonplaceholder.typicode.com/posts/">-->
+                                    <!--<i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>-->
+                                <!--</upload>-->
+                            <!--</form-item>-->
                             <form-item label="置顶" prop="sticky">
                                 <i-switch v-model="form.sticky" size="large">
                                     <span slot="open">置顶</span>

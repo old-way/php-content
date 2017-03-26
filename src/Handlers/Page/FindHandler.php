@@ -28,6 +28,8 @@ class FindHandler extends DataHandler
         Page $page
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::page.find.fail'));
+        $this->messages->push($this->translator->trans('content::page.find.success'));
         $this->model = $page;
     }
 
@@ -45,29 +47,5 @@ class FindHandler extends DataHandler
         }
 
         return $page->getAttributes();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::page.find.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::page.find.success'),
-        ];
     }
 }

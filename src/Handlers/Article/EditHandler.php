@@ -28,19 +28,9 @@ class EditHandler extends SetHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::article.update.fail'));
+        $this->messages->push($this->translator->trans('content::article.update.success'));
         $this->model = $article;
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::article.update.fail'),
-        ];
     }
 
     /**
@@ -71,9 +61,6 @@ class EditHandler extends SetHandler
             'keyword'       => $this->request->input('tags'),
             'title'         => $this->request->input('title'),
         ]);
-        $this->messages = [
-            $this->translator->trans('content::article.update.success'),
-        ];
 
         return true;
     }
