@@ -6,10 +6,10 @@ export default function (injection) {
                     path: '/content/article',
                     title: '全部文章',
                 },
-                {
-                    path: '/content/article/category',
-                    title: '分类管理',
-                },
+                // {
+                //     path: '/content/article/category',
+                //     title: '分类管理',
+                // },
                 {
                     path: '/content/article/recycle',
                     title: '回收站',
@@ -28,10 +28,10 @@ export default function (injection) {
                     path: '/content/page',
                     title: '全部页面',
                 },
-                {
-                    path: '/content/page/category',
-                    title: '分类管理',
-                },
+                // {
+                //     path: '/content/page/category',
+                //     title: '分类管理',
+                // },
             ],
             icon: 'plus',
             title: '页面管理',
