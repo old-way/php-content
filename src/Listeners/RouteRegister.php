@@ -84,8 +84,9 @@ class RouteRegister extends AbstractRouteRegister
                     $this->router->post('fetch', CategoryTypeApiController::class . '@fetch');
                 });
             });
-            $this->router->group(['prefix' => 'api/content'], function () {
-                $this->router->post('component', ComponentController::class . '@seo');
+            $this->router->group(['prefix' => 'api/content/component'], function () {
+                $this->router->post('get', ComponentController::class . '@get');
+                $this->router->post('set', ComponentController::class . '@set');
             });
             $this->router->group(['prefix' => 'api/page'], function () {
                 $this->router->post('create', PageApiController::class . '@create');
