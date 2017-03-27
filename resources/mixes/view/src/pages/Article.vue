@@ -66,6 +66,7 @@
                         width: 200,
                     },
                 ],
+                keyword: '',
                 list: [],
                 loading: false,
                 pagination: {},
@@ -167,6 +168,31 @@
                     });
                 }
             },
+            search() {
+                const self = this;
+                if (self.keyword.length > 0) {
+                    injection.loading.start();
+                    injection.http.post(`${window.api}/article/fetch`, {
+                        search: self.keyword,
+                    }).then(response => {
+                        const list = response.data.data;
+                        list.forEach(article => {
+                            article.loading = false;
+                        });
+                        self.list = list;
+                        self.pagination = response.data.pagination;
+                        injection.loading.finish();
+                        injection.message.info('获取文章列表成功！');
+                        injection.sidebar.active('content');
+                    }).catch(() => {
+                        injection.loading.fail();
+                    });
+                } else {
+                    self.$notice.error({
+                        title: '请先输入搜索关键词！',
+                    });
+                }
+            },
             selection(items) {
                 this.selections = items;
             },
@@ -178,8 +204,8 @@
         <div class="article-list">
             <card>
                 <template slot="title">
-                    <i-input class="search" placeholder="请输入搜索关键字">
-                        <i-button slot="append" icon="ios-search"></i-button>
+                    <i-input class="search" placeholder="请输入搜索关键字" v-model="keyword">
+                        <i-button slot="append" icon="ios-search" @click.native="search"></i-button>
                     </i-input>
                     <div class="filter">
                         <i-select clearable style="width:200px">
@@ -196,7 +222,8 @@
                 </template>
                 <i-table :columns="columns" :content="self" :data="list" @on-selection-change="selection"></i-table>
                 <div class="ivu-page-wrap">
-                    <page :current="pagination.current_page" :page-size="pagination.per_page" :total="pagination.total" @on-change="paginator"></page>
+                    <page :current="pagination.current_page" :page-size="pagination.per_page" :total="pagination.total"
+                          @on-change="paginator"></page>
                 </div>
             </card>
         </div>
