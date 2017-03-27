@@ -21,9 +21,9 @@
                     vm.form.hidden = article.is_hidden === 1;
                     vm.form.image = article.thumb_image ? `${window.url}/${article.thumb_image}` : '';
                     vm.form.sticky = article.is_sticky === 1;
-                    if (article.keyword.length) {
-                        vm.form.tags = article.keyword.split(',');
-                    }
+//                    if (article.keyword.length) {
+//                        vm.form.tags = article.keyword.split(',');
+//                    }
                     vm.form.source = {
                         author: article.source_author,
                         link: article.source_link,
