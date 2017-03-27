@@ -53,6 +53,7 @@
                         width: 200,
                     },
                 ],
+                keyword: '',
                 list: [],
                 loading: false,
                 pagination: {},
@@ -137,8 +138,8 @@
                             id: article.id,
                         }).then(response => {
                             const result = response.data;
-                            result.data.forEach(item => {
-                                item.loading = false;
+                            result.data.forEach(page => {
+                                page.loading = false;
                             });
                             self.list = result.data;
                             self.pagination = result.pagination;
@@ -154,6 +155,31 @@
                     });
                 }
             },
+            search() {
+                const self = this;
+                if (self.keyword.length > 0) {
+                    injection.loading.start();
+                    self.$http.post(`${window.api}/page/fetch`, {
+                        search: self.keyword,
+                    }).then(response => {
+                        const list = response.data.data;
+                        list.forEach(page => {
+                            page.loading = false;
+                        });
+                        self.list = list;
+                        self.pagination = response.data.pagination;
+                        injection.loading.finish();
+                        injection.message.info('获取文章列表成功！');
+                        injection.sidebar.active('content');
+                    }).catch(() => {
+                        injection.loading.fail();
+                    });
+                } else {
+                    self.$notice.error({
+                        title: '请先输入搜索关键词！',
+                    });
+                }
+            },
             selection(items) {
                 this.selections = items;
             },
@@ -165,8 +191,8 @@
         <div class="article-list">
             <card>
                 <template slot="title">
-                    <i-input class="search" placeholder="请输入搜索关键字">
-                        <i-button slot="append" icon="ios-search"></i-button>
+                    <i-input class="search" placeholder="请输入搜索关键字" v-model="keyword">
+                        <i-button slot="append" icon="ios-search" @click.native="search"></i-button>
                     </i-input>
                     <div class="filter">
                         <i-select clearable style="width:200px">
