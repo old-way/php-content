@@ -1,3 +1,5 @@
+import $ from 'jquery';
+
 import {
     mixinBoard,
     mixinNavigation,
@@ -10,6 +12,7 @@ const injection = {};
 function install(instance) {
     Object.assign(injection, {
         http: instance.http,
+        jquery: $,
         loading: instance.loading,
         message: instance.message,
         sidebar: instance.sidebar,
