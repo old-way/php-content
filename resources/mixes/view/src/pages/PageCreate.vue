@@ -4,8 +4,29 @@
 
     export default {
         beforeRouteEnter(to, from, next) {
-            next(() => {
-                injection.sidebar.active('content');
+            injection.loading.start();
+            injection.http.post(`${window.api}/page/category/fetch`).then(response => {
+                const list = response.data.data;
+                next(vm => {
+                    vm.form.category.list = list.map(first => ({
+                        children: first.children.map(second => ({
+                            children: second.children.map(third => ({
+                                children: [],
+                                label: third.title,
+                                value: third.id,
+                            })),
+                            label: second.title,
+                            value: second.id,
+                        })),
+                        label: first.title,
+                        value: first.id,
+                    }));
+                    injection.loading.finish();
+                    injection.message.info('获取分类列表成功！');
+                    injection.sidebar.active('content');
+                });
+            }).catch(() => {
+                injection.loading.fail();
             });
         },
         components: {
@@ -69,7 +90,7 @@
                     if (valid) {
                         const formData = new window.FormData();
                         formData.append('alias', self.form.alias);
-                        formData.append('category_id', self.form.category.id);
+                        formData.append('category_id', self.form.category.id[self.form.category.id.length - 1]);
                         formData.append('content', self.form.content);
                         formData.append('enabled', self.form.enabled ? '1' : '0');
                         formData.append('title', self.form.title);
@@ -112,6 +133,9 @@
                             </form-item>
                             <form-item label="别名" prop="alias">
                                 <i-input placeholder="请输入页面标题" v-model="form.alias"></i-input>
+                            </form-item>
+                            <form-item label="分类">
+                                <cascader :data="form.category.list" v-model="form.category.id"></cascader>
                             </form-item>
                             <form-item label="开启" prop="enabled">
                                 <i-switch v-model="form.enabled" size="large">

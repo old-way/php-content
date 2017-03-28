@@ -9,7 +9,9 @@
 namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
+use Illuminate\Support\Collection;
 use Notadd\Content\Models\Page;
+use Notadd\Content\Models\PageCategory;
 use Notadd\Foundation\Passport\Abstracts\DataHandler;
 
 /**
@@ -43,9 +45,25 @@ class FindHandler extends DataHandler
         $page = $this->model->newQuery()->find($this->request->input('id'));
         $category = $page->getAttribute('category');
         if ($category) {
+            $data = new Collection();
+            $this->loopCategory($page->getAttribute('category_id'), $data);
             $page->setAttribute('category', $category->getAttributes());
+            $page->setAttribute('category_path', $data->toArray());
         }
 
         return $page->getAttributes();
+    }
+
+    /**
+     * @param                                $id
+     * @param \Illuminate\Support\Collection $data
+     */
+    protected function loopCategory($id, Collection $data)
+    {
+        $parent = (new PageCategory())->newQuery()->find($id);
+        if ($parent) {
+            $data->prepend($parent->getAttribute('id'));
+            $parent->getAttribute('parent_id') && $this->loopCategory($parent->getAttribute('parent_id'), $data);
+        }
     }
 }

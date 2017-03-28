@@ -8,27 +8,46 @@
             injection.http.post(`${window.api}/article/find`, {
                 id: to.params.id,
             }).then(response => {
-                window.console.log(response);
-                next(vm => {
-                    injection.sidebar.active('content');
-                    const article = response.data.data;
-                    vm.form.category.id = article.category ? article.category.id : 0;
-                    vm.form.category.text = article.category ? `选择分类[${article.category.title}(${article.category.id})]` : '选择分类[未分类(0)]';
-                    vm.form.title = article.title;
-                    vm.form.date = article.created_at;
-                    vm.form.content = article.content;
-                    vm.form.summary = article.description;
-                    vm.form.hidden = article.is_hidden === 1;
-                    vm.form.image = article.thumb_image ? `${window.url}/${article.thumb_image}` : '';
-                    vm.form.sticky = article.is_sticky === 1;
+                const article = response.data.data;
+                injection.message.info('获取文章信息成功！');
+                injection.http.post(`${window.api}/category/fetch`).then(result => {
+                    const list = result.data.data;
+                    next(vm => {
+                        vm.form.category.id = article.category_path ? article.category_path : [];
+                        vm.form.category.list = list.map(first => ({
+                            children: first.children.map(second => ({
+                                children: second.children.map(third => ({
+                                    children: [],
+                                    label: third.title,
+                                    value: third.id,
+                                })),
+                                label: second.title,
+                                value: second.id,
+                            })),
+                            label: first.title,
+                            value: first.id,
+                        }));
+                        vm.form.category.text = article.category ? `选择分类[${article.category.title}(${article.category.id})]` : '选择分类[未分类(0)]';
+                        vm.form.title = article.title;
+                        vm.form.date = article.created_at;
+                        vm.form.content = article.content;
+                        vm.form.summary = article.description;
+                        vm.form.hidden = article.is_hidden === 1;
+                        vm.form.image = article.thumb_image ? `${window.url}/${article.thumb_image}` : '';
+                        vm.form.sticky = article.is_sticky === 1;
 //                    if (article.keyword.length) {
 //                        vm.form.tags = article.keyword.split(',');
 //                    }
-                    vm.form.source = {
-                        author: article.source_author,
-                        link: article.source_link,
-                    };
-                    injection.loading.finish();
+                        vm.form.source = {
+                            author: article.source_author,
+                            link: article.source_link,
+                        };
+                        injection.loading.finish();
+                        injection.message.info('获取分类列表成功！');
+                        injection.sidebar.active('content');
+                    });
+                }).catch(() => {
+                    injection.loading.fail();
                 });
             }).catch(() => {
                 injection.loading.fail();
@@ -94,7 +113,7 @@
                 self.$refs.form.validate(valid => {
                     if (valid) {
                         const formData = new window.FormData();
-                        formData.append('category_id', self.form.category.id);
+                        formData.append('category_id', self.form.category.id[self.form.category.id.length - 1]);
                         formData.append('content', self.form.content);
                         formData.append('date', self.form.date);
                         formData.append('hidden', self.form.hidden ? '1' : '0');
@@ -164,6 +183,9 @@
                             <!--<i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>-->
                             <!--</upload>-->
                             <!--</form-item>-->
+                            <form-item label="分类">
+                                <cascader :data="form.category.list" v-model="form.category.id"></cascader>
+                            </form-item>
                             <form-item label="置顶" prop="sticky">
                                 <i-switch v-model="form.sticky" size="large">
                                     <span slot="open">置顶</span>

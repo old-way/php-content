@@ -4,8 +4,29 @@
 
     export default {
         beforeRouteEnter(to, from, next) {
-            next(() => {
-                injection.sidebar.active('content');
+            injection.loading.start();
+            injection.http.post(`${window.api}/category/fetch`).then(response => {
+                const list = response.data.data;
+                next(vm => {
+                    vm.form.category.list = list.map(first => ({
+                        children: first.children.map(second => ({
+                            children: second.children.map(third => ({
+                                children: [],
+                                label: third.title,
+                                value: third.id,
+                            })),
+                            label: second.title,
+                            value: second.id,
+                        })),
+                        label: first.title,
+                        value: first.id,
+                    }));
+                    injection.loading.finish();
+                    injection.message.info('获取分类列表成功！');
+                    injection.sidebar.active('content');
+                });
+            }).catch(() => {
+                injection.loading.fail();
             });
         },
         components: {
@@ -68,7 +89,7 @@
                 self.$refs.form.validate(valid => {
                     if (valid) {
                         const formData = new window.FormData();
-                        formData.append('category_id', self.form.category.id);
+                        formData.append('category_id', self.form.category.id[self.form.category.id.length - 1]);
                         formData.append('content', self.form.content);
                         formData.append('date', self.form.date);
                         formData.append('hidden', self.form.hidden ? '1' : '0');
@@ -136,6 +157,9 @@
                                     <!--<i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>-->
                                 <!--</upload>-->
                             <!--</form-item>-->
+                            <form-item label="分类">
+                                <cascader :data="form.category.list" v-model="form.category.id"></cascader>
+                            </form-item>
                             <form-item label="置顶" prop="sticky">
                                 <i-switch v-model="form.sticky" size="large">
                                     <span slot="open">置顶</span>

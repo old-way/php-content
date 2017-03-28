@@ -8,16 +8,35 @@
             injection.http.post(`${window.api}/page/find`, {
                 id: to.params.id,
             }).then(response => {
-                next(vm => {
-                    injection.sidebar.active('content');
-                    const article = response.data.data;
-                    vm.form.alias = article.alias;
-                    vm.form.category.id = article.category ? article.category.id : 0;
-                    vm.form.category.text = article.category ? `选择分类[${article.category.title}(${article.category.id})]` : '选择分类[未分类(0)]';
-                    vm.form.enabled = article.enabled === 1;
-                    vm.form.title = article.title;
-                    vm.form.content = article.content;
-                    injection.loading.finish();
+                const article = response.data.data;
+                injection.http.post(`${window.api}/page/category/fetch`).then(result => {
+                    const list = result.data.data;
+                    next(vm => {
+                        vm.form.category.list = list.map(first => ({
+                            children: first.children.map(second => ({
+                                children: second.children.map(third => ({
+                                    children: [],
+                                    label: third.title,
+                                    value: third.id,
+                                })),
+                                label: second.title,
+                                value: second.id,
+                            })),
+                            label: first.title,
+                            value: first.id,
+                        }));
+                        vm.form.alias = article.alias;
+                        vm.form.category.id = article.category_path ? article.category_path : [];
+                        vm.form.category.text = article.category ? `选择分类[${article.category.title}(${article.category.id})]` : '选择分类[未分类(0)]';
+                        vm.form.enabled = article.enabled === 1;
+                        vm.form.title = article.title;
+                        vm.form.content = article.content;
+                        injection.loading.finish();
+                        injection.message.info('获取页面信息成功！');
+                        injection.sidebar.active('content');
+                    });
+                }).catch(() => {
+                    injection.loading.fail();
                 });
             }).catch(() => {
                 injection.loading.fail();
@@ -84,7 +103,7 @@
                     if (valid) {
                         const formData = new window.FormData();
                         formData.append('alias', self.form.alias);
-                        formData.append('category_id', self.form.category.id);
+                        formData.append('category_id', self.form.category.id[self.form.category.id.length - 1]);
                         formData.append('content', self.form.content);
                         formData.append('enabled', self.form.enabled ? '1' : '0');
                         formData.append('id', self.$route.params.id);
@@ -128,6 +147,9 @@
                             </form-item>
                             <form-item label="别名" prop="alias">
                                 <i-input placeholder="请输入页面标题" v-model="form.alias"></i-input>
+                            </form-item>
+                            <form-item label="分类">
+                                <cascader :data="form.category.list" v-model="form.category.id"></cascader>
                             </form-item>
                             <form-item label="开启" prop="enabled">
                                 <i-switch v-model="form.enabled" size="large">
