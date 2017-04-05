@@ -41,7 +41,7 @@
 
                     editorScriptTag = document.createElement('script');
                     editorScriptTag.type = 'text/javascript';
-                    editorScriptTag.src = `${self.path}neditor.all.js`;
+                    editorScriptTag.src = `${self.path}neditor.all.min.js`;
                     editorScriptTag.id = 'editorScriptTag';
                     const s = document.getElementsByTagName('head')[0];
                     s.appendChild(configScriptTag);
