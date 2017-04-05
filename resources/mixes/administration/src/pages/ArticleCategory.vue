@@ -60,6 +60,7 @@
                         },
                     ],
                 },
+                updated: false,
             };
         },
         methods: {
