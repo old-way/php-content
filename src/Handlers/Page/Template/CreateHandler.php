@@ -33,6 +33,8 @@ class CreateHandler extends SetHandler
         PageTemplate $pageTemplate
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::page_template.create.fail'));
+        $this->messages->push($this->translator->trans('content::page_template.create.success'));
         $this->model = $pageTemplate;
     }
 
@@ -49,18 +51,6 @@ class CreateHandler extends SetHandler
     }
 
     /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::page_template.create.fail'),
-        ];
-    }
-
-    /**
      * Execute Handler.
      *
      * @return bool
@@ -70,17 +60,5 @@ class CreateHandler extends SetHandler
         $this->id = $this->model->create($this->request->all());
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::page_template.create.success'),
-        ];
     }
 }
