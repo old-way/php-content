@@ -111,7 +111,7 @@
                     } else {
                         self.loading = false;
                         self.$notice.error({
-                            title: '请先填写文章内容！',
+                            title: '填写内容不完整或填写错误！',
                         });
                     }
                 });
