@@ -70,6 +70,8 @@ class DeleteHandler extends SetHandler
         } else {
             $this->errors->push($this->translator->trans('content::article.force.fail'));
         }
+
+        return parent::errors();
     }
 
     /**

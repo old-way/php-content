@@ -68,7 +68,7 @@ class CreateHandler extends SetHandler
             'title.required' => '必须填写文章标题',
         ]);
         $this->container->make('log')->info('create article:', $this->request->all());
-        $this->model = $this->model->create([
+        $this->model = $this->model->newQuery()->create([
             'category_id'   => $this->request->input('category_id', 0),
             'content'       => $this->request->input('content'),
             'is_hidden'     => $this->request->input('hidden', false),

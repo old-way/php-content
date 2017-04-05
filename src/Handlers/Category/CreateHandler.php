@@ -61,7 +61,7 @@ class CreateHandler extends SetHandler
             'alias.unique' => '分类别名已被占用',
             'title.required' => '必须填写分类标题',
         ]);
-        $this->model->create([
+        $this->model->newQuery()->create([
             'alias'            => $this->request->input('alias'),
             'background_color' => $this->request->input('background_color'),
             'background_image' => $this->request->input('background_image'),
