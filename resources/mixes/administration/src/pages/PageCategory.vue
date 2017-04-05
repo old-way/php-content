@@ -104,7 +104,7 @@
             remove() {
                 const self = this;
                 if (self.form.pattern === 'edit') {
-                    self.$http.post(`${window.api}/page/category/delete`, self.modal).then(response => {
+                    self.$http.post(`${window.api}/page/category/delete`, self.form).then(response => {
                         self.list = response.data.data;
                     }).finally(() => {
                         self.modal.visible = false;
@@ -145,25 +145,45 @@
                 const self = this;
                 self.modal.loading = true;
                 if (self.form.pattern === 'create') {
-                    self.$http.post(`${window.api}/page/category/create`, self.form).then(response => {
-                        self.list = response.data.data;
-                        self.$notice.open({
-                            title: '创建分类成功！',
-                        });
-                    }).finally(() => {
-                        self.modal.loading = false;
-                        self.modal.visible = false;
+                    self.$refs.form.validate(valid => {
+                        if (valid) {
+                            self.$http.post(`${window.api}/page/category/create`, self.form).then(response => {
+                                self.list = response.data.data;
+                                self.$notice.open({
+                                    title: '创建分类成功！',
+                                });
+                            }).finally(() => {
+                                self.modal.loading = false;
+                                self.modal.visible = false;
+                            });
+                        } else {
+                            self.$notice.error({
+                                title: '请正确填写分类信息！',
+                            });
+                            self.modal.loading = false;
+                            self.modal.visible = false;
+                        }
                     });
                 }
                 if (self.form.pattern === 'edit') {
-                    self.$http.post(`${window.api}/page/category/edit`, self.form).then(response => {
-                        self.list = response.data.data;
-                        self.$notice.open({
-                            title: '编辑分类成功！',
-                        });
-                    }).finally(() => {
-                        self.modal.loading = false;
-                        self.modal.visible = false;
+                    self.$refs.form.validate(valid => {
+                        if (valid) {
+                            self.$http.post(`${window.api}/page/category/edit`, self.form).then(response => {
+                                self.list = response.data.data;
+                                self.$notice.open({
+                                    title: '编辑分类成功！',
+                                });
+                            }).finally(() => {
+                                self.modal.loading = false;
+                                self.modal.visible = false;
+                            });
+                        } else {
+                            self.$notice.error({
+                                title: '请正确填写分类信息！',
+                            });
+                            self.modal.loading = false;
+                            self.modal.visible = false;
+                        }
                     });
                 }
             },
@@ -233,7 +253,7 @@
         </div>
         <modal :loading="modal.loading" :value="modal.visible" @on-cancel="modal.visible = false" @on-ok="submit">
             <template slot="header">
-                <div class="ivu-modal-header-inner">
+                <div class="ivu-modal-header-inner category-modal-header">
                     {{ form.title }}
                     <button v-if="form.pattern === 'edit'" @click="remove">删除</button>
                 </div>
