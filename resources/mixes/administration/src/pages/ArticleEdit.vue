@@ -199,7 +199,7 @@
                                 </i-switch>
                             </form-item>
                             <form-item label="发布时间">
-                                <date-picker placeholder="请选择发布时间" type="date" v-model="form.date"></date-picker>
+                                <date-picker placeholder="请选择发布时间" type="datetime" v-model="form.date"></date-picker>
                             </form-item>
                             <form-item label="来源">
                                 <i-input placeholder="请输入来源" v-model="form.source.author"></i-input>
