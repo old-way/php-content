@@ -28,6 +28,8 @@ class EditHandler extends SetHandler
         PageCategory $category
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::category.update.fail'));
+        $this->messages->push($this->translator->trans('content::category.update.success'));
         $this->model = $category;
     }
 
@@ -39,18 +41,6 @@ class EditHandler extends SetHandler
     public function data()
     {
         return $this->model->structure();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category.update.fail'),
-        ];
     }
 
     /**
@@ -88,17 +78,5 @@ class EditHandler extends SetHandler
         ]);
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::category.update.success'),
-        ];
     }
 }

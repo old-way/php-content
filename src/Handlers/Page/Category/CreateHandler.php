@@ -33,6 +33,8 @@ class CreateHandler extends SetHandler
         PageCategory $category
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::category.create.fail'));
+        $this->messages->push($this->translator->trans('content::category.create.success'));
         $this->model = $category;
     }
 
@@ -44,18 +46,6 @@ class CreateHandler extends SetHandler
     public function data()
     {
         return $this->model->structure();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category.create.fail'),
-        ];
     }
 
     /**
@@ -94,17 +84,5 @@ class CreateHandler extends SetHandler
         ]);
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::category.create.success'),
-        ];
     }
 }

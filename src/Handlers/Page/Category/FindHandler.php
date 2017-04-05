@@ -28,6 +28,8 @@ class FindHandler extends DataHandler
         PageCategory $category
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::category.find.fail'));
+        $this->messages->push($this->translator->trans('content::category.find.success'));
         $this->model = $category;
     }
 
@@ -41,29 +43,5 @@ class FindHandler extends DataHandler
         $category = $this->model->newQuery()->find($this->request->input('id'));
 
         return $category->getAttributes();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category.find.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::category.find.success'),
-        ];
     }
 }
