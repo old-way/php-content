@@ -104,7 +104,7 @@
             remove() {
                 const self = this;
                 if (self.form.pattern === 'edit') {
-                    self.$http.post(`${window.api}/category/delete`, self.modal).then(response => {
+                    self.$http.post(`${window.api}/category/delete`, self.form).then(response => {
                         self.list = response.data.data;
                     }).finally(() => {
                         self.modal.visible = false;
@@ -233,7 +233,7 @@
         </div>
         <modal :loading="modal.loading" :value="modal.visible" @on-cancel="modal.visible = false" @on-ok="submit">
             <template slot="header">
-                <div class="ivu-modal-header-inner">
+                <div class="ivu-modal-header-inner category-modal-header">
                     {{ form.title }}
                     <button v-if="form.pattern === 'edit'" @click="remove">删除</button>
                 </div>
