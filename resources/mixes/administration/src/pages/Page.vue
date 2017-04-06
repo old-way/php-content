@@ -4,20 +4,32 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/page/fetch`).then(response => {
-                const list = response.data.data;
-                const pagination = response.data.pagination;
+            injection.http.all([
+                injection.http.post(`${window.api}/page/fetch`),
+                injection.http.post(`${window.api}/page/category/fetch`, {
+                    'with-children': true,
+                }),
+            ]).then(injection.http.spread((pageData, categoryData) => {
+                window.console.log(pageData, categoryData);
+                const list = pageData.data.data;
+                const pagination = pageData.data.pagination;
                 next(vm => {
-                    list.forEach(article => {
-                        article.loading = false;
+                    list.forEach(page => {
+                        page.loading = false;
                     });
                     vm.list = list;
                     vm.pagination = pagination;
+                    vm.categories.all = categoryData.data.data;
+                    vm.categories.all.forEach(category => {
+                        if (category.parent_id === 0) {
+                            vm.categories.first.push(category);
+                        }
+                    });
                     injection.loading.finish();
                     injection.message.info('获取页面列表成功！');
                     injection.sidebar.active('content');
                 });
-            }).catch(() => {
+            })).catch(() => {
                 injection.loading.fail();
             });
         },
