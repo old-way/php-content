@@ -75,6 +75,84 @@
             };
         },
         methods: {
+            category(value, level) {
+                const self = this;
+                function find() {
+                    let selected;
+                    self.categories.all.forEach(cateogry => {
+                        if (cateogry.id.toString() === self.categories.id.toString()) {
+                            selected = cateogry;
+                        }
+                    });
+                    return selected;
+                }
+                let category;
+                self.categories.id = value;
+                if (self.categories.id === '0') {
+                    switch (level) {
+                        case 'first':
+                            self.categories.second = [];
+                            self.categories.third = [];
+                            break;
+                        case 'second':
+                            self.categories.third = [];
+                            self.categories.id = self.categories.selected.first;
+                            break;
+                        case 'third':
+                            self.categories.id = self.categories.selected.second;
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    switch (level) {
+                        case 'first':
+                            if (self.categories.id === 'none') {
+                                self.categories.second = [];
+                                self.categories.third = [];
+                            } else {
+                                category = find();
+                                self.categories.second = category.children ? category.children : [];
+                                self.categories.third = [];
+                                self.categories.selected.first = self.categories.id;
+                            }
+                            break;
+                        case 'second':
+                            category = find();
+                            self.categories.third = category.children ? category.children : [];
+                            self.categories.selected.second = self.categories.id;
+                            break;
+                        case 'third':
+                            self.categories.selected.third = self.categories.id;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                if (self.categories.id === 'none') {
+                    self.$http.post(`${window.api}/article/fetch`, {
+                        'only-no-category': true,
+                    }).then(response => {
+                        self.list = [];
+                        response.data.data.forEach(article => {
+                            article.checked = false;
+                            self.list.push(article);
+                        });
+                        self.pagination = response.data.pagination;
+                    });
+                } else {
+                    self.$http.post(`${window.api}/article/fetch`, {
+                        category: self.categories.id,
+                    }).then(response => {
+                        self.list = [];
+                        response.data.data.forEach(article => {
+                            article.checked = false;
+                            self.list.push(article);
+                        });
+                        self.pagination = response.data.pagination;
+                    });
+                }
+            },
             edit(index) {
                 const self = this;
                 const article = self.list[index];
@@ -197,6 +275,26 @@
                 this.selections = items;
             },
         },
+        watch: {
+            'categories.selected.first': {
+                deep: true,
+                handler(value) {
+                    this.category(value, 'first');
+                },
+            },
+            'categories.selected.second': {
+                deep: true,
+                handler(value) {
+                    this.category(value, 'second');
+                },
+            },
+            'categories.selected.third': {
+                deep: true,
+                handler(value) {
+                    this.category(value, 'third');
+                },
+            },
+        },
     };
 </script>
 <template>
@@ -210,6 +308,17 @@
                     <div class="filter">
                         <i-select clearable style="width:200px">
                             <!--<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>-->
+                        <i-select clearable style="width:200px" v-if="categories.first.length !== 0" v-model="categories.selected.first">
+                            <i-option value="none">未分类</i-option>
+                            <i-option v-for="category in categories.first" :value="category.id">{{ category.title }}</i-option>
+                        </i-select>
+                        <i-select clearable style="width:200px" v-if="categories.second.length !== 0" v-model="categories.selected.second">
+                            <i-option value="none">未分类</i-option>
+                            <i-option v-for="category in categories.second" :value="category.id">{{ category.title }}</i-option>
+                        </i-select>
+                        <i-select clearable style="width:200px" v-if="categories.third.length !== 0" v-model="categories.selected.third">
+                            <i-option value="none">未分类</i-option>
+                            <i-option v-for="category in categories.third" :value="category.id">{{ category.title }}</i-option>
                         </i-select>
                         <router-link to="/content/article/create">
                             <i-button type="primary">添加文章</i-button>
