@@ -23,6 +23,7 @@ class Article extends Model
      */
     protected $fillable = [
         'category_id',
+        'created_at',
         'title',
         'author',
         'source_author',
