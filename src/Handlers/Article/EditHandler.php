@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
+use Carbon\Carbon;
 use Illuminate\Container\Container;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
@@ -23,10 +24,8 @@ class EditHandler extends SetHandler
      * @param \Notadd\Content\Models\Article  $article
      * @param \Illuminate\Container\Container $container
      */
-    public function __construct(
-        Article $article,
-        Container $container
-    ) {
+    public function __construct(Article $article, Container $container)
+    {
         parent::__construct($container);
         $this->errors->push($this->translator->trans('content::article.update.fail'));
         $this->messages->push($this->translator->trans('content::article.update.success'));
@@ -44,10 +43,10 @@ class EditHandler extends SetHandler
     {
         $this->validate($this->request, [
             'content' => 'required',
-            'title' => 'required',
+            'title'   => 'required',
         ], [
             'content.required' => '必须填写文章内容',
-            'title.required' => '必须填写文章标题',
+            'title.required'   => '必须填写文章标题',
         ]);
         $article = $this->model->newQuery()->find($this->request->input('id'));
         $article->update([
@@ -60,6 +59,10 @@ class EditHandler extends SetHandler
             'description'   => $this->request->input('summary'),
             'keyword'       => $this->request->input('tags'),
             'title'         => $this->request->input('title'),
+        ]);
+
+        $this->request->has('date') && $article->update([
+            'created_at' => new Carbon($this->request->input('date')),
         ]);
 
         return true;

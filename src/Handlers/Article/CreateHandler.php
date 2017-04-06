@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
+use Carbon\Carbon;
 use function Couchbase\fastlzDecompress;
 use Illuminate\Container\Container;
 use Notadd\Content\Models\Article;
@@ -78,6 +79,9 @@ class CreateHandler extends SetHandler
             'description'   => $this->request->input('summary'),
             'keyword'       => $this->request->input('tags'),
             'title'         => $this->request->input('title'),
+        ]);
+        $this->request->has('date') && $this->model->update([
+            'created_at' => new Carbon($this->request->input('date')),
         ]);
         $this->id = $this->model->getAttribute('id');
 
