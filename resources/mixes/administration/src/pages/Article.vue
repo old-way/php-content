@@ -4,20 +4,32 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/article/fetch`).then(response => {
-                const list = response.data.data;
-                const pagination = response.data.pagination;
+            injection.http.all([
+                injection.http.post(`${window.api}/article/fetch`),
+                injection.http.post(`${window.api}/category/fetch`, {
+                    'with-children': true,
+                }),
+            ]).then(injection.http.spread((articleData, categoryData) => {
+                window.console.log(articleData, categoryData);
+                const list = articleData.data.data;
+                const pagination = articleData.data.pagination;
                 next(vm => {
                     list.forEach(article => {
                         article.loading = false;
                     });
                     vm.list = list;
                     vm.pagination = pagination;
+                    vm.categories.all = categoryData.data.data;
+                    vm.categories.all.forEach(category => {
+                        if (category.parent_id === 0) {
+                            vm.categories.first.push(category);
+                        }
+                    });
                     injection.loading.finish();
                     injection.message.info('获取文章列表成功！');
                     injection.sidebar.active('content');
                 });
-            }).catch(() => {
+            })).catch(() => {
                 injection.loading.fail();
             });
         },
@@ -306,8 +318,6 @@
                         <i-button slot="append" icon="ios-search" @click.native="search"></i-button>
                     </i-input>
                     <div class="filter">
-                        <i-select clearable style="width:200px">
-                            <!--<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>-->
                         <i-select clearable style="width:200px" v-if="categories.first.length !== 0" v-model="categories.selected.first">
                             <i-option value="none">未分类</i-option>
                             <i-option v-for="category in categories.first" :value="category.id">{{ category.title }}</i-option>
