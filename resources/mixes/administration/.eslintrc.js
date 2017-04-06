@@ -28,7 +28,9 @@ module.exports = {
         'arrow-parens': [2, "as-needed", {
             "requireForBlockBody": false
         }],
-        'indent': ['error', 4],
+        'indent': ['error', 4, {
+            'SwitchCase': 1
+        }],
         // don't require .vue extension when importing
         'import/extensions': ['error', 'always', {
             'js': 'never',
