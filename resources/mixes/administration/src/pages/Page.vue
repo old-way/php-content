@@ -167,8 +167,8 @@
             },
             edit(index) {
                 const self = this;
-                const article = self.list[index];
-                self.$router.push(`/content/page/${article.id}/edit`);
+                const page = self.list[index];
+                self.$router.push(`/content/page/${page.id}/edit`);
             },
             paginator(id) {
                 const self = this;
@@ -209,10 +209,10 @@
             },
             remove(index) {
                 const self = this;
-                const article = self.list[index];
-                article.loading = true;
+                const page = self.list[index];
+                page.loading = true;
                 self.$http.post(`${window.api}/page/delete`, {
-                    id: article.id,
+                    id: page.id,
                 }).then(response => {
                     const result = response.data;
                     result.data.forEach(item => {
@@ -222,7 +222,7 @@
                     self.pagination = result.pagination;
                     self.$message.info('删除页面成功！');
                 }).finally(() => {
-                    article.loading = false;
+                    page.loading = false;
                 });
             },
             removeSelected() {
@@ -236,18 +236,18 @@
                     });
                     self.loading = false;
                 } else {
-                    self.selections.forEach((article, key) => {
+                    self.selections.forEach((page, key) => {
                         self.$http.post(`${window.api}/page/delete`, {
-                            id: article.id,
+                            id: page.id,
                         }).then(response => {
                             const result = response.data;
-                            result.data.forEach(page => {
-                                page.loading = false;
+                            result.data.forEach(item => {
+                                item.loading = false;
                             });
                             self.list = result.data;
                             self.pagination = result.pagination;
                             self.$notice.open({
-                                title: `页面[${article.title}]删除成功！`,
+                                title: `页面[${page.title}]删除成功！`,
                             });
                         }).finally(() => {
                             if (self.selections.length === key + 1) {
