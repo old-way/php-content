@@ -153,9 +153,11 @@
                                 self.$notice.open({
                                     title: '创建分类成功！',
                                 });
+                                self.modal.visible = false;
+                            }).catch(() => {
+                                self.modal.visible = true;
                             }).finally(() => {
                                 self.modal.loading = false;
-                                self.modal.visible = false;
                             });
                         } else {
                             self.$notice.error({
@@ -174,9 +176,11 @@
                                 self.$notice.open({
                                     title: '编辑分类成功！',
                                 });
+                                self.modal.visible = false;
+                            }).catch(() => {
+                                self.modal.visible = true;
                             }).finally(() => {
                                 self.modal.loading = false;
-                                self.modal.visible = false;
                             });
                         } else {
                             self.$notice.error({
