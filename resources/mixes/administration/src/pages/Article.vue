@@ -10,7 +10,6 @@
                     'with-children': true,
                 }),
             ]).then(injection.http.spread((articleData, categoryData) => {
-                window.console.log(articleData, categoryData);
                 const list = articleData.data.data;
                 const pagination = articleData.data.pagination;
                 next(vm => {

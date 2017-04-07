@@ -46,7 +46,7 @@
                     image: '',
                     source: {
                         author: '',
-                        link: '',
+                        link: 'http://',
                     },
                     sticky: false,
                     summary: '',
@@ -99,7 +99,13 @@
                         formData.append('tags', self.form.tags);
                         formData.append('title', self.form.title);
                         formData.append('source_author', self.form.source.author);
-                        formData.append('source_link', self.form.source.link);
+                        if (self.form.source.link === 'http://') {
+                            formData.append('source_link', '');
+                        } else if (self.form.source.link === 'https://') {
+                            formData.append('source_link', '');
+                        } else {
+                            formData.append('source_link', self.form.source.url);
+                        }
                         self.$http.post(`${window.api}/article/create`, formData).then(response => {
                             self.$notice.open({
                                 title: response.data.message,
