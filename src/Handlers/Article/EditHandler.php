@@ -43,9 +43,11 @@ class EditHandler extends SetHandler
     {
         $this->validate($this->request, [
             'content' => 'required',
+            'source_link' => 'url',
             'title'   => 'required',
         ], [
             'content.required' => '必须填写文章内容',
+            'source_link.url' => '来源链接不是合法的URL',
             'title.required'   => '必须填写文章标题',
         ]);
         $article = $this->model->newQuery()->find($this->request->input('id'));
