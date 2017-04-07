@@ -103,7 +103,7 @@
                     if (valid) {
                         const formData = new window.FormData();
                         formData.append('alias', self.form.alias);
-                        formData.append('category_id', self.form.category.id[self.form.category.id.length - 1]);
+                        formData.append('category_id', self.form.category.id ? self.form.category.id[self.form.category.id.length - 1] : 0);
                         formData.append('content', self.form.content);
                         formData.append('enabled', self.form.enabled ? '1' : '0');
                         formData.append('id', self.$route.params.id);

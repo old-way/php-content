@@ -113,7 +113,7 @@
                 self.$refs.form.validate(valid => {
                     if (valid) {
                         const formData = new window.FormData();
-                        formData.append('category_id', self.form.category.id[self.form.category.id.length - 1]);
+                        formData.append('category_id', self.form.category.id ? self.form.category.id[self.form.category.id.length - 1] : 0);
                         formData.append('content', self.form.content);
                         formData.append('date', self.form.date);
                         formData.append('hidden', self.form.hidden ? '1' : '0');
