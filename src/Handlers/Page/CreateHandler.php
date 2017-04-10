@@ -60,11 +60,11 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
+            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:pages',
             'title' => 'required',
-            'alias' => 'required|alpha_dash|unique:pages',
         ], [
             'alias.required' => '必须填写页面别名',
-            'alias.alpha_dash' => '页面别名只能包含字母、数字、破折号（ - ）以及下划线（ _ ）',
+            'alias.regex' => '页面别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
             'alias.unique' => '页面别名已被占用',
             'title.required' => '必须填写页面标题',
         ]);
