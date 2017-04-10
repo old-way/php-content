@@ -68,7 +68,7 @@ class CreateHandler extends SetHandler
             'alias.unique' => '页面别名已被占用',
             'title.required' => '必须填写页面标题',
         ]);
-        $this->model = $this->model->create([
+        $this->model = $this->model->newQuery()->create([
             'alias'       => $this->request->input('alias'),
             'category_id' => $this->request->input('category_id', 0),
             'content'     => $this->request->input('content'),
