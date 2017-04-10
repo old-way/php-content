@@ -57,7 +57,7 @@ class CreateHandler extends SetHandler
      */
     public function execute()
     {
-        $this->model = $this->model->create([
+        $this->model = $this->model->newQuery()->create([
             'content'       => $this->request->input('content'),
             'is_hidden'     => $this->request->input('hidden'),
             'is_sticky'     => $this->request->input('sticky'),
