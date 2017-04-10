@@ -53,11 +53,11 @@ class EditHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
+            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:page_categories,id,' . $this->request->input('id'),
             'title' => 'required',
-            'alias' => 'required|alpha_dash|unique:page_categories,id,' . $this->request->input('id'),
         ], [
             'alias.required' => '必须填写分类别名',
-            'alias.alpha_dash' => '分类别名只能包含字母、数字、破折号（ - ）以及下划线（ _ ）',
+            'alias.regex' => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
             'alias.unique' => '分类别名已被占用',
             'title.required' => '必须填写分类标题',
         ]);
