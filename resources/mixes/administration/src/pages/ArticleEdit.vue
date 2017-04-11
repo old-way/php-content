@@ -62,7 +62,6 @@
                     category: {
                         id: 0,
                         list: [],
-                        text: '选择分类[未分类(0)]',
                     },
                     content: '',
                     date: '',
@@ -84,7 +83,7 @@
                         {
                             required: true,
                             type: 'string',
-                            message: '请输入文章内容',
+                            message: injection.trans('content.article.form.content.error'),
                             trigger: 'change',
                         },
                     ],
@@ -92,7 +91,7 @@
                         {
                             required: true,
                             type: 'string',
-                            message: '请输入文章标题',
+                            message: injection.trans('content.article.form.title.error'),
                             trigger: 'change',
                         },
                     ],
@@ -161,7 +160,7 @@
                     <i-col span="16">
                         <card>
                             <form-item prop="title">
-                                <i-input placeholder="请输入文章标题" v-model="form.title"></i-input>
+                                <i-input :placeholder="trans('content.article.form.title.placeholder')" v-model="form.title"></i-input>
                             </form-item>
                             <form-item prop="content">
                                 <editor :path="path" @ready="editor"></editor>
@@ -184,29 +183,29 @@
                             <!--<i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>-->
                             <!--</upload>-->
                             <!--</form-item>-->
-                            <form-item label="分类">
+                            <form-item :label="trans('content.article.form.category.label')">
                                 <cascader :data="form.category.list" v-model="form.category.id"></cascader>
                             </form-item>
-                            <form-item label="置顶" prop="sticky">
+                            <form-item :label="trans('content.article.form.sticky.label')" prop="sticky">
                                 <i-switch v-model="form.sticky" size="large">
-                                    <span slot="open">置顶</span>
-                                    <span slot="close">取消</span>
+                                    <span slot="open">{{ trans('content.article.form.sticky.open') }}</span>
+                                    <span slot="close">{{ trans('content.article.form.sticky.close') }}</span>
                                 </i-switch>
                             </form-item>
-                            <form-item label="隐藏" prop="hidden">
+                            <form-item :label="trans('content.article.form.hidden.label')" prop="hidden">
                                 <i-switch v-model="form.hidden" size="large">
-                                    <span slot="open">隐藏</span>
-                                    <span slot="close">取消</span>
+                                    <span slot="open">{{ trans('content.article.form.hidden.open') }}</span>
+                                    <span slot="close">{{ trans('content.article.form.hidden.close') }}</span>
                                 </i-switch>
                             </form-item>
-                            <form-item label="发布时间">
-                                <date-picker placeholder="请选择发布时间" type="datetime" v-model="form.date"></date-picker>
+                            <form-item :label="trans('content.article.form.date.label')">
+                                <date-picker :placeholder="trans('content.article.form.date.placeholder')" type="datetime" v-model="form.date"></date-picker>
                             </form-item>
-                            <form-item label="来源">
-                                <i-input placeholder="请输入来源" v-model="form.source.author"></i-input>
+                            <form-item :label="trans('content.article.form.source.author.label')">
+                                <i-input :placeholder="trans('content.article.form.source.author.placeholder')" v-model="form.source.author"></i-input>
                             </form-item>
-                            <form-item label="来源链接">
-                                <i-input placeholder="请输入来源链接" v-model="form.source.link"></i-input>
+                            <form-item :label="trans('content.article.form.source.link.label')">
+                                <i-input :placeholder="trans('content.article.form.source.link.placeholder')" v-model="form.source.link"></i-input>
                             </form-item>
                         </card>
                     </i-col>
