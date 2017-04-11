@@ -9,6 +9,10 @@
 
 return [
     'choose' => '选择',
+    'edit'   => [
+        'loading' => '正在编辑...',
+        'submit'  => '编辑',
+    ],
     'delete' => [
         'batch'   => [
             'loading' => '正在批量删除…',
@@ -16,5 +20,9 @@ return [
         ],
         'loading' => '正在删除…',
         'submit'  => '删除',
+    ],
+    'search' => [
+        'error'       => '请先输入搜索关键词！',
+        'placeholder' => '请输入搜索关键字',
     ],
 ];

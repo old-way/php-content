@@ -55,25 +55,25 @@
                     },
                     {
                         key: 'title',
-                        title: '文章名称',
+                        title: injection.trans('content.article.table.title'),
                     },
                     {
                         key: 'created_at',
-                        title: '发布时间',
+                        title: injection.trans('content.article.table.date'),
                         width: 200,
                     },
                     {
                         key: 'handle',
                         render(row, column, index) {
                             return `
-                                    <i-button size="small" type="primary" @click.native="edit(${index})">编辑</i-button>
+                                    <i-button size="small" type="primary" @click.native="edit(${index})">${injection.trans('content.global.edit.submit')}</i-button>
                                     <i-button :loading="list[${index}].loading"  size="small" type="error" @click.native="remove(${index})">
                                         <span v-if="!list[${index}].loading">${injection.trans('content.global.delete.submit')}</span>
                                         <span v-else>${injection.trans('content.global.delete.loading')}</span>
                                     </i-button>
                                     `;
                         },
-                        title: '操作',
+                        title: injection.trans('content.article.table.handle'),
                         width: 200,
                     },
                 ],
@@ -279,7 +279,7 @@
                     });
                 } else {
                     self.$notice.error({
-                        title: '请先输入搜索关键词！',
+                        title: injection.trans('content.global.search.error'),
                     });
                 }
             },
@@ -314,7 +314,7 @@
         <div class="article-list">
             <card>
                 <template slot="title">
-                    <i-input class="search" placeholder="请输入搜索关键字" v-model="keyword">
+                    <i-input class="search" :placeholder="trans('content.global.search.placeholder')" v-model="keyword">
                         <i-button slot="append" icon="ios-search" @click.native="search"></i-button>
                     </i-input>
                     <div class="filter">

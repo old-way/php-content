@@ -60,6 +60,11 @@ return [
             'placeholder' => '请输入文章标题',
         ],
     ],
+    'table'  => [
+        'date'   => '文章名称',
+        'handle' => '操作',
+        'title'  => '文章名称',
+    ],
     'update' => [
         'success' => 'Article has been updated!',
         'fail'    => 'Article update fail!',

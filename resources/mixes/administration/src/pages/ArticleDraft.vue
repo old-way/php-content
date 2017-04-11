@@ -28,7 +28,7 @@
                         key: 'handle',
                         render(row, column, index) {
                             return `
-                                    <i-button type="primary" @click.native="edit(${index})">编辑</i-button>
+                                    <i-button type="primary" @click.native="edit(${index})">${injection.trans('content.global.edit.submit')}</i-button>
                                     <i-button type="error" @click.native="remove(${index})">${injection.trans('content.global.delete.submit')}</i-button>
                                     `;
                         },
