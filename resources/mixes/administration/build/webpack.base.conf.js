@@ -13,7 +13,7 @@ module.exports = {
     },
     output: {
         path: config.build.assetsRoot,
-        filename: utils.assetsPath('js/module.js'),
+        filename: utils.assetsPath('js/module.min.js'),
         library: 'notadd/content',
         libraryTarget: "umd",
         publicPath: process.env.NODE_ENV === 'production'
