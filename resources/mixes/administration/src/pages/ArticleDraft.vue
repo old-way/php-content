@@ -64,6 +64,7 @@
                     },
                 ],
                 self: this,
+                trans: injection.trans,
             };
         },
         methods: {

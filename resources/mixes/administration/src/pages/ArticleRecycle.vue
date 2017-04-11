@@ -63,6 +63,7 @@
                 pagination: {},
                 selections: [],
                 self: this,
+                trans: injection.trans,
             };
         },
         methods: {

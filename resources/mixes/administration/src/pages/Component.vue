@@ -42,6 +42,7 @@
                     },
                 },
                 loading: false,
+                trans: injection.trans,
             };
         },
         methods: {

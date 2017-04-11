@@ -97,6 +97,7 @@
                         },
                     ],
                 },
+                trans: injection.trans,
             };
         },
         methods: {

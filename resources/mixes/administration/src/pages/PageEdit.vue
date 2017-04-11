@@ -86,6 +86,7 @@
                         },
                     ],
                 },
+                trans: injection.trans,
             };
         },
         methods: {

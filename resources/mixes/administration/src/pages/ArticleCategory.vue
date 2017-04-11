@@ -60,6 +60,7 @@
                         },
                     ],
                 },
+                trans: injection.trans,
                 updated: false,
             };
         },

@@ -73,6 +73,7 @@
                         },
                     ],
                 },
+                trans: injection.trans,
             };
         },
         methods: {
