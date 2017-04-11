@@ -260,7 +260,7 @@
             <template slot="header">
                 <div class="ivu-modal-header-inner category-modal-header">
                     {{ form.title }}
-                    <button v-if="form.pattern === 'edit'" @click="remove">删除</button>
+                    <button v-if="form.pattern === 'edit'" @click="remove">{{ trans('content.global.delete.submit') }}</button>
                 </div>
             </template>
             <i-form label-position="left" :model="form" ref="form" :rules="rules">

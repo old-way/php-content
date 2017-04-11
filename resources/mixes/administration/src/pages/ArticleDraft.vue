@@ -29,7 +29,7 @@
                         render(row, column, index) {
                             return `
                                     <i-button type="primary" @click.native="edit(${index})">编辑</i-button>
-                                    <i-button type="error" @click.native="remove(${index})">删除</i-button>
+                                    <i-button type="error" @click.native="remove(${index})">${injection.trans('content.global.delete.submit')}</i-button>
                                     `;
                         },
                         title: '操作',
@@ -88,8 +88,8 @@
                         <router-link to="/content/article/create">
                             <i-button type="primary">添加文章</i-button>
                         </router-link>
-                        <i-button type="success">选择</i-button>
-                        <i-button type="error">删除</i-button>
+                        <i-button type="success">{{ trans('content.global.choose') }}</i-button>
+                        <i-button type="error">{{ trans('content.global.delete.submit') }}</i-button>
                     </div>
                 </template>
                 <i-table :columns="columns" :content="self" :data="list"></i-table>

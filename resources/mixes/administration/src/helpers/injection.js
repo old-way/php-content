@@ -16,6 +16,7 @@ function install(instance) {
         loading: instance.loading,
         message: instance.message,
         sidebar: instance.sidebar,
+        trans: instance.trans,
     });
     mixinBoard(instance);
     mixinNavigation(instance);

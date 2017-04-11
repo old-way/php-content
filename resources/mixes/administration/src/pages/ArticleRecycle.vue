@@ -49,8 +49,8 @@
                                         <span v-if="!list[${index}].restoring">恢复</span>
                                         <span v-else>正在恢复…</span></i-button>
                                     <i-button :loading="list[${index}].loading" size="small" type="error" @click.native="remove(${index})">
-                                        <span v-if="!list[${index}].loading">删除</span>
-                                        <span v-else>正在删除…</span>
+                                        <span v-if="!list[${index}].loading">${injection.trans('content.global.delete.submit')}</span>
+                                        <span v-else>${injection.trans('content.global.delete.loading')}</span>
                                     </i-button>
                                     `;
                         },
@@ -199,8 +199,8 @@
                             <!--&lt;!&ndash;<i-option v-for="item in cityList" :value="item.value">{{ item.label }}</i-option>&ndash;&gt;-->
                         <!--</i-select>-->
                         <i-button :loading="loading" type="error" @click.native="removeSelected">
-                            <span v-if="!loading">删除</span>
-                            <span v-else>正在批量删除…</span>
+                            <span v-if="!loading">{{ trans('content.global.delete.submit') }}</span>
+                            <span v-else>{{ trans('content.global.delete.batch.loading') }}</span>
                         </i-button>
                     </div>
                 </template>

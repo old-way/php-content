@@ -68,8 +68,8 @@
                             return `
                                     <i-button size="small" type="primary" @click.native="edit(${index})">编辑</i-button>
                                     <i-button :loading="list[${index}].loading"  size="small" type="error" @click.native="remove(${index})">
-                                        <span v-if="!list[${index}].loading">删除</span>
-                                        <span v-else>正在删除…</span>
+                                        <span v-if="!list[${index}].loading">${injection.trans('content.global.delete.submit')}</span>
+                                        <span v-else>${injection.trans('content.global.delete.loading')}</span>
                                     </i-button>
                                     `;
                         },
@@ -83,6 +83,7 @@
                 pagination: {},
                 selections: [],
                 self: this,
+                trans: injection.trans,
             };
         },
         methods: {
@@ -333,8 +334,8 @@
                             <i-button type="primary">添加文章</i-button>
                         </router-link>
                         <i-button :loading="loading" type="error" @click.native="removeSelected">
-                            <span v-if="!loading">删除</span>
-                            <span v-else>正在批量删除…</span>
+                            <span v-if="!loading">{{ trans('content.global.delete.submit') }}</span>
+                            <span v-else>{{ trans('content.global.delete.batch.loading') }}</span>
                         </i-button>
                     </div>
                 </template>
