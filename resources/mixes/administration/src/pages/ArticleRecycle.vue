@@ -34,11 +34,11 @@
                     },
                     {
                         key: 'title',
-                        title: '文章名称',
+                        title: injection.trans('content.article.recycle.table.title'),
                     },
                     {
                         key: 'author',
-                        title: '作者',
+                        title: injection.trans('content.article.recycle.table.author'),
                         width: 200,
                     },
                     {
@@ -54,7 +54,7 @@
                                     </i-button>
                                     `;
                         },
-                        title: '操作',
+                        title: injection.trans('content.article.recycle.table.handle'),
                         width: 200,
                     },
                 ],

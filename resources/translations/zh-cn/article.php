@@ -90,6 +90,13 @@ return [
             'placeholder' => '请输入文章标题',
         ],
     ],
+    'recycle' => [
+        'table' => [
+            'author'   => '作者',
+            'handle' => '操作',
+            'title'  => '文章名称',
+        ],
+    ],
     'table'    => [
         'date'   => '文章名称',
         'handle' => '操作',
