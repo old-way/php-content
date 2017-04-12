@@ -26,7 +26,7 @@
                         }
                     });
                     injection.loading.finish();
-                    injection.message.info('获取页面列表成功！');
+                    injection.message.info(injection.trans('content.page.list.info.get'));
                     injection.sidebar.active('content');
                 });
             })).catch(() => {
@@ -186,7 +186,7 @@
                         self.list = result.data;
                         self.pagination = result.pagination;
                         self.$loading.finish();
-                        self.$message.info('更新页面列表成功！');
+                        self.$message.info(injection.trans('content.page.list.info.update'));
                     }).catch(() => {
                         self.$loading.fail();
                     });
@@ -202,7 +202,7 @@
                         self.list = result.data;
                         self.pagination = result.pagination;
                         self.$loading.finish();
-                        self.$message.info('更新页面列表成功！');
+                        self.$message.info(injection.trans('content.page.list.info.update'));
                     }).catch(() => {
                         self.$loading.fail();
                     });
@@ -221,7 +221,7 @@
                     });
                     self.list = result.data;
                     self.pagination = result.pagination;
-                    self.$message.info('删除页面成功！');
+                    self.$message.info(injection.trans('content.page.info.update'));
                 }).finally(() => {
                     page.loading = false;
                 });
@@ -233,7 +233,7 @@
                 if (self.selections.length === 0) {
                     self.$loading.finish();
                     self.$notice.error({
-                        title: '尚未选择任何页面！',
+                        title: injection.trans('content.page.list.info.none'),
                     });
                     self.loading = false;
                 } else {
@@ -248,7 +248,7 @@
                             self.list = result.data;
                             self.pagination = result.pagination;
                             self.$notice.open({
-                                title: `页面[${page.title}]删除成功！`,
+                                title: injection.trans('content.page.info.delete'),
                             });
                         }).finally(() => {
                             if (self.selections.length === key + 1) {
@@ -273,7 +273,7 @@
                         self.list = list;
                         self.pagination = response.data.pagination;
                         injection.loading.finish();
-                        injection.message.info('获取文章列表成功！');
+                        injection.message.info(injection.trans('content.page.list.info.get'));
                         injection.sidebar.active('content');
                     }).catch(() => {
                         injection.loading.fail();
@@ -312,7 +312,7 @@
                             <i-option v-for="category in categories.third" :value="category.id">{{ category.title }}</i-option>
                         </i-select>
                         <router-link to="/content/page/create">
-                            <i-button type="primary">添加页面</i-button>
+                            <i-button type="primary">{{ trans('content.page.info.create') }}</i-button>
                         </router-link>
                         <i-button :loading="loading" type="error" @click.native="removeSelected">
                             <span v-if="!loading">{{ trans('content.global.delete.submit') }}</span>
