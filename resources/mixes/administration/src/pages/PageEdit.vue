@@ -27,12 +27,11 @@
                         }));
                         vm.form.alias = article.alias;
                         vm.form.category.id = article.category_path ? article.category_path : [];
-                        vm.form.category.text = article.category ? `选择分类[${article.category.title}(${article.category.id})]` : '选择分类[未分类(0)]';
                         vm.form.enabled = article.enabled === 1;
                         vm.form.title = article.title;
                         vm.form.content = article.content;
                         injection.loading.finish();
-                        injection.message.info('获取页面信息成功！');
+                        injection.message.info(injection.trans('content.page.info.get'));
                         injection.sidebar.active('content');
                     });
                 }).catch(() => {
