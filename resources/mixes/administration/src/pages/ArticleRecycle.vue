@@ -46,8 +46,8 @@
                         render(row, column, index) {
                             return `
                                     <i-button :loading="list[${index}].restoring" size="small" type="primary" @click.native="restore(${index})">
-                                        <span v-if="!list[${index}].restoring">恢复</span>
-                                        <span v-else>正在恢复…</span></i-button>
+                                        <span v-if="!list[${index}].restoring">${injection.trans('content.global.restore.submit')}</span>
+                                        <span v-else>${injection.trans('content.global.restore.loading')}</span></i-button>
                                     <i-button :loading="list[${index}].loading" size="small" type="error" @click.native="remove(${index})">
                                         <span v-if="!list[${index}].loading">${injection.trans('content.global.delete.submit')}</span>
                                         <span v-else>${injection.trans('content.global.delete.loading')}</span>

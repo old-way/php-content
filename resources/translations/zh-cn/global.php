@@ -24,6 +24,10 @@ return [
         'loading' => '正在发布…',
         'submit'  => '发布',
     ],
+    'restore' => [
+        'loading' => '正在恢复…',
+        'submit'  => '恢复',
+    ],
     'search'  => [
         'error'       => '请先输入搜索关键词！',
         'placeholder' => '请输入搜索关键字',
