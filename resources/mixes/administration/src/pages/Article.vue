@@ -220,7 +220,7 @@
                     });
                     self.list = result.data;
                     self.pagination = result.pagination;
-                    self.$message.info('删除文章成功！');
+                    self.$message.info(injection.trans('content.article.info.delete'));
                 }).finally(() => {
                     article.loading = false;
                 });
@@ -247,7 +247,7 @@
                             self.list = result.data;
                             self.pagination = result.pagination;
                             self.$notice.open({
-                                title: `删除文章[${article.title}]成功！`,
+                                title: injection.trans('content.article.info.delete'),
                             });
                         }).finally(() => {
                             if (self.selections.length === key + 1) {

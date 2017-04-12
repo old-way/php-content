@@ -122,7 +122,7 @@
                     self.list = result.data;
                     self.pagination = result.pagination;
                     self.$notice.open({
-                        title: `文章[${article.title}]强制删除成功！`,
+                        title: injection.trans('content.article.info.force'),
                     });
                 }).finally(() => {
                     article.loading = false;
@@ -151,7 +151,7 @@
                             self.list = result.data;
                             self.pagination = result.pagination;
                             self.$notice.open({
-                                title: `文章[${article.title}]强制删除成功！`,
+                                title: injection.trans('content.article.info.force'),
                             });
                         }).finally(() => {
                             if (self.selections.length === key + 1) {
@@ -178,7 +178,7 @@
                     self.list = result.data;
                     self.pagination = result.pagination;
                     self.$notice.open({
-                        title: `文章[${article.title}]恢复成功！`,
+                        title: injection.trans('content.article.info.restore'),
                     });
                 }).finally(() => {
                     article.restoring = false;
