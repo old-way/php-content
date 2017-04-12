@@ -9,6 +9,7 @@
 namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
+use Illuminate\Validation\Rule;
 use Notadd\Content\Models\Category;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -51,7 +52,11 @@ class EditHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
-            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:categories,id,' . $this->request->input('id'),
+            'alias' => [
+                'required',
+                'regex:/^[a-zA-Z\pN_-]+$/u',
+                Rule::unique('categories')->ignore($this->request->input('id'), 'id'),
+            ],
             'title' => 'required',
         ], [
             'alias.required' => '必须填写分类别名',
@@ -59,22 +64,27 @@ class EditHandler extends SetHandler
             'alias.unique' => '分类别名已被占用',
             'title.required' => '必须填写分类标题',
         ]);
+        $this->container->make('log')->info('edit category', $this->request->all());
         $category = $this->model->newQuery()->find($this->request->input('id'));
-        $category->update([
-            'alias'            => $this->request->input('alias'),
-            'background_color' => $this->request->input('background_color'),
-            'background_image' => $this->request->input('background_image'),
-            'description'      => $this->request->input('description'),
-            'enabled'          => $this->request->input('enabled'),
-            'pagination'       => $this->request->input('pagination'),
-            'seo_title'        => $this->request->input('seo_title'),
-            'seo_keyword'      => $this->request->input('seo_keyword'),
-            'seo_description'  => $this->request->input('seo_description'),
-            'top_image'        => $this->request->input('top_image'),
-            'title'            => $this->request->input('name'),
-            'type'             => $this->request->input('type') ?: 'normal',
-        ]);
+        if ($category) {
+            $category->update([
+                'alias'            => $this->request->input('alias'),
+                'background_color' => $this->request->input('background_color'),
+                'background_image' => $this->request->input('background_image'),
+                'description'      => $this->request->input('description'),
+                'enabled'          => $this->request->input('enabled'),
+                'pagination'       => $this->request->input('pagination'),
+                'seo_title'        => $this->request->input('seo_title'),
+                'seo_keyword'      => $this->request->input('seo_keyword'),
+                'seo_description'  => $this->request->input('seo_description'),
+                'top_image'        => $this->request->input('top_image'),
+                'title'            => $this->request->input('name'),
+                'type'             => $this->request->input('type') ?: 'normal',
+            ]);
 
-        return true;
+            return true;
+        }
+
+        return false;
     }
 }

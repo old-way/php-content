@@ -9,6 +9,7 @@
 namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
+use Illuminate\Validation\Rule;
 use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -41,7 +42,11 @@ class EditHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
-            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:pages,id,' . $this->request->input('id'),
+            'alias' => [
+                'required',
+                'regex:/^[a-zA-Z\pN_-]+$/u',
+                Rule::unique('pages')->ignore($this->request->input('id'), 'id'),
+            ],
             'title' => 'required',
         ], [
             'alias.required' => '必须填写页面别名',

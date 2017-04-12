@@ -9,6 +9,7 @@
 namespace Notadd\Content\Handlers\Page\Category;
 
 use Illuminate\Container\Container;
+use Illuminate\Validation\Rule;
 use Notadd\Content\Models\PageCategory;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -53,7 +54,11 @@ class EditHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
-            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:page_categories,id,' . $this->request->input('id'),
+            'alias' => [
+                'required',
+                'regex:/^[a-zA-Z\pN_-]+$/u',
+                Rule::unique('page_categories')->ignore($this->request->input('id'), 'id'),
+            ],
             'title' => 'required',
         ], [
             'alias.required' => '必须填写分类别名',
