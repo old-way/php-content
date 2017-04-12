@@ -12,6 +12,32 @@ return [
         'success' => '页面已经被创建！',
         'fail'    => '页面创建失败！',
     ],
+    'category' => [
+        'form' => [
+            'alias' => [
+                'error'       => '请输入别名',
+                'label'       => '别名',
+                'placeholder' => '请输入别名',
+            ],
+            'background' => [
+                'label'       => '颜色',
+                'placeholder' => '请输入颜色',
+            ],
+            'description' => [
+                'label'       => '描述',
+                'placeholder' => '请输入描述',
+            ],
+            'link' => [
+                'label'       => '内链',
+                'placeholder' => '请输入内链',
+            ],
+            'name' => [
+                'error'       => '请输入别名',
+                'label'       => '名称',
+                'placeholder' => '请输入名称',
+            ],
+        ],
+    ],
     'delete' => [
         'success' => '页面已经被删除！',
         'fail'    => '页面删除失败！',
