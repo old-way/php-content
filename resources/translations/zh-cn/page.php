@@ -49,6 +49,10 @@ return [
             'edit'   => '编辑分类',
         ],
     ],
+    'delete'   => [
+        'success' => '页面已经被删除！',
+        'fail'    => '页面删除失败！',
+    ],
     'form'     => [
         'alias'    => [
             'error'       => '请输入页面别名',
@@ -73,10 +77,6 @@ return [
             'placeholder' => '请输入页面标题',
         ],
     ],
-    'delete'   => [
-        'success' => '页面已经被删除！',
-        'fail'    => '页面删除失败！',
-    ],
     'fetch'    => [
         'success' => '页面批量获取成功！',
         'fail'    => '页面批量获取失败！',
@@ -84,6 +84,9 @@ return [
     'find'     => [
         'success' => '页面查找成功！',
         'fail'    => '页面查找失败！',
+    ],
+    'info'     => [
+        'error' => '填写内容不完整或填写错误！',
     ],
     'update'   => [
         'success' => '页面已经被更新！',

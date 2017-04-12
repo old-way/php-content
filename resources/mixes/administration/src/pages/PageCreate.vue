@@ -22,7 +22,7 @@
                         value: first.id,
                     }));
                     injection.loading.finish();
-                    injection.message.info('获取分类列表成功！');
+                    injection.message.info(injection.trans('content.page.category.info.fetch'));
                     injection.sidebar.active('content');
                 });
             }).catch(() => {
@@ -105,7 +105,7 @@
                     } else {
                         self.loading = false;
                         self.$notice.error({
-                            title: '填写内容不完整或填写错误！',
+                            title: injection.trans('content.page.info.error'),
                         });
                     }
                 });
