@@ -133,7 +133,7 @@
                     self.$nextTick(() => {
                         self.$loading.finish();
                         self.$notice.open({
-                            title: '更新排序成功！',
+                            title: injection.trans('content.global.sort.success'),
                         });
                         self.list = response.data.data;
                     });
@@ -249,8 +249,8 @@
                     <row>
                         <i-col>
                             <i-button :loading="loading" type="error" @click.native="sorting">
-                                <span v-if="!loading">更新排序</span>
-                                <span v-else>正在更新排序…</span>
+                                <span v-if="!loading">{{ trans('content.global.sort.submit') }}</span>
+                                <span v-else>{{ trans('content.global.sort.loading') }}</span>
                             </i-button>
                         </i-col>
                     </row>
