@@ -93,7 +93,6 @@ return [
             'placeholder' => '请输入文章标题',
         ],
     ],
-    'recycle' => [
     'info'     => [
         'error' => '填写内容不完整或填写错误！',
         'get'   => '获取文章信息成功！',
@@ -105,8 +104,9 @@ return [
             'update' => '更新文章列表成功！',
         ],
     ],
+    'recycle'  => [
         'table' => [
-            'author'   => '作者',
+            'author' => '作者',
             'handle' => '操作',
             'title'  => '文章名称',
         ],
