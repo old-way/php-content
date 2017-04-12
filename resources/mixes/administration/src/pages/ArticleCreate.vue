@@ -117,7 +117,7 @@
                     } else {
                         self.loading = false;
                         self.$notice.error({
-                            title: '填写内容不完整或填写错误！',
+                            title: injection.trans('content.article.info.error'),
                         });
                     }
                 });

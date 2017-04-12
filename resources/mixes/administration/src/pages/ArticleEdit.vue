@@ -9,7 +9,7 @@
                 id: to.params.id,
             }).then(response => {
                 const article = response.data.data;
-                injection.message.info('获取文章信息成功！');
+                injection.message.info(injection.trans('content.article.info.get'));
                 injection.http.post(`${window.api}/category/fetch`).then(result => {
                     const list = result.data.data;
                     next(vm => {
@@ -27,7 +27,6 @@
                             label: first.title,
                             value: first.id,
                         }));
-                        vm.form.category.text = article.category ? `选择分类[${article.category.title}(${article.category.id})]` : '选择分类[未分类(0)]';
                         vm.form.title = article.title;
                         vm.form.date = article.created_at;
                         vm.form.content = article.content;
@@ -137,7 +136,7 @@
                     } else {
                         self.loading = false;
                         self.$notice.error({
-                            title: '填写内容不完整或填写错误！',
+                            title: injection.trans('content.article.info.error'),
                         });
                     }
                 });
