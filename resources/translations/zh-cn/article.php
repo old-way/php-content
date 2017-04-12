@@ -91,6 +91,13 @@ return [
         ],
     ],
     'recycle' => [
+    'list'     => [
+        'info' => [
+            'get'  => '获取文章列表成功！',
+            'none' => '尚未选择任何文章！',
+            'update' => '更新文章列表成功！',
+        ],
+    ],
         'table' => [
             'author'   => '作者',
             'handle' => '操作',

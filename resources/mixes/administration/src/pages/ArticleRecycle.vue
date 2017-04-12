@@ -17,7 +17,7 @@
                     vm.list = list;
                     vm.pagination = pagination;
                     injection.loading.finish();
-                    injection.message.info('获取文章列表成功！');
+                    injection.message.info(injection.trans('content.article.list.info.get'));
                     injection.sidebar.active('content');
                 });
             }).catch(() => {
@@ -83,7 +83,7 @@
                         self.list = result.data;
                         self.pagination = result.pagination;
                         self.$loading.finish();
-                        self.$message.info('更新文章列表成功！');
+                        self.$message.info(injection.trans('content.article.list.info.get'));
                     }).catch(() => {
                         self.$loading.fail();
                     });
@@ -100,7 +100,7 @@
                         self.list = result.data;
                         self.pagination = result.pagination;
                         self.$loading.finish();
-                        self.$message.info('更新文章列表成功！');
+                        self.$message.info(injection.trans('content.article.list.info.get'));
                     }).catch(() => {
                         self.$loading.fail();
                     });
@@ -135,7 +135,7 @@
                 if (self.selections.length === 0) {
                     self.$loading.finish();
                     self.$notice.error({
-                        title: '尚未选择任何文章！',
+                        title: injection.trans('content.article.list.info.none'),
                     });
                     self.loading = false;
                 } else {
