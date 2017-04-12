@@ -51,7 +51,7 @@
                 self.loading = true;
                 self.$http.post(`${window.api}/content/component/set`, self.form).then(() => {
                     self.$notice.open({
-                        title: '更新 SEO 设置信息成功！',
+                        title: injection.trans('content.component.info.success'),
                     });
                 }).finally(() => {
                     self.loading = false;
@@ -63,78 +63,92 @@
 <template>
     <i-form :label-width="200" :model="form" ref="form">
         <card>
-            <p slot="title">文章 SEO 配置</p>
+            <p slot="title">{{ trans('content.component.info.article') }}</p>
             <row>
                 <i-col span="14">
-                    <form-item label="标题">
-                        <i-input placeholder="请输入标题" v-model="form.article.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
+                    <form-item :label="trans('content.component.form.article.title.label')">
+                        <i-input :placeholder="trans('content.component.form.article.title.placeholder')"
+                                 v-model="form.article.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
                     </form-item>
                 </i-col>
             </row>
             <row>
                 <i-col span="14">
-                    <form-item label="描述">
-                        <i-input type="textarea" placeholder="请输入描述" v-model="form.article.keyword"
+                    <form-item :label="trans('content.component.form.article.keyword.label')">
+                        <i-input type="textarea"
+                                 :placeholder="trans('content.component.form.article.keyword.placeholder')"
+                                 v-model="form.article.keyword"
                                  :autosize="{minRows: 2,maxRows: 5}"></i-input>
                     </form-item>
                 </i-col>
             </row>
             <row>
                 <i-col span="14">
-                    <form-item label="关键字">
-                        <i-input type="textarea" placeholder="请输入关键字" v-model="form.article.description"
-                                 :autosize="{minRows: 2,maxRows: 5}"></i-input>
-                    </form-item>
-                </i-col>
-            </row>
-        </card>
-        <card>
-            <p slot="title">文章 SEO 配置</p>
-            <row>
-                <i-col span="14">
-                    <form-item label="标题">
-                        <i-input placeholder="请输入标题" v-model="form.category.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
-                    </form-item>
-                </i-col>
-            </row>
-            <row>
-                <i-col span="14">
-                    <form-item label="描述">
-                        <i-input type="textarea" placeholder="请输入描述" v-model="form.category.keyword"
-                                 :autosize="{minRows: 2,maxRows: 5}"></i-input>
-                    </form-item>
-                </i-col>
-            </row>
-            <row>
-                <i-col span="14">
-                    <form-item label="关键字">
-                        <i-input type="textarea" placeholder="请输入关键字" v-model="form.category.description"
+                    <form-item :label="trans('content.component.form.article.description.label')">
+                        <i-input type="textarea"
+                                 :placeholder="trans('content.component.form.article.description.placeholder')"
+                                 v-model="form.article.description"
                                  :autosize="{minRows: 2,maxRows: 5}"></i-input>
                     </form-item>
                 </i-col>
             </row>
         </card>
         <card>
-            <p slot="title">文章 SEO 配置</p>
+            <p slot="title">{{ trans('content.component.info.category') }}</p>
             <row>
                 <i-col span="14">
-                    <form-item label="标题">
-                        <i-input placeholder="请输入标题" v-model="form.page.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
+                    <form-item :label="trans('content.component.form.category.title.label')">
+                        <i-input :placeholder="trans('content.component.form.category.title.placeholder')"
+                                 v-model="form.category.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
                     </form-item>
                 </i-col>
             </row>
             <row>
                 <i-col span="14">
-                    <form-item label="描述">
-                        <i-input type="textarea" placeholder="请输入描述" v-model="form.page.keyword"
+                    <form-item :label="trans('content.component.form.category.keyword.label')">
+                        <i-input type="textarea"
+                                 :placeholder="trans('content.component.form.category.keyword.placeholder')"
+                                 v-model="form.category.keyword"
                                  :autosize="{minRows: 2,maxRows: 5}"></i-input>
                     </form-item>
                 </i-col>
             </row>
             <row>
                 <i-col span="14">
-                    <form-item label="关键字">
-                        <i-input type="textarea" placeholder="请输入关键字" v-model="form.page.description"
+                    <form-item :label="trans('content.component.form.category.description.label')">
+                        <i-input type="textarea"
+                                 :placeholder="trans('content.component.form.category.description.placeholder')"
+                                 v-model="form.category.description"
+                                 :autosize="{minRows: 2,maxRows: 5}"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
+        </card>
+        <card>
+            <p slot="title">{{ trans('content.component.info.page') }}</p>
+            <row>
+                <i-col span="14">
+                    <form-item :label="trans('content.component.form.page.title.label')">
+                        <i-input :placeholder="trans('content.component.form.page.title.placeholder')"
+                                 v-model="form.page.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
+            <row>
+                <i-col span="14">
+                    <form-item :label="trans('content.component.form.page.keyword.label')">
+                        <i-input type="textarea" :placeholder="trans('content.component.form.page.keyword.placeholder')"
+                                 v-model="form.page.keyword"
+                                 :autosize="{minRows: 2,maxRows: 5}"></i-input>
+                    </form-item>
+                </i-col>
+            </row>
+            <row>
+                <i-col span="14">
+                    <form-item :label="trans('content.component.form.page.description.label')">
+                        <i-input type="textarea"
+                                 :placeholder="trans('content.component.form.page.description.placeholder')"
+                                 v-model="form.page.description"
                                  :autosize="{minRows: 2,maxRows: 5}"></i-input>
                     </form-item>
                 </i-col>
