@@ -34,7 +34,7 @@
                     seo_title: '',
                     seo_keyword: '',
                     seo_description: '',
-                    title: '创建分类',
+                    title: injection.trans('content.article.category.modal.create'),
                     top_image: '',
                 },
                 loading: false,
@@ -80,7 +80,7 @@
                 self.form.seo_title = '';
                 self.form.seo_keyword = '';
                 self.form.seo_description = '';
-                self.form.title = '创建分类';
+                self.form.title = injection.trans('content.article.category.modal.create');
                 self.form.top_image = '';
                 self.modal.visible = true;
             },
@@ -99,7 +99,7 @@
                 self.form.seo_title = item.seo_title;
                 self.form.seo_keyword = item.seo_keyword;
                 self.form.seo_description = item.seo_description;
-                self.form.title = `编辑分类：${item.title}`;
+                self.form.title = injection.trans('content.article.category.modal.edit');
                 self.form.top_image = item.top_image;
                 self.modal.visible = true;
             },
@@ -152,7 +152,7 @@
                             self.$http.post(`${window.api}/category/create`, self.form).then(response => {
                                 self.list = response.data.data;
                                 self.$notice.open({
-                                    title: '创建分类成功！',
+                                    title: injection.trans('content.article.category.info.success'),
                                 });
                                 self.modal.visible = false;
                             }).catch(() => {
@@ -162,7 +162,7 @@
                             });
                         } else {
                             self.$notice.error({
-                                title: '请正确填写分类信息！',
+                                title: injection.trans('content.article.category.info.error'),
                             });
                             self.modal.loading = false;
                             self.modal.visible = false;
@@ -175,7 +175,7 @@
                             self.$http.post(`${window.api}/category/edit`, self.form).then(response => {
                                 self.list = response.data.data;
                                 self.$notice.open({
-                                    title: '编辑分类成功！',
+                                    title: injection.trans('content.article.category.info.success'),
                                 });
                                 self.modal.visible = false;
                             }).catch(() => {
@@ -185,7 +185,7 @@
                             });
                         } else {
                             self.$notice.error({
-                                title: '请正确填写分类信息！',
+                                title: injection.trans('content.article.category.info.error'),
                             });
                             self.modal.loading = false;
                             self.modal.visible = false;
@@ -207,10 +207,10 @@
             <card>
                 <template slot="title">
                     <div class="filter">
-                        <i-button type="primary" @click.native="create">添加分类</i-button>
+                        <i-button type="primary" @click.native="create">{{ trans('content.article.category.info.create') }}</i-button>
                     </div>
                 </template>
-                <div class="none-item" v-if="list.length === 0">目前还没有分类哦！</div>
+                <div class="none-item" v-if="list.length === 0">{{ trans('content.article.category.info.none') }}</div>
                 <div class="article-category">
                     <row>
                         <i-col span="16">

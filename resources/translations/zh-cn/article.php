@@ -13,7 +13,7 @@ return [
         'fail'    => '文章创建失败！',
     ],
     'category' => [
-        'form' => [
+        'form'  => [
             'alias'       => [
                 'error'       => '请输入别名',
                 'label'       => '别名',
@@ -37,8 +37,16 @@ return [
                 'placeholder' => '请输入名称',
             ],
         ],
-        'info' => [
-            'get' => '获取分类列表成功！',
+        'info'  => [
+            'create'  => '添加分类',
+            'error'   => '请正确填写分类信息！',
+            'get'     => '获取分类列表成功！',
+            'none'    => '目前还没有分类哦！',
+            'success' => '编辑分类成功！',
+        ],
+        'modal' => [
+            'create' => '创建分类',
+            'edit'   => '编辑分类',
         ],
     ],
     'delete'   => [
