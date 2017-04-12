@@ -14,12 +14,12 @@ return [
     ],
     'category' => [
         'form' => [
-            'alias' => [
+            'alias'       => [
                 'error'       => '请输入别名',
                 'label'       => '别名',
                 'placeholder' => '请输入别名',
             ],
-            'background' => [
+            'background'  => [
                 'label'       => '颜色',
                 'placeholder' => '请输入颜色',
             ],
@@ -27,15 +27,18 @@ return [
                 'label'       => '描述',
                 'placeholder' => '请输入描述',
             ],
-            'link' => [
+            'link'        => [
                 'label'       => '内链',
                 'placeholder' => '请输入内链',
             ],
-            'name' => [
+            'name'        => [
                 'error'       => '请输入别名',
                 'label'       => '名称',
                 'placeholder' => '请输入名称',
             ],
+        ],
+        'info' => [
+            'get' => '获取分类列表成功！',
         ],
     ],
     'delete'   => [

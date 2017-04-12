@@ -43,7 +43,7 @@
                             link: article.source_link,
                         };
                         injection.loading.finish();
-                        injection.message.info('获取分类列表成功！');
+                        injection.message.info(injection.trans('content.article.category.info.get'));
                         injection.sidebar.active('content');
                     });
                 }).catch(() => {
