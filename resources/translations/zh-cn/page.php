@@ -48,6 +48,7 @@ return [
         ],
         'content'  => [
             'error' => '请输入文章内容',
+            'label' => '内容',
         ],
         'enabled'  => [
             'close' => '关闭',

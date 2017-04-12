@@ -64,7 +64,7 @@
                         {
                             required: true,
                             type: 'string',
-                            message: '请输入页面别名',
+                            message: injection.trans('content.page.form.alias.error'),
                             trigger: 'change',
                         },
                     ],
@@ -72,7 +72,7 @@
                         {
                             required: true,
                             type: 'string',
-                            message: '请输入页面内容',
+                            message: injection.trans('content.page.form.content.error'),
                             trigger: 'change',
                         },
                     ],
@@ -80,7 +80,7 @@
                         {
                             required: true,
                             type: 'string',
-                            message: '请输入页面标题',
+                            message: injection.trans('content.page.form.title.error'),
                             trigger: 'change',
                         },
                     ],
