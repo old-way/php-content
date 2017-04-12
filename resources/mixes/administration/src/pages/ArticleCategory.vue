@@ -47,7 +47,7 @@
                         {
                             required: true,
                             type: 'string',
-                            message: '请输入别名',
+                            message: injection.trans('content.article.category.form.alias.error'),
                             trigger: 'change',
                         },
                     ],
@@ -55,7 +55,7 @@
                         {
                             required: true,
                             type: 'string',
-                            message: '请输入名称',
+                            message: injection.trans('content.article.category.form.name.error'),
                             trigger: 'change',
                         },
                     ],
@@ -265,20 +265,20 @@
                 </div>
             </template>
             <i-form label-position="left" :model="form" ref="form" :rules="rules">
-                <form-item label="名称" prop="name">
-                    <i-input placeholder="请输入名称" v-model="form.name"></i-input>
+                <form-item :label="trans('content.article.category.form.name.label')" prop="name">
+                    <i-input :placeholder="trans('content.article.category.form.name.placeholder')" v-model="form.name"></i-input>
                 </form-item>
-                <form-item label="别名" prop="alias">
-                    <i-input placeholder="请输入别名" v-model="form.alias"></i-input>
+                <form-item :label="trans('content.article.category.form.alias.label')" prop="alias">
+                    <i-input :placeholder="trans('content.article.category.form.alias.placeholder')" v-model="form.alias"></i-input>
                 </form-item>
-                <form-item label="内链" prop="link">
-                    <i-input placeholder="请输入内链" v-model="form.link"></i-input>
+                <form-item :label="trans('content.article.category.form.link.label')" prop="link">
+                    <i-input :placeholder="trans('content.article.category.form.link.placeholder')" v-model="form.link"></i-input>
                 </form-item>
-                <form-item label="描述" prop="description">
-                    <i-input placeholder="请输入描述" v-model="form.description"></i-input>
+                <form-item :label="trans('content.article.category.form.description.label')" prop="description">
+                    <i-input :placeholder="trans('content.article.category.form.description.placeholder')" v-model="form.description"></i-input>
                 </form-item>
-                <form-item label="颜色" prop="background">
-                    <i-input placeholder="请输入颜色" v-model="form.background_color"></i-input>
+                <form-item :label="trans('content.article.category.form.background.label')" prop="background">
+                    <i-input :placeholder="trans('content.article.category.form.background.placeholder')" v-model="form.background_color"></i-input>
                 </form-item>
             </i-form>
         </modal>

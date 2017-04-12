@@ -7,28 +7,54 @@
  * @datetime 2017-01-16 15:00
  */
 return [
-    'add'    => '添加文章',
-    'create' => [
+    'add'      => '添加文章',
+    'create'   => [
         'success' => '文章已经被创建！',
         'fail'    => '文章创建失败！',
     ],
-    'delete' => [
+    'category' => [
+        'form' => [
+            'alias' => [
+                'error'       => '请输入别名',
+                'label'       => '别名',
+                'placeholder' => '请输入别名',
+            ],
+            'background' => [
+                'label'       => '颜色',
+                'placeholder' => '请输入颜色',
+            ],
+            'description' => [
+                'label'       => '描述',
+                'placeholder' => '请输入描述',
+            ],
+            'link' => [
+                'label'       => '内链',
+                'placeholder' => '请输入内链',
+            ],
+            'name' => [
+                'error'       => '请输入别名',
+                'label'       => '名称',
+                'placeholder' => '请输入名称',
+            ],
+        ],
+    ],
+    'delete'   => [
         'success' => '文章已经被删除！',
         'fail'    => '文章删除失败！',
     ],
-    'fetch'  => [
+    'fetch'    => [
         'success' => '文章批量获取成功！',
         'fail'    => '文章批量获取失败！',
     ],
-    'find'   => [
+    'find'     => [
         'success' => '文章查找成功！',
         'fail'    => '文章查找失败！',
     ],
-    'force'  => [
+    'force'    => [
         'success' => '文章已经被强制删除！',
         'fail'    => '文章强制删除失败！',
     ],
-    'form'   => [
+    'form'     => [
         'category' => [
             'label' => '分类',
         ],
@@ -64,12 +90,12 @@ return [
             'placeholder' => '请输入文章标题',
         ],
     ],
-    'table'  => [
+    'table'    => [
         'date'   => '文章名称',
         'handle' => '操作',
         'title'  => '文章名称',
     ],
-    'update' => [
+    'update'   => [
         'success' => '文章已经被更新！',
         'fail'    => '文章更新失败！',
     ],
