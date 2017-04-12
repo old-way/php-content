@@ -129,22 +129,22 @@
                 <row>
                     <i-col offset="4" span="16">
                         <i-form label-position="top" :model="form" ref="form" :rules="rules">
-                            <form-item label="标题" prop="title">
-                                <i-input placeholder="请输入页面标题" v-model="form.title"></i-input>
+                            <form-item :label="trans('content.page.form.title.label')" prop="title">
+                                <i-input :placeholder="trans('content.page.form.title.placeholder')" v-model="form.title"></i-input>
                             </form-item>
-                            <form-item label="别名" prop="alias">
-                                <i-input placeholder="请输入页面标题" v-model="form.alias"></i-input>
+                            <form-item :label="trans('content.page.form.alias.label')" prop="alias">
+                                <i-input :placeholder="trans('content.page.form.alias.placeholder')" v-model="form.alias"></i-input>
                             </form-item>
-                            <form-item label="分类">
+                            <form-item :label="trans('content.page.form.category.label')">
                                 <cascader :data="form.category.list" v-model="form.category.id"></cascader>
                             </form-item>
-                            <form-item label="开启" prop="enabled">
+                            <form-item :label="trans('content.page.form.enabled.label')" prop="enabled">
                                 <i-switch v-model="form.enabled" size="large">
-                                    <span slot="open">开启</span>
-                                    <span slot="close">关闭</span>
+                                    <span slot="open">{{ trans('content.page.form.enabled.open') }}</span>
+                                    <span slot="close">{{ trans('content.page.form.enabled.close') }}</span>
                                 </i-switch>
                             </form-item>
-                            <form-item label="内容" prop="content">
+                            <form-item :label="trans('content.page.form.content.label')" prop="content">
                                 <editor :path="path" @ready="editor"></editor>
                             </form-item>
                             <form-item>
