@@ -56,11 +56,11 @@
                     },
                     {
                         key: 'title',
-                        title: '页面名称',
+                        title: injection.trans('content.page.list.table.title'),
                     },
                     {
                         key: 'author',
-                        title: '作者',
+                        title: injection.trans('content.page.list.table.author'),
                         width: 200,
                     },
                     {
@@ -74,7 +74,7 @@
                                     </i-button>
                                     `;
                         },
-                        title: '操作',
+                        title: injection.trans('content.page.list.table.handle'),
                         width: 200,
                     },
                 ],
