@@ -163,8 +163,8 @@
                             </form-item>
                             <form-item>
                                 <i-button :loading="loading" type="primary" @click.native="submit">
-                                    <span v-if="!loading">确认提交</span>
-                                    <span v-else>正在提交…</span>
+                                    <span v-if="!loading">{{ trans('content.global.publish.submit') }}</span>
+                                    <span v-else>{{ trans('content.global.publish.loading') }}</span>
                                 </i-button>
                             </form-item>
                         </i-form>
