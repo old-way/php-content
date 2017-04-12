@@ -124,7 +124,7 @@
     <div class="article-wrap">
         <div class="article-edit">
             <card>
-                <p slot="title">创建页面</p>
+                <p slot="title">{{ trans('content.page.info.create') }}</p>
                 <row>
                     <i-col offset="4" span="16">
                         <i-form label-position="top" :model="form" ref="form" :rules="rules">
