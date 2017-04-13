@@ -99,6 +99,9 @@
             };
         },
         methods: {
+            dateChange(val) {
+                this.form.date = val;
+            },
             editor(instance) {
                 const self = this;
                 instance.setContent(self.form.content);
@@ -159,7 +162,8 @@
                     <i-col span="16">
                         <card>
                             <form-item prop="title">
-                                <i-input :placeholder="trans('content.article.form.title.placeholder')" v-model="form.title"></i-input>
+                                <i-input :placeholder="trans('content.article.form.title.placeholder')"
+                                         v-model="form.title"></i-input>
                             </form-item>
                             <form-item prop="content">
                                 <editor :path="path" @ready="editor"></editor>
@@ -198,13 +202,16 @@
                                 </i-switch>
                             </form-item>
                             <form-item :label="trans('content.article.form.date.label')">
-                                <date-picker :placeholder="trans('content.article.form.date.placeholder')" type="datetime" v-model="form.date"></date-picker>
+                                <date-picker :placeholder="trans('content.article.form.date.placeholder')"
+                                             type="datetime" @on-change="dateChange"></date-picker>
                             </form-item>
                             <form-item :label="trans('content.article.form.source.author.label')">
-                                <i-input :placeholder="trans('content.article.form.source.author.placeholder')" v-model="form.source.author"></i-input>
+                                <i-input :placeholder="trans('content.article.form.source.author.placeholder')"
+                                         v-model="form.source.author"></i-input>
                             </form-item>
                             <form-item :label="trans('content.article.form.source.link.label')">
-                                <i-input :placeholder="trans('content.article.form.source.link.placeholder')" v-model="form.source.link"></i-input>
+                                <i-input :placeholder="trans('content.article.form.source.link.placeholder')"
+                                         v-model="form.source.link"></i-input>
                             </form-item>
                         </card>
                     </i-col>
