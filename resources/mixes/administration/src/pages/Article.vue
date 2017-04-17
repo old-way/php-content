@@ -339,7 +339,7 @@
                         </i-button>
                     </div>
                 </template>
-                <i-table :columns="columns" :content="self" :data="list" @on-selection-change="selection"></i-table>
+                <i-table :columns="columns" :context="self" :data="list" @on-selection-change="selection"></i-table>
                 <div class="ivu-page-wrap">
                     <page :current="pagination.current_page" :page-size="pagination.per_page" :total="pagination.total"
                           @on-change="paginator"></page>

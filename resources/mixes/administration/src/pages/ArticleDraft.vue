@@ -93,7 +93,7 @@
                         <i-button type="error">{{ trans('content.global.delete.submit') }}</i-button>
                     </div>
                 </template>
-                <i-table :columns="columns" :content="self" :data="list"></i-table>
+                <i-table :columns="columns" :context="self" :data="list"></i-table>
             </card>
         </div>
     </div>
