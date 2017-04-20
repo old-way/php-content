@@ -1,17 +1,17 @@
-import Article from '../pages/Article';
-import ArticleCategory from '../pages/ArticleCategory';
-import ArticleCreate from '../pages/ArticleCreate';
-import ArticleDraft from '../pages/ArticleDraft';
-import ArticleDraftEdit from '../pages/ArticleDraftEdit';
-import ArticleEdit from '../pages/ArticleEdit';
-import ArticleRecycle from '../pages/ArticleRecycle';
-import Component from '../pages/Component';
-import Dashboard from '../pages/Dashboard';
-import Layout from '../layouts/Layout';
-import Page from '../pages/Page';
-import PageCategory from '../pages/PageCategory';
-import PageCreate from '../pages/PageCreate';
-import PageEdit from '../pages/PageEdit';
+import Article from '../pages/Article.vue';
+import ArticleCategory from '../pages/ArticleCategory.vue';
+import ArticleCreate from '../pages/ArticleCreate.vue';
+import ArticleDraft from '../pages/ArticleDraft.vue';
+import ArticleDraftEdit from '../pages/ArticleDraftEdit.vue';
+import ArticleEdit from '../pages/ArticleEdit.vue';
+import ArticleRecycle from '../pages/ArticleRecycle.vue';
+import Component from '../pages/Component.vue';
+import Dashboard from '../pages/Dashboard.vue';
+import Layout from '../layouts/Layout.vue';
+import Page from '../pages/Page.vue';
+import PageCategory from '../pages/PageCategory.vue';
+import PageCreate from '../pages/PageCreate.vue';
+import PageEdit from '../pages/PageEdit.vue';
 
 export default function (injection) {
     injection.useModuleRoute([

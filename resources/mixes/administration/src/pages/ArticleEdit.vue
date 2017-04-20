@@ -1,5 +1,5 @@
 <script>
-    import Editor from '../components/Editor';
+    import Editor from '../components/Editor.vue';
     import injection from '../helpers/injection';
 
     export default {
