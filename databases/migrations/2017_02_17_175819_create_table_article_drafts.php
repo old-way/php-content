@@ -45,6 +45,6 @@ class CreateTableArticleDrafts extends Migration
      */
     public function down()
     {
-        $this->schema->drop('article_drafts');
+        $this->schema->dropIfExists('article_drafts');
     }
 }

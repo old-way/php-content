@@ -46,6 +46,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        $this->schema->drop('pages');
+        $this->schema->dropIfExists('pages');
     }
 }

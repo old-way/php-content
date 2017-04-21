@@ -48,6 +48,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        $this->schema->drop('categories');
+        $this->schema->dropIfExists('categories');
     }
 }
