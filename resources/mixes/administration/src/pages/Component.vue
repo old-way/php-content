@@ -65,7 +65,7 @@
         <card>
             <p slot="title">{{ trans('content.component.info.article') }}</p>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.article.title.label')">
                         <i-input :placeholder="trans('content.component.form.article.title.placeholder')"
                                  v-model="form.article.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
@@ -73,7 +73,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.article.keyword.label')">
                         <i-input type="textarea"
                                  :placeholder="trans('content.component.form.article.keyword.placeholder')"
@@ -83,7 +83,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.article.description.label')">
                         <i-input type="textarea"
                                  :placeholder="trans('content.component.form.article.description.placeholder')"
@@ -96,7 +96,7 @@
         <card>
             <p slot="title">{{ trans('content.component.info.category') }}</p>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.category.title.label')">
                         <i-input :placeholder="trans('content.component.form.category.title.placeholder')"
                                  v-model="form.category.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
@@ -104,7 +104,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.category.keyword.label')">
                         <i-input type="textarea"
                                  :placeholder="trans('content.component.form.category.keyword.placeholder')"
@@ -114,7 +114,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.category.description.label')">
                         <i-input type="textarea"
                                  :placeholder="trans('content.component.form.category.description.placeholder')"
@@ -127,7 +127,7 @@
         <card>
             <p slot="title">{{ trans('content.component.info.page') }}</p>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.page.title.label')">
                         <i-input :placeholder="trans('content.component.form.page.title.placeholder')"
                                  v-model="form.page.title" :autosize="{minRows: 2,maxRows: 5}"></i-input>
@@ -135,7 +135,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.page.keyword.label')">
                         <i-input type="textarea" :placeholder="trans('content.component.form.page.keyword.placeholder')"
                                  v-model="form.page.keyword"
@@ -144,7 +144,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item :label="trans('content.component.form.page.description.label')">
                         <i-input type="textarea"
                                  :placeholder="trans('content.component.form.page.description.placeholder')"
@@ -154,7 +154,7 @@
                 </i-col>
             </row>
             <row>
-                <i-col span="14">
+                <i-col span="12">
                     <form-item>
                         <i-button :loading="loading" type="primary" @click.native="submit">
                             <span v-if="!loading">{{ trans('content.global.publish.submit') }}</span>
