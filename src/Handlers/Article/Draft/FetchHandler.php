@@ -83,18 +83,21 @@ class FetchHandler extends DataHandler
     public function toResponse()
     {
         $response = parent::toResponse();
-
-        return $response->withParams([
-            'pagination' => [
-                'total' => $this->pagination->total(),
-                'per_page' => $this->pagination->perPage(),
-                'current_page' => $this->pagination->currentPage(),
-                'last_page' => $this->pagination->lastPage(),
-                'next_page_url' => $this->pagination->nextPageUrl(),
-                'prev_page_url' => $this->pagination->previousPageUrl(),
-                'from' => $this->pagination->firstItem(),
-                'to' => $this->pagination->lastItem(),
-            ]
-        ]);
+        if ($this->pagination) {
+            return $response->withParams([
+                'pagination' => [
+                    'total' => $this->pagination->total(),
+                    'per_page' => $this->pagination->perPage(),
+                    'current_page' => $this->pagination->currentPage(),
+                    'last_page' => $this->pagination->lastPage(),
+                    'next_page_url' => $this->pagination->nextPageUrl(),
+                    'prev_page_url' => $this->pagination->previousPageUrl(),
+                    'from' => $this->pagination->firstItem(),
+                    'to' => $this->pagination->lastItem(),
+                ]
+            ]);
+        } else {
+            return $response;
+        }
     }
 }
