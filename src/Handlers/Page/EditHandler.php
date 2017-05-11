@@ -9,6 +9,7 @@
 namespace Notadd\Content\Handlers\Page;
 
 use Illuminate\Container\Container;
+use Illuminate\Validation\Rule;
 use Notadd\Content\Models\Page;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -26,29 +27,9 @@ class EditHandler extends SetHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::page.update.fail'));
+        $this->messages->push($this->translator->trans('content::page.update.success'));
         $this->model = new Page();
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::page.update.fail'),
-        ];
     }
 
     /**
@@ -61,11 +42,15 @@ class EditHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
+            'alias' => [
+                'required',
+                'regex:/^[a-zA-Z\pN_-]+$/u',
+                Rule::unique('pages')->ignore($this->request->input('id'), 'id'),
+            ],
             'title' => 'required',
-            'alias' => 'required|alpha_dash|unique:pages,id,' . $this->request->input('id'),
         ], [
             'alias.required' => '必须填写页面别名',
-            'alias.alpha_dash' => '页面别名只能由字母、数字和斜杠组成',
+            'alias.regex' => '页面别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
             'alias.unique' => '页面别名已被占用',
             'title.required' => '必须填写页面标题',
         ]);
@@ -81,17 +66,5 @@ class EditHandler extends SetHandler
         ]);
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::page.update.success'),
-        ];
     }
 }

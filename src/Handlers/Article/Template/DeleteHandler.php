@@ -28,29 +28,9 @@ class DeleteHandler extends SetHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::article_template.delete.fail'));
+        $this->messages->push($this->translator->trans('content::article_template.delete.success'));
         $this->model = $articleTemplate;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::article_template.delete.fail'),
-        ];
     }
 
     /**
@@ -67,17 +47,5 @@ class DeleteHandler extends SetHandler
         $articleTemplate->delete();
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::article_template.delete.success'),
-        ];
     }
 }

@@ -33,6 +33,8 @@ class AutoHandler extends AbstractSetHandler
         SettingsRepository $settings
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('修改设置失败！'));
+        $this->messages->push($this->translator->trans('修改设置成功!'));
         $this->settings = $settings;
     }
 
@@ -47,18 +49,6 @@ class AutoHandler extends AbstractSetHandler
     }
 
     /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            '修改设置失败！',
-        ];
-    }
-
-    /**
      * Execute Handler.
      *
      * @return bool
@@ -68,17 +58,5 @@ class AutoHandler extends AbstractSetHandler
         $this->settings->set('article.save.auto', $this->request->input('auto'));
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            '修改设置成功!',
-        ];
     }
 }

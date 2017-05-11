@@ -28,54 +28,8 @@ class FetchHandler extends DataHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::category_template.fetch.fail'));
+        $this->messages->push($this->translator->trans('content::category_template.fetch.success'));
         $this->model = $categoryTemplate;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        if($this->hasFilter) {
-            return $this->model->get();
-        } else {
-            return $this->model->all();
-        }
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category_template.fetch.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::category_template.fetch.success'),
-        ];
     }
 }

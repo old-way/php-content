@@ -27,6 +27,7 @@ class CreateArticlesTable extends Migration
             $table->string('author')->nullable();
             $table->string('source_author')->nullable();
             $table->string('source_link')->nullable();
+            $table->string('thumb_image')->nullable();
             $table->mediumText('content')->nullable();
             $table->string('keyword')->nullable();
             $table->string('description')->nullable();
@@ -45,6 +46,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        $this->schema->drop('articles');
+        $this->schema->dropIfExists('articles');
     }
 }

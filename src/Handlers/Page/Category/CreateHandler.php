@@ -33,17 +33,9 @@ class CreateHandler extends SetHandler
         PageCategory $category
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::category.create.fail'));
+        $this->messages->push($this->translator->trans('content::category.create.success'));
         $this->model = $category;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
     }
 
     /**
@@ -57,18 +49,6 @@ class CreateHandler extends SetHandler
     }
 
     /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category.create.fail'),
-        ];
-    }
-
-    /**
      * Execute Handler.
      *
      * @return bool
@@ -78,15 +58,15 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
+            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:page_categories',
             'title' => 'required',
-            'alias' => 'required|alpha_dash|unique:page_categories',
         ], [
             'alias.required' => '必须填写分类别名',
-            'alias.alpha_dash' => '分类别名只能由字母、数字和斜杠组成',
+            'alias.regex' => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
             'alias.unique' => '分类别名已被占用',
             'title.required' => '必须填写分类标题',
         ]);
-        $this->id = $this->model->create([
+        $this->id = $this->model->newQuery()->create([
             'alias'            => $this->request->input('alias'),
             'background_color' => $this->request->input('background_color'),
             'background_image' => $this->request->input('background_image'),
@@ -104,17 +84,5 @@ class CreateHandler extends SetHandler
         ]);
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::category.create.success'),
-        ];
     }
 }

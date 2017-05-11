@@ -6,7 +6,6 @@
  * @copyright (c) 2017, iBenchu.org
  * @datetime 2017-01-16 15:00
  */
-
 return [
     'create' => [
         'success' => 'Article has been created!',

@@ -8,7 +8,8 @@
  */
 namespace Notadd\Content\Controllers;
 
-use Notadd\Content\Handlers\ComponentHandler;
+use Notadd\Content\Handlers\Component\GetHandler;
+use Notadd\Content\Handlers\Component\SetHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -17,14 +18,26 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
 class ComponentController extends Controller
 {
     /**
-     * Seo handler.
+     * Get handler.
      *
-     * @param \Notadd\Content\Handlers\ComponentHandler $handler
+     * @param \Notadd\Content\Handlers\Component\GetHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function get(GetHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * Set handler.
+     *
+     * @param \Notadd\Content\Handlers\Component\SetHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function seo(ComponentHandler $handler)
+    public function set(SetHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

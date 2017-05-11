@@ -23,12 +23,12 @@ use Notadd\Content\Controllers\Api\Article\TypeController as ArticleTypeApiContr
 use Notadd\Content\Controllers\CategoryController;
 use Notadd\Content\Controllers\ComponentController;
 use Notadd\Content\Controllers\PageController;
-use Notadd\Foundation\Routing\Abstracts\RouteRegistrar as AbstractRouteRegistrar;
+use Notadd\Foundation\Routing\Abstracts\RouteRegister as AbstractRouteRegister;
 
 /**
  * Class RouteRegister.
  */
-class RouteRegister extends AbstractRouteRegistrar
+class RouteRegister extends AbstractRouteRegister
 {
     /**
      * Handle Route Registrar.
@@ -84,8 +84,9 @@ class RouteRegister extends AbstractRouteRegistrar
                     $this->router->post('fetch', CategoryTypeApiController::class . '@fetch');
                 });
             });
-            $this->router->group(['prefix' => 'api/content'], function () {
-                $this->router->post('component', ComponentController::class . '@seo');
+            $this->router->group(['prefix' => 'api/content/component'], function () {
+                $this->router->post('get', ComponentController::class . '@get');
+                $this->router->post('set', ComponentController::class . '@set');
             });
             $this->router->group(['prefix' => 'api/page'], function () {
                 $this->router->post('create', PageApiController::class . '@create');

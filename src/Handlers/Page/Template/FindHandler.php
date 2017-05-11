@@ -28,17 +28,9 @@ class FindHandler extends DataHandler
         PageTemplate $pageTemplate
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::page_template.find.fail'));
+        $this->messages->push($this->translator->trans('content::page_template.find.success'));
         $this->model = $pageTemplate;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
     }
 
     /**
@@ -51,29 +43,5 @@ class FindHandler extends DataHandler
         $pageTemplate = $this->model->newQuery()->find($this->request->input('id'));
 
         return $pageTemplate->getAttributes();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::page_template.find.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::page_template.find.success'),
-        ];
     }
 }

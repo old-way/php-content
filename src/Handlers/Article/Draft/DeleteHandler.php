@@ -37,16 +37,6 @@ class DeleteHandler extends SetHandler
     }
 
     /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
      * Data for handler.
      *
      * @return array
@@ -102,35 +92,22 @@ class DeleteHandler extends SetHandler
         $restore = $this->request->input('restore');
         if ($force) {
             $article->forceDelete();
-        } elseif ($restore) {
-            $article->restore();
-        } else {
-            $article->delete();
-        }
-
-        return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        if ($this->request->input('force')) {
-            return [
+            $this->messages = [
                 $this->translator->trans('content::article.force.success')
             ];
-        } elseif ($this->request->input('restore')) {
-            return [
+        } elseif ($restore) {
+            $article->restore();
+            $this->messages = [
                 $this->translator->trans('content::article.restore.success')
             ];
         } else {
-            return [
+            $article->delete();
+            $this->messages = [
                 $this->translator->trans('content::article.delete.success'),
             ];
         }
+
+        return true;
     }
 
     /**

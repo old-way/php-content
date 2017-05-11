@@ -33,17 +33,9 @@ class CreateHandler extends SetHandler
         Page $page
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::page.create.fail'));
+        $this->messages->push($this->translator->trans('content::page.create.success'));
         $this->model = $page;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
     }
 
     /**
@@ -59,18 +51,6 @@ class CreateHandler extends SetHandler
     }
 
     /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::page.create.fail'),
-        ];
-    }
-
-    /**
      * Execute Handler.
      *
      * @return bool
@@ -80,15 +60,15 @@ class CreateHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
+            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:pages',
             'title' => 'required',
-            'alias' => 'required|alpha_dash|unique:pages',
         ], [
             'alias.required' => '必须填写页面别名',
-            'alias.alpha_dash' => '页面别名只能由字母、数字和斜杠组成',
+            'alias.regex' => '页面别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
             'alias.unique' => '页面别名已被占用',
             'title.required' => '必须填写页面标题',
         ]);
-        $this->model = $this->model->create([
+        $this->model = $this->model->newQuery()->create([
             'alias'       => $this->request->input('alias'),
             'category_id' => $this->request->input('category_id', 0),
             'content'     => $this->request->input('content'),
@@ -100,17 +80,5 @@ class CreateHandler extends SetHandler
         $this->id = $this->model->getAttribute('id');
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::page.create.success'),
-        ];
     }
 }

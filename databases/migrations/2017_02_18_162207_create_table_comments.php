@@ -49,6 +49,6 @@ class CreateTableComments extends Migration
      */
     public function down()
     {
-        $this->schema->drop('comments');
+        $this->schema->dropIfExists('comments');
     }
 }

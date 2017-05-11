@@ -37,16 +37,6 @@ class DeleteHandler extends SetHandler
     }
 
     /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
      * Data for handler.
      *
      * @return array
@@ -74,18 +64,14 @@ class DeleteHandler extends SetHandler
     public function errors()
     {
         if ($this->request->input('force')) {
-            return [
-                $this->translator->trans('content::article.force.fail'),
-            ];
+            $this->errors->push($this->translator->trans('content::article.force.fail'));
         } elseif ($this->request->input('restore')) {
-            return [
-                $this->translator->trans('content::article.force.fail'),
-            ];
+            $this->errors->push($this->translator->trans('content::article.force.fail'));
         } else {
-            return [
-                $this->translator->trans('content::article.force.fail'),
-            ];
+            $this->errors->push($this->translator->trans('content::article.force.fail'));
         }
+
+        return parent::errors();
     }
 
     /**
@@ -103,35 +89,16 @@ class DeleteHandler extends SetHandler
         $restore = $this->request->input('restore');
         if ($force) {
             $article->forceDelete();
+            $this->messages->push($this->translator->trans('content::article.force.success'));
         } elseif ($restore) {
             $article->restore();
+            $this->messages->push($this->translator->trans('content::article.force.success'));
         } else {
             $article->delete();
+            $this->messages->push($this->translator->trans('content::article.force.success'));
         }
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        if ($this->request->input('force')) {
-            return [
-                $this->translator->trans('content::article.force.success'),
-            ];
-        } elseif ($this->request->input('restore')) {
-            return [
-                $this->translator->trans('content::article.force.success'),
-            ];
-        } else {
-            return [
-                $this->translator->trans('content::article.force.success'),
-            ];
-        }
     }
 
     /**

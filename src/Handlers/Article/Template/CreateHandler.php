@@ -33,29 +33,9 @@ class CreateHandler extends SetHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::article_template.create.fail'));
+        $this->messages->push($this->translator->trans('content::article_template.create.success'));
         $this->model = $articleTemplate;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::article_template.create.fail'),
-        ];
     }
 
     /**
@@ -68,17 +48,5 @@ class CreateHandler extends SetHandler
         $this->id = $this->model->create($this->request->all());
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::article_template.create.success'),
-        ];
     }
 }

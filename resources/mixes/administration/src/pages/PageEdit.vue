@@ -1,0 +1,174 @@
+<script>
+    import Editor from '../components/Editor.vue';
+    import injection from '../helpers/injection';
+
+    export default {
+        beforeRouteEnter(to, from, next) {
+            injection.loading.start();
+            injection.http.post(`${window.api}/page/find`, {
+                id: to.params.id,
+            }).then(response => {
+                const article = response.data.data;
+                injection.http.post(`${window.api}/page/category/fetch`).then(result => {
+                    const list = result.data.data;
+                    next(vm => {
+                        vm.form.category.list = list.map(first => ({
+                            children: first.children.map(second => ({
+                                children: second.children.map(third => ({
+                                    children: [],
+                                    label: third.title,
+                                    value: third.id,
+                                })),
+                                label: second.title,
+                                value: second.id,
+                            })),
+                            label: first.title,
+                            value: first.id,
+                        }));
+                        vm.form.alias = article.alias;
+                        vm.form.category.id = article.category_path ? article.category_path : [];
+                        vm.form.enabled = article.enabled === 1;
+                        vm.form.title = article.title;
+                        vm.form.content = article.content;
+                        injection.loading.finish();
+                        injection.message.info(injection.trans('content.page.info.get'));
+                        injection.sidebar.active('content');
+                    });
+                }).catch(() => {
+                    injection.loading.fail();
+                });
+            }).catch(() => {
+                injection.loading.fail();
+            });
+        },
+        components: {
+            Editor,
+        },
+        data() {
+            return {
+                form: {
+                    alias: '',
+                    category: {
+                        id: 0,
+                        list: [],
+                    },
+                    content: '',
+                    enabled: false,
+                    title: '',
+                },
+                loading: false,
+                path: window.UEDITOR_HOME_URL,
+                rules: {
+                    alias: [
+                        {
+                            required: true,
+                            type: 'string',
+                            message: injection.trans('content.page.form.alias.error'),
+                            trigger: 'change',
+                        },
+                    ],
+                    content: [
+                        {
+                            required: true,
+                            type: 'string',
+                            message: injection.trans('content.page.form.content.error'),
+                            trigger: 'change',
+                        },
+                    ],
+                    title: [
+                        {
+                            required: true,
+                            type: 'string',
+                            message: injection.trans('content.page.form.title.error'),
+                            trigger: 'change',
+                        },
+                    ],
+                },
+                trans: injection.trans,
+            };
+        },
+        methods: {
+            editor(instance) {
+                const self = this;
+                instance.setContent(self.form.content);
+                instance.addListener('contentChange', () => {
+                    self.form.content = instance.getContent();
+                });
+            },
+            submit() {
+                const self = this;
+                self.loading = true;
+                self.$refs.form.validate(valid => {
+                    if (valid) {
+                        const formData = new window.FormData();
+                        formData.append('alias', self.form.alias);
+                        formData.append('category_id', self.form.category.id.length ? self.form.category.id[self.form.category.id.length - 1] : 0);
+                        formData.append('content', self.form.content);
+                        formData.append('enabled', self.form.enabled ? '1' : '0');
+                        formData.append('id', self.$route.params.id);
+                        formData.append('title', self.form.title);
+                        self.$http.post(`${window.api}/page/edit`, formData).then(response => {
+                            self.$notice.open({
+                                title: response.data.message,
+                            });
+                            self.$router.push('/content/page');
+                        }).finally(() => {
+                            self.loading = false;
+                        });
+                    } else {
+                        self.loading = false;
+                        self.$notice.error({
+                            title: injection.trans('content.page.info.error'),
+                        });
+                    }
+                });
+            },
+        },
+        watch: {
+            'form.content': {
+                handler() {
+                    this.$refs.form.validateField('content');
+                },
+            },
+        },
+    };
+</script>
+<template>
+    <div class="article-wrap">
+        <div class="article-edit">
+            <card>
+                <p slot="title">{{ trans('content.page.info.edit') }}</p>
+                <row>
+                    <i-col offset="4" span="16">
+                        <i-form label-position="top" :model="form" ref="form" :rules="rules">
+                            <form-item :label="trans('content.page.form.title.label')" prop="title">
+                                <i-input :placeholder="trans('content.page.form.title.placeholder')" v-model="form.title"></i-input>
+                            </form-item>
+                            <form-item :label="trans('content.page.form.alias.label')" prop="alias">
+                                <i-input :placeholder="trans('content.page.form.alias.placeholder')" v-model="form.alias"></i-input>
+                            </form-item>
+                            <form-item :label="trans('content.page.form.category.label')">
+                                <cascader :data="form.category.list" v-model="form.category.id"></cascader>
+                            </form-item>
+                            <form-item :label="trans('content.page.form.enabled.label')" prop="enabled">
+                                <i-switch v-model="form.enabled" size="large">
+                                    <span slot="open">{{ trans('content.page.form.enabled.open') }}</span>
+                                    <span slot="close">{{ trans('content.page.form.enabled.close') }}</span>
+                                </i-switch>
+                            </form-item>
+                            <form-item :label="trans('content.page.form.content.label')" prop="content">
+                                <editor :path="path" @ready="editor"></editor>
+                            </form-item>
+                            <form-item>
+                                <i-button :loading="loading" type="primary" @click.native="submit">
+                                    <span v-if="!loading">{{ trans('content.global.publish.submit') }}</span>
+                                    <span v-else>{{ trans('content.global.publish.loading') }}</span>
+                                </i-button>
+                            </form-item>
+                        </i-form>
+                    </i-col>
+                </row>
+            </card>
+        </div>
+    </div>
+</template>

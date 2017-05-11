@@ -32,16 +32,6 @@ class FindHandler extends DataHandler
     }
 
     /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
      * Data for handler.
      *
      * @return array
@@ -49,6 +39,9 @@ class FindHandler extends DataHandler
     public function data()
     {
         $article = $this->model->newQuery()->find($this->request->input('id'));
+        $this->messages = [
+            $this->translator->trans('content::article.find.success'),
+        ];
 
         return $article->getAttributes();
     }
@@ -62,18 +55,6 @@ class FindHandler extends DataHandler
     {
         return [
             $this->translator->trans('content::article.find.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::article.find.success'),
         ];
     }
 }

@@ -9,13 +9,14 @@
 namespace Notadd\Content;
 
 use Illuminate\Events\Dispatcher;
-use Illuminate\Support\ServiceProvider;
 use Notadd\Content\Events\RegisterArticleTemplate;
 use Notadd\Content\Events\RegisterArticleType;
 use Notadd\Content\Events\RegisterCategoryTemplate;
 use Notadd\Content\Events\RegisterCategoryType;
 use Notadd\Content\Events\RegisterPageTemplate;
 use Notadd\Content\Events\RegisterPageType;
+use Notadd\Content\Injections\Installer;
+use Notadd\Content\Injections\Uninstaller;
 use Notadd\Content\Listeners\CsrfTokenRegister;
 use Notadd\Content\Listeners\RouteRegister;
 use Notadd\Content\Managers\ArticleManager;
@@ -25,11 +26,12 @@ use Notadd\Content\Models\Article;
 use Notadd\Content\Models\ArticleDraft;
 use Notadd\Content\Observers\ArticleObserver;
 use Notadd\Content\Observers\DraftObserver;
+use Notadd\Foundation\Module\Abstracts\Module;
 
 /**
  * Class Module.
  */
-class ModuleServiceProvider extends ServiceProvider
+class ModuleServiceProvider extends Module
 {
     /**
      * Boot service provider.
@@ -50,6 +52,36 @@ class ModuleServiceProvider extends ServiceProvider
     }
 
     /**
+     * Description of module
+     *
+     * @return string
+     */
+    public static function description()
+    {
+        return 'Notadd 内容管理模块';
+    }
+
+    /**
+     * Install module.
+     *
+     * @return string
+     */
+    public static function install()
+    {
+        return Installer::class;
+    }
+
+    /**
+     * Name of module.
+     *
+     * @return string
+     */
+    public static function name()
+    {
+        return '文章CMS';
+    }
+
+    /**
      * Register services.
      */
     public function register()
@@ -59,22 +91,22 @@ class ModuleServiceProvider extends ServiceProvider
         $this->app->alias('page.manager', PageManager::class);
         $this->app->singleton('article.manager', function ($app) {
             $manager = new ArticleManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->fire(new RegisterArticleTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->fire(new RegisterArticleType($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterArticleTemplate($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterArticleType($app, $manager));
 
             return $manager;
         });
         $this->app->singleton('category.manager', function ($app) {
             $manager = new CategoryManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->fire(new RegisterCategoryTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->fire(new RegisterCategoryType($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterCategoryTemplate($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterCategoryType($app, $manager));
 
             return $manager;
         });
         $this->app->singleton('page.manager', function ($app) {
             $manager = new PageManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->fire(new RegisterPageTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->fire(new RegisterPageType($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterPageTemplate($app, $manager));
+            $this->app->make(Dispatcher::class)->dispatch(new RegisterPageType($app, $manager));
 
             return $manager;
         });
@@ -88,7 +120,7 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public static function script()
     {
-        return asset('assets/content/administration/js/module.js');
+        return asset('assets/content/administration/js/module.min.js');
     }
 
     /**
@@ -100,7 +132,27 @@ class ModuleServiceProvider extends ServiceProvider
     public static function stylesheet()
     {
         return [
-            asset('assets/content/administration/css/module.css'),
+            asset('assets/content/administration/css/module.min.css'),
         ];
+    }
+
+    /**
+     * Uninstall module.
+     *
+     * @return string
+     */
+    public static function uninstall()
+    {
+        return Uninstaller::class;
+    }
+
+    /**
+     * Version of module.
+     *
+     * @return string
+     */
+    public static function version()
+    {
+        return '2.0.0';
     }
 }

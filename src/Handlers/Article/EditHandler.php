@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
+use Carbon\Carbon;
 use Illuminate\Container\Container;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
@@ -23,34 +24,12 @@ class EditHandler extends SetHandler
      * @param \Notadd\Content\Models\Article  $article
      * @param \Illuminate\Container\Container $container
      */
-    public function __construct(
-        Article $article,
-        Container $container
-    ) {
+    public function __construct(Article $article, Container $container)
+    {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::article.update.fail'));
+        $this->messages->push($this->translator->trans('content::article.update.success'));
         $this->model = $article;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::article.update.fail'),
-        ];
     }
 
     /**
@@ -64,10 +43,12 @@ class EditHandler extends SetHandler
     {
         $this->validate($this->request, [
             'content' => 'required',
-            'title' => 'required',
+            'source_link' => 'url',
+            'title'   => 'required',
         ], [
             'content.required' => '必须填写文章内容',
-            'title.required' => '必须填写文章标题',
+            'source_link.url' => '来源链接不是合法的URL',
+            'title.required'   => '必须填写文章标题',
         ]);
         $article = $this->model->newQuery()->find($this->request->input('id'));
         $article->update([
@@ -82,18 +63,10 @@ class EditHandler extends SetHandler
             'title'         => $this->request->input('title'),
         ]);
 
-        return true;
-    }
+        $this->request->has('date') && $article->update([
+            'created_at' => new Carbon($this->request->input('date')),
+        ]);
 
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::article.update.success'),
-        ];
+        return true;
     }
 }

@@ -9,6 +9,7 @@
 namespace Notadd\Content\Handlers\Page\Category;
 
 use Illuminate\Container\Container;
+use Illuminate\Validation\Rule;
 use Notadd\Content\Models\PageCategory;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
 
@@ -28,17 +29,9 @@ class EditHandler extends SetHandler
         PageCategory $category
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::category.update.fail'));
+        $this->messages->push($this->translator->trans('content::category.update.success'));
         $this->model = $category;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
     }
 
     /**
@@ -52,18 +45,6 @@ class EditHandler extends SetHandler
     }
 
     /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category.update.fail'),
-        ];
-    }
-
-    /**
      * Execute Handler.
      *
      * @return bool
@@ -73,11 +54,15 @@ class EditHandler extends SetHandler
     public function execute()
     {
         $this->validate($this->request, [
+            'alias' => [
+                'required',
+                'regex:/^[a-zA-Z\pN_-]+$/u',
+                Rule::unique('page_categories')->ignore($this->request->input('id'), 'id'),
+            ],
             'title' => 'required',
-            'alias' => 'required|alpha_dash|unique:page_categories,id,' . $this->request->input('id'),
         ], [
             'alias.required' => '必须填写分类别名',
-            'alias.alpha_dash' => '分类别名只能由字母、数字和斜杠组成',
+            'alias.regex' => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
             'alias.unique' => '分类别名已被占用',
             'title.required' => '必须填写分类标题',
         ]);
@@ -98,17 +83,5 @@ class EditHandler extends SetHandler
         ]);
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::category.update.success'),
-        ];
     }
 }

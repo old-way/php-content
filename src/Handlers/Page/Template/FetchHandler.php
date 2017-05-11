@@ -28,17 +28,9 @@ class FetchHandler extends DataHandler
         PageTemplate $pageTemplate
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::page_template.fetch.fail'));
+        $this->messages->push($this->translator->trans('content::page_template.fetch.success'));
         $this->model = $pageTemplate;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
     }
 
     /**
@@ -53,29 +45,5 @@ class FetchHandler extends DataHandler
         } else {
             return $this->model->all();
         }
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::page_template.fetch.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::page_template.fetch.success'),
-        ];
     }
 }

@@ -8,6 +8,8 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
+use Carbon\Carbon;
+use function Couchbase\fastlzDecompress;
 use Illuminate\Container\Container;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Passport\Abstracts\SetHandler;
@@ -33,17 +35,9 @@ class CreateHandler extends SetHandler
         Container $container
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::article.create.fail'));
+        $this->messages->push($this->translator->trans('content::article.create.success'));
         $this->model = $article;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
     }
 
     /**
@@ -59,18 +53,6 @@ class CreateHandler extends SetHandler
     }
 
     /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::article.create.fail'),
-        ];
-    }
-
-    /**
      * Execute Handler.
      *
      * @return bool
@@ -81,36 +63,30 @@ class CreateHandler extends SetHandler
     {
         $this->validate($this->request, [
             'content' => 'required',
+            'source_link' => 'url',
             'title' => 'required',
         ], [
             'content.required' => '必须填写文章内容',
+            'source_link.url' => '来源链接不是合法的URL',
             'title.required' => '必须填写文章标题',
         ]);
-        $this->model = $this->model->create([
+        $this->container->make('log')->info('create article:', $this->request->all());
+        $this->model = $this->model->newQuery()->create([
             'category_id'   => $this->request->input('category_id', 0),
             'content'       => $this->request->input('content'),
-            'is_hidden'     => $this->request->input('hidden'),
-            'is_sticky'     => $this->request->input('sticky'),
+            'is_hidden'     => $this->request->input('hidden', false),
+            'is_sticky'     => $this->request->input('sticky', false),
             'source_author' => $this->request->input('source_author'),
             'source_link'   => $this->request->input('source_link'),
             'description'   => $this->request->input('summary'),
             'keyword'       => $this->request->input('tags'),
             'title'         => $this->request->input('title'),
         ]);
+        $this->request->has('date') && $this->model->update([
+            'created_at' => new Carbon($this->request->input('date')),
+        ]);
         $this->id = $this->model->getAttribute('id');
 
         return true;
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::article.create.success'),
-        ];
     }
 }

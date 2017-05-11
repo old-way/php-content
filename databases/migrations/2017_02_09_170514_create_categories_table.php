@@ -35,6 +35,7 @@ class CreateCategoriesTable extends Migration
             $table->string('top_image')->nullable();
             $table->tinyInteger('pagination')->default(30);
             $table->boolean('enabled')->default(true);
+            $table->tinyInteger('order_id')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -47,6 +48,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        $this->schema->drop('categories');
+        $this->schema->dropIfExists('categories');
     }
 }

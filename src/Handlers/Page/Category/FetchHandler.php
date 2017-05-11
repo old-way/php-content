@@ -28,17 +28,9 @@ class FetchHandler extends DataHandler
         PageCategory $category
     ) {
         parent::__construct($container);
+        $this->errors->push($this->translator->trans('content::category.fetch.fail'));
+        $this->messages->push($this->translator->trans('content::category.fetch.success'));
         $this->model = $category;
-    }
-
-    /**
-     * Http code.
-     *
-     * @return int
-     */
-    public function code()
-    {
-        return 200;
     }
 
     /**
@@ -62,29 +54,5 @@ class FetchHandler extends DataHandler
         } else {
             return $this->model->structure();
         }
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::category.fetch.fail'),
-        ];
-    }
-
-    /**
-     * Messages for handler.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            $this->translator->trans('content::category.fetch.success'),
-        ];
     }
 }
