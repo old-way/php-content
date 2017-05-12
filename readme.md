@@ -1,4 +1,6 @@
 # Notadd Content
+
+[![Build Status](https://travis-ci.org/notadd/content.svg?branch=master)](https://travis-ci.org/notadd/content)
 ![Packagist](https://img.shields.io/packagist/v/notadd/content.svg) 
 ![Downloads](https://img.shields.io/packagist/dt/notadd/content.svg)
 
