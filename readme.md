@@ -1,4 +1,6 @@
 # Notadd Content
+![Packagist](https://img.shields.io/packagist/v/notadd/content.svg) 
+![Downloads](https://img.shields.io/packagist/dt/notadd/content.svg)
 
 Notadd Framework 的 CMS 模块。
 
