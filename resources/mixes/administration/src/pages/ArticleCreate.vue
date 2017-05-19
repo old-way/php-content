@@ -107,7 +107,7 @@
                         } else if (self.form.source.link === 'https://') {
                             formData.append('source_link', '');
                         } else {
-                            formData.append('source_link', self.form.source.url);
+                            formData.append('source_link', self.form.source.link);
                         }
                         self.$http.post(`${window.api}/article/create`, formData).then(response => {
                             self.$notice.open({
