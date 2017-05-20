@@ -3,7 +3,7 @@
  * This file is part of Notadd.
  *
  * @author TwilRoad <269044570@qq.com>
- * @copyright (c) 2017, iBenchu.org
+ * @copyright (c) 2017, notadd.com
  * @datetime 2017-02-17 19:02
  */
 namespace Notadd\Content\Handlers\Article\Draft;
@@ -119,18 +119,21 @@ class DeleteHandler extends SetHandler
     public function toResponse()
     {
         $response = parent::toResponse();
-
-        return $response->withParams([
-            'pagination' => [
-                'total' => $this->pagination->total(),
-                'per_page' => $this->pagination->perPage(),
-                'current_page' => $this->pagination->currentPage(),
-                'last_page' => $this->pagination->lastPage(),
-                'next_page_url' => $this->pagination->nextPageUrl(),
-                'prev_page_url' => $this->pagination->previousPageUrl(),
-                'from' => $this->pagination->firstItem(),
-                'to' => $this->pagination->lastItem(),
-            ]
-        ]);
+        if ($this->pagination) {
+            return $response->withParams([
+                'pagination' => [
+                    'total' => $this->pagination->total(),
+                    'per_page' => $this->pagination->perPage(),
+                    'current_page' => $this->pagination->currentPage(),
+                    'last_page' => $this->pagination->lastPage(),
+                    'next_page_url' => $this->pagination->nextPageUrl(),
+                    'prev_page_url' => $this->pagination->previousPageUrl(),
+                    'from' => $this->pagination->firstItem(),
+                    'to' => $this->pagination->lastItem(),
+                ]
+            ]);
+        } else {
+            return $response;
+        }
     }
 }
