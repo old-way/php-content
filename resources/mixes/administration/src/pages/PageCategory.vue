@@ -5,7 +5,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/page/category/fetch`).then(response => {
+            injection.http.post(`${window.api}/content/page/category/fetch`).then(response => {
                 const list = response.data.data;
                 next(vm => {
                     vm.list = list;
@@ -106,7 +106,7 @@
             remove() {
                 const self = this;
                 if (self.form.pattern === 'edit') {
-                    self.$http.post(`${window.api}/page/category/delete`, self.form).then(response => {
+                    self.$http.post(`${window.api}/content/page/category/delete`, self.form).then(response => {
                         self.list = response.data.data;
                     }).finally(() => {
                         self.modal.visible = false;
@@ -127,7 +127,7 @@
                 })).get();
                 self.$loading.start();
                 self.loading = true;
-                self.$http.post(`${window.api}/page/category/sort`, {
+                self.$http.post(`${window.api}/content/page/category/sort`, {
                     data: order,
                 }).then(response => {
                     self.$nextTick(() => {
@@ -149,7 +149,7 @@
                 if (self.form.pattern === 'create') {
                     self.$refs.form.validate(valid => {
                         if (valid) {
-                            self.$http.post(`${window.api}/page/category/create`, self.form).then(response => {
+                            self.$http.post(`${window.api}/content/page/category/create`, self.form).then(response => {
                                 self.list = response.data.data;
                                 self.$notice.open({
                                     title: injection.trans('content.page.category.info.create'),
@@ -172,7 +172,7 @@
                 if (self.form.pattern === 'edit') {
                     self.$refs.form.validate(valid => {
                         if (valid) {
-                            self.$http.post(`${window.api}/page/category/edit`, self.form).then(response => {
+                            self.$http.post(`${window.api}/content/page/category/edit`, self.form).then(response => {
                                 self.list = response.data.data;
                                 self.$notice.open({
                                     title: injection.trans('content.page.category.info.edit'),

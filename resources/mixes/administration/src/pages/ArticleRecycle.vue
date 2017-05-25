@@ -4,7 +4,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/article/fetch`, {
+            injection.http.post(`${window.api}/content/article/fetch`, {
                 trashed: true,
             }).then(response => {
                 const list = response.data.data;
@@ -71,7 +71,7 @@
                 const self = this;
                 self.$loading.start();
                 if (self.categories.id === 'none') {
-                    self.$http.post(`${window.api}/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/fetch`, {
                         'only-no-category': true,
                         page: id,
                     }).then(response => {
@@ -88,7 +88,7 @@
                         self.$loading.fail();
                     });
                 } else {
-                    self.$http.post(`${window.api}/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/fetch`, {
                         category: self.categories.id,
                         page: id,
                     }).then(response => {
@@ -110,7 +110,7 @@
                 const self = this;
                 const article = self.list[index];
                 article.loading = true;
-                self.$http.post(`${window.api}/article/delete`, {
+                self.$http.post(`${window.api}/content/article/delete`, {
                     id: article.id,
                     force: true,
                 }).then(response => {
@@ -140,7 +140,7 @@
                     self.loading = false;
                 } else {
                     self.selections.forEach((article, key) => {
-                        self.$http.post(`${window.api}/article/delete`, {
+                        self.$http.post(`${window.api}/content/article/delete`, {
                             id: article.id,
                             force: true,
                         }).then(response => {
@@ -166,7 +166,7 @@
                 const self = this;
                 const article = self.list[index];
                 article.restoring = true;
-                self.$http.post(`${window.api}/article/delete`, {
+                self.$http.post(`${window.api}/content/article/delete`, {
                     id: article.id,
                     restore: true,
                 }).then(response => {

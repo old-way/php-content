@@ -6,7 +6,7 @@
     },
     beforeRouteEnter (to, from, next) {
       Core.instance.store.commit('progress', 'start')
-      Core.http.post(window.api + '/article/fetch', {
+      Core.http.post(window.api + '/content/article/fetch', {
         trashed: true
       }).then(function (response) {
         Core.instance.store.commit('progress', 'done')
@@ -46,7 +46,7 @@
       },
       forceDelete: function (id) {
         let _this = this
-        _this.$http.post(window.api + '/article/delete', {
+        _this.$http.post(window.api + '/content/article/delete', {
           id: id,
           force: true
         }).then(function (response) {
@@ -67,7 +67,7 @@
         let _this = this
         _this.list.forEach((article) => {
           if (article.checked) {
-            _this.$http.post(window.api + '/article/delete', {
+            _this.$http.post(window.api + '/content/article/delete', {
               id: article.id,
               force: true
             }).then(function (response) {
@@ -88,7 +88,7 @@
       },
       paginator: function (page) {
         let _this = this
-        _this.$http.post(window.api + '/article/fetch', {
+        _this.$http.post(window.api + '/content/article/fetch', {
           page: page,
           trashed: true
         }).then(function (response) {
@@ -102,7 +102,7 @@
       },
       restore: function (id) {
         let _this = this
-        _this.$http.post(window.api + '/article/delete', {
+        _this.$http.post(window.api + '/content/article/delete', {
           id: id,
           restore: true
         }).then(function (response) {

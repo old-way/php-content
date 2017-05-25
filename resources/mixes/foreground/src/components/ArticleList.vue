@@ -70,7 +70,7 @@
       }
     },
     beforeRouteEnter (to, from, next) {
-      Vue.http.post(window.api + '/article/find', {
+      Vue.http.post(window.api + '/content/article/find', {
         id: to.params.id
       }).then((response) => {
         const data = response.data.data

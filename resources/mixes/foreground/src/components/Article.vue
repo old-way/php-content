@@ -46,7 +46,7 @@
       }
     },
     mounted () {
-      Vue.http.post(window.api + '/article/fetch').then((response) => {
+      Vue.http.post(window.api + '/content/article/fetch').then((response) => {
         this.articleList = response.data.data
         this.articleList.forEach(article => {
           article.thumb_image = article.thumb_image ? window.url + '/' + article.thumb_image : ''

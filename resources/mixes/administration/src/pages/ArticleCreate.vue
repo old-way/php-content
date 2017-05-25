@@ -5,7 +5,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/category/fetch`).then(response => {
+            injection.http.post(`${window.api}/content/category/fetch`).then(response => {
                 const list = response.data.data;
                 next(vm => {
                     vm.form.category.list = list.map(first => ({
@@ -109,7 +109,7 @@
                         } else {
                             formData.append('source_link', self.form.source.link);
                         }
-                        self.$http.post(`${window.api}/article/create`, formData).then(response => {
+                        self.$http.post(`${window.api}/content/article/create`, formData).then(response => {
                             self.$notice.open({
                                 title: response.data.message,
                             });

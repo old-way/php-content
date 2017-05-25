@@ -5,12 +5,12 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/article/find`, {
+            injection.http.post(`${window.api}/content/article/find`, {
                 id: to.params.id,
             }).then(response => {
                 const article = response.data.data;
                 injection.message.info(injection.trans('content.article.info.get'));
-                injection.http.post(`${window.api}/category/fetch`).then(result => {
+                injection.http.post(`${window.api}/content/category/fetch`).then(result => {
                     const list = result.data.data;
                     next(vm => {
                         vm.form.category.id = article.category_path ? article.category_path : [];
@@ -128,7 +128,7 @@
                         formData.append('source_author', self.form.source.author);
                         formData.append('source_link', self.form.source.link);
                         window.console.log(self.form);
-                        self.$http.post(`${window.api}/article/edit`, formData).then(response => {
+                        self.$http.post(`${window.api}/content/article/edit`, formData).then(response => {
                             self.$notice.open({
                                 title: response.data.message,
                             });

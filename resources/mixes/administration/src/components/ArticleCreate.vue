@@ -95,7 +95,7 @@
         _formData.append('title', _this.title)
         _formData.append('source_author', _this.source.author)
         _formData.append('source_link', _this.source.link)
-        _this.$http.post(window.api + '/article/create', _formData).then(function (response) {
+        _this.$http.post(window.api + '/content/article/create', _formData).then(function (response) {
           if (response.data.data.id && response.data.data.id > 0) {
             _this.$store.commit('message', {
               callback: function () {
@@ -137,7 +137,7 @@
             _formData.append('title', _this.title)
             _formData.append('source_author', _this.source.author)
             _formData.append('source_link', _this.source.link)
-            _this.$http.post(window.api + '/article/draft/create', _formData).then(function (response) {
+            _this.$http.post(window.api + '/content/article/draft/create', _formData).then(function (response) {
               if (response.data.data.id && response.data.data.id > 0) {
                 _this.$store.commit('message', {
                   show: true,
@@ -151,7 +151,7 @@
           }
         }, 10000)
       }
-      _this.$http.post(window.api + '/category/fetch').then(response => {
+      _this.$http.post(window.api + '/content/category/fetch').then(response => {
         _this.category.list = response.data.data
       })
     },
@@ -159,7 +159,7 @@
       auto: {
         handler: function (val) {
           let _this = this
-          _this.$http.post(window.api + '/article/auto', {
+          _this.$http.post(window.api + '/content/article/auto', {
             auto: _this.auto
           }).then(function (response) {
             _this.$store.commit('setting', response.data.data)

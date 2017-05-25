@@ -5,8 +5,8 @@
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
             injection.http.all([
-                injection.http.post(`${window.api}/page/fetch`),
-                injection.http.post(`${window.api}/page/category/fetch`, {
+                injection.http.post(`${window.api}/content/page/fetch`),
+                injection.http.post(`${window.api}/content/page/category/fetch`, {
                     'with-children': true,
                 }),
             ]).then(injection.http.spread((pageData, categoryData) => {
@@ -143,7 +143,7 @@
                     }
                 }
                 if (self.categories.id === 'none') {
-                    self.$http.post(`${window.api}/page/fetch`, {
+                    self.$http.post(`${window.api}/content/page/fetch`, {
                         'only-no-category': true,
                     }).then(response => {
                         self.list = [];
@@ -154,7 +154,7 @@
                         self.pagination = response.data.pagination;
                     });
                 } else {
-                    self.$http.post(`${window.api}/page/fetch`, {
+                    self.$http.post(`${window.api}/content/page/fetch`, {
                         category: self.categories.id,
                     }).then(response => {
                         self.list = [];
@@ -175,7 +175,7 @@
                 const self = this;
                 self.$loading.start();
                 if (self.categories.id === 'none') {
-                    self.$http.post(`${window.api}/page/fetch`, {
+                    self.$http.post(`${window.api}/content/page/fetch`, {
                         'only-no-category': true,
                         page: id,
                     }).then(response => {
@@ -191,7 +191,7 @@
                         self.$loading.fail();
                     });
                 } else {
-                    self.$http.post(`${window.api}/page/fetch`, {
+                    self.$http.post(`${window.api}/content/page/fetch`, {
                         category: self.categories.id,
                         page: id,
                     }).then(response => {
@@ -212,7 +212,7 @@
                 const self = this;
                 const page = self.list[index];
                 page.loading = true;
-                self.$http.post(`${window.api}/page/delete`, {
+                self.$http.post(`${window.api}/content/page/delete`, {
                     id: page.id,
                 }).then(response => {
                     const result = response.data;
@@ -238,7 +238,7 @@
                     self.loading = false;
                 } else {
                     self.selections.forEach((page, key) => {
-                        self.$http.post(`${window.api}/page/delete`, {
+                        self.$http.post(`${window.api}/content/page/delete`, {
                             id: page.id,
                         }).then(response => {
                             const result = response.data;
@@ -263,7 +263,7 @@
                 const self = this;
                 if (self.keyword.length > 0) {
                     injection.loading.start();
-                    self.$http.post(`${window.api}/page/fetch`, {
+                    self.$http.post(`${window.api}/content/page/fetch`, {
                         search: self.keyword,
                     }).then(response => {
                         const list = response.data.data;

@@ -8,7 +8,7 @@
     },
     beforeRouteEnter (to, from, next) {
       Core.instance.store.commit('progress', 'start')
-      Core.http.post(window.api + '/article/draft/find', {
+      Core.http.post(window.api + '/content/article/draft/find', {
         id: to.params.id
       }).then(function (response) {
         Core.instance.store.commit('progress', 'done')
@@ -89,7 +89,7 @@
         _formData.append('title', _this.title)
         _formData.append('source_author', _this.source.author)
         _formData.append('source_link', _this.source.link)
-        _this.$http.post(window.api + '/article/edit', _formData).then(function (response) {
+        _this.$http.post(window.api + '/content/article/edit', _formData).then(function (response) {
           _this.$store.commit('message', {
             callback: function () {
               _this.$router.push('/content/article/all')
