@@ -31,7 +31,7 @@ use Notadd\Foundation\Routing\Abstracts\RouteRegister as AbstractRouteRegister;
 class RouteRegister extends AbstractRouteRegister
 {
     /**
-     * Handle Route Registrar.
+     * Handle Route Register.
      */
     public function handle()
     {
