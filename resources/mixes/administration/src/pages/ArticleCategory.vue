@@ -204,7 +204,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-list">
-            <card>
+            <card :bordered="false">
                 <template slot="title">
                     <div class="filter">
                         <i-button type="primary" @click.native="create">{{ trans('content.article.category.info.create') }}</i-button>

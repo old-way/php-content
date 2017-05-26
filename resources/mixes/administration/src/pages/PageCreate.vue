@@ -123,7 +123,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-edit">
-            <card>
+            <card :bordered="false">
                 <p slot="title">{{ trans('content.page.info.create') }}</p>
                 <row>
                     <i-col offset="4" span="16">

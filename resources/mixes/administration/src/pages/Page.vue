@@ -293,7 +293,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-list">
-            <card>
+            <card :bordered="false">
                 <template slot="title">
                     <i-input class="search" :placeholder="trans('content.global.search.placeholder')" v-model="keyword">
                         <i-button slot="append" icon="ios-search" @click.native="search"></i-button>

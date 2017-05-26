@@ -160,7 +160,7 @@
             <i-form label-position="top" :model="form" ref="form" :rules="rules">
                 <row :gutter="20">
                     <i-col span="16">
-                        <card>
+                        <card :bordered="false">
                             <form-item prop="title">
                                 <i-input :placeholder="trans('content.article.form.title.placeholder')"
                                          v-model="form.title"></i-input>
@@ -177,10 +177,10 @@
                         </card>
                     </i-col>
                     <i-col span="8">
-                        <!--<card>-->
+                        <!--<card :bordered="false">-->
                         <!--<p slot="title">草稿箱</p>-->
                         <!--</card>-->
-                        <card>
+                        <card :bordered="false">
                             <!--<form-item label="缩略图" prop="image">-->
                             <!--<upload action="//jsonplaceholder.typicode.com/posts/">-->
                             <!--<i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>-->
