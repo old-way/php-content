@@ -22,7 +22,7 @@ class PermissionGroupRegister extends AbstractPermissionGroupRegister
     {
         $this->manager->group('content', [
             'description'    => '内容管理权限定义。',
-            'identification' => 'global',
+            'identification' => 'content',
             'name'           => '内容管理权限',
         ]);
     }
