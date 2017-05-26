@@ -8,14 +8,13 @@
  */
 namespace Notadd\Content\Handlers\Article\Draft;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\ArticleDraft;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\Handler;
 
 /**
  * Class FetchHandler.
  */
-class FetchHandler extends DataHandler
+class FetchHandler extends Handler
 {
     /**
      * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator
@@ -23,81 +22,40 @@ class FetchHandler extends DataHandler
     protected $pagination;
 
     /**
-     * FetchHandler constructor.
+     * Execute Handler.
      *
-     * @param \Notadd\Content\Models\ArticleDraft $article
-     * @param \Illuminate\Container\Container     $container
+     * @throws \Exception
      */
-    public function __construct(
-        ArticleDraft $article,
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->model = $article;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
+    protected function execute()
     {
         $pagination = $this->request->input('pagination') ?: 10;
         $search = $this->request->input('search');
         $trashed = $this->request->input('trashed');
         if($trashed) {
-            $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at', 'desc')->paginate($pagination);
+            $this->pagination = ArticleDraft::query()->onlyTrashed()->orderBy('deleted_at', 'desc')->paginate($pagination);
         } else {
             if($search) {
-                $this->pagination = $this->model->newQuery()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
+                $this->pagination = ArticleDraft::query()->where('title', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at', 'desc')->paginate($pagination);
             } else {
-                $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+                $this->pagination = ArticleDraft::query()->orderBy('created_at', 'desc')->paginate($pagination);
             }
         }
-        $this->messages = [
-            $this->translator->trans('content::article.fetch.success'),
-        ];
-
-        return $this->pagination->items();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::article.fetch.fail'),
-        ];
-    }
-
-    /**
-     * Make data to response with errors or messages.
-     *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
-     * @throws \Exception
-     */
-    public function toResponse()
-    {
-        $response = parent::toResponse();
         if ($this->pagination) {
-            return $response->withParams([
-                'pagination' => [
-                    'total' => $this->pagination->total(),
-                    'per_page' => $this->pagination->perPage(),
-                    'current_page' => $this->pagination->currentPage(),
-                    'last_page' => $this->pagination->lastPage(),
-                    'next_page_url' => $this->pagination->nextPageUrl(),
-                    'prev_page_url' => $this->pagination->previousPageUrl(),
-                    'from' => $this->pagination->firstItem(),
-                    'to' => $this->pagination->lastItem(),
-                ]
-            ]);
-        } else {
-            return $response;
+            $this->success()
+                ->withData($this->pagination->items())
+                ->withMessage('content::article.fetch.success')
+                ->withExtra([
+                    'pagination' => [
+                        'total'         => $this->pagination->total(),
+                        'per_page'      => $this->pagination->perPage(),
+                        'current_page'  => $this->pagination->currentPage(),
+                        'last_page'     => $this->pagination->lastPage(),
+                        'next_page_url' => $this->pagination->nextPageUrl(),
+                        'prev_page_url' => $this->pagination->previousPageUrl(),
+                        'from'          => $this->pagination->firstItem(),
+                        'to'            => $this->pagination->lastItem(),
+                    ],
+                ]);
         }
     }
 }

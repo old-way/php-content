@@ -10,52 +10,35 @@ namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\Handler;
 
 /**
  * Class FetchHandler.
  */
-class FetchHandler extends DataHandler
+class FetchHandler extends Handler
 {
     /**
-     * FetchHandler constructor.
+     * Execute Handler.
      *
-     * @param \Notadd\Content\Models\Category $category
-     * @param \Illuminate\Container\Container $container
+     * @throws \Exception
      */
-    public function __construct(
-        Category $category,
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::category.fetch.fail'));
-        $this->messages->push($this->translator->trans('content::category.fetch.success'));
-        $this->model = $category;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
+    protected function execute()
     {
         if ($this->request->input('with-children')) {
-            $categories = $this->model->newQuery()->orderBy('order_id', 'asc')->get();
+            $categories = Category::query()->orderBy('order_id', 'asc')->get();
             $categories->transform(function (Category $category) {
-                $children = $this->model->newQuery()->where('parent_id',
+                $children = Category::query()->where('parent_id',
                     $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
                 $children->count() && $category->setAttribute('children', $children);
 
                 return $category;
             });
-
-            return $categories;
+            $this->success()
+                ->withData($categories->toArray())
+                ->withMessage('content::category.fetch.success');
         }
-        if ($this->hasFilter) {
-            return $this->model->get();
-        } else {
-            return $this->model->structure();
-        }
+        $this->success()
+            ->withData((new Category())->structure())
+            ->withMessage('content::category.fetch.success');
     }
 }

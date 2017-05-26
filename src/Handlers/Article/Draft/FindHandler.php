@@ -8,53 +8,23 @@
  */
 namespace Notadd\Content\Handlers\Article\Draft;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\ArticleDraft;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\Handler;
 
 /**
  * Class FindHandler.
  */
-class FindHandler extends DataHandler
+class FindHandler extends Handler
 {
     /**
-     * FindHandler constructor.
+     * Execute Handler.
      *
-     * @param \Notadd\Content\Models\ArticleDraft $article
-     * @param \Illuminate\Container\Container     $container
+     * @throws \Exception
      */
-    public function __construct(
-        ArticleDraft $article,
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->model = $article;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
+    protected function execute()
     {
-        $article = $this->model->newQuery()->find($this->request->input('id'));
-        $this->messages = [
-            $this->translator->trans('content::article.find.success'),
-        ];
-
-        return $article->getAttributes();
-    }
-
-    /**
-     * Errors for handler.
-     *
-     * @return array
-     */
-    public function errors()
-    {
-        return [
-            $this->translator->trans('content::article.find.fail'),
-        ];
+        $this->success()
+            ->withData(ArticleDraft::query()->find($this->request->input('id'))->getAttributes())
+            ->withMessage('content::article.find.success');
     }
 }

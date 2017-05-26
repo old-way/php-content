@@ -8,40 +8,23 @@
  */
 namespace Notadd\Content\Handlers\Page\Category;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\PageCategory;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Passport\Abstracts\Handler;
 
 /**
  * Class FindHandler.
  */
-class FindHandler extends DataHandler
+class FindHandler extends Handler
 {
     /**
-     * FindHandler constructor.
+     * Execute Handler.
      *
-     * @param \Illuminate\Container\Container     $container
-     * @param \Notadd\Content\Models\PageCategory $category
+     * @throws \Exception
      */
-    public function __construct(
-        Container $container,
-        PageCategory $category
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::category.find.fail'));
-        $this->messages->push($this->translator->trans('content::category.find.success'));
-        $this->model = $category;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
+    protected function execute()
     {
-        $category = $this->model->newQuery()->find($this->request->input('id'));
-
-        return $category->getAttributes();
+        $this->success()
+            ->withData(PageCategory::query()->find($this->request->input('id'))->getAttributes())
+            ->withMessage('content::category.find.success');
     }
 }
