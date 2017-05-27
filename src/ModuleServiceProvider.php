@@ -19,6 +19,7 @@ use Notadd\Content\Injections\Installer;
 use Notadd\Content\Injections\Uninstaller;
 use Notadd\Content\Listeners\CsrfTokenRegister;
 use Notadd\Content\Listeners\PermissionGroupRegister;
+use Notadd\Content\Listeners\PermissionModuleRegister;
 use Notadd\Content\Listeners\RouteRegister;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
@@ -42,6 +43,7 @@ class ModuleServiceProvider extends Module
         Article::observe(ArticleObserver::class);
         ArticleDraft::observe(DraftObserver::class);
         $this->app->make(Dispatcher::class)->subscribe(CsrfTokenRegister::class);
+        $this->app->make(Dispatcher::class)->subscribe(PermissionModuleRegister::class);
         $this->app->make(Dispatcher::class)->subscribe(PermissionGroupRegister::class);
         $this->app->make(Dispatcher::class)->subscribe(RouteRegister::class);
         $this->loadMigrationsFrom(realpath(__DIR__ . '/../databases/migrations'));
