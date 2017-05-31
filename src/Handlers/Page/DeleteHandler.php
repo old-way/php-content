@@ -8,89 +8,24 @@
  */
 namespace Notadd\Content\Handlers\Page;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\Page;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class DeleteHandler.
  */
-class DeleteHandler extends SetHandler
+class DeleteHandler extends Handler
 {
     /**
-     * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    protected $pagination;
-
-    /**
-     * DeleteHandler constructor.
-     *
-     * @param \Illuminate\Container\Container $container
-     * @param \Notadd\Content\Models\Page     $page
-     */
-    public function __construct(
-        Container $container,
-        Page $page
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::page.delete.fail'));
-        $this->messages->push($this->translator->trans('content::page.delete.success'));
-        $this->model = $page;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        $pagination = $this->request->input('pagination') ?: 10;
-        $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
-
-        return $this->pagination->items();
-    }
-
-    /**
      * Execute Handler.
-     *
-     * @return bool
      */
     public function execute()
     {
-        $page = $this->model->newQuery()->find($this->request->input('id'));
-        if ($page === null) {
-            return false;
-        }
-        $page->delete();
-
-        return true;
-    }
-
-    /**
-     * Make data to response with errors or messages.
-     *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
-     * @throws \Exception
-     */
-    public function toResponse()
-    {
-        $response = parent::toResponse();
-        if ($this->pagination) {
-            return $response->withParams([
-                'pagination' => [
-                    'total'         => $this->pagination->total(),
-                    'per_page'      => $this->pagination->perPage(),
-                    'current_page'  => $this->pagination->currentPage(),
-                    'last_page'     => $this->pagination->lastPage(),
-                    'next_page_url' => $this->pagination->nextPageUrl(),
-                    'prev_page_url' => $this->pagination->previousPageUrl(),
-                    'from'          => $this->pagination->firstItem(),
-                    'to'            => $this->pagination->lastItem(),
-                ],
-            ]);
+        $id = $this->request->input('id');
+        if (($page = Page::query()->find($id)) && $page->delete()) {
+            $this->withCode(200)->withMessage('content::page.delete.success');
         } else {
-            return $response;
+            $this->withCode(500)->withError('content::page.delete.fail');
         }
     }
 }

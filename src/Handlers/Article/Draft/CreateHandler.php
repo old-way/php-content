@@ -8,56 +8,20 @@
  */
 namespace Notadd\Content\Handlers\Article\Draft;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\ArticleDraft;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class CreateHandler.
  */
-class CreateHandler extends SetHandler
+class CreateHandler extends Handler
 {
     /**
-     * @var int
-     */
-    protected $id = 0;
-
-    /**
-     * CreatorHandler constructor.
-     *
-     * @param \Notadd\Content\Models\ArticleDraft $article
-     * @param \Illuminate\Container\Container     $container
-     */
-    public function __construct(
-        ArticleDraft $article,
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::article.create.fail'));
-        $this->messages->push($this->translator->trans('content::article.create.success'));
-        $this->model = $article;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        return [
-            'id' => $this->id,
-        ];
-    }
-
-    /**
      * Execute Handler.
-     *
-     * @return bool
      */
     public function execute()
     {
-        $this->model = $this->model->newQuery()->create([
+        if (ArticleDraft::query()->create([
             'content'       => $this->request->input('content'),
             'is_hidden'     => $this->request->input('hidden'),
             'is_sticky'     => $this->request->input('sticky'),
@@ -66,9 +30,11 @@ class CreateHandler extends SetHandler
             'description'   => $this->request->input('summary'),
             'keyword'       => $this->request->input('tags'),
             'title'         => $this->request->input('title'),
-        ]);
-        $this->id = $this->model->getAttribute('id');
-
-        return true;
+        ])
+        ) {
+            $this->withCode(200)->withMessage('');
+        } else {
+            $this->withCode(500)->withError('');
+        }
     }
 }

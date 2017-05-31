@@ -8,46 +8,18 @@
  */
 namespace Notadd\Content\Handlers\Page\Category;
 
-use Illuminate\Container\Container;
 use Illuminate\Validation\Rule;
 use Notadd\Content\Models\PageCategory;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class EditHandler.
  */
-class EditHandler extends SetHandler
+class EditHandler extends Handler
 {
-    /**
-     * EditHandler constructor.
-     *
-     * @param \Illuminate\Container\Container     $container
-     * @param \Notadd\Content\Models\PageCategory $category
-     */
-    public function __construct(
-        Container $container,
-        PageCategory $category
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::category.update.fail'));
-        $this->messages->push($this->translator->trans('content::category.update.success'));
-        $this->model = $category;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        return $this->model->structure();
-    }
-
     /**
      * Execute Handler.
      *
-     * @return bool
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -62,12 +34,11 @@ class EditHandler extends SetHandler
             'title' => 'required',
         ], [
             'alias.required' => '必须填写分类别名',
-            'alias.regex' => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
-            'alias.unique' => '分类别名已被占用',
+            'alias.regex'    => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
+            'alias.unique'   => '分类别名已被占用',
             'title.required' => '必须填写分类标题',
         ]);
-        $category = $this->model->newQuery()->find($this->request->input('id'));
-        $category->update([
+        $data = [
             'title'            => $this->request->input('name'),
             'alias'            => $this->request->input('alias'),
             'description'      => $this->request->input('description'),
@@ -80,8 +51,12 @@ class EditHandler extends SetHandler
             'top_image'        => $this->request->input('top_image'),
             'pagination'       => $this->request->input('pagination'),
             'enabled'          => $this->request->input('enabled'),
-        ]);
-
-        return true;
+        ];
+        $id = $this->request->input('id');
+        if (($category = PageCategory::query()->find($id)) && $category->update($data)) {
+            $this->withCode(200)->withMessage('content::category.update.success');
+        } else {
+            $this->withCode(500)->withError('content::category.update.fail');
+        }
     }
 }

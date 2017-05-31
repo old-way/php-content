@@ -8,44 +8,24 @@
  */
 namespace Notadd\Content\Handlers\Article\Template;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\ArticleTemplate;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class EditHandler.
  */
-class EditHandler extends SetHandler
+class EditHandler extends Handler
 {
     /**
-     * EditHandler constructor.
-     *
-     * @param \Notadd\Content\Models\ArticleTemplate $articleTemplate
-     * @param \Illuminate\Container\Container        $container
-     */
-    public function __construct(
-        ArticleTemplate $articleTemplate,
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::article_template.update.fail'));
-        $this->messages->push($this->translator->trans('content::article_template.update.success'));
-        $this->model = $articleTemplate;
-    }
-
-    /**
      * Execute Handler.
-     *
-     * @return bool
      */
     public function execute()
     {
-        $articleTemplate = $this->model->newQuery()->find($this->request->input('id'));
-        if ($articleTemplate === null) {
-            return false;
+        $id = $this->request->input('id');
+        if (($articleTemplate = ArticleTemplate::query()->find($id)) && $articleTemplate->update($this->request->all())) {
+            $this->withCode(200)->withMessage('');
+        } else {
+            $this->withCode(500)->withError('');
         }
-        $articleTemplate->update($this->request->all());
-
-        return true;
     }
 }
