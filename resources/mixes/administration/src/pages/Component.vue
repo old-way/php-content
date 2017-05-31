@@ -62,7 +62,7 @@
 </script>
 <template>
     <i-form :label-width="200" :model="form" ref="form">
-        <card>
+        <card :bordered="false">
             <p slot="title">{{ trans('content.component.info.article') }}</p>
             <row>
                 <i-col span="12">
@@ -93,7 +93,7 @@
                 </i-col>
             </row>
         </card>
-        <card>
+        <card :bordered="false">
             <p slot="title">{{ trans('content.component.info.category') }}</p>
             <row>
                 <i-col span="12">
@@ -124,7 +124,7 @@
                 </i-col>
             </row>
         </card>
-        <card>
+        <card :bordered="false">
             <p slot="title">{{ trans('content.component.info.page') }}</p>
             <row>
                 <i-col span="12">

@@ -5,7 +5,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/category/fetch`).then(response => {
+            injection.http.post(`${window.api}/content/category/fetch`).then(response => {
                 const list = response.data.data;
                 next(vm => {
                     vm.form.category.list = list.map(first => ({
@@ -109,7 +109,7 @@
                         } else {
                             formData.append('source_link', self.form.source.link);
                         }
-                        self.$http.post(`${window.api}/article/create`, formData).then(response => {
+                        self.$http.post(`${window.api}/content/article/create`, formData).then(response => {
                             self.$notice.open({
                                 title: response.data.message,
                             });
@@ -141,7 +141,7 @@
             <i-form label-position="top" :model="form" ref="form" :rules="rules">
                 <row :gutter="20">
                     <i-col span="16">
-                        <card>
+                        <card :bordered="false">
                             <form-item prop="title">
                                 <i-input :placeholder="trans('content.article.form.title.placeholder')"
                                          v-model="form.title"></i-input>
@@ -158,10 +158,10 @@
                         </card>
                     </i-col>
                     <i-col span="8">
-                        <!--<card>-->
+                        <!--<card :bordered="false">-->
                         <!--<p slot="title">草稿箱</p>-->
                         <!--</card>-->
-                        <card>
+                        <card :bordered="false">
                             <!--<form-item label="缩略图" prop="image">-->
                             <!--<upload action="//jsonplaceholder.typicode.com/posts/">-->
                             <!--<i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>-->

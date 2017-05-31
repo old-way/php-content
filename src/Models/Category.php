@@ -2,7 +2,7 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2016, notadd.com
  * @datetime 2016-10-09 15:31
  */
@@ -59,6 +59,6 @@ class Category extends Model
             return $category;
         });
 
-        return $list;
+        return $list->toArray();
     }
 }

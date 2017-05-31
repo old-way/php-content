@@ -5,8 +5,8 @@
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
             injection.http.all([
-                injection.http.post(`${window.api}/article/fetch`),
-                injection.http.post(`${window.api}/category/fetch`, {
+                injection.http.post(`${window.api}/content/article/fetch`),
+                injection.http.post(`${window.api}/content/category/fetch`, {
                     'with-children': true,
                 }),
             ]).then(injection.http.spread((articleData, categoryData) => {
@@ -142,7 +142,7 @@
                     }
                 }
                 if (self.categories.id === 'none') {
-                    self.$http.post(`${window.api}/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/fetch`, {
                         'only-no-category': true,
                     }).then(response => {
                         self.list = [];
@@ -153,7 +153,7 @@
                         self.pagination = response.data.pagination;
                     });
                 } else {
-                    self.$http.post(`${window.api}/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/fetch`, {
                         category: self.categories.id,
                     }).then(response => {
                         self.list = [];
@@ -174,7 +174,7 @@
                 const self = this;
                 self.$loading.start();
                 if (self.categories.id === 'none') {
-                    self.$http.post(`${window.api}/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/fetch`, {
                         'only-no-category': true,
                         page: id,
                     }).then(response => {
@@ -190,7 +190,7 @@
                         self.$loading.fail();
                     });
                 } else {
-                    self.$http.post(`${window.api}/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/fetch`, {
                         category: self.categories.id,
                         page: id,
                     }).then(response => {
@@ -211,7 +211,7 @@
                 const self = this;
                 const article = self.list[index];
                 article.loading = true;
-                self.$http.post(`${window.api}/article/delete`, {
+                self.$http.post(`${window.api}/content/article/delete`, {
                     id: article.id,
                 }).then(response => {
                     const result = response.data;
@@ -237,7 +237,7 @@
                     self.loading = false;
                 } else {
                     self.selections.forEach((article, key) => {
-                        self.$http.post(`${window.api}/article/delete`, {
+                        self.$http.post(`${window.api}/content/article/delete`, {
                             id: article.id,
                         }).then(response => {
                             const result = response.data;
@@ -262,7 +262,7 @@
                 const self = this;
                 if (self.keyword.length > 0) {
                     injection.loading.start();
-                    injection.http.post(`${window.api}/article/fetch`, {
+                    injection.http.post(`${window.api}/content/article/fetch`, {
                         search: self.keyword,
                     }).then(response => {
                         const list = response.data.data;
@@ -312,7 +312,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-list">
-            <card>
+            <card :bordered="false">
                 <template slot="title">
                     <i-input class="search" :placeholder="trans('content.global.search.placeholder')" v-model="keyword">
                         <i-button slot="append" icon="ios-search" @click.native="search"></i-button>

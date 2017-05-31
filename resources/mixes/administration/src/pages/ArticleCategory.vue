@@ -5,7 +5,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/category/fetch`).then(response => {
+            injection.http.post(`${window.api}/content/category/fetch`).then(response => {
                 const list = response.data.data;
                 next(vm => {
                     vm.list = list;
@@ -106,7 +106,7 @@
             remove() {
                 const self = this;
                 if (self.form.pattern === 'edit') {
-                    self.$http.post(`${window.api}/category/delete`, self.form).then(response => {
+                    self.$http.post(`${window.api}/content/category/delete`, self.form).then(response => {
                         self.list = response.data.data;
                     }).finally(() => {
                         self.modal.visible = false;
@@ -127,7 +127,7 @@
                 })).get();
                 self.$loading.start();
                 self.loading = true;
-                self.$http.post(`${window.api}/category/sort`, {
+                self.$http.post(`${window.api}/content/category/sort`, {
                     data: order,
                 }).then(response => {
                     self.$nextTick(() => {
@@ -149,7 +149,7 @@
                 if (self.form.pattern === 'create') {
                     self.$refs.form.validate(valid => {
                         if (valid) {
-                            self.$http.post(`${window.api}/category/create`, self.form).then(response => {
+                            self.$http.post(`${window.api}/content/category/create`, self.form).then(response => {
                                 self.list = response.data.data;
                                 self.$notice.open({
                                     title: injection.trans('content.article.category.info.success'),
@@ -172,7 +172,7 @@
                 if (self.form.pattern === 'edit') {
                     self.$refs.form.validate(valid => {
                         if (valid) {
-                            self.$http.post(`${window.api}/category/edit`, self.form).then(response => {
+                            self.$http.post(`${window.api}/content/category/edit`, self.form).then(response => {
                                 self.list = response.data.data;
                                 self.$notice.open({
                                     title: injection.trans('content.article.category.info.success'),
@@ -204,7 +204,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-list">
-            <card>
+            <card :bordered="false">
                 <template slot="title">
                     <div class="filter">
                         <i-button type="primary" @click.native="create">{{ trans('content.article.category.info.create') }}</i-button>

@@ -2,46 +2,29 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2016, notadd.com
  * @datetime 2016-11-24 18:50
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class FindHandler.
  */
-class FindHandler extends DataHandler
+class FindHandler extends Handler
 {
     /**
-     * FindHandler constructor.
+     * Execute Handler.
      *
-     * @param \Notadd\Content\Models\Category $category
-     * @param \Illuminate\Container\Container $container
+     * @throws \Exception
      */
-    public function __construct(
-        Category $category,
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::category.find.fail'));
-        $this->messages->push($this->translator->trans('content::category.find.success'));
-        $this->model = $category;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
+    protected function execute()
     {
-        $category = $this->model->newQuery()->find($this->request->input('id'));
-
-        return $category->getAttributes();
+        $this->success()
+            ->withData(Category::query()->find($this->request->input('id'))->getAttributes())
+            ->withMessage('content::category.find.success');
     }
 }

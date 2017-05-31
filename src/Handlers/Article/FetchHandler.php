@@ -2,21 +2,20 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2017, notadd.com
  * @datetime 2017-01-15 20:31
  */
 namespace Notadd\Content\Handlers\Article;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\Article;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class FetchHandler.
  */
-class FetchHandler extends DataHandler
+class FetchHandler extends Handler
 {
     /**
      * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator
@@ -24,31 +23,15 @@ class FetchHandler extends DataHandler
     protected $pagination;
 
     /**
-     * FetchHandler constructor.
+     * Execute Handler.
      *
-     * @param \Notadd\Content\Models\Article  $article
-     * @param \Illuminate\Container\Container $container
+     * @throws \Exception
      */
-    public function __construct(
-        Article $article,
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::article.fetch.fail'));
-        $this->messages->push($this->translator->trans('content::article.fetch.success'));
-        $this->model = $article;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
+    protected function execute()
     {
         $pagination = $this->request->input('pagination') ?: 10;
         if ($this->request->input('only-no-category')) {
-            $this->pagination = $this->model->newQuery()->where('category_id', 0)->paginate($pagination);
+            $this->pagination = Article::query()->where('category_id', 0)->paginate($pagination);
         } elseif ($id = $this->request->input('category')) {
             $categories = collect([(int)$id]);
             $this->container->make('log')->info('has category', $categories->toArray());
@@ -68,39 +51,29 @@ class FetchHandler extends DataHandler
             $this->container->make('log')->info('get categories', $categories->toArray());
             $categories = $categories->unique();
             $this->container->make('log')->info('get categories', $categories->toArray());
-            $this->pagination = $this->model->newQuery()->whereIn('category_id',
+            $this->pagination = Article::query()->whereIn('category_id',
                 $categories->toArray())->orderBy('created_at', 'desc')->paginate($pagination);
         } else {
             $search = $this->request->input('search');
             $trashed = $this->request->input('trashed');
             if ($trashed) {
-                $this->pagination = $this->model->newQuery()->onlyTrashed()->orderBy('deleted_at',
+                $this->pagination = Article::query()->onlyTrashed()->orderBy('deleted_at',
                     'desc')->paginate($pagination);
             } else {
                 if ($search) {
-                    $this->pagination = $this->model->newQuery()->where('title', 'like',
+                    $this->pagination = Article::query()->where('title', 'like',
                         '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at',
                         'desc')->paginate($pagination);
                 } else {
-                    $this->pagination = $this->model->newQuery()->orderBy('created_at', 'desc')->paginate($pagination);
+                    $this->pagination = Article::query()->orderBy('created_at', 'desc')->paginate($pagination);
                 }
             }
         }
-
-        return $this->pagination->items();
-    }
-
-    /**
-     * Make data to response with errors or messages.
-     *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
-     * @throws \Exception
-     */
-    public function toResponse()
-    {
-        $response = parent::toResponse();
         if ($this->pagination) {
-            return $response->withParams([
+            $this->success()
+                ->withData($this->pagination->items())
+                ->withMessage('content::article.fetch.success')
+                ->withExtra([
                 'pagination' => [
                     'total'         => $this->pagination->total(),
                     'per_page'      => $this->pagination->perPage(),
@@ -112,8 +85,6 @@ class FetchHandler extends DataHandler
                     'to'            => $this->pagination->lastItem(),
                 ],
             ]);
-        } else {
-            return $response;
         }
     }
 }

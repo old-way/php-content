@@ -12,7 +12,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-edit">
-            <card>
+            <card :bordered="false">
                 <p slot="title">编辑草稿</p>
             </card>
         </div>

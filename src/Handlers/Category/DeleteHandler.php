@@ -2,58 +2,30 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2016, notadd.com
  * @datetime 2016-11-24 18:33
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class DeleteHandler.
  */
-class DeleteHandler extends SetHandler
+class DeleteHandler extends Handler
 {
     /**
-     * DeleteHandler constructor.
-     *
-     * @param \Illuminate\Container\Container $container
-     */
-    public function __construct(
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::category.delete.fail'));
-        $this->messages->push($this->translator->trans('content::category.delete.success'));
-        $this->model = new Category();
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        return $this->model->structure();
-    }
-
-    /**
      * Execute Handler.
-     *
-     * @return bool
      */
     public function execute()
     {
-        $category = $this->model->newQuery()->find($this->request->input('id'));
-        if ($category === null) {
-            return false;
+        $id = $this->request->input('id');
+        if (($category = Category::query()->find($id)) && $category->delete()) {
+            $this->withCode(200)->withMessage('content::category.delete.success');
+        } else {
+            $this->withCode(500)->withError('content::category.delete.fail');
         }
-        $category->delete();
-
-        return true;
     }
 }

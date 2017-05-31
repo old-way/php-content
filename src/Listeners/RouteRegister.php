@@ -2,7 +2,7 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2016, notadd.com
  * @datetime 2016-10-08 18:30
  */
@@ -31,12 +31,12 @@ use Notadd\Foundation\Routing\Abstracts\RouteRegister as AbstractRouteRegister;
 class RouteRegister extends AbstractRouteRegister
 {
     /**
-     * Handle Route Registrar.
+     * Handle Route Register.
      */
     public function handle()
     {
         $this->router->group(['middleware' => ['auth:api', 'cross', 'web']], function () {
-            $this->router->group(['prefix' => 'api/article'], function () {
+            $this->router->group(['prefix' => 'api/content/article'], function () {
                 $this->router->post('auto', ArticleApiController::class . '@auto');
                 $this->router->post('create', ArticleApiController::class . '@create');
                 $this->router->post('delete', ArticleApiController::class . '@delete');
@@ -62,7 +62,7 @@ class RouteRegister extends AbstractRouteRegister
                     $this->router->post('fetch', ArticleTypeApiController::class . '@fetch');
                 });
             });
-            $this->router->group(['prefix' => 'api/category'], function () {
+            $this->router->group(['prefix' => 'api/content/category'], function () {
                 $this->router->post('create', CategoryApiController::class . '@create');
                 $this->router->post('delete', CategoryApiController::class . '@delete');
                 $this->router->post('edit', CategoryApiController::class . '@edit');
@@ -88,7 +88,7 @@ class RouteRegister extends AbstractRouteRegister
                 $this->router->post('get', ComponentController::class . '@get');
                 $this->router->post('set', ComponentController::class . '@set');
             });
-            $this->router->group(['prefix' => 'api/page'], function () {
+            $this->router->group(['prefix' => 'api/content/page'], function () {
                 $this->router->post('create', PageApiController::class . '@create');
                 $this->router->post('delete', PageApiController::class . '@delete');
                 $this->router->post('edit', PageApiController::class . '@edit');
@@ -120,7 +120,7 @@ class RouteRegister extends AbstractRouteRegister
         });
 
         $this->router->group(['middleware' => ['cross', 'web']], function () {
-            $this->router->group(['prefix' => 'api/article'], function () {
+            $this->router->group(['prefix' => 'api/content/article'], function () {
                 $this->router->post('find', ArticleApiController::class . '@find');
                 $this->router->post('fetch', ArticleApiController::class . '@fetch');
             });

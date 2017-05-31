@@ -2,50 +2,24 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2016, notadd.com
  * @datetime 2016-11-24 18:33
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Illuminate\Container\Container;
 use Illuminate\Validation\Rule;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class EditHandler.
  */
-class EditHandler extends SetHandler
+class EditHandler extends Handler
 {
-    /**
-     * EditHandler constructor.
-     *
-     * @param \Illuminate\Container\Container $container
-     */
-    public function __construct(
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::category.update.fail'));
-        $this->messages->push($this->translator->trans('content::category.update.success'));
-        $this->model = new Category();
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        return $this->model->structure();
-    }
-
     /**
      * Execute Handler.
      *
-     * @return bool
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -65,26 +39,25 @@ class EditHandler extends SetHandler
             'title.required' => '必须填写分类标题',
         ]);
         $this->container->make('log')->info('edit category', $this->request->all());
-        $category = $this->model->newQuery()->find($this->request->input('id'));
-        if ($category) {
-            $category->update([
-                'alias'            => $this->request->input('alias'),
-                'background_color' => $this->request->input('background_color'),
-                'background_image' => $this->request->input('background_image'),
-                'description'      => $this->request->input('description'),
-                'enabled'          => $this->request->input('enabled'),
-                'pagination'       => $this->request->input('pagination'),
-                'seo_title'        => $this->request->input('seo_title'),
-                'seo_keyword'      => $this->request->input('seo_keyword'),
-                'seo_description'  => $this->request->input('seo_description'),
-                'top_image'        => $this->request->input('top_image'),
-                'title'            => $this->request->input('name'),
-                'type'             => $this->request->input('type') ?: 'normal',
-            ]);
-
-            return true;
+        $data = [
+            'alias'            => $this->request->input('alias'),
+            'background_color' => $this->request->input('background_color'),
+            'background_image' => $this->request->input('background_image'),
+            'description'      => $this->request->input('description'),
+            'enabled'          => $this->request->input('enabled'),
+            'pagination'       => $this->request->input('pagination'),
+            'seo_title'        => $this->request->input('seo_title'),
+            'seo_keyword'      => $this->request->input('seo_keyword'),
+            'seo_description'  => $this->request->input('seo_description'),
+            'top_image'        => $this->request->input('top_image'),
+            'title'            => $this->request->input('name'),
+            'type'             => $this->request->input('type') ?: 'normal',
+        ];
+        $id = $this->request->input('id');
+        if (($category = Category::query()->find($id)) && $category->update($data)) {
+            $this->withCode(200)->withMessage('content::category.update.success');
+        } else {
+            $this->withCode(500)->withError('content::category.update.fail');
         }
-
-        return false;
     }
 }

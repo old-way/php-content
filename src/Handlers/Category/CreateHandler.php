@@ -2,51 +2,23 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2016, notadd.com
  * @datetime 2016-10-08 17:27
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\SetHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class CreateHandler.
  */
-class CreateHandler extends SetHandler
+class CreateHandler extends Handler
 {
-    /**
-     * CreateHandler constructor.
-     *
-     * @param \Notadd\Content\Models\Category $category
-     * @param \Illuminate\Container\Container $container
-     */
-    public function __construct(
-        Category $category,
-        Container $container
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::article.find.fail'));
-        $this->messages->push($this->translator->trans('content::article.find.success'));
-        $this->model = $category;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        return $this->model->structure();
-    }
-
     /**
      * Execute Handler.
      *
-     * @return bool
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @throws \Illuminate\Validation\ValidationException
      */
@@ -57,11 +29,11 @@ class CreateHandler extends SetHandler
             'title' => 'required',
         ], [
             'alias.required' => '必须填写分类别名',
-            'alias.regex' => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
-            'alias.unique' => '分类别名已被占用',
+            'alias.regex'    => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
+            'alias.unique'   => '分类别名已被占用',
             'title.required' => '必须填写分类标题',
         ]);
-        $this->model->newQuery()->create([
+        if (Category::query()->create([
             'alias'            => $this->request->input('alias'),
             'background_color' => $this->request->input('background_color'),
             'background_image' => $this->request->input('background_image'),
@@ -76,8 +48,11 @@ class CreateHandler extends SetHandler
             'title'            => $this->request->input('name'),
             'top_image'        => $this->request->input('top_image'),
             'type'             => $this->request->input('type') ?: 'normal',
-        ]);
-
-        return true;
+        ])
+        ) {
+            $this->withCode(200)->withMessage('content::article.find.success');
+        } else {
+            $this->withCode(500)->withError('content::article.find.fail');
+        }
     }
 }

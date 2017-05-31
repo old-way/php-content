@@ -5,7 +5,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/page/category/fetch`).then(response => {
+            injection.http.post(`${window.api}/content/page/category/fetch`).then(response => {
                 const list = response.data.data;
                 next(vm => {
                     vm.form.category.list = list.map(first => ({
@@ -94,7 +94,7 @@
                         formData.append('content', self.form.content);
                         formData.append('enabled', self.form.enabled ? '1' : '0');
                         formData.append('title', self.form.title);
-                        self.$http.post(`${window.api}/page/create`, formData).then(response => {
+                        self.$http.post(`${window.api}/content/page/create`, formData).then(response => {
                             self.$notice.open({
                                 title: response.data.message,
                             });
@@ -123,7 +123,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-edit">
-            <card>
+            <card :bordered="false">
                 <p slot="title">{{ trans('content.page.info.create') }}</p>
                 <row>
                     <i-col offset="4" span="16">

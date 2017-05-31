@@ -2,7 +2,7 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2016, notadd.com
  * @datetime 2016-10-08 17:12
  */
@@ -18,6 +18,11 @@ use Notadd\Content\Events\RegisterPageType;
 use Notadd\Content\Injections\Installer;
 use Notadd\Content\Injections\Uninstaller;
 use Notadd\Content\Listeners\CsrfTokenRegister;
+use Notadd\Content\Listeners\FlowRegister;
+use Notadd\Content\Listeners\PermissionGroupRegister;
+use Notadd\Content\Listeners\PermissionModuleRegister;
+use Notadd\Content\Listeners\PermissionRegister;
+use Notadd\Content\Listeners\PermissionTypeRegister;
 use Notadd\Content\Listeners\RouteRegister;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
@@ -41,6 +46,11 @@ class ModuleServiceProvider extends Module
         Article::observe(ArticleObserver::class);
         ArticleDraft::observe(DraftObserver::class);
         $this->app->make(Dispatcher::class)->subscribe(CsrfTokenRegister::class);
+        $this->app->make(Dispatcher::class)->subscribe(FlowRegister::class);
+        $this->app->make(Dispatcher::class)->subscribe(PermissionModuleRegister::class);
+        $this->app->make(Dispatcher::class)->subscribe(PermissionGroupRegister::class);
+        $this->app->make(Dispatcher::class)->subscribe(PermissionRegister::class);
+        $this->app->make(Dispatcher::class)->subscribe(PermissionTypeRegister::class);
         $this->app->make(Dispatcher::class)->subscribe(RouteRegister::class);
         $this->loadMigrationsFrom(realpath(__DIR__ . '/../databases/migrations'));
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/translations'), 'content');

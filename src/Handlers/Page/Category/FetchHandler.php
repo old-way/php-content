@@ -2,57 +2,41 @@
 /**
  * This file is part of Notadd.
  *
- * @author TwilRoad <269044570@qq.com>
+ * @author TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2017, notadd.com
  * @datetime 2017-02-15 14:48
  */
 namespace Notadd\Content\Handlers\Page\Category;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\PageCategory;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class FetchHandler.
  */
-class FetchHandler extends DataHandler
+class FetchHandler extends Handler
 {
     /**
-     * FetchHandler constructor.
+     * Execute Handler.
      *
-     * @param \Illuminate\Container\Container     $container
-     * @param \Notadd\Content\Models\PageCategory $category
+     * @throws \Exception
      */
-    public function __construct(
-        Container $container,
-        PageCategory $category
-    ) {
-        parent::__construct($container);
-        $this->errors->push($this->translator->trans('content::category.fetch.fail'));
-        $this->messages->push($this->translator->trans('content::category.fetch.success'));
-        $this->model = $category;
-    }
-
-    /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
+    protected function execute()
     {
         if ($this->request->input('with-children')) {
-            $categories = $this->model->newQuery()->orderBy('order_id', 'asc')->get();
+            $categories = PageCategory::query()->orderBy('order_id', 'asc')->get();
             $categories->transform(function (PageCategory $category) {
-                $children = $this->model->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
+                $children = PageCategory::query()->where('parent_id', $category->getAttribute('id'))
+                    ->orderBy('order_id', 'asc')
+                    ->get();
                 $children->count() && $category->setAttribute('children', $children);
                 return $category;
             });
-            return $categories;
-        }
-        if ($this->hasFilter) {
-            return $this->model->get();
+            $this->success()->withData($categories->toArray())->withMessage('content::category.fetch.success');
         } else {
-            return $this->model->structure();
+            $this->success()
+                ->withData((new PageCategory())->structure())
+                ->withMessage('content::category.fetch.success');
         }
     }
 }

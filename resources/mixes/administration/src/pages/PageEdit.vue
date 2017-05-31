@@ -5,11 +5,11 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/page/find`, {
+            injection.http.post(`${window.api}/content/page/find`, {
                 id: to.params.id,
             }).then(response => {
                 const article = response.data.data;
-                injection.http.post(`${window.api}/page/category/fetch`).then(result => {
+                injection.http.post(`${window.api}/content/page/category/fetch`).then(result => {
                     const list = result.data.data;
                     next(vm => {
                         vm.form.category.list = list.map(first => ({
@@ -107,7 +107,7 @@
                         formData.append('enabled', self.form.enabled ? '1' : '0');
                         formData.append('id', self.$route.params.id);
                         formData.append('title', self.form.title);
-                        self.$http.post(`${window.api}/page/edit`, formData).then(response => {
+                        self.$http.post(`${window.api}/content/page/edit`, formData).then(response => {
                             self.$notice.open({
                                 title: response.data.message,
                             });
@@ -136,7 +136,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-edit">
-            <card>
+            <card :bordered="false">
                 <p slot="title">{{ trans('content.page.info.edit') }}</p>
                 <row>
                     <i-col offset="4" span="16">

@@ -80,7 +80,7 @@
 <template>
     <div class="article-wrap">
         <div class="article-list">
-            <card>
+            <card :bordered="false">
                 <template slot="title">
                     <div class="filter">
                         <i-select clearable style="width:200px">

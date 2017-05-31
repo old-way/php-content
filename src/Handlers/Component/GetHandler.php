@@ -8,13 +8,13 @@
 namespace Notadd\Content\Handlers\Component;
 
 use Illuminate\Container\Container;
-use Notadd\Foundation\Passport\Abstracts\DataHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\Foundation\Setting\Contracts\SettingsRepository;
 
 /**
  * Class GetHandler.
  */
-class GetHandler extends DataHandler
+class GetHandler extends Handler
 {
     /**
      * @var \Notadd\Foundation\Setting\Contracts\SettingsRepository
@@ -34,13 +34,13 @@ class GetHandler extends DataHandler
     }
 
     /**
-     * Data for handler.
+     * Execute Handler.
      *
-     * @return array
+     * @throws \Exception
      */
-    public function data()
+    protected function execute()
     {
-        return [
+        $this->success()->withData([
             'articleDescription' => $this->settings->get('content.seo.article.description', ''),
             'articleKeyword' => $this->settings->get('content.seo.article.keyword', ''),
             'articleTitle' => $this->settings->get('content.seo.article.title', ''),
@@ -50,6 +50,6 @@ class GetHandler extends DataHandler
             'pageDescription' => $this->settings->get('content.seo.page.description', ''),
             'pageKeyword' => $this->settings->get('content.seo.page.keyword', ''),
             'pageTitle' => $this->settings->get('content.seo.page.title', ''),
-        ];
+        ])->withMessage('获取组件配置成功！');
     }
 }
