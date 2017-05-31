@@ -10,7 +10,7 @@ namespace Notadd\Content\Handlers\Article;
 
 use Notadd\Content\Models\Article;
 use Notadd\Content\Models\Category;
-use Notadd\Foundation\Passport\Abstracts\Handler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class FetchHandler.

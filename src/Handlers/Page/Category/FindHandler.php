@@ -9,7 +9,7 @@
 namespace Notadd\Content\Handlers\Page\Category;
 
 use Notadd\Content\Models\PageCategory;
-use Notadd\Foundation\Passport\Abstracts\Handler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class FindHandler.

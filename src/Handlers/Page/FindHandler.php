@@ -11,7 +11,7 @@ namespace Notadd\Content\Handlers\Page;
 use Illuminate\Support\Collection;
 use Notadd\Content\Models\Page;
 use Notadd\Content\Models\PageCategory;
-use Notadd\Foundation\Passport\Abstracts\Handler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class FindHandler.

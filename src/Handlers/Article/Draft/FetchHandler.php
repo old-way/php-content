@@ -9,7 +9,7 @@
 namespace Notadd\Content\Handlers\Article\Draft;
 
 use Notadd\Content\Models\ArticleDraft;
-use Notadd\Foundation\Passport\Abstracts\Handler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class FetchHandler.
