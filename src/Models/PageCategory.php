@@ -59,6 +59,6 @@ class PageCategory extends Model
             return $category;
         });
 
-        return $list;
+        return $list->toArray();
     }
 }

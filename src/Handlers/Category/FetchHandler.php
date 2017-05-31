@@ -36,9 +36,10 @@ class FetchHandler extends Handler
             $this->success()
                 ->withData($categories->toArray())
                 ->withMessage('content::category.fetch.success');
+        } else {
+            $this->success()
+                ->withData((new Category())->structure())
+                ->withMessage('content::category.fetch.success');
         }
-        $this->success()
-            ->withData((new Category())->structure())
-            ->withMessage('content::category.fetch.success');
     }
 }
