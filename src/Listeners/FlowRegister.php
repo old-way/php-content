@@ -8,6 +8,11 @@
  */
 namespace Notadd\Content\Listeners;
 
+use Notadd\Content\Entities\Article;
+use Notadd\Content\Entities\ArticleCategory;
+use Notadd\Content\Entities\ArticleDraft;
+use Notadd\Content\Entities\Page;
+use Notadd\Content\Entities\PageCategory;
 use Notadd\Foundation\Flow\Abstracts\FlowRegister as AbstractFlowRegister;
 
 /**
@@ -16,10 +21,20 @@ use Notadd\Foundation\Flow\Abstracts\FlowRegister as AbstractFlowRegister;
 class FlowRegister extends AbstractFlowRegister
 {
     /**
+     * @var array
+     */
+    protected $definitions = [
+    ];
+
+    /**
      * Register flow or flows.
      */
     public function handle()
     {
-        // TODO: Implement handle() method.
+        $this->flow->register(Article::class);
+        $this->flow->register(ArticleCategory::class);
+        $this->flow->register(ArticleDraft::class);
+        $this->flow->register(Page::class);
+        $this->flow->register(PageCategory::class);
     }
 }
