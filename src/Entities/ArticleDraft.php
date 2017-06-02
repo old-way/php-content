@@ -22,4 +22,12 @@ class ArticleDraft extends Entity
     {
         return 'content.article.draft';
     }
+
+    /**
+     * @return array
+     */
+    public function places()
+    {
+        return [];
+    }
 }

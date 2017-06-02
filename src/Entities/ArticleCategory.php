@@ -22,4 +22,12 @@ class ArticleCategory extends Entity
     {
         return 'content.article.category';
     }
+
+    /**
+     * @return array
+     */
+    public function places()
+    {
+        return [];
+    }
 }

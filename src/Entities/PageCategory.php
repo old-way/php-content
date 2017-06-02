@@ -22,4 +22,12 @@ class PageCategory extends Entity
     {
         return 'content.page.category';
     }
+
+    /**
+     * @return array
+     */
+    public function places()
+    {
+        return [];
+    }
 }
