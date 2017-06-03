@@ -16,10 +16,34 @@ use Notadd\Foundation\Flow\Abstracts\Entity;
 class Page extends Entity
 {
     /**
+     * @return array
+     */
+    public function events()
+    {
+        return [];
+    }
+
+    /**
      * @return string
      */
     public function name()
     {
         return 'content.page';
+    }
+
+    /**
+     * @return array
+     */
+    public function places()
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function transitions()
+    {
+        return [];
     }
 }

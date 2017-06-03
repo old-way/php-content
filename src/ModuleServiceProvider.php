@@ -46,7 +46,7 @@ class ModuleServiceProvider extends Module
         Article::observe(ArticleObserver::class);
         ArticleDraft::observe(DraftObserver::class);
         $this->app->make(Dispatcher::class)->subscribe(CsrfTokenRegister::class);
-        $this->app->make(Dispatcher::class)->subscribe(FlowRegister::class);
+//        $this->app->make(Dispatcher::class)->subscribe(FlowRegister::class);
         $this->app->make(Dispatcher::class)->subscribe(PermissionModuleRegister::class);
         $this->app->make(Dispatcher::class)->subscribe(PermissionGroupRegister::class);
         $this->app->make(Dispatcher::class)->subscribe(PermissionRegister::class);

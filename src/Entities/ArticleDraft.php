@@ -16,10 +16,34 @@ use Notadd\Foundation\Flow\Abstracts\Entity;
 class ArticleDraft extends Entity
 {
     /**
+     * @return array
+     */
+    public function events()
+    {
+        return [];
+    }
+
+    /**
      * @return string
      */
     public function name()
     {
         return 'content.article.draft';
+    }
+
+    /**
+     * @return array
+     */
+    public function places()
+    {
+        return [];
+    }
+
+    /**
+     * @return array
+     */
+    public function transitions()
+    {
+        return [];
     }
 }
