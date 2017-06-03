@@ -9,20 +9,13 @@
 namespace Notadd\Content\Entities;
 
 use Notadd\Foundation\Flow\Abstracts\Entity;
+use Symfony\Component\Workflow\Transition;
 
 /**
  * Class Page.
  */
 class Page extends Entity
 {
-    /**
-     * @return array
-     */
-    public function events()
-    {
-        return [];
-    }
-
     /**
      * @return string
      */
@@ -36,7 +29,18 @@ class Page extends Entity
      */
     public function places()
     {
-        return [];
+        return [
+            'create',
+            'created',
+            'edit',
+            'edited',
+            'publish',
+            'published',
+            'remove',
+            'removed',
+            'review',
+            'reviewed',
+        ];
     }
 
     /**
@@ -44,7 +48,13 @@ class Page extends Entity
      */
     public function transitions()
     {
-        return [];
+        return [
+            new Transition('create', 'create', 'created'),
+            new Transition('edit', 'edit', 'edited'),
+            new Transition('publish', 'publish', 'publish'),
+            new Transition('remove', 'remove', 'removed'),
+            new Transition('review', 'review', 'reviewed'),
+        ];
     }
 
     /**
