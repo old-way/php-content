@@ -9,6 +9,7 @@
 namespace Notadd\Content\Entities;
 
 use Notadd\Foundation\Flow\Abstracts\Entity;
+use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
 
 /**
@@ -83,8 +84,10 @@ class Article extends Entity
 
     /**
      * Guard a transition.
+     *
+     * @param \Symfony\Component\Workflow\Event\GuardEvent $event
      */
-    public function guard()
+    public function guard(GuardEvent $event)
     {
         // TODO: Implement guard() method.
     }
