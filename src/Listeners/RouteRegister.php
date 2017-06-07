@@ -118,14 +118,12 @@ class RouteRegister extends AbstractRouteRegister
                 });
             });
         });
-
         $this->router->group(['middleware' => ['cross', 'web']], function () {
             $this->router->group(['prefix' => 'api/content/article'], function () {
                 $this->router->post('find', ArticleApiController::class . '@find');
                 $this->router->post('fetch', ArticleApiController::class . '@fetch');
             });
         });
-
         $this->router->group(['middleware' => 'web'], function () {
             $this->router->get('/', function () {
                 return $this->container->make('view')->make('content::content');
