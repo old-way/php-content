@@ -47,7 +47,9 @@ class PageCategory extends Entity
     {
         return [
             new Transition('create', 'create', 'created'),
+            new Transition('need_to_edit', ['created', 'edited'], 'edit'),
             new Transition('edit', 'edit', 'edited'),
+            new Transition('need_to_remove', ['created', 'edited'], 'remove'),
             new Transition('remove', 'remove', 'removed'),
         ];
     }
