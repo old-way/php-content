@@ -51,10 +51,14 @@ class Article extends Entity
     {
         return [
             new Transition('create', 'create', 'created'),
+            new Transition('need_to_edit', ['created', 'edited'], 'edit'),
             new Transition('edit', 'edit', 'edited'),
-            new Transition('publish', 'publish', 'publish'),
+            new Transition('need_to_remove', ['created', 'edited'], 'remove'),
             new Transition('remove', 'remove', 'removed'),
+            new Transition('wait_to_review', ['created', 'edit'], 'review'),
             new Transition('review', 'review', 'reviewed'),
+            new Transition('need_to_publish', 'reviewed', 'publish'),
+            new Transition('publish', 'publish', 'publish'),
         ];
     }
 
