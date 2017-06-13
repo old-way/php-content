@@ -11,7 +11,7 @@ use Notadd\Foundation\Database\Migrations\Migration;
 /**
  * Class CreateTablePageCategories.
  */
-class CreateTablePageCategories extends Migration
+class CreateContentPageCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,7 @@ class CreateTablePageCategories extends Migration
      */
     public function up()
     {
-        $this->schema->create('page_categories', function (Blueprint $table) {
+        $this->schema->create('content_page_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id');
             $table->string('title');

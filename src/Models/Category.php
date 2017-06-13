@@ -40,6 +40,11 @@ class Category extends Model
     ];
 
     /**
+     * @var string
+     */
+    protected $table = 'content_article_categories';
+
+    /**
      * Get category structure list.
      *
      * @return array

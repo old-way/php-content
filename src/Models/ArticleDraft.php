@@ -36,4 +36,9 @@ class ArticleDraft extends Model
         'is_hidden',
         'is_sticky',
     ];
+
+    /**
+     * @var string
+     */
+    protected $table = 'content_article_drafts';
 }

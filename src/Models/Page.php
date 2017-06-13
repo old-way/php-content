@@ -38,6 +38,11 @@ class Page extends Model
     ];
 
     /**
+     * @var string
+     */
+    protected $table = 'content_pages';
+
+    /**
      * Relation of category.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -40,6 +40,11 @@ class PageCategory extends Model
     ];
 
     /**
+     * @var string
+     */
+    protected $table = 'content_page_categories';
+
+    /**
      * Get category structure list.
      *
      * @return array

@@ -37,4 +37,9 @@ class Comment extends Model
         'parent_id',
         'type',
     ];
+
+    /**
+     * @var string
+     */
+    protected $table = 'content_comments';
 }

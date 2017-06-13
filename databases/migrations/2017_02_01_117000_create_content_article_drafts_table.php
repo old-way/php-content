@@ -11,7 +11,7 @@ use Notadd\Foundation\Database\Migrations\Migration;
 /**
  * Class CreateTableArticleDrafts.
  */
-class CreateTableArticleDrafts extends Migration
+class CreateContentArticleDraftsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,7 @@ class CreateTableArticleDrafts extends Migration
      */
     public function up()
     {
-        $this->schema->create('article_drafts', function (Blueprint $table) {
+        $this->schema->create('content_article_drafts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id');
             $table->string('title');

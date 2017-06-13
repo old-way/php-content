@@ -39,6 +39,11 @@ class Article extends Model
     ];
 
     /**
+     * @var string
+     */
+    protected $table = 'content_articles';
+
+    /**
      * Relation of category.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

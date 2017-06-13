@@ -2,16 +2,16 @@
 /**
  * This file is part of Notadd.
  *
- * @datetime 2017-01-22 18:10:17
+ * @datetime 2017-02-09 17:05:14
  */
 
 use Illuminate\Database\Schema\Blueprint;
 use Notadd\Foundation\Database\Migrations\Migration;
 
 /**
- * Class CreatePagesTable.
+ * Class CreateCategoriesTable.
  */
-class CreatePagesTable extends Migration
+class CreateContentArticleCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,19 +20,21 @@ class CreatePagesTable extends Migration
      */
     public function up()
     {
-        $this->schema->create('pages', function (Blueprint $table) {
+        $this->schema->create('content_article_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id');
-            $table->integer('category_id')->default(0);
             $table->string('title');
-            $table->string('thumb_image')->nullable();
             $table->string('alias')->nullable();
-            $table->string('keyword')->nullable();
             $table->string('description')->nullable();
-            $table->string('template')->nullable();
-            $table->text('content')->nullable();
+            $table->string('type')->default('normal');
+            $table->string('seo_title')->nullable();
+            $table->string('seo_keyword')->nullable();
+            $table->string('seo_description')->nullable();
+            $table->string('background_color')->nullable();
+            $table->string('background_image')->nullable();
+            $table->string('top_image')->nullable();
+            $table->tinyInteger('pagination')->default(30);
             $table->boolean('enabled')->default(true);
-            $table->bigInteger('hits')->default(0);
             $table->tinyInteger('order_id')->default(0);
             $table->timestamps();
             $table->softDeletes();
@@ -46,6 +48,6 @@ class CreatePagesTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('pages');
+        $this->schema->dropIfExists('categories');
     }
 }

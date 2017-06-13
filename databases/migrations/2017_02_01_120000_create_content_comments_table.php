@@ -11,7 +11,7 @@ use Notadd\Foundation\Database\Migrations\Migration;
 /**
  * Class CreateTableComments.
  */
-class CreateTableComments extends Migration
+class CreateContentCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,7 @@ class CreateTableComments extends Migration
      */
     public function up()
     {
-        $this->schema->create('comments', function (Blueprint $table) {
+        $this->schema->create('content_comments', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('log_id');
             $table->integer('user_id');
