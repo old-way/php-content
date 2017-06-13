@@ -46,6 +46,6 @@ class FindHandler extends Handler
             $article->setAttribute('category', $category->getAttributes());
             $article->setAttribute('category_path', $data->toArray());
         }
-        $this->success()->withData($article->getAttributes())->withMessage('content::article.find.success');
+        $this->withCode(200)->withData($article->getAttributes())->withMessage('content::article.find.success');
     }
 }

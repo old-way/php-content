@@ -67,7 +67,7 @@ class FetchHandler extends Handler
         }
 
         if ($this->pagination) {
-            $this->success()
+            $this->withCode(200)
                 ->withData($this->pagination->items())
                 ->withMessage('content::page.fetch.success')
                 ->withExtra([

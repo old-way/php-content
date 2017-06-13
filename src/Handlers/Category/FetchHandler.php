@@ -33,11 +33,11 @@ class FetchHandler extends Handler
 
                 return $category;
             });
-            $this->success()
+            $this->withCode(200)
                 ->withData($categories->toArray())
                 ->withMessage('content::category.fetch.success');
         } else {
-            $this->success()
+            $this->withCode(200)
                 ->withData((new Category())->structure())
                 ->withMessage('content::category.fetch.success');
         }

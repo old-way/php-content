@@ -23,7 +23,7 @@ class FindHandler extends Handler
      */
     protected function execute()
     {
-        $this->success()
+        $this->withCode(200)
             ->withData(Category::query()->find($this->request->input('id'))->getAttributes())
             ->withMessage('content::category.find.success');
     }

@@ -32,9 +32,9 @@ class FetchHandler extends Handler
                 $children->count() && $category->setAttribute('children', $children);
                 return $category;
             });
-            $this->success()->withData($categories->toArray())->withMessage('content::category.fetch.success');
+            $this->withCode(200)->withData($categories->toArray())->withMessage('content::category.fetch.success');
         } else {
-            $this->success()
+            $this->withCode(200)
                 ->withData((new PageCategory())->structure())
                 ->withMessage('content::category.fetch.success');
         }
