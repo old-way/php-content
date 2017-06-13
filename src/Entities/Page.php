@@ -93,7 +93,37 @@ class Page extends Entity
      */
     public function guard(GuardEvent $event)
     {
-        // TODO: Implement guard() method.
+        switch ($event->getTransition()->getName()) {
+            case 'create':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'need_to_edit':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'edit':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'need_to_publish':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'publish':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'need_to_remove':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'remove':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'wait_to_review':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'review':
+                $this->block($event, $this->permission(''));
+                break;
+            default:
+                $event->setBlocked(true);
+        }
     }
 
     /**
