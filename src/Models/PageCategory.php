@@ -8,8 +8,8 @@
  */
 namespace Notadd\Content\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Notadd\Foundation\Database\Model;
 
 /**
  * Class PageCategory.
