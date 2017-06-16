@@ -9,13 +9,13 @@
 namespace Notadd\Content\Handlers\Article;
 
 use Illuminate\Container\Container;
-use Notadd\Foundation\Passport\Abstracts\SetHandler as AbstractSetHandler;
+use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\Foundation\Setting\Contracts\SettingsRepository;
 
 /**
  * Class AutoHandler.
  */
-class AutoHandler extends AbstractSetHandler
+class AutoHandler extends Handler
 {
     /**
      * @var \Notadd\Foundation\Setting\Contracts\SettingsRepository
@@ -28,35 +28,17 @@ class AutoHandler extends AbstractSetHandler
      * @param \Illuminate\Container\Container                         $container
      * @param \Notadd\Foundation\Setting\Contracts\SettingsRepository $settings
      */
-    public function __construct(
-        Container $container,
-        SettingsRepository $settings
-    ) {
+    public function __construct(Container $container, SettingsRepository $settings) {
         parent::__construct($container);
-        $this->errors->push($this->translator->trans('修改设置失败！'));
-        $this->messages->push($this->translator->trans('修改设置成功!'));
         $this->settings = $settings;
     }
 
     /**
-     * Data for handler.
-     *
-     * @return array
-     */
-    public function data()
-    {
-        return $this->settings->all()->toArray();
-    }
-
-    /**
      * Execute Handler.
-     *
-     * @return bool
      */
     public function execute()
     {
         $this->settings->set('article.save.auto', $this->request->input('auto'));
-
-        return true;
+        $this->withCode(200)->withMessage('修改设置成功!');
     }
 }
