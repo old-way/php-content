@@ -4,25 +4,25 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2017, notadd.com
- * @datetime 2017-06-01 18:43
+ * @datetime 2017-06-01 18:42
  */
-namespace Notadd\Content\Entities;
+namespace Notadd\Content\Flows;
 
 use Notadd\Foundation\Flow\Abstracts\Entity;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
 
 /**
- * Class PageCategory.
+ * Class ArticleDraft.
  */
-class PageCategory extends Entity
+class ArticleDraft extends Entity
 {
     /**
      * @return string
      */
     public function name()
     {
-        return 'content.page.category';
+        return 'content.article.draft';
     }
 
     /**

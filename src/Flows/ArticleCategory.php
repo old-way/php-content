@@ -6,23 +6,23 @@
  * @copyright (c) 2017, notadd.com
  * @datetime 2017-06-01 18:42
  */
-namespace Notadd\Content\Entities;
+namespace Notadd\Content\Flows;
 
 use Notadd\Foundation\Flow\Abstracts\Entity;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
 
 /**
- * Class Article.
+ * Class ArticleCategory.
  */
-class Article extends Entity
+class ArticleCategory extends Entity
 {
     /**
      * @return string
      */
     public function name()
     {
-        return 'content.article';
+        return 'content.article.category';
     }
 
     /**
@@ -35,12 +35,8 @@ class Article extends Entity
             'created',
             'edit',
             'edited',
-            'publish',
-            'published',
             'remove',
             'removed',
-            'review',
-            'reviewed',
         ];
     }
 
@@ -55,10 +51,6 @@ class Article extends Entity
             new Transition('edit', 'edit', 'edited'),
             new Transition('need_to_remove', ['created', 'edited'], 'remove'),
             new Transition('remove', 'remove', 'removed'),
-            new Transition('wait_to_review', ['created', 'edit'], 'review'),
-            new Transition('review', 'review', 'reviewed'),
-            new Transition('need_to_publish', 'reviewed', 'publish'),
-            new Transition('publish', 'publish', 'publish'),
         ];
     }
 
@@ -83,18 +75,6 @@ class Article extends Entity
                 $this->block($event, $this->permission(''));
                 break;
             case 'remove':
-                $this->block($event, $this->permission(''));
-                break;
-            case 'wait_to_review':
-                $this->block($event, $this->permission(''));
-                break;
-            case 'review':
-                $this->block($event, $this->permission(''));
-                break;
-            case 'need_to_publish':
-                $this->block($event, $this->permission(''));
-                break;
-            case 'publish':
                 $this->block($event, $this->permission(''));
                 break;
             default:

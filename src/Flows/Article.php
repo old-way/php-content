@@ -4,25 +4,25 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2017, notadd.com
- * @datetime 2017-06-01 18:43
+ * @datetime 2017-06-01 18:42
  */
-namespace Notadd\Content\Entities;
+namespace Notadd\Content\Flows;
 
 use Notadd\Foundation\Flow\Abstracts\Entity;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
 
 /**
- * Class Page.
+ * Class Article.
  */
-class Page extends Entity
+class Article extends Entity
 {
     /**
      * @return string
      */
     public function name()
     {
-        return 'content.page';
+        return 'content.article';
     }
 
     /**
@@ -53,12 +53,12 @@ class Page extends Entity
             new Transition('create', 'create', 'created'),
             new Transition('need_to_edit', ['created', 'edited'], 'edit'),
             new Transition('edit', 'edit', 'edited'),
-            new Transition('need_to_publish', ['created', 'edited'], 'publish'),
-            new Transition('publish', 'publish', 'publish'),
             new Transition('need_to_remove', ['created', 'edited'], 'remove'),
             new Transition('remove', 'remove', 'removed'),
-            new Transition('wait_to_review', ['created', 'edited'], 'review'),
+            new Transition('wait_to_review', ['created', 'edit'], 'review'),
             new Transition('review', 'review', 'reviewed'),
+            new Transition('need_to_publish', 'reviewed', 'publish'),
+            new Transition('publish', 'publish', 'publish'),
         ];
     }
 
@@ -79,12 +79,6 @@ class Page extends Entity
             case 'edit':
                 $this->block($event, $this->permission(''));
                 break;
-            case 'need_to_publish':
-                $this->block($event, $this->permission(''));
-                break;
-            case 'publish':
-                $this->block($event, $this->permission(''));
-                break;
             case 'need_to_remove':
                 $this->block($event, $this->permission(''));
                 break;
@@ -95,6 +89,12 @@ class Page extends Entity
                 $this->block($event, $this->permission(''));
                 break;
             case 'review':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'need_to_publish':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'publish':
                 $this->block($event, $this->permission(''));
                 break;
             default:

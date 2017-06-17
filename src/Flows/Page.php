@@ -4,25 +4,25 @@
  *
  * @author TwilRoad <269044570@qq.com>
  * @copyright (c) 2017, notadd.com
- * @datetime 2017-06-01 18:42
+ * @datetime 2017-06-01 18:43
  */
-namespace Notadd\Content\Entities;
+namespace Notadd\Content\Flows;
 
 use Notadd\Foundation\Flow\Abstracts\Entity;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
 
 /**
- * Class ArticleDraft.
+ * Class Page.
  */
-class ArticleDraft extends Entity
+class Page extends Entity
 {
     /**
      * @return string
      */
     public function name()
     {
-        return 'content.article.draft';
+        return 'content.page';
     }
 
     /**
@@ -35,8 +35,12 @@ class ArticleDraft extends Entity
             'created',
             'edit',
             'edited',
+            'publish',
+            'published',
             'remove',
             'removed',
+            'review',
+            'reviewed',
         ];
     }
 
@@ -49,8 +53,12 @@ class ArticleDraft extends Entity
             new Transition('create', 'create', 'created'),
             new Transition('need_to_edit', ['created', 'edited'], 'edit'),
             new Transition('edit', 'edit', 'edited'),
+            new Transition('need_to_publish', ['created', 'edited'], 'publish'),
+            new Transition('publish', 'publish', 'publish'),
             new Transition('need_to_remove', ['created', 'edited'], 'remove'),
             new Transition('remove', 'remove', 'removed'),
+            new Transition('wait_to_review', ['created', 'edited'], 'review'),
+            new Transition('review', 'review', 'reviewed'),
         ];
     }
 
@@ -71,10 +79,22 @@ class ArticleDraft extends Entity
             case 'edit':
                 $this->block($event, $this->permission(''));
                 break;
+            case 'need_to_publish':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'publish':
+                $this->block($event, $this->permission(''));
+                break;
             case 'need_to_remove':
                 $this->block($event, $this->permission(''));
                 break;
             case 'remove':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'wait_to_review':
+                $this->block($event, $this->permission(''));
+                break;
+            case 'review':
                 $this->block($event, $this->permission(''));
                 break;
             default:
