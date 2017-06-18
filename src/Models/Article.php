@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Notadd\Foundation\Database\Model;
 use Notadd\Foundation\Flow\Traits\HasFlow;
 use Symfony\Component\Workflow\Event\GuardEvent;
+use Symfony\Component\Workflow\Transition;
 
 /**
  * Class Article.
@@ -62,7 +63,7 @@ class Article extends Model
      */
     public function name()
     {
-        // TODO: Implement name() method.
+        return 'content.article';
     }
 
     /**
@@ -72,7 +73,18 @@ class Article extends Model
      */
     public function places()
     {
-        // TODO: Implement places() method.
+        return [
+            'create',
+            'created',
+            'edit',
+            'edited',
+            'publish',
+            'published',
+            'remove',
+            'removed',
+            'review',
+            'reviewed',
+        ];
     }
 
     /**
@@ -82,7 +94,17 @@ class Article extends Model
      */
     public function transitions()
     {
-        // TODO: Implement transitions() method.
+        return [
+            new Transition('create', 'create', 'created'),
+            new Transition('need_to_edit', ['created', 'edited'], 'edit'),
+            new Transition('edit', 'edit', 'edited'),
+            new Transition('need_to_remove', ['created', 'edited'], 'remove'),
+            new Transition('remove', 'remove', 'removed'),
+            new Transition('wait_to_review', ['created', 'edit'], 'review'),
+            new Transition('review', 'review', 'reviewed'),
+            new Transition('need_to_publish', 'reviewed', 'publish'),
+            new Transition('publish', 'publish', 'publish'),
+        ];
     }
 
     /**
@@ -92,6 +114,36 @@ class Article extends Model
      */
     public function guardTransition(GuardEvent $event)
     {
-        // TODO: Implement guardTransition() method.
+        switch ($event->getTransition()->getName()) {
+            case 'create':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'need_to_edit':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'edit':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'need_to_remove':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'remove':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'wait_to_review':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'review':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'need_to_publish':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'publish':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            default:
+                $event->setBlocked(true);
+        }
     }
 }
