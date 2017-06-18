@@ -8,11 +8,11 @@
  */
 namespace Notadd\Content\Listeners;
 
-use Notadd\Content\Flows\Article;
-use Notadd\Content\Flows\ArticleCategory;
-use Notadd\Content\Flows\ArticleDraft;
-use Notadd\Content\Flows\Page;
-use Notadd\Content\Flows\PageCategory;
+use Notadd\Content\Models\Article;
+use Notadd\Content\Models\ArticleCategory;
+use Notadd\Content\Models\ArticleDraft;
+use Notadd\Content\Models\Page;
+use Notadd\Content\Models\PageCategory;
 use Notadd\Foundation\Flow\Abstracts\FlowRegister as AbstractFlowRegister;
 
 /**
