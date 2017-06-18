@@ -10,13 +10,15 @@ namespace Notadd\Content\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Notadd\Foundation\Database\Model;
+use Notadd\Foundation\Flow\Traits\HasFlow;
+use Symfony\Component\Workflow\Event\GuardEvent;
 
 /**
  * Class Page.
  */
 class Page extends Model
 {
-    use SoftDeletes;
+    use HasFlow, SoftDeletes;
 
     /**
      * @var array
@@ -50,5 +52,45 @@ class Page extends Model
     public function category()
     {
         return $this->belongsTo(PageCategory::class);
+    }
+
+    /**
+     * Definition of name for flow.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        // TODO: Implement name() method.
+    }
+
+    /**
+     * Definition of places for flow.
+     *
+     * @return array
+     */
+    public function places()
+    {
+        // TODO: Implement places() method.
+    }
+
+    /**
+     * Definition of transitions for flow.
+     *
+     * @return array
+     */
+    public function transitions()
+    {
+        // TODO: Implement transitions() method.
+    }
+
+    /**
+     * Guard a transition.
+     *
+     * @param \Symfony\Component\Workflow\Event\GuardEvent $event
+     */
+    public function guardTransition(GuardEvent $event)
+    {
+        // TODO: Implement guardTransition() method.
     }
 }
