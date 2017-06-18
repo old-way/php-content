@@ -9,7 +9,7 @@
 namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Container\Container;
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -25,9 +25,9 @@ class FetchHandler extends Handler
     protected function execute()
     {
         if ($this->request->input('with-children')) {
-            $categories = Category::query()->orderBy('order_id', 'asc')->get();
-            $categories->transform(function (Category $category) {
-                $children = Category::query()->where('parent_id',
+            $categories = ArticleCategory::query()->orderBy('order_id', 'asc')->get();
+            $categories->transform(function (ArticleCategory $category) {
+                $children = ArticleCategory::query()->where('parent_id',
                     $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
                 $children->count() && $category->setAttribute('children', $children);
 
@@ -38,7 +38,7 @@ class FetchHandler extends Handler
                 ->withMessage('content::category.fetch.success');
         } else {
             $this->withCode(200)
-                ->withData((new Category())->structure())
+                ->withData((new ArticleCategory())->structure())
                 ->withMessage('content::category.fetch.success');
         }
     }

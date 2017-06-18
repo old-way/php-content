@@ -8,7 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -24,7 +24,7 @@ class FindHandler extends Handler
     protected function execute()
     {
         $this->withCode(200)
-            ->withData(Category::query()->find($this->request->input('id'))->getAttributes())
+            ->withData(ArticleCategory::query()->find($this->request->input('id'))->getAttributes())
             ->withMessage('content::category.find.success');
     }
 }

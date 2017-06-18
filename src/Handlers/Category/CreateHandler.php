@@ -8,7 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -33,7 +33,7 @@ class CreateHandler extends Handler
             'alias.unique'   => '分类别名已被占用',
             'title.required' => '必须填写分类标题',
         ]);
-        if (Category::query()->create([
+        if (ArticleCategory::query()->create([
             'alias'            => $this->request->input('alias'),
             'background_color' => $this->request->input('background_color'),
             'background_image' => $this->request->input('background_image'),

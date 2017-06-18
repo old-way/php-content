@@ -10,7 +10,7 @@ namespace Notadd\Content\Handlers\Article;
 
 use Illuminate\Support\Collection;
 use Notadd\Content\Models\Article;
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -24,7 +24,7 @@ class FindHandler extends Handler
      */
     protected function loopCategory($id, Collection $data)
     {
-        $parent = (new Category())->newQuery()->find($id);
+        $parent = (new ArticleCategory())->newQuery()->find($id);
         if ($parent) {
             $data->prepend($parent->getAttribute('id'));
             $parent->getAttribute('parent_id') && $this->loopCategory($parent->getAttribute('parent_id'), $data);

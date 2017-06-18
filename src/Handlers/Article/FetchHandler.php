@@ -9,7 +9,7 @@
 namespace Notadd\Content\Handlers\Article;
 
 use Notadd\Content\Models\Article;
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -35,15 +35,15 @@ class FetchHandler extends Handler
         } elseif ($id = $this->request->input('category')) {
             $categories = collect([(int)$id]);
             $this->container->make('log')->info('has category', $categories->toArray());
-            (new Category())->newQuery()->where('parent_id', $id)->get()->each(function (Category $category) use (
+            (new ArticleCategory())->newQuery()->where('parent_id', $id)->get()->each(function (ArticleCategory $category) use (
                 $categories
             ) {
                 $categories->push($category->getAttribute('id'));
-                $children = (new Category())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
-                $children->count() && $children->each(function (Category $category) use ($categories) {
+                $children = (new ArticleCategory())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+                $children->count() && $children->each(function (ArticleCategory $category) use ($categories) {
                     $categories->push($category->getAttribute('id'));
-                    $children = (new Category())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
-                    $children->count() && $children->each(function (Category $category) use ($categories) {
+                    $children = (new ArticleCategory())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+                    $children->count() && $children->each(function (ArticleCategory $category) use ($categories) {
                         $categories->push($category->getAttribute('id'));
                     });
                 });

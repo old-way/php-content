@@ -9,7 +9,7 @@
 namespace Notadd\Content\Handlers\Category;
 
 use Illuminate\Validation\Rule;
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -54,7 +54,7 @@ class EditHandler extends Handler
             'type'             => $this->request->input('type') ?: 'normal',
         ];
         $id = $this->request->input('id');
-        if (($category = Category::query()->find($id)) && $category->update($data)) {
+        if (($category = ArticleCategory::query()->find($id)) && $category->update($data)) {
             $this->withCode(200)->withMessage('content::category.update.success');
         } else {
             $this->withCode(500)->withError('content::category.update.fail');

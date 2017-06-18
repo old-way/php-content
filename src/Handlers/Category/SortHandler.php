@@ -8,7 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -24,7 +24,7 @@ class SortHandler extends Handler
         $data = collect($this->request->input('data'));
         $data->each(function ($item, $key) {
             $id = $item['id'];
-            $category = Category::query()->find($id);
+            $category = ArticleCategory::query()->find($id);
             $category->update([
                 'parent_id' => 0,
                 'order_id'  => $key,
@@ -34,7 +34,7 @@ class SortHandler extends Handler
                 $children->each(function ($item, $key) use ($id) {
                     $parentId = $id;
                     $id = $item['id'];
-                    $category = Category::query()->find($id);
+                    $category = ArticleCategory::query()->find($id);
                     $category->update([
                         'parent_id' => $parentId,
                         'order_id'  => $key,
@@ -44,7 +44,7 @@ class SortHandler extends Handler
                         $children->each(function ($item, $key) use ($id) {
                             $parentId = $id;
                             $id = $item['id'];
-                            $category = Category::query()->find($id);
+                            $category = ArticleCategory::query()->find($id);
                             $category->update([
                                 'parent_id' => $parentId,
                                 'order_id'  => $key,

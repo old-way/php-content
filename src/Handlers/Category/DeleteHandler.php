@@ -8,7 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -22,7 +22,7 @@ class DeleteHandler extends Handler
     public function execute()
     {
         $id = $this->request->input('id');
-        if (($category = Category::query()->find($id)) && $category->delete()) {
+        if (($category = ArticleCategory::query()->find($id)) && $category->delete()) {
             $this->withCode(200)->withMessage('content::category.delete.success');
         } else {
             $this->withCode(500)->withError('content::category.delete.fail');

@@ -15,7 +15,7 @@ use Symfony\Component\Workflow\Event\GuardEvent;
 /**
  * Class Comment.
  */
-class Comment extends Model
+class ArticleComment extends Model
 {
     use HasFlow;
 
