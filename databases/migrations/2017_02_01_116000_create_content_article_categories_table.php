@@ -36,6 +36,7 @@ class CreateContentArticleCategoriesTable extends Migration
             $table->tinyInteger('pagination')->default(30);
             $table->boolean('enabled')->default(true);
             $table->tinyInteger('order_id')->default(0);
+            $table->string('flow_marketing')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

@@ -10,7 +10,7 @@ namespace Notadd\Content\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Notadd\Foundation\Database\Model;
-use Notadd\Foundation\Flow\Traits\HasFlow;
+use Notadd\Foundation\Database\Traits\HasFlow;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
 
@@ -25,19 +25,20 @@ class ArticleDraft extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id',
-        'title',
         'author',
-        'source_author',
-        'source_link',
         'content',
-        'keyword',
+        'category_id',
         'description',
-        'thumb_image',
-        'user_id',
+        'flow_marketing',
         'hits',
         'is_hidden',
         'is_sticky',
+        'keyword',
+        'source_author',
+        'source_link',
+        'thumb_image',
+        'title',
+        'user_id',
     ];
 
     /**

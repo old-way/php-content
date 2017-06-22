@@ -10,7 +10,7 @@ namespace Notadd\Content\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Notadd\Foundation\Database\Model;
-use Notadd\Foundation\Flow\Traits\HasFlow;
+use Notadd\Foundation\Database\Traits\HasFlow;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
 
@@ -25,21 +25,22 @@ class PageCategory extends Model
      * @var array
      */
     protected $fillable = [
-        'parent_id',
-        'title',
         'alias',
-        'description',
-        'type',
         'background_color',
-        'seo_title',
-        'seo_keyword',
-        'seo_description',
         'background_image',
-        'top_image',
-        'pagination',
+        'deleted_at',
+        'description',
         'enabled',
+        'flow_marketing',
         'order_id',
-        'deleted_at'
+        'parent_id',
+        'pagination',
+        'title',
+        'type',
+        'seo_description',
+        'seo_keyword',
+        'seo_title',
+        'top_image',
     ];
 
     /**

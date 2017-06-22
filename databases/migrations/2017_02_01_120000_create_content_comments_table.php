@@ -39,6 +39,9 @@ class CreateContentCommentsTable extends Migration
             $table->text('message');
             $table->bigInteger('parent_id');
             $table->string('type')->nullable();
+            $table->string('flow_marketing')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -10,7 +10,7 @@ namespace Notadd\Content\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Notadd\Foundation\Database\Model;
-use Notadd\Foundation\Flow\Traits\HasFlow;
+use Notadd\Foundation\Database\Traits\HasFlow;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
 
@@ -31,6 +31,7 @@ class Page extends Model
         'deleted_at',
         'description',
         'enabled',
+        'flow_marketing',
         'hits',
         'keyword',
         'order_id',

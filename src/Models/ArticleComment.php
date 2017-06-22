@@ -9,7 +9,7 @@
 namespace Notadd\Content\Models;
 
 use Notadd\Foundation\Database\Model;
-use Notadd\Foundation\Flow\Traits\HasFlow;
+use Notadd\Foundation\Database\Traits\HasFlow;
 use Symfony\Component\Workflow\Event\GuardEvent;
 
 /**
@@ -23,22 +23,23 @@ class ArticleComment extends Model
      * @var array
      */
     protected $fillable = [
-        'log_id',
-        'user_id',
         'action',
+        'author_email',
+        'author_id',
+        'author_key',
+        'author_name',
+        'author_url',
+        'created_at',
         'date',
+        'flow_marketing',
+        'ip',
+        'log_id',
+        'message',
+        'parent_id',
+        'user_id',
         'post_id',
         'thread_id',
         'thread_key',
-        'author_id',
-        'author_name',
-        'author_email',
-        'author_url',
-        'author_key',
-        'ip',
-        'created_at',
-        'message',
-        'parent_id',
         'type',
     ];
 

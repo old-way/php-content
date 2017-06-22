@@ -34,6 +34,7 @@ class CreateContentPagesTable extends Migration
             $table->boolean('enabled')->default(true);
             $table->bigInteger('hits')->default(0);
             $table->tinyInteger('order_id')->default(0);
+            $table->string('flow_marketing')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
