@@ -9,12 +9,6 @@
 namespace Notadd\Content;
 
 use Illuminate\Events\Dispatcher;
-use Notadd\Content\Events\RegisterArticleTemplate;
-use Notadd\Content\Events\RegisterArticleType;
-use Notadd\Content\Events\RegisterCategoryTemplate;
-use Notadd\Content\Events\RegisterCategoryType;
-use Notadd\Content\Events\RegisterPageTemplate;
-use Notadd\Content\Events\RegisterPageType;
 use Notadd\Content\Injections\Installer;
 use Notadd\Content\Injections\Uninstaller;
 use Notadd\Content\Listeners\CsrfTokenRegister;
@@ -101,22 +95,16 @@ class ModuleServiceProvider extends Module
         $this->app->alias('page.manager', PageManager::class);
         $this->app->singleton('article.manager', function ($app) {
             $manager = new ArticleManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->dispatch(new RegisterArticleTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->dispatch(new RegisterArticleType($app, $manager));
 
             return $manager;
         });
         $this->app->singleton('category.manager', function ($app) {
             $manager = new CategoryManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->dispatch(new RegisterCategoryTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->dispatch(new RegisterCategoryType($app, $manager));
 
             return $manager;
         });
         $this->app->singleton('page.manager', function ($app) {
             $manager = new PageManager($app, $app['events']);
-            $this->app->make(Dispatcher::class)->dispatch(new RegisterPageTemplate($app, $manager));
-            $this->app->make(Dispatcher::class)->dispatch(new RegisterPageType($app, $manager));
 
             return $manager;
         });
