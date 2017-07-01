@@ -56,16 +56,6 @@ class ModuleServiceProvider extends Module
     }
 
     /**
-     * Description of module
-     *
-     * @return string
-     */
-    public static function description()
-    {
-        return 'Notadd 内容管理模块';
-    }
-
-    /**
      * Install module.
      *
      * @return string
@@ -73,16 +63,6 @@ class ModuleServiceProvider extends Module
     public static function install()
     {
         return Installer::class;
-    }
-
-    /**
-     * Name of module.
-     *
-     * @return string
-     */
-    public static function name()
-    {
-        return '文章CMS';
     }
 
     /**
@@ -111,30 +91,6 @@ class ModuleServiceProvider extends Module
     }
 
     /**
-     * Get script of extension.
-     *
-     * @return string
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    public static function script()
-    {
-        return asset('assets/content/administration/js/module.min.js');
-    }
-
-    /**
-     * Get stylesheet of extension.
-     *
-     * @return array
-     * @throws \Illuminate\Contracts\Container\BindingResolutionException
-     */
-    public static function stylesheet()
-    {
-        return [
-            asset('assets/content/administration/css/module.min.css'),
-        ];
-    }
-
-    /**
      * Uninstall module.
      *
      * @return string
@@ -142,15 +98,5 @@ class ModuleServiceProvider extends Module
     public static function uninstall()
     {
         return Uninstaller::class;
-    }
-
-    /**
-     * Version of module.
-     *
-     * @return string
-     */
-    public static function version()
-    {
-        return '2.0.0';
     }
 }
