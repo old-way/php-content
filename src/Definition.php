@@ -29,10 +29,19 @@ class Definition extends AbstractDefinition
      * Entries for module.
      *
      * @return array
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function entries()
     {
-        return [];
+        return [
+            'administration' => [
+                'notadd/content'   => [
+                    'permissions' => '',
+                    'scripts'     => asset('assets/content/administration/js/module.min.js'),
+                    'stylesheets' => asset('assets/content/administration/css/module.min.css'),
+                ],
+            ],
+        ];
     }
 
     /**
