@@ -4,7 +4,6 @@
  *
  * @datetime 2017-02-18 16:22:07
  */
-
 use Illuminate\Database\Schema\Blueprint;
 use Notadd\Foundation\Database\Migrations\Migration;
 
@@ -35,7 +34,6 @@ class CreateContentCommentsTable extends Migration
             $table->string('author_url')->nullable();
             $table->integer('author_key');
             $table->string('ip');
-            $table->string('created_at');
             $table->text('message');
             $table->bigInteger('parent_id');
             $table->string('type')->nullable();
