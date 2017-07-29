@@ -10,7 +10,7 @@
             }).then(response => {
                 const article = response.data.data;
                 injection.message.info(injection.trans('content.article.info.get'));
-                injection.http.post(`${window.api}/content/category/fetch`).then(result => {
+                injection.http.post(`${window.api}/content/category/list`).then(result => {
                     const list = result.data.data;
                     next(vm => {
                         vm.form.category.id = article.category_path ? article.category_path : [];

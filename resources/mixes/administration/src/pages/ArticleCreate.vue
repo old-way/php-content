@@ -5,7 +5,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/content/category/fetch`).then(response => {
+            injection.http.post(`${window.api}/content/category/list`).then(response => {
                 const list = response.data.data;
                 next(vm => {
                     vm.form.category.list = list.map(first => ({

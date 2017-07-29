@@ -6,7 +6,7 @@
             injection.loading.start();
             injection.http.all([
                 injection.http.post(`${window.api}/content/article/fetch`),
-                injection.http.post(`${window.api}/content/category/fetch`, {
+                injection.http.post(`${window.api}/content/category/list`, {
                     'with-children': true,
                 }),
             ]).then(injection.http.spread((articleData, categoryData) => {

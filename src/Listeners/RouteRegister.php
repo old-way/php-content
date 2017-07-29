@@ -43,11 +43,11 @@ class RouteRegister extends AbstractRouteRegister
                 });
             });
             $this->router->group(['prefix' => 'api/content/category'], function () {
+                $this->router->post('/', CategoryControllerForAdministration::class . '@category');
                 $this->router->post('create', CategoryControllerForAdministration::class . '@create');
-                $this->router->post('delete', CategoryControllerForAdministration::class . '@delete');
                 $this->router->post('edit', CategoryControllerForAdministration::class . '@edit');
-                $this->router->post('find', CategoryControllerForAdministration::class . '@find');
-                $this->router->post('fetch', CategoryControllerForAdministration::class . '@fetch');
+                $this->router->post('list', CategoryControllerForAdministration::class . '@list');
+                $this->router->post('remove', CategoryControllerForAdministration::class . '@remove');
                 $this->router->post('sort', CategoryControllerForAdministration::class . '@sort');
             });
             $this->router->group(['prefix' => 'api/content/component'], function () {

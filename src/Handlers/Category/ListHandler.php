@@ -8,14 +8,13 @@
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Illuminate\Container\Container;
 use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
  * Class FetchHandler.
  */
-class FetchHandler extends Handler
+class ListHandler extends Handler
 {
     /**
      * Execute Handler.
