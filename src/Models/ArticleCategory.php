@@ -9,6 +9,7 @@
 namespace Notadd\Content\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Collection;
 use Notadd\Foundation\Database\Model;
 use Notadd\Foundation\Database\Traits\HasFlow;
 use Symfony\Component\Workflow\Event\GuardEvent;
@@ -20,6 +21,14 @@ use Symfony\Component\Workflow\Transition;
 class ArticleCategory extends Model
 {
     use HasFlow, SoftDeletes;
+
+    /**
+     * @var array
+     */
+    protected $appends = [
+        'breadcrumb',
+        'path',
+    ];
 
     /**
      * @var array
@@ -42,6 +51,49 @@ class ArticleCategory extends Model
         'top_image',
         'type',
     ];
+
+    /**
+     * @param $value
+     *
+     * @return string
+     */
+    public function getBreadcrumbAttribute($value)
+    {
+        $paths = new Collection([$this]);
+        $one = static::query()->find($this->attributes['parent_id']);
+        if ($this->attributes['parent_id'] && $one instanceof ArticleCategory) {
+            $paths->prepend($one);
+            $two = static::query()->find($one->getAttribute('parent_id'));
+            if ($one->getAttribute('parent_id') && $two instanceof ArticleCategory) {
+                $paths->prepend($two);
+            }
+        }
+        $paths->transform(function (ArticleCategory $category) {
+            return $category->getAttribute('name');
+        });
+
+        return $paths->implode(' / ');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return array
+     */
+    public function getPathAttribute($value)
+    {
+        $paths = new Collection([$this]);
+        $one = static::query()->find($this->attributes['parent_id']);
+        if ($this->attributes['parent_id'] && $one instanceof ArticleCategory) {
+            $paths->prepend($one);
+            $two = static::query()->find($one->getAttribute('parent_id'));
+            if ($one->getAttribute('parent_id') && $two instanceof ArticleCategory) {
+                $paths->prepend($two);
+            }
+        }
+
+        return $paths->toArray();
+    }
 
     /**
      * @var string
