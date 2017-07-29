@@ -33,6 +33,7 @@
             });
         },
         data() {
+            const self = this;
             return {
                 categories: {
                     all: [],
@@ -64,14 +65,41 @@
                     },
                     {
                         key: 'handle',
-                        render(row, column, index) {
-                            return `
-                                    <i-button size="small" type="primary" @click.native="edit(${index})">${injection.trans('content.global.edit.submit')}</i-button>
-                                    <i-button :loading="list[${index}].loading"  size="small" type="error" @click.native="remove(${index})">
-                                        <span v-if="!list[${index}].loading">${injection.trans('content.global.delete.submit')}</span>
-                                        <span v-else>${injection.trans('content.global.delete.loading')}</span>
-                                    </i-button>
-                                    `;
+                        render(h, data) {
+                            let text = '';
+                            if (self.list[data.index].loading) {
+                                text = injection.trans('content.global.delete.loading');
+                            } else {
+                                text = injection.trans('content.global.delete.submit');
+                            }
+                            return h('div', [
+                                h('router-link', {
+                                    props: {
+                                        to: `/content/article/${data.row.id}/edit`,
+                                    },
+                                }, [
+                                    h('i-button', {
+                                        props: {
+                                            size: 'small',
+                                            type: 'primary',
+                                        },
+                                    }, injection.trans('content.global.edit.submit')),
+                                ]),
+                                h('i-button', {
+                                    on: {
+                                        click() {
+                                            self.remove(data.index);
+                                        },
+                                    },
+                                    props: {
+                                        loading: self.list[data.index].loading,
+                                        size: 'small',
+                                        type: 'error',
+                                    },
+                                }, [
+                                    h('span', text),
+                                ]),
+                            ]);
                         },
                         title: injection.trans('content.article.table.handle'),
                         width: 200,
@@ -164,11 +192,6 @@
                         self.pagination = response.data.pagination;
                     });
                 }
-            },
-            edit(index) {
-                const self = this;
-                const article = self.list[index];
-                self.$router.push(`/content/article/${article.id}/edit`);
             },
             paginator(id) {
                 const self = this;
