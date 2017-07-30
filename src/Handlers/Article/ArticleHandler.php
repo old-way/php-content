@@ -8,10 +8,9 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
-use Illuminate\Support\Collection;
 use Notadd\Content\Models\Article;
-use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
+use Notadd\Foundation\Validation\Rule;
 
 /**
  * Class FindHandler.
@@ -19,33 +18,28 @@ use Notadd\Foundation\Routing\Abstracts\Handler;
 class ArticleHandler extends Handler
 {
     /**
-     * @param                                $id
-     * @param \Illuminate\Support\Collection $data
-     */
-    protected function loopCategory($id, Collection $data)
-    {
-        $parent = (new ArticleCategory())->newQuery()->find($id);
-        if ($parent) {
-            $data->prepend($parent->getAttribute('id'));
-            $parent->getAttribute('parent_id') && $this->loopCategory($parent->getAttribute('parent_id'), $data);
-        }
-    }
-
-    /**
      * Execute Handler.
      *
      * @throws \Exception
      */
     protected function execute()
     {
+        $this->validate($this->request, [
+            'id' => [
+                Rule::exists('content_articles'),
+                Rule::numeric(),
+                Rule::required(),
+            ],
+        ], [
+            'id.exists'   => '没有对应的文章信息',
+            'id.numeric'  => '文章 ID 必须为数值',
+            'id.required' => "文章 ID 必须填写",
+        ]);
         $article = Article::query()->with('category')->find($this->request->input('id'));
-        $category = $article->getAttribute('category');
-        if ($category) {
-            $data = new Collection();
-            $this->loopCategory($article->getAttribute('category_id'), $data);
-            $article->setAttribute('category', $category->getAttributes());
-            $article->setAttribute('category_path', $data->toArray());
+        if ($article instanceof Article) {
+            $this->withCode(200)->withData($article)->withMessage('content::article.find.success');
+        } else {
+            $this->withCode(500)->withError('获取文章信息失败！');
         }
-        $this->withCode(200)->withData($article->getAttributes())->withMessage('content::article.find.success');
     }
 }
