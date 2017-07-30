@@ -43,6 +43,15 @@ class Article extends Model
     ];
 
     /**
+     * @var array
+     */
+    protected $setters = [
+        'category_id' => 'null|0',
+        'is_hidden'   => 'null|0',
+        'is_sticky'   => 'null|0',
+    ];
+
+    /**
      * @var string
      */
     protected $table = 'content_articles';

@@ -29,6 +29,7 @@ class EditHandler extends Handler
         $this->validate($this->request, [
             'category_id' => Rule::numeric(),
             'content'     => Rule::required(),
+            'created_at'  => Rule::dateFormat('Y-m-d H:i:s'),
             'id'          => [
                 Rule::exists('content_articles'),
                 Rule::numeric(),
@@ -39,15 +40,16 @@ class EditHandler extends Handler
             'source_link' => Rule::url(),
             'title'       => Rule::required(),
         ], [
-            'category_id.numeric' => '分类 ID 必须为数值',
-            'content.required'    => '必须填写文章内容',
-            'id.exists'           => '没有对应的文章信息',
-            'id.numeric'          => '文章 ID 必须为数值',
-            'id.required'         => '文章 ID 必须填写',
-            'is_hidden.boolean'   => '是否隐藏标识必须为布尔值',
-            'is_sticky.boolean'   => '是否置顶标识必须为布尔值',
-            'source_link.url'     => '来源链接不是合法的URL',
-            'title.required'      => '必须填写文章标题',
+            'category_id.numeric'    => '分类 ID 必须为数值',
+            'content.required'       => '必须填写文章内容',
+            'created_at.date_format' => '创建时间格式错误',
+            'id.exists'              => '没有对应的文章信息',
+            'id.numeric'             => '文章 ID 必须为数值',
+            'id.required'            => '文章 ID 必须填写',
+            'is_hidden.boolean'      => '是否隐藏标识必须为布尔值',
+            'is_sticky.boolean'      => '是否置顶标识必须为布尔值',
+            'source_link.url'        => '来源链接不是合法的URL',
+            'title.required'         => '必须填写文章标题',
         ]);
         $this->beginTransaction();
         $data = $this->request->only([

@@ -29,17 +29,19 @@ class CreateHandler extends Handler
         $this->validate($this->request, [
             'category_id' => Rule::numeric(),
             'content'     => Rule::required(),
+            'created_at'  => Rule::dateFormat('Y-m-d H:i:s'),
             'is_hidden'   => Rule::boolean(),
             'is_sticky'   => Rule::boolean(),
             'source_link' => Rule::url(),
             'title'       => Rule::required(),
         ], [
-            'category_id.numeric' => '分类 ID 必须为数值',
-            'content.required'    => '必须填写文章内容',
-            'is_hidden.boolean'   => '是否隐藏标识必须为布尔值',
-            'is_sticky.boolean'   => '是否置顶标识必须为布尔值',
-            'source_link.url'     => '来源链接不是合法的URL',
-            'title.required'      => '必须填写文章标题',
+            'category_id.numeric'    => '分类 ID 必须为数值',
+            'content.required'       => '必须填写文章内容',
+            'created_at.date_format' => '创建时间格式错误',
+            'is_hidden.boolean'      => '是否隐藏标识必须为布尔值',
+            'is_sticky.boolean'      => '是否置顶标识必须为布尔值',
+            'source_link.url'        => '来源链接不是合法的URL',
+            'title.required'         => '必须填写文章标题',
         ]);
         $this->beginTransaction();
         $data = $this->request->only([
