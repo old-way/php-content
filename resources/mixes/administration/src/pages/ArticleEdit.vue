@@ -5,7 +5,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/content/article/find`, {
+            injection.http.post(`${window.api}/content/article`, {
                 id: to.params.id,
             }).then(response => {
                 const article = response.data.data;

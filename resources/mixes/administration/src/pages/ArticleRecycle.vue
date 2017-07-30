@@ -4,7 +4,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/content/article/fetch`, {
+            injection.http.post(`${window.api}/content/article/list`, {
                 trashed: true,
             }).then(response => {
                 const list = response.data.data;
@@ -71,7 +71,7 @@
                 const self = this;
                 self.$loading.start();
                 if (self.categories.id === 'none') {
-                    self.$http.post(`${window.api}/content/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/list`, {
                         'only-no-category': true,
                         page: id,
                     }).then(response => {
@@ -88,7 +88,7 @@
                         self.$loading.fail();
                     });
                 } else {
-                    self.$http.post(`${window.api}/content/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/list`, {
                         category: self.categories.id,
                         page: id,
                     }).then(response => {

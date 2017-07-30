@@ -72,8 +72,8 @@ class RouteRegister extends AbstractRouteRegister
         });
         $this->router->group(['middleware' => ['cross', 'web']], function () {
             $this->router->group(['prefix' => 'api/content/article'], function () {
-                $this->router->post('find', ArticleControllerForAdministration::class . '@find');
-                $this->router->post('fetch', ArticleControllerForAdministration::class . '@fetch');
+                $this->router->post('/', ArticleControllerForAdministration::class . '@article');
+                $this->router->post('list', ArticleControllerForAdministration::class . '@list');
             });
         });
         $this->router->group(['middleware' => 'web'], function () {

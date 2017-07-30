@@ -16,7 +16,7 @@ use Notadd\Foundation\Routing\Abstracts\Handler;
 /**
  * Class FindHandler.
  */
-class FindHandler extends Handler
+class ArticleHandler extends Handler
 {
     /**
      * @param                                $id
