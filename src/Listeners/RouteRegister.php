@@ -43,10 +43,8 @@ class RouteRegister extends AbstractRouteRegister
                 });
             });
             $this->router->group(['prefix' => 'api/content/category'], function () {
-                $this->router->post('/', CategoryControllerForAdministration::class . '@category');
                 $this->router->post('create', CategoryControllerForAdministration::class . '@create');
                 $this->router->post('edit', CategoryControllerForAdministration::class . '@edit');
-                $this->router->post('list', CategoryControllerForAdministration::class . '@list');
                 $this->router->post('remove', CategoryControllerForAdministration::class . '@remove');
                 $this->router->post('sort', CategoryControllerForAdministration::class . '@sort');
             });
@@ -74,6 +72,10 @@ class RouteRegister extends AbstractRouteRegister
             $this->router->group(['prefix' => 'api/content/article'], function () {
                 $this->router->post('/', ArticleControllerForAdministration::class . '@article');
                 $this->router->post('list', ArticleControllerForAdministration::class . '@list');
+            });
+            $this->router->group(['prefix' => 'api/content/category'], function () {
+                $this->router->post('/', CategoryControllerForAdministration::class . '@category');
+                $this->router->post('list', CategoryControllerForAdministration::class . '@list');
             });
         });
         $this->router->group(['middleware' => 'web'], function () {

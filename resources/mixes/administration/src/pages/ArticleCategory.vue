@@ -28,13 +28,13 @@
                     enabled: '',
                     id: 0,
                     link: '',
-                    name: '',
+                    title: '',
                     pattern: 'create',
                     pagination: 30,
                     seo_title: '',
                     seo_keyword: '',
                     seo_description: '',
-                    title: injection.trans('content.article.category.modal.create'),
+                    subline: injection.trans('content.article.category.modal.create'),
                     top_image: '',
                 },
                 loading: false,
@@ -51,7 +51,7 @@
                             trigger: 'change',
                         },
                     ],
-                    name: [
+                    title: [
                         {
                             required: true,
                             type: 'string',
@@ -74,13 +74,13 @@
                 self.form.enabled = '1';
                 self.form.id = 0;
                 self.form.link = '';
-                self.form.name = '';
+                self.form.title = '';
                 self.form.pattern = 'create';
                 self.form.pagination = 30;
                 self.form.seo_title = '';
                 self.form.seo_keyword = '';
                 self.form.seo_description = '';
-                self.form.title = injection.trans('content.article.category.modal.create');
+                self.form.subline = injection.trans('content.article.category.modal.create');
                 self.form.top_image = '';
                 self.modal.visible = true;
             },
@@ -93,13 +93,13 @@
                 self.form.enabled = item.enabled;
                 self.form.id = item.id;
                 self.form.link = item.link;
-                self.form.name = item.title;
+                self.form.title = item.title;
                 self.form.pattern = 'edit';
                 self.form.pagination = 30;
                 self.form.seo_title = item.seo_title;
                 self.form.seo_keyword = item.seo_keyword;
                 self.form.seo_description = item.seo_description;
-                self.form.title = injection.trans('content.article.category.modal.edit');
+                self.form.subline = injection.trans('content.article.category.modal.edit');
                 self.form.top_image = item.top_image;
                 self.modal.visible = true;
             },
@@ -260,13 +260,13 @@
         <modal :loading="modal.loading" :value="modal.visible" @on-cancel="modal.visible = false" @on-ok="submit">
             <template slot="header">
                 <div class="ivu-modal-header-inner category-modal-header">
-                    {{ form.title }}
+                    {{ form.subline }}
                     <button v-if="form.pattern === 'edit'" @click="remove">{{ trans('content.global.delete.submit') }}</button>
                 </div>
             </template>
             <i-form label-position="left" :model="form" ref="form" :rules="rules">
-                <form-item :label="trans('content.article.category.form.name.label')" prop="name">
-                    <i-input :placeholder="trans('content.article.category.form.name.placeholder')" v-model="form.name"></i-input>
+                <form-item :label="trans('content.article.category.form.name.label')" prop="title">
+                    <i-input :placeholder="trans('content.article.category.form.name.placeholder')" v-model="form.title"></i-input>
                 </form-item>
                 <form-item :label="trans('content.article.category.form.alias.label')" prop="alias">
                     <i-input :placeholder="trans('content.article.category.form.alias.placeholder')" v-model="form.alias"></i-input>

@@ -27,7 +27,6 @@ class ArticleCategory extends Model
      */
     protected $appends = [
         'breadcrumb',
-        'path',
     ];
 
     /**
@@ -53,47 +52,15 @@ class ArticleCategory extends Model
     ];
 
     /**
-     * @param $value
-     *
-     * @return string
+     * @var array
      */
-    public function getBreadcrumbAttribute($value)
-    {
-        $paths = new Collection([$this]);
-        $one = static::query()->find($this->attributes['parent_id']);
-        if ($this->attributes['parent_id'] && $one instanceof ArticleCategory) {
-            $paths->prepend($one);
-            $two = static::query()->find($one->getAttribute('parent_id'));
-            if ($one->getAttribute('parent_id') && $two instanceof ArticleCategory) {
-                $paths->prepend($two);
-            }
-        }
-        $paths->transform(function (ArticleCategory $category) {
-            return $category->getAttribute('name');
-        });
-
-        return $paths->implode(' / ');
-    }
-
-    /**
-     * @param $value
-     *
-     * @return array
-     */
-    public function getPathAttribute($value)
-    {
-        $paths = new Collection([$this]);
-        $one = static::query()->find($this->attributes['parent_id']);
-        if ($this->attributes['parent_id'] && $one instanceof ArticleCategory) {
-            $paths->prepend($one);
-            $two = static::query()->find($one->getAttribute('parent_id'));
-            if ($one->getAttribute('parent_id') && $two instanceof ArticleCategory) {
-                $paths->prepend($two);
-            }
-        }
-
-        return $paths->toArray();
-    }
+    protected $setters = [
+        'enabled'    => 'empty|1',
+        'order_id'   => 'empty|0',
+        'parent_id'  => 'empty|0',
+        'pagination' => 'empty|20',
+        'type'       => 'empty|normal',
+    ];
 
     /**
      * @var string
@@ -101,11 +68,33 @@ class ArticleCategory extends Model
     protected $table = 'content_article_categories';
 
     /**
+     * @param $value
+     *
+     * @return string
+     */
+    public function getBreadcrumbAttribute($value)
+    {
+        $paths = new Collection([$this]);
+        if ($this->attributes['parent_id'] && ($one = static::query()->find($this->attributes['parent_id'])) instanceof ArticleCategory) {
+            $paths->prepend($one);
+            if ($one->getAttribute('parent_id') && ($two = static::query()->find($one->getAttribute('parent_id'))) instanceof ArticleCategory) {
+                $paths->prepend($two);
+            }
+        }
+        $paths->transform(function (ArticleCategory $category) {
+            return $category->getAttribute('title');
+        });
+
+        return $paths->implode(' / ');
+    }
+
+    /**
      * Get category structure list.
      *
      * @return array
      */
-    public function structure() {
+    public function structure()
+    {
         $list = $this->newQuery()->where('parent_id', 0)->orderBy('order_id', 'asc')->get();
         $list->transform(function (ArticleCategory $category) {
             $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
@@ -121,6 +110,34 @@ class ArticleCategory extends Model
         });
 
         return $list->toArray();
+    }
+
+    /**
+     * Guard a transition.
+     *
+     * @param \Symfony\Component\Workflow\Event\GuardEvent $event
+     */
+    public function guardTransition(GuardEvent $event)
+    {
+        switch ($event->getTransition()->getName()) {
+            case 'create':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'need_to_edit':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'edit':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'need_to_remove':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            case 'remove':
+                $this->blockTransition($event, $this->permission(''));
+                break;
+            default:
+                $event->setBlocked(true);
+        }
     }
 
     /**
@@ -164,33 +181,5 @@ class ArticleCategory extends Model
             new Transition('need_to_remove', ['created', 'edited'], 'remove'),
             new Transition('remove', 'remove', 'removed'),
         ];
-    }
-
-    /**
-     * Guard a transition.
-     *
-     * @param \Symfony\Component\Workflow\Event\GuardEvent $event
-     */
-    public function guardTransition(GuardEvent $event)
-    {
-        switch ($event->getTransition()->getName()) {
-            case 'create':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            case 'need_to_edit':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            case 'edit':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            case 'need_to_remove':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            case 'remove':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            default:
-                $event->setBlocked(true);
-        }
     }
 }
