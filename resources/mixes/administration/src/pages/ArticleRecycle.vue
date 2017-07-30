@@ -110,7 +110,7 @@
                 const self = this;
                 const article = self.list[index];
                 article.loading = true;
-                self.$http.post(`${window.api}/content/article/delete`, {
+                self.$http.post(`${window.api}/content/article/remove`, {
                     id: article.id,
                     force: true,
                 }).then(response => {
@@ -140,7 +140,7 @@
                     self.loading = false;
                 } else {
                     self.selections.forEach((article, key) => {
-                        self.$http.post(`${window.api}/content/article/delete`, {
+                        self.$http.post(`${window.api}/content/article/remove`, {
                             id: article.id,
                             force: true,
                         }).then(response => {
@@ -166,7 +166,7 @@
                 const self = this;
                 const article = self.list[index];
                 article.restoring = true;
-                self.$http.post(`${window.api}/content/article/delete`, {
+                self.$http.post(`${window.api}/content/article/remove`, {
                     id: article.id,
                     restore: true,
                 }).then(response => {

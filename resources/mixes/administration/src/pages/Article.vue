@@ -234,7 +234,7 @@
                 const self = this;
                 const article = self.list[index];
                 article.loading = true;
-                self.$http.post(`${window.api}/content/article/delete`, {
+                self.$http.post(`${window.api}/content/article/remove`, {
                     id: article.id,
                 }).then(response => {
                     const result = response.data;
@@ -260,7 +260,7 @@
                     self.loading = false;
                 } else {
                     self.selections.forEach((article, key) => {
-                        self.$http.post(`${window.api}/content/article/delete`, {
+                        self.$http.post(`${window.api}/content/article/remove`, {
                             id: article.id,
                         }).then(response => {
                             const result = response.data;

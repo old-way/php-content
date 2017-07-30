@@ -33,13 +33,13 @@ class RouteRegister extends AbstractRouteRegister
             $this->router->group(['prefix' => 'api/content/article'], function () {
                 $this->router->post('auto', ArticleControllerForAdministration::class . '@auto');
                 $this->router->post('create', ArticleControllerForAdministration::class . '@create');
-                $this->router->post('delete', ArticleControllerForAdministration::class . '@delete');
                 $this->router->post('edit', ArticleControllerForAdministration::class . '@edit');
+                $this->router->post('remove', ArticleControllerForAdministration::class . '@remove');
                 $this->router->group(['prefix' => 'draft'], function () {
+                    $this->router->post('/', ArticleDraftControllerForAdministration::class . '@draft');
                     $this->router->post('create', ArticleDraftControllerForAdministration::class . '@create');
-                    $this->router->post('delete', ArticleDraftControllerForAdministration::class . '@delete');
-                    $this->router->post('find', ArticleDraftControllerForAdministration::class . '@find');
-                    $this->router->post('fetch', ArticleDraftControllerForAdministration::class . '@fetch');
+                    $this->router->post('list', ArticleDraftControllerForAdministration::class . '@list');
+                    $this->router->post('remove', ArticleDraftControllerForAdministration::class . '@remove');
                 });
             });
             $this->router->group(['prefix' => 'api/content/category'], function () {

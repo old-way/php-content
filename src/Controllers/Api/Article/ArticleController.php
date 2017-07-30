@@ -10,7 +10,7 @@ namespace Notadd\Content\Controllers\Api\Article;
 
 use Notadd\Content\Handlers\Article\AutoHandler;
 use Notadd\Content\Handlers\Article\CreateHandler;
-use Notadd\Content\Handlers\Article\DeleteHandler;
+use Notadd\Content\Handlers\Article\RemoveHandler;
 use Notadd\Content\Handlers\Article\EditHandler;
 use Notadd\Content\Handlers\Article\FetchHandler;
 use Notadd\Content\Handlers\Article\FindHandler;
@@ -50,12 +50,12 @@ class ArticleController extends Controller
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Article\DeleteHandler $handler
+     * @param \Notadd\Content\Handlers\Article\RemoveHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(DeleteHandler $handler)
+    public function remove(RemoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
