@@ -111,9 +111,13 @@
                         }
                         self.$http.post(`${window.api}/content/article/create`, formData).then(response => {
                             self.$notice.open({
-                                title: response.data.message,
+                                title: '创建文章信息成功！',
                             });
                             self.$router.push('/content/article');
+                        }).catch(() => {
+                            self.$notice.error({
+                                title: '创建文章信息失败！',
+                            });
                         }).finally(() => {
                             self.loading = false;
                         });

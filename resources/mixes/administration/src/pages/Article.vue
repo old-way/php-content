@@ -96,6 +96,9 @@
                                         size: 'small',
                                         type: 'error',
                                     },
+                                    style: {
+                                        marginLeft: '10px',
+                                    },
                                 }, [
                                     h('span', text),
                                 ]),

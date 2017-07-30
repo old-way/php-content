@@ -130,9 +130,13 @@
                         window.console.log(self.form);
                         self.$http.post(`${window.api}/content/article/edit`, formData).then(response => {
                             self.$notice.open({
-                                title: response.data.message,
+                                title: '编辑文章信息成功！',
                             });
                             self.$router.push('/content/article');
+                        }).catch(() => {
+                            self.$notice.error({
+                                title: '编辑文章信息失败！',
+                            });
                         }).finally(() => {
                             self.loading = false;
                         });
