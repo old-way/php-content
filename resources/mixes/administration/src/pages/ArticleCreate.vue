@@ -40,16 +40,16 @@
                         list: [],
                     },
                     content: '',
-                    date: '',
-                    hidden: false,
+                    created_at: '',
+                    description: '',
                     image: '',
+                    is_hidden: false,
+                    is_sticky: false,
+                    keyword: [],
                     source: {
                         author: '',
                         link: 'http://',
                     },
-                    sticky: false,
-                    summary: '',
-                    tags: [],
                     title: '',
                 },
                 loading: false,
@@ -77,7 +77,7 @@
         },
         methods: {
             dateChange(val) {
-                this.form.date = val;
+                this.form.created_at = val;
             },
             editor(instance) {
                 const self = this;
@@ -94,14 +94,14 @@
                         const formData = new window.FormData();
                         formData.append('category_id', self.form.category.id ? self.form.category.id[self.form.category.id.length - 1] : 0);
                         formData.append('content', self.form.content);
-                        formData.append('date', self.form.date);
-                        formData.append('hidden', self.form.hidden ? '1' : '0');
+                        formData.append('created_at', self.form.created_at);
+                        formData.append('description', self.form.description);
                         formData.append('image', self.form.image);
-                        formData.append('sticky', self.form.sticky ? '1' : '0');
-                        formData.append('summary', self.form.summary);
-                        formData.append('tags', self.form.tags);
-                        formData.append('title', self.form.title);
+                        formData.append('is_hidden', self.form.is_hidden ? '1' : '0');
+                        formData.append('is_sticky', self.form.is_sticky ? '1' : '0');
                         formData.append('source_author', self.form.source.author);
+                        formData.append('keyword', self.form.keyword);
+                        formData.append('title', self.form.title);
                         if (self.form.source.link === 'http://') {
                             formData.append('source_link', '');
                         } else if (self.form.source.link === 'https://') {
@@ -171,13 +171,13 @@
                                 <cascader :data="form.category.list" v-model="form.category.id"></cascader>
                             </form-item>
                             <form-item :label="trans('content.article.form.sticky.label')" prop="sticky">
-                                <i-switch v-model="form.sticky" size="large">
+                                <i-switch v-model="form.is_sticky" size="large">
                                     <span slot="open">{{ trans('content.article.form.sticky.open') }}</span>
                                     <span slot="close">{{ trans('content.article.form.sticky.close') }}</span>
                                 </i-switch>
                             </form-item>
                             <form-item :label="trans('content.article.form.hidden.label')" prop="hidden">
-                                <i-switch v-model="form.hidden" size="large">
+                                <i-switch v-model="form.is_hidden" size="large">
                                     <span slot="open">{{ trans('content.article.form.hidden.open') }}</span>
                                     <span slot="close">{{ trans('content.article.form.hidden.close') }}</span>
                                 </i-switch>
