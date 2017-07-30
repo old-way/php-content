@@ -128,7 +128,7 @@
                         formData.append('source_author', self.form.source.author);
                         formData.append('source_link', self.form.source.link);
                         window.console.log(self.form);
-                        self.$http.post(`${window.api}/content/article/edit`, formData).then(response => {
+                        self.$http.post(`${window.api}/content/article/edit`, formData).then(() => {
                             self.$notice.open({
                                 title: '编辑文章信息成功！',
                             });

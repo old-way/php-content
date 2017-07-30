@@ -109,7 +109,7 @@
                         } else {
                             formData.append('source_link', self.form.source.link);
                         }
-                        self.$http.post(`${window.api}/content/article/create`, formData).then(response => {
+                        self.$http.post(`${window.api}/content/article/create`, formData).then(() => {
                             self.$notice.open({
                                 title: '创建文章信息成功！',
                             });
