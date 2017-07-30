@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
+use Carbon\Carbon;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\Foundation\Validation\Rule;
@@ -53,6 +54,11 @@ class CreateHandler extends Handler
             'source_link',
             'title',
         ]);
+        if ($data['created_at']) {
+            $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
+        } else {
+            unset($data['created_at']);
+        }
         if (Article::query()->create($data)) {
             $this->commitTransaction();
             $this->withCode(200)->withMessage('创建文章信息成功！');

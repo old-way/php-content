@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
+use Carbon\Carbon;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\Foundation\Validation\Rule;
@@ -61,13 +62,18 @@ class EditHandler extends Handler
             'source_link',
             'title',
         ]);
+        if ($data['created_at']) {
+            $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
+        } else {
+            unset($data['created_at']);
+        }
         $article = Article::query()->find($this->request->input('id'));
         if ($article && $article->update($data)) {
             $this->commitTransaction();
-            $this->withCode(200)->withMessage('');
+            $this->withCode(200)->withMessage('编辑文章信息成功！');
         } else {
             $this->rollBackTransaction();
-            $this->withCode(500)->withError('');
+            $this->withCode(500)->withError('编辑文章信息失败！');
         }
     }
 }
