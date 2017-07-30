@@ -11,6 +11,7 @@ namespace Notadd\Content\Handlers\Article;
 use Notadd\Content\Models\Article;
 use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
+use Notadd\Foundation\Validation\Rule;
 
 /**
  * Class FetchHandler.
@@ -29,62 +30,71 @@ class ListHandler extends Handler
      */
     protected function execute()
     {
-        $pagination = $this->request->input('pagination') ?: 10;
-        if ($this->request->input('only-no-category')) {
-            $this->pagination = Article::query()->where('category_id', 0)->paginate($pagination);
-        } elseif ($id = $this->request->input('category')) {
+        $this->validate($this->request, [
+            'category_id'    => Rule::numeric(),
+            'category_level' => Rule::boolean(),
+            'order'          => Rule::in([
+                'asc',
+                'desc',
+            ]),
+            'page'           => Rule::numeric(),
+            'paginate'       => Rule::numeric(),
+            'trashed'        => Rule::boolean(),
+        ], [
+            'category_id.numeric'    => '分类 ID 必须为数值',
+            'category_level.boolean' => '分类层级标识必须为数值',
+            'order.in'               => '排序规则错误',
+            'page.numeric'           => '当前页面必须为数值',
+            'paginate.numeric'       => '分页数必须为数值',
+            'trashed.boolean'        => '仅删除标识必须为布尔值',
+        ]);
+        $builder = Article::query();
+        if ($this->request->has('category_id') && $this->request->input('category_level', true)) {
+            $id = $this->request->input('category_id', 0);
             $categories = collect([(int)$id]);
-            $this->container->make('log')->info('has category', $categories->toArray());
-            (new ArticleCategory())->newQuery()->where('parent_id', $id)->get()->each(function (ArticleCategory $category) use (
-                $categories
-            ) {
-                $categories->push($category->getAttribute('id'));
-                $children = (new ArticleCategory())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
-                $children->count() && $children->each(function (ArticleCategory $category) use ($categories) {
+            ArticleCategory::query()
+                ->where('parent_id', $id)
+                ->get()
+                ->each(function (ArticleCategory $category) use ($categories) {
                     $categories->push($category->getAttribute('id'));
-                    $children = (new ArticleCategory())->newQuery()->where('parent_id', $category->getAttribute('id'))->get();
+                    $children = ArticleCategory::query()
+                        ->where('parent_id', $category->getAttribute('id'))
+                        ->get();
                     $children->count() && $children->each(function (ArticleCategory $category) use ($categories) {
                         $categories->push($category->getAttribute('id'));
+                        $children = ArticleCategory::query()
+                            ->where('parent_id', $category->getAttribute('id'))
+                            ->get();
+                        $children->count() && $children->each(function (ArticleCategory $category) use ($categories) {
+                            $categories->push($category->getAttribute('id'));
+                        });
                     });
                 });
-            });
-            $this->container->make('log')->info('get categories', $categories->toArray());
-            $categories = $categories->unique();
-            $this->container->make('log')->info('get categories', $categories->toArray());
-            $this->pagination = Article::query()->whereIn('category_id',
-                $categories->toArray())->orderBy('created_at', 'desc')->paginate($pagination);
+            $builder->whereIn('category_id', $categories->unique()->toArray());
         } else {
-            $search = $this->request->input('search');
-            $trashed = $this->request->input('trashed');
-            if ($trashed) {
-                $this->pagination = Article::query()->onlyTrashed()->orderBy('deleted_at',
-                    'desc')->paginate($pagination);
-            } else {
-                if ($search) {
-                    $this->pagination = Article::query()->where('title', 'like',
-                        '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%')->orderBy('created_at',
-                        'desc')->paginate($pagination);
-                } else {
-                    $this->pagination = Article::query()->orderBy('created_at', 'desc')->paginate($pagination);
-                }
-            }
+            $builder->where('category_id', $this->request->input('category_id', 0));
         }
-        if ($this->pagination) {
-            $this->withCode(200)
-                ->withData($this->pagination->items())
-                ->withMessage('content::article.fetch.success')
-                ->withExtra([
-                'pagination' => [
-                    'total'         => $this->pagination->total(),
-                    'per_page'      => $this->pagination->perPage(),
-                    'current_page'  => $this->pagination->currentPage(),
-                    'last_page'     => $this->pagination->lastPage(),
-                    'next_page_url' => $this->pagination->nextPageUrl(),
-                    'prev_page_url' => $this->pagination->previousPageUrl(),
-                    'from'          => $this->pagination->firstItem(),
-                    'to'            => $this->pagination->lastItem(),
-                ],
-            ]);
+        if ($this->request->has('keyword')) {
+            $keyword = $this->request->input('keyword');
+            $builder->where('title', 'like', '%' . $keyword . '%')
+                ->orWhere('content', 'like', '%' . $keyword . '%');
         }
+        $builder->orderBy($this->request->input('sort', 'created_at'), $this->request->input('order', 'desc'));
+        if ($this->request->input('trashed', false)) {
+            $builder->onlyTrashed();
+        }
+        $pagination = $builder->paginate($this->request->input('pagination', 20));
+        $this->withCode(200)->withData($pagination->items())->withExtra([
+            'pagination' => [
+                'total'         => $pagination->total(),
+                'per_page'      => $pagination->perPage(),
+                'current_page'  => $pagination->currentPage(),
+                'last_page'     => $pagination->lastPage(),
+                'next_page_url' => $pagination->nextPageUrl(),
+                'prev_page_url' => $pagination->previousPageUrl(),
+                'from'          => $pagination->firstItem(),
+                'to'            => $pagination->lastItem(),
+            ],
+        ])->withMessage('content::article.fetch.success');
     }
 }
