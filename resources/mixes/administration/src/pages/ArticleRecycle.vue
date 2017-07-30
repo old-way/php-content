@@ -112,7 +112,7 @@
                 article.loading = true;
                 self.$http.post(`${window.api}/content/article/remove`, {
                     id: article.id,
-                    force: true,
+                    forced: true,
                 }).then(response => {
                     const result = response.data;
                     result.data.forEach(item => {
@@ -142,7 +142,7 @@
                     self.selections.forEach((article, key) => {
                         self.$http.post(`${window.api}/content/article/remove`, {
                             id: article.id,
-                            force: true,
+                            forced: true,
                         }).then(response => {
                             const result = response.data;
                             result.data.forEach(item => {
