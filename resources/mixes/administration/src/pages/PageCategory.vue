@@ -5,7 +5,7 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/content/page/category/fetch`).then(response => {
+            injection.http.post(`${window.api}/content/page/category/list`).then(response => {
                 const list = response.data.data;
                 next(vm => {
                     vm.list = list;
@@ -106,7 +106,7 @@
             remove() {
                 const self = this;
                 if (self.form.pattern === 'edit') {
-                    self.$http.post(`${window.api}/content/page/category/delete`, self.form).then(response => {
+                    self.$http.post(`${window.api}/content/page/category/remove`, self.form).then(response => {
                         self.list = response.data.data;
                     }).finally(() => {
                         self.modal.visible = false;

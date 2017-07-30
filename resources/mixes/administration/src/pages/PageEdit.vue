@@ -5,11 +5,11 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/content/page/find`, {
+            injection.http.post(`${window.api}/content/page`, {
                 id: to.params.id,
             }).then(response => {
                 const article = response.data.data;
-                injection.http.post(`${window.api}/content/page/category/fetch`).then(result => {
+                injection.http.post(`${window.api}/content/page/category/list`).then(result => {
                     const list = result.data.data;
                     next(vm => {
                         vm.form.category.list = list.map(first => ({

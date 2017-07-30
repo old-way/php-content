@@ -9,10 +9,10 @@
 namespace Notadd\Content\Controllers\Api\Page;
 
 use Notadd\Content\Handlers\Page\Category\CreateHandler;
-use Notadd\Content\Handlers\Page\Category\DeleteHandler;
+use Notadd\Content\Handlers\Page\Category\RemoveHandler;
 use Notadd\Content\Handlers\Page\Category\EditHandler;
-use Notadd\Content\Handlers\Page\Category\FetchHandler;
-use Notadd\Content\Handlers\Page\Category\FindHandler;
+use Notadd\Content\Handlers\Page\Category\ListHandler;
+use Notadd\Content\Handlers\Page\Category\CategoryHandler;
 use Notadd\Content\Handlers\Page\Category\SortHandler;
 
 /**
@@ -36,12 +36,12 @@ class CategoryController
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Page\Category\DeleteHandler $handler
+     * @param \Notadd\Content\Handlers\Page\Category\RemoveHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(DeleteHandler $handler)
+    public function remove(RemoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -62,12 +62,12 @@ class CategoryController
     /**
      * Fetch handler.
      *
-     * @param \Notadd\Content\Handlers\Page\Category\FetchHandler $handler
+     * @param \Notadd\Content\Handlers\Page\Category\ListHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function fetch(FetchHandler $handler)
+    public function list(ListHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -75,12 +75,12 @@ class CategoryController
     /**
      * Find handler.
      *
-     * @param \Notadd\Content\Handlers\Page\Category\FindHandler $handler
+     * @param \Notadd\Content\Handlers\Page\Category\CategoryHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function find(FindHandler $handler)
+    public function category(CategoryHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

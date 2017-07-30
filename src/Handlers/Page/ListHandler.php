@@ -15,7 +15,7 @@ use Notadd\Foundation\Routing\Abstracts\Handler;
 /**
  * Class FetchHandler.
  */
-class FetchHandler extends Handler
+class ListHandler extends Handler
 {
     /**
      * @var \Illuminate\Contracts\Pagination\LengthAwarePaginator

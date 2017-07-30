@@ -55,17 +55,17 @@ class RouteRegister extends AbstractRouteRegister
                 $this->router->post('set', ComponentController::class . '@set');
             });
             $this->router->group(['prefix' => 'api/content/page'], function () {
+                $this->router->post('/', PageControllerForAdministration::class . '@page');
                 $this->router->post('create', PageControllerForAdministration::class . '@create');
-                $this->router->post('delete', PageControllerForAdministration::class . '@delete');
                 $this->router->post('edit', PageControllerForAdministration::class . '@edit');
-                $this->router->post('find', PageControllerForAdministration::class . '@find');
-                $this->router->post('fetch', PageControllerForAdministration::class . '@fetch');
+                $this->router->post('list', PageControllerForAdministration::class . '@list');
+                $this->router->post('remove', PageControllerForAdministration::class . '@remove');
                 $this->router->group(['prefix' => 'category'], function () {
+                    $this->router->post('/', PageCategoryControllerForAdministration::class . '@category');
                     $this->router->post('create', PageCategoryControllerForAdministration::class . '@create');
-                    $this->router->post('delete', PageCategoryControllerForAdministration::class . '@delete');
                     $this->router->post('edit', PageCategoryControllerForAdministration::class . '@edit');
-                    $this->router->post('find', PageCategoryControllerForAdministration::class . '@find');
-                    $this->router->post('fetch', PageCategoryControllerForAdministration::class . '@fetch');
+                    $this->router->post('list', PageCategoryControllerForAdministration::class . '@list');
+                    $this->router->post('remove', PageCategoryControllerForAdministration::class . '@remove');
                     $this->router->post('sort', PageCategoryControllerForAdministration::class . '@sort');
                 });
             });

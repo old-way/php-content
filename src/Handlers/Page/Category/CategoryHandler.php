@@ -14,7 +14,7 @@ use Notadd\Foundation\Routing\Abstracts\Handler;
 /**
  * Class FindHandler.
  */
-class FindHandler extends Handler
+class CategoryHandler extends Handler
 {
     /**
      * Execute Handler.

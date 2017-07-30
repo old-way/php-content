@@ -14,7 +14,7 @@ use Notadd\Foundation\Routing\Abstracts\Handler;
 /**
  * Class DeleteHandler.
  */
-class DeleteHandler extends Handler
+class RemoveHandler extends Handler
 {
     /**
      * Execute Handler.
