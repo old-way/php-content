@@ -50,9 +50,9 @@ class CreateHandler extends Handler
             $this->request->has('date') && $article->update([
                 'created_at' => new Carbon($this->request->input('date')),
             ]);
-            $this->withCode(200)->withMessage('');
+            $this->withCode(200)->withMessage('创建文章信息成功！');
         } else {
-            $this->withCode(500)->withError('');
+            $this->withCode(500)->withError('创建文章信息失败！');
         }
     }
 }
