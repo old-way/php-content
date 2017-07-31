@@ -83,7 +83,7 @@ class ListHandler extends Handler
         if ($this->request->input('trashed', false)) {
             $builder->onlyTrashed();
         }
-        $pagination = $builder->paginate($this->request->input('pagination', 20));
+        $pagination = $builder->paginate($this->request->input('paginate', 20));
         $this->withCode(200)->withData($pagination->items())->withExtra([
             'pagination' => [
                 'total'         => $pagination->total(),

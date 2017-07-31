@@ -89,27 +89,11 @@ class ArticleCategory extends Model
     }
 
     /**
-     * Get category structure list.
-     *
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function structure()
+    public function children()
     {
-        $list = $this->newQuery()->where('parent_id', 0)->orderBy('order_id', 'asc')->get();
-        $list->transform(function (ArticleCategory $category) {
-            $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
-            $children->transform(function (ArticleCategory $category) {
-                $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
-                $category->setAttribute('children', $children);
-
-                return $category;
-            });
-            $category->setAttribute('children', $children);
-
-            return $category;
-        });
-
-        return $list->toArray();
+        return $this->hasMany(ArticleCategory::class, 'parent_id');
     }
 
     /**

@@ -10,9 +10,10 @@ namespace Notadd\Content\Handlers\Category;
 
 use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
+use Notadd\Foundation\Validation\Rule;
 
 /**
- * Class FetchHandler.
+ * Class ListHandler.
  */
 class ListHandler extends Handler
 {
@@ -23,22 +24,19 @@ class ListHandler extends Handler
      */
     protected function execute()
     {
-        if ($this->request->input('with-children')) {
-            $categories = ArticleCategory::query()->orderBy('order_id', 'asc')->get();
-            $categories->transform(function (ArticleCategory $category) {
-                $children = ArticleCategory::query()->where('parent_id',
-                    $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
-                $children->count() && $category->setAttribute('children', $children);
-
-                return $category;
-            });
-            $this->withCode(200)
-                ->withData($categories->toArray())
-                ->withMessage('content::category.fetch.success');
-        } else {
-            $this->withCode(200)
-                ->withData((new ArticleCategory())->structure())
-                ->withMessage('content::category.fetch.success');
-        }
+        $this->validate($this->request, [
+            'order'     => Rule::in([
+                'asc',
+                'desc',
+            ]),
+            'parent_id' => Rule::numeric(),
+        ], [
+            'parent_id.numeric' => '父级 ID 必须为数值',
+        ]);
+        $builder = ArticleCategory::query();
+        $builder->with('children.children.children');
+        $builder->where('parent_id', $this->request->input('parent_id', 0));
+        $builder->orderBy($this->request->input('sort', 'order_id'), $this->request->input('order', 'asc'));
+        $this->withCode(200)->withData($builder->get())->withMessage('content::category.fetch.success');
     }
 }

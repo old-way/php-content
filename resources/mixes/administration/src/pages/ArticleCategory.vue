@@ -103,11 +103,27 @@
                 self.form.top_image = item.top_image;
                 self.modal.visible = true;
             },
+            refresh() {
+                const self = this;
+                self.$notice.open({
+                    title: '正在刷新数据...',
+                });
+                self.$loading.start();
+                self.$http.post(`${window.api}/content/category/list`).then(response => {
+                    self.list = response.data.data;
+                    self.$loading.finish();
+                    self.$notice.open({
+                        title: '刷新数据成功！',
+                    });
+                }).catch(() => {
+                    self.$loading.fail();
+                });
+            },
             remove() {
                 const self = this;
                 if (self.form.pattern === 'edit') {
-                    self.$http.post(`${window.api}/content/category/remove`, self.form).then(response => {
-                        self.list = response.data.data;
+                    self.$http.post(`${window.api}/content/category/remove`, self.form).then(() => {
+                        self.refresh();
                     }).finally(() => {
                         self.modal.visible = false;
                     });
@@ -129,13 +145,13 @@
                 self.loading = true;
                 self.$http.post(`${window.api}/content/category/sort`, {
                     data: order,
-                }).then(response => {
+                }).then(() => {
                     self.$nextTick(() => {
                         self.$loading.finish();
                         self.$notice.open({
                             title: injection.trans('content.global.sort.success'),
                         });
-                        self.list = response.data.data;
+                        self.refresh();
                     });
                 }).catch(() => {
                     self.$loading.fail();
@@ -149,11 +165,11 @@
                 if (self.form.pattern === 'create') {
                     self.$refs.form.validate(valid => {
                         if (valid) {
-                            self.$http.post(`${window.api}/content/category/create`, self.form).then(response => {
-                                self.list = response.data.data;
+                            self.$http.post(`${window.api}/content/category/create`, self.form).then(() => {
                                 self.$notice.open({
                                     title: injection.trans('content.article.category.info.success'),
                                 });
+                                self.refresh();
                                 self.modal.visible = false;
                             }).catch(() => {
                                 self.modal.visible = true;
@@ -172,11 +188,11 @@
                 if (self.form.pattern === 'edit') {
                     self.$refs.form.validate(valid => {
                         if (valid) {
-                            self.$http.post(`${window.api}/content/category/edit`, self.form).then(response => {
-                                self.list = response.data.data;
+                            self.$http.post(`${window.api}/content/category/edit`, self.form).then(() => {
                                 self.$notice.open({
                                     title: injection.trans('content.article.category.info.success'),
                                 });
+                                self.refresh();
                                 self.modal.visible = false;
                             }).catch(() => {
                                 self.modal.visible = true;
