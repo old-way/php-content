@@ -15,15 +15,21 @@
                     next(vm => {
                         vm.form.category.id = article.category_path ? article.category_path : [];
                         vm.form.category.list = list.map(first => ({
-                            children: first.children.map(second => ({
-                                children: second.children.map(third => ({
-                                    children: [],
-                                    label: third.title,
-                                    value: third.id,
-                                })),
-                                label: second.title,
-                                value: second.id,
-                            })),
+                            children: Object.keys(first.children).map(i => {
+                                const second = first.children[i];
+                                return {
+                                    children: Object.keys(second.children).map(n => {
+                                        const third = second.children[n];
+                                        return {
+                                            children: [],
+                                            label: third.title,
+                                            value: third.id,
+                                        };
+                                    }),
+                                    label: second.title,
+                                    value: second.id,
+                                };
+                            }),
                             label: first.title,
                             value: first.id,
                         }));
