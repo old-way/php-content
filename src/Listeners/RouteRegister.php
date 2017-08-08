@@ -13,6 +13,7 @@ use Notadd\Content\Controllers\Api\Article\DraftController as ArticleDraftContro
 use Notadd\Content\Controllers\Api\Category\CategoryController as CategoryControllerForAdministration;
 use Notadd\Content\Controllers\Api\Page\PageController as PageControllerForAdministration;
 use Notadd\Content\Controllers\Api\Page\CategoryController as PageCategoryControllerForAdministration;
+use Notadd\Content\Controllers\Api\UploadController;
 use Notadd\Content\Controllers\ArticleController;
 use Notadd\Content\Controllers\CategoryController;
 use Notadd\Content\Controllers\ComponentController;
@@ -67,6 +68,7 @@ class RouteRegister extends AbstractRouteRegister
                     $this->router->post('sort', PageCategoryControllerForAdministration::class . '@sort');
                 });
             });
+            $this->router->post('api/content/upload', UploadController::class . '@handle');
         });
         $this->router->group(['middleware' => ['cross', 'web']], function () {
             $this->router->group(['prefix' => 'api/content/article'], function () {

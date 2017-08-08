@@ -8,8 +8,6 @@
  */
 namespace Notadd\Content\Listeners;
 
-use Notadd\Content\Models\Article;
-use Notadd\Content\Models\ArticleCategory;
 use Notadd\Content\Models\ArticleDraft;
 use Notadd\Content\Models\Page;
 use Notadd\Content\Models\PageCategory;
@@ -31,8 +29,6 @@ class FlowRegister extends AbstractFlowRegister
      */
     public function handle()
     {
-        $this->flow->register(Article::class);
-        $this->flow->register(ArticleCategory::class);
         $this->flow->register(ArticleDraft::class);
         $this->flow->register(Page::class);
         $this->flow->register(PageCategory::class);
