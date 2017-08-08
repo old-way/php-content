@@ -77,9 +77,9 @@
                     content: '',
                     created_at: '',
                     description: '',
+                    image: '',
                     is_hidden: false,
                     is_sticky: false,
-                    image: '',
                     keyword: [],
                     source: {
                         author: '',
@@ -111,9 +111,6 @@
             };
         },
         methods: {
-            dateChange(val) {
-                this.form.created_at = val;
-            },
             editor(instance) {
                 const self = this;
                 instance.setContent(self.form.content);
@@ -134,11 +131,11 @@
                         formData.append('category_id', self.form.category.length ? self.form.category[self.form.category.length - 1] : 0);
                         formData.append('content', self.form.content);
                         formData.append('created_at', self.form.created_at);
+                        formData.append('description', self.form.description);
                         formData.append('is_hidden', self.form.is_hidden ? '1' : '0');
                         formData.append('id', self.$route.params.id);
                         formData.append('thumb_image', self.form.image ? self.form.image : '');
                         formData.append('is_sticky', self.form.is_sticky ? '1' : '0');
-                        formData.append('description', self.form.description);
                         formData.append('keyword', self.form.keyword);
                         formData.append('title', self.form.title);
                         formData.append('source_author', self.form.source.author);
@@ -222,9 +219,6 @@
                         </card>
                     </i-col>
                     <i-col span="8">
-                        <!--<card :bordered="false">-->
-                        <!--<p slot="title">草稿箱</p>-->
-                        <!--</card>-->
                         <card :bordered="false">
                             <form-item label="缩略图" prop="image">
                                 <div class="upload-form">

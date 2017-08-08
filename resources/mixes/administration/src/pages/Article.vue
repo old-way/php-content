@@ -55,10 +55,6 @@
                         width: 60,
                     },
                     {
-                        key: 'title',
-                        title: injection.trans('content.article.table.title'),
-                    },
-                    {
                         align: 'center',
                         key: 'thumb',
                         render(h, data) {
@@ -92,6 +88,10 @@
                         },
                         title: ' ',
                         width: 20,
+                    },
+                    {
+                        key: 'title',
+                        title: injection.trans('content.article.table.title'),
                     },
                     {
                         key: 'category',
