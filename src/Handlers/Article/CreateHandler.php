@@ -49,6 +49,7 @@ class CreateHandler extends Handler
             'content',
             'created_at',
             'description',
+            'image',
             'is_hidden',
             'is_sticky',
             'keyword',

@@ -8,7 +8,7 @@
             injection.http.post(`${window.api}/content/category/list`).then(response => {
                 const list = response.data.data;
                 next(vm => {
-                    vm.form.category.list = list.map(first => ({
+                    vm.categories = list.map(first => ({
                         children: Object.keys(first.children).map(i => {
                             const second = first.children[i];
                             return {
@@ -40,11 +40,10 @@
         },
         data() {
             return {
+                action: `${window.api}/content/upload`,
+                categories: [],
                 form: {
-                    category: {
-                        id: 0,
-                        list: [],
-                    },
+                    category: [],
                     content: '',
                     created_at: '',
                     description: '',
@@ -82,9 +81,6 @@
             };
         },
         methods: {
-            dateChange(val) {
-                this.form.created_at = val;
-            },
             editor(instance) {
                 const self = this;
                 instance.setContent(self.form.content);
@@ -98,15 +94,15 @@
                 self.$refs.form.validate(valid => {
                     if (valid) {
                         const formData = new window.FormData();
-                        formData.append('category_id', self.form.category.id ? self.form.category.id[self.form.category.id.length - 1] : 0);
+                        formData.append('category_id', self.form.category ? self.form.category[self.form.category.length - 1] : 0);
                         formData.append('content', self.form.content);
                         formData.append('created_at', self.form.created_at);
                         formData.append('description', self.form.description);
-                        formData.append('image', self.form.image);
+                        formData.append('thumb_image', self.form.image ? self.form.image : '');
                         formData.append('is_hidden', self.form.is_hidden ? '1' : '0');
                         formData.append('is_sticky', self.form.is_sticky ? '1' : '0');
-                        formData.append('source_author', self.form.source.author);
                         formData.append('keyword', self.form.keyword);
+                        formData.append('source_author', self.form.source.author);
                         formData.append('title', self.form.title);
                         if (self.form.source.link === 'http://') {
                             formData.append('source_link', '');
@@ -134,6 +130,32 @@
                         });
                     }
                 });
+            },
+            uploadBefore() {
+                this.$loading.start();
+            },
+            uploadError(error, data) {
+                const self = this;
+                self.$loading.error();
+                Object.keys(data.message).forEach(index => {
+                    self.$notice.error({
+                        title: data.message[index],
+                    });
+                });
+            },
+            uploadFormatError(file) {
+                this.$notice.warning({
+                    title: '文件格式不正确',
+                    desc: `文件 ${file.name} 格式不正确，请上传 jpg 或 png 格式的图片。`,
+                });
+            },
+            uploadSuccess(data) {
+                const self = this;
+                self.$loading.finish();
+                self.$notice.open({
+                    title: data.message,
+                });
+                self.form.image = data.data.path;
             },
         },
         watch: {
@@ -168,17 +190,31 @@
                         </card>
                     </i-col>
                     <i-col span="8">
-                        <!--<card :bordered="false">-->
-                        <!--<p slot="title">草稿箱</p>-->
-                        <!--</card>-->
                         <card :bordered="false">
-                            <!--<form-item label="缩略图" prop="image">-->
-                            <!--<upload action="//jsonplaceholder.typicode.com/posts/">-->
-                            <!--<i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>-->
-                            <!--</upload>-->
-                            <!--</form-item>-->
+                            <form-item label="缩略图" prop="image">
+                                <div class="upload-form">
+                                    <div class="preview" v-if="form.image">
+                                        <img :src="form.image">
+                                        <icon type="close" @click.native="removeImage"></icon>
+                                    </div>
+                                    <upload :action="action"
+                                            :before-upload="uploadBefore"
+                                            :format="['jpg','jpeg','png']"
+                                            :headers="{
+                                                    Authorization: `Bearer ${$store.state.token.access_token}`
+                                                }"
+                                            :max-size="2048"
+                                            :on-error="uploadError"
+                                            :on-format-error="uploadFormatError"
+                                            :on-success="uploadSuccess"
+                                            ref="upload"
+                                            :show-upload-list="false"
+                                            v-if="form.image === '' || form.image === null">
+                                    </upload>
+                                </div>
+                            </form-item>
                             <form-item :label="trans('content.article.form.category.label')">
-                                <cascader :data="form.category.list" v-model="form.category.id"></cascader>
+                                <cascader :data="categories" v-model="form.category"></cascader>
                             </form-item>
                             <form-item :label="trans('content.article.form.sticky.label')" prop="sticky">
                                 <i-switch v-model="form.is_sticky" size="large">
@@ -194,7 +230,8 @@
                             </form-item>
                             <form-item :label="trans('content.article.form.date.label')">
                                 <date-picker :placeholder="trans('content.article.form.date.placeholder')"
-                                             type="datetime" @on-change="dateChange"></date-picker>
+                                             v-model="form.created_at"
+                                             type="datetime"></date-picker>
                             </form-item>
                             <form-item :label="trans('content.article.form.source.author.label')">
                                 <i-input :placeholder="trans('content.article.form.source.author.placeholder')"
