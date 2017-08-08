@@ -35,7 +35,7 @@ class ArticleHandler extends Handler
             'id.numeric'  => '文章 ID 必须为数值',
             'id.required' => "文章 ID 必须填写",
         ]);
-        $article = Article::query()->with('category')->find($this->request->input('id'));
+        $article = Article::query()->with('category.parent.parent')->find($this->request->input('id'));
         if ($article instanceof Article) {
             $this->withCode(200)->withData($article)->withMessage('content::article.find.success');
         } else {

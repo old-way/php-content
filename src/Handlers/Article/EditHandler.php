@@ -29,7 +29,6 @@ class EditHandler extends Handler
         $this->validate($this->request, [
             'category_id' => Rule::numeric(),
             'content'     => Rule::required(),
-            'created_at'  => Rule::dateFormat('Y-m-d H:i:s'),
             'id'          => [
                 Rule::exists('content_articles'),
                 Rule::numeric(),
@@ -42,7 +41,6 @@ class EditHandler extends Handler
         ], [
             'category_id.numeric'    => '分类 ID 必须为数值',
             'content.required'       => '必须填写文章内容',
-            'created_at.date_format' => '创建时间格式错误',
             'id.exists'              => '没有对应的文章信息',
             'id.numeric'             => '文章 ID 必须为数值',
             'id.required'            => '文章 ID 必须填写',
@@ -62,13 +60,9 @@ class EditHandler extends Handler
             'keyword',
             'source_author',
             'source_link',
+            'thumb_image',
             'title',
         ]);
-        if ($data['created_at']) {
-            $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
-        } else {
-            unset($data['created_at']);
-        }
         $article = Article::query()->find($this->request->input('id'));
         if ($article && $article->update($data)) {
             $this->commitTransaction();

@@ -11,16 +11,13 @@ namespace Notadd\Content\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
 use Notadd\Foundation\Database\Model;
-use Notadd\Foundation\Database\Traits\HasFlow;
-use Symfony\Component\Workflow\Event\GuardEvent;
-use Symfony\Component\Workflow\Transition;
 
 /**
  * Class Category.
  */
 class ArticleCategory extends Model
 {
-    use HasFlow, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * @var array
@@ -97,73 +94,10 @@ class ArticleCategory extends Model
     }
 
     /**
-     * Guard a transition.
-     *
-     * @param \Symfony\Component\Workflow\Event\GuardEvent $event
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function guardTransition(GuardEvent $event)
+    public function parent()
     {
-        switch ($event->getTransition()->getName()) {
-            case 'create':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            case 'need_to_edit':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            case 'edit':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            case 'need_to_remove':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            case 'remove':
-                $this->blockTransition($event, $this->permission(''));
-                break;
-            default:
-                $event->setBlocked(true);
-        }
-    }
-
-    /**
-     * Definition of name for flow.
-     *
-     * @return string
-     */
-    public function name()
-    {
-        return 'content.article.category';
-    }
-
-    /**
-     * Definition of places for flow.
-     *
-     * @return array
-     */
-    public function places()
-    {
-        return [
-            'create',
-            'created',
-            'edit',
-            'edited',
-            'remove',
-            'removed',
-        ];
-    }
-
-    /**
-     * Definition of transitions for flow.
-     *
-     * @return array
-     */
-    public function transitions()
-    {
-        return [
-            new Transition('create', 'create', 'created'),
-            new Transition('need_to_edit', ['created', 'edited'], 'edit'),
-            new Transition('edit', 'edit', 'edited'),
-            new Transition('need_to_remove', ['created', 'edited'], 'remove'),
-            new Transition('remove', 'remove', 'removed'),
-        ];
+        return $this->belongsTo(ArticleCategory::class, 'parent_id');
     }
 }
