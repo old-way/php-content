@@ -59,6 +59,41 @@
                         title: injection.trans('content.article.table.title'),
                     },
                     {
+                        align: 'center',
+                        key: 'thumb',
+                        render(h, data) {
+                            if (data.row.thumb_image) {
+                                return h('tooltip', {
+                                    props: {
+                                        placement: 'right-end',
+                                    },
+                                    scopedSlots: {
+                                        content() {
+                                            return h('img', {
+                                                domProps: {
+                                                    src: data.row.thumb_image,
+                                                },
+                                                style: {
+                                                    maxWidth: '200px',
+                                                },
+                                            });
+                                        },
+                                        default() {
+                                            return h('icon', {
+                                                props: {
+                                                    type: 'image',
+                                                },
+                                            });
+                                        },
+                                    },
+                                });
+                            }
+                            return '';
+                        },
+                        title: ' ',
+                        width: 20,
+                    },
+                    {
                         key: 'category',
                         render(h, data) {
                             let title = '';
@@ -74,7 +109,7 @@
                             return title;
                         },
                         title: '分类',
-                        width: 300,
+                        width: 200,
                     },
                     {
                         key: 'created_at',
