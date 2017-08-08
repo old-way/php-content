@@ -59,6 +59,24 @@
                         title: injection.trans('content.article.table.title'),
                     },
                     {
+                        key: 'category',
+                        render(h, data) {
+                            let title = '';
+                            if (data.row.category_id) {
+                                title = data.row.category.title;
+                                if (data.row.category.parent_id) {
+                                    title = `${data.row.category.parent.title} / ${title}`;
+                                    if (data.row.category.parent.parent_id) {
+                                        title = `${data.row.category.parent.parent.title} / ${title}`;
+                                    }
+                                }
+                            }
+                            return title;
+                        },
+                        title: '分类',
+                        width: 300,
+                    },
+                    {
                         key: 'created_at',
                         title: injection.trans('content.article.table.date'),
                         width: 200,

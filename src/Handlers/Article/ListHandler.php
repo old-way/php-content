@@ -49,6 +49,7 @@ class ListHandler extends Handler
             'trashed.boolean'        => '仅删除标识必须为布尔值',
         ]);
         $builder = Article::query();
+        $builder->with('category.parent.parent');
         if ($this->request->input('category_level', true)) {
             $id = $this->request->input('category_id', 0);
             $categories = collect([(int)$id]);
