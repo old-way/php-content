@@ -94,7 +94,7 @@
                 self.$refs.form.validate(valid => {
                     if (valid) {
                         const formData = new window.FormData();
-                        formData.append('category_id', self.form.category ? self.form.category[self.form.category.length - 1] : 0);
+                        formData.append('category_id', self.form.category.length ? self.form.category[self.form.category.length - 1] : 0);
                         formData.append('content', self.form.content);
                         formData.append('created_at', self.form.created_at);
                         formData.append('description', self.form.description);

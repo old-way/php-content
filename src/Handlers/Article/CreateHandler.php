@@ -43,6 +43,7 @@ class CreateHandler extends Handler
             'source_link.url'        => '来源链接不是合法的URL',
             'title.required'         => '必须填写文章标题',
         ]);
+        $this->withCode(500)->withData($this->request->all());
         $this->beginTransaction();
         $data = $this->request->only([
             'category_id',
@@ -57,11 +58,6 @@ class CreateHandler extends Handler
             'thumb_image',
             'title',
         ]);
-        if ($data['created_at']) {
-            $data['created_at'] = Carbon::createFromTimestamp(strtotime($data['created_at']));
-        } else {
-            unset($data['created_at']);
-        }
         if (Article::query()->create($data)) {
             $this->commitTransaction();
             $this->withCode(200)->withMessage('创建文章信息成功！');
