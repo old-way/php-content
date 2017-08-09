@@ -49,12 +49,12 @@ class CreateHandler extends Handler
             'content',
             'created_at',
             'description',
-            'image',
             'is_hidden',
             'is_sticky',
             'keyword',
             'source_author',
             'source_link',
+            'thumb_image',
             'title',
         ]);
         if ($data['created_at']) {
