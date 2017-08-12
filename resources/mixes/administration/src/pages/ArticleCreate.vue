@@ -192,7 +192,7 @@
                     <i-col span="8">
                         <card :bordered="false">
                             <form-item label="缩略图" prop="image">
-                                <div class="upload-form">
+                                <div class="ivu-upload-wrapper">
                                     <div class="preview" v-if="form.image">
                                         <img :src="form.image">
                                         <icon type="close" @click.native="removeImage"></icon>
