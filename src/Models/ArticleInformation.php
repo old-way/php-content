@@ -21,13 +21,11 @@ class ArticleInformation extends Model
      */
     protected $fillable = [
         'description',
-        'details',
         'length',
         'name',
         'order',
         'opinions',
         'privacy',
-        'register',
         'required',
         'type',
     ];

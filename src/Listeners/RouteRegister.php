@@ -9,6 +9,7 @@
 namespace Notadd\Content\Listeners;
 
 use Notadd\Content\Controllers\Api\Article\ArticleController as ArticleControllerForAdministration;
+use Notadd\Content\Controllers\Api\Article\ArticleInformationController as ArticleInformationControllerForAdministration;
 use Notadd\Content\Controllers\Api\Article\DraftController as ArticleDraftControllerForAdministration;
 use Notadd\Content\Controllers\Api\Category\CategoryController as CategoryControllerForAdministration;
 use Notadd\Content\Controllers\Api\Page\PageController as PageControllerForAdministration;
@@ -41,6 +42,9 @@ class RouteRegister extends AbstractRouteRegister
                     $this->router->post('create', ArticleDraftControllerForAdministration::class . '@create');
                     $this->router->post('list', ArticleDraftControllerForAdministration::class . '@list');
                     $this->router->post('remove', ArticleDraftControllerForAdministration::class . '@remove');
+                });
+                $this->router->group(['prefix' => 'information'], function () {
+                    $this->router->post('list', ArticleInformationControllerForAdministration::class . '@list');
                 });
             });
             $this->router->group(['prefix' => 'api/content/category'], function () {
