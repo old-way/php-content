@@ -28,4 +28,20 @@ class ArticleInformationRelation extends Model
      * @var string
      */
     protected $table = 'content_article_information_relations';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(ArticleCategory::class);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function information()
+    {
+        return $this->belongsTo(ArticleInformation::class);
+    }
 }

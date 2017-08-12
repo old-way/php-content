@@ -9,6 +9,7 @@
 
 namespace Notadd\Content\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Notadd\Foundation\Database\Model;
 
 /**
@@ -16,6 +17,8 @@ use Notadd\Foundation\Database\Model;
  */
 class ArticleInformationValue extends Model
 {
+    use SoftDeletes;
+
     /**
      * @var array
      */

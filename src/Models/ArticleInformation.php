@@ -19,10 +19,34 @@ class ArticleInformation extends Model
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = [
+        'description',
+        'details',
+        'length',
+        'name',
+        'order',
+        'opinions',
+        'privacy',
+        'register',
+        'required',
+        'type',
+    ];
 
     /**
      * @var string
      */
     protected $table = 'content_article_informations';
+
+    public function categories()
+    {
+        return $this->belongsToMany(ArticleCategory::class, 'member_information_relations', 'information_id', 'category_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function values()
+    {
+        return $this->hasMany(ArticleInformationValue::class, 'information_id');
+    }
 }
