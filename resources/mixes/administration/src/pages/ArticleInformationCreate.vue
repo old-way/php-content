@@ -1,6 +1,5 @@
 <script>
     import fields from '../helpers/fields';
-    import fieldPrivacies from '../helpers/privacies';
     import injection from '../helpers/injection';
 
     export default {
@@ -13,20 +12,16 @@
             return {
                 form: {
                     description: '',
-                    details: false,
                     groups: [],
                     length: 0,
                     name: '',
                     opinions: '',
                     order: 0,
-                    privacy: 0,
-                    register: false,
                     required: false,
                     type: 'input',
                 },
                 groups: [],
                 loading: false,
-                privacies: fieldPrivacies,
                 rules: {
                     name: [
                         {
@@ -117,40 +112,11 @@
                     </row>
                     <row>
                         <i-col span="12">
-                            <form-item label="注册页显示">
-                                <i-switch v-model="form.register" size="large">
-                                    <span slot="open">开启</span>
-                                    <span slot="close">关闭</span>
-                                </i-switch>
-                            </form-item>
-                        </i-col>
-                    </row>
-                    <row>
-                        <i-col span="12">
-                            <form-item label="资料页显示">
-                                <i-switch v-model="form.details" size="large">
-                                    <span slot="open">开启</span>
-                                    <span slot="close">关闭</span>
-                                </i-switch>
-                            </form-item>
-                        </i-col>
-                    </row>
-                    <row>
-                        <i-col span="12">
                             <form-item label="必填项">
                                 <i-switch v-model="form.required" size="large">
                                     <span slot="open">开启</span>
                                     <span slot="close">关闭</span>
                                 </i-switch>
-                            </form-item>
-                        </i-col>
-                    </row>
-                    <row>
-                        <i-col span="12">
-                            <form-item label="隐私级别">
-                                <i-select v-model="form.privacy">
-                                    <i-option v-for="item in privacies" :value="item.value" :key="item">{{ item.label }}</i-option>
-                                </i-select>
                             </form-item>
                         </i-col>
                     </row>
