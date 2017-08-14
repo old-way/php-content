@@ -6,7 +6,6 @@
  * @copyright (c) 2017, notadd.com
  * @datetime 2017-08-12 14:14
  */
-
 namespace Notadd\Content\Handlers\Article\Information;
 
 use Notadd\Content\Models\ArticleInformation;
