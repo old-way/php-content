@@ -25,7 +25,6 @@ class ArticleInformation extends Model
         'name',
         'order',
         'opinions',
-        'privacy',
         'required',
         'type',
     ];
@@ -35,9 +34,12 @@ class ArticleInformation extends Model
      */
     protected $table = 'content_article_informations';
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function categories()
     {
-        return $this->belongsToMany(ArticleCategory::class, 'member_information_relations', 'information_id', 'category_id');
+        return $this->belongsToMany(ArticleCategory::class, 'content_article_information_relations', 'information_id', 'category_id');
     }
 
     /**

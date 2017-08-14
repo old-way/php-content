@@ -94,6 +94,14 @@ class ArticleCategory extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function informations()
+    {
+        return $this->belongsToMany(ArticleInformation::class, 'content_article_information_relations', 'category_id', 'information_id');
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function parent()
