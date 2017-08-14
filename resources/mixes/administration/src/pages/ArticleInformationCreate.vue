@@ -49,7 +49,7 @@
                 self.loading = true;
                 self.$refs.form.validate(valid => {
                     if (valid) {
-                        self.$http.post(`${window.api}/content/article/information/create`, self.form).then(() => {
+                        self.$http.post(`${window.api}/content/article/information/edit`, self.form).then(() => {
                             self.$notice.open({
                                 title: '创建信息项成功！',
                             });
@@ -139,7 +139,7 @@
                     <row>
                         <i-col span="12">
                             <form-item label="所属分类">
-                                <checkbox-group v-model="form.group">
+                                <checkbox-group v-model="form.categories">
                                     <div v-for="item in categories">
                                         <checkbox :label="item.id">
                                             <span>{{ item.title }}</span>
@@ -148,7 +148,7 @@
                                             <checkbox :label="child.id">
                                                 <span>{{ child.title }}</span>
                                             </checkbox>
-                                            <div style="margin-left: 60px" v-for="sub in item.children" v-if="child.children">
+                                            <div style="margin-left: 60px" v-for="sub in child.children" v-if="child.children">
                                                 <checkbox :label="sub.id">
                                                     <span>{{ sub.title }}</span>
                                                 </checkbox>
