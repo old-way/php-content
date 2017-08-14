@@ -6,6 +6,7 @@ import ArticleDraftEdit from '../pages/ArticleDraftEdit.vue';
 import ArticleEdit from '../pages/ArticleEdit.vue';
 import ArticleInformation from '../pages/ArticleInformation.vue';
 import ArticleInformationCreate from '../pages/ArticleInformationCreate.vue';
+import ArticleInformationEdit from '../pages/ArticleInformationEdit.vue';
 import ArticleRecycle from '../pages/ArticleRecycle.vue';
 import Component from '../pages/Component.vue';
 import Dashboard from '../pages/Dashboard.vue';
@@ -63,6 +64,11 @@ export default function (injection) {
                     beforeEnter: injection.middleware.requireAuth,
                     component: ArticleInformationCreate,
                     path: 'article/information/create',
+                },
+                {
+                    beforeEnter: injection.middleware.requireAuth,
+                    component: ArticleInformationEdit,
+                    path: 'article/information/:id/edit',
                 },
                 {
                     beforeEnter: injection.middleware.requireAuth,
