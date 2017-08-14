@@ -49,7 +49,7 @@
                 self.loading = true;
                 self.$refs.form.validate(valid => {
                     if (valid) {
-                        self.$http.post(`${window.api}/content/article/information/edit`, self.form).then(() => {
+                        self.$http.post(`${window.api}/content/article/information/create`, self.form).then(() => {
                             self.$notice.open({
                                 title: '创建信息项成功！',
                             });
