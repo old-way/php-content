@@ -9,6 +9,8 @@
 namespace Notadd\Content\Controllers\Api\Article;
 
 use Notadd\Content\Handlers\Article\Information\CreateHandler;
+use Notadd\Content\Handlers\Article\Information\EditHandler;
+use Notadd\Content\Handlers\Article\Information\InformationHandler;
 use Notadd\Content\Handlers\Article\Information\ListHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
@@ -23,6 +25,26 @@ class ArticleInformationController extends Controller
     public function create(CreateHandler $handler)
     {
         $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * @param \Notadd\Content\Handlers\Article\Information\EditHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function edit(EditHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * @param \Notadd\Content\Handlers\Article\Information\InformationHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function information(InformationHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
     }
 
     /**
