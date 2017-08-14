@@ -4,15 +4,23 @@
 
     export default {
         beforeRouteEnter(to, from, next) {
-            next(() => {
-                injection.sidebar.active('content');
+            injection.loading.start();
+            injection.http.post(`${window.api}/content/category/list`).then(response => {
+                const categories = response.data.data;
+                next(vm => {
+                    vm.categories = categories;
+                    injection.loading.finish();
+                    injection.sidebar.active('content');
+                });
+            }).catch(() => {
+                injection.loading.error();
             });
         },
         data() {
             return {
                 form: {
                     description: '',
-                    groups: [],
+                    categories: [],
                     length: 0,
                     name: '',
                     opinions: '',
@@ -20,7 +28,7 @@
                     required: false,
                     type: 'input',
                 },
-                groups: [],
+                categories: [],
                 loading: false,
                 rules: {
                     name: [
@@ -41,11 +49,11 @@
                 self.loading = true;
                 self.$refs.form.validate(valid => {
                     if (valid) {
-                        self.$http.post(`${window.api}/member/administration/information/create`, self.form).then(() => {
+                        self.$http.post(`${window.api}/content/article/information/create`, self.form).then(() => {
                             self.$notice.open({
                                 title: '创建信息项成功！',
                             });
-                            self.$router.push('/member/information');
+                            self.$router.push('/content/article/information');
                         }).finally(() => {
                             self.loading = false;
                         });
@@ -132,9 +140,21 @@
                         <i-col span="12">
                             <form-item label="所属分类">
                                 <checkbox-group v-model="form.group">
-                                    <checkbox :label="item.label" v-for="item in groups">
-                                        <span>{{ item.text }}</span>
-                                    </checkbox>
+                                    <div v-for="item in categories">
+                                        <checkbox :label="item.id">
+                                            <span>{{ item.title }}</span>
+                                        </checkbox>
+                                        <div style="margin-left: 60px" v-for="child in item.children" v-if="item.children">
+                                            <checkbox :label="child.id">
+                                                <span>{{ child.title }}</span>
+                                            </checkbox>
+                                            <div style="margin-left: 60px" v-for="sub in item.children" v-if="child.children">
+                                                <checkbox :label="sub.id">
+                                                    <span>{{ sub.title }}</span>
+                                                </checkbox>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </checkbox-group>
                             </form-item>
                         </i-col>

@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content\Controllers\Api\Article;
 
+use Notadd\Content\Handlers\Article\Information\CreateHandler;
 use Notadd\Content\Handlers\Article\Information\ListHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
@@ -16,6 +17,14 @@ use Notadd\Foundation\Routing\Abstracts\Controller;
  */
 class ArticleInformationController extends Controller
 {
+    /**
+     * @param \Notadd\Content\Handlers\Article\Information\CreateHandler $handler
+     */
+    public function create(CreateHandler $handler)
+    {
+        $handler->toResponse()->generateHttpResponse();
+    }
+
     /**
      * @param \Notadd\Content\Handlers\Article\Information\ListHandler $handler
      *

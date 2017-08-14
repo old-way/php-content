@@ -44,6 +44,7 @@ class RouteRegister extends AbstractRouteRegister
                     $this->router->post('remove', ArticleDraftControllerForAdministration::class . '@remove');
                 });
                 $this->router->group(['prefix' => 'information'], function () {
+                    $this->router->post('create', ArticleInformationControllerForAdministration::class . '@create');
                     $this->router->post('list', ArticleInformationControllerForAdministration::class . '@list');
                 });
             });
