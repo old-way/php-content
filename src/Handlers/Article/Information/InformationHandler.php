@@ -29,7 +29,7 @@ class InformationHandler extends Handler
     {
         $this->validate($this->request, [
             'id' => [
-                Rule::exists('member_informations'),
+                Rule::exists('content_article_informations'),
                 Rule::numeric(),
                 Rule::required(),
             ],
