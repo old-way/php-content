@@ -55,16 +55,6 @@ class Definition extends AbstractDefinition
     }
 
     /**
-     * Requires of module.
-     *
-     * @return array
-     */
-    public function requires()
-    {
-        return [];
-    }
-
-    /**
      * Version of module.
      *
      * @return string
@@ -72,5 +62,25 @@ class Definition extends AbstractDefinition
     public function version()
     {
         return '2.0.0';
+    }
+
+    /**
+     * Setting data definition.
+     *
+     * @return array
+     */
+    public function settings()
+    {
+        return [];
+    }
+
+    /**
+     * Requires of module.
+     *
+     * @return array
+     */
+    public function requires()
+    {
+        return [];
     }
 }
