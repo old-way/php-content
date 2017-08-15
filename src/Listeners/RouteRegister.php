@@ -48,6 +48,7 @@ class RouteRegister extends AbstractRouteRegister
                     $this->router->post('create', ArticleInformationControllerForAdministration::class . '@create');
                     $this->router->post('edit', ArticleInformationControllerForAdministration::class . '@edit');
                     $this->router->post('list', ArticleInformationControllerForAdministration::class . '@list');
+                    $this->router->post('remove', ArticleInformationControllerForAdministration::class . '@remove');
                 });
             });
             $this->router->group(['prefix' => 'api/content/category'], function () {
