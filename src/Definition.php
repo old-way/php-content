@@ -8,6 +8,7 @@
  */
 namespace Notadd\Content;
 
+use Notadd\Content\Models\Article;
 use Notadd\Foundation\Module\Abstracts\Definition as AbstractDefinition;
 
 /**
@@ -35,13 +36,21 @@ class Definition extends AbstractDefinition
     {
         return [
             'administration' => [
-                'notadd/content'   => [
+                'notadd/content' => [
                     'permissions' => '',
                     'scripts'     => asset('assets/content/administration/js/module.min.js'),
                     'stylesheets' => asset('assets/content/administration/css/module.min.css'),
                 ],
             ],
         ];
+    }
+
+    /**
+     * @return array
+     */
+    public function exports()
+    {
+        return Article::query()->orderBy('created_at', 'desc')->get()->toArray();
     }
 
     /**
@@ -62,6 +71,26 @@ class Definition extends AbstractDefinition
     public function requires()
     {
         return [];
+    }
+
+    /**
+     * Setting data definition.
+     *
+     * @return array
+     */
+    public function settings()
+    {
+        return [
+            'content.seo.article.description'  => '',
+            'content.seo.article.keyword'      => '',
+            'content.seo.article.title'        => '',
+            'content.seo.category.description' => '',
+            'content.seo.category.keyword'     => '',
+            'content.seo.category.title'       => '',
+            'content.seo.page.description'     => '',
+            'content.seo.page.keyword'         => '',
+            'content.seo.page.title'           => '',
+        ];
     }
 
     /**

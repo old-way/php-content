@@ -12,6 +12,7 @@ use Notadd\Content\Handlers\Article\Information\CreateHandler;
 use Notadd\Content\Handlers\Article\Information\EditHandler;
 use Notadd\Content\Handlers\Article\Information\InformationHandler;
 use Notadd\Content\Handlers\Article\Information\ListHandler;
+use Notadd\Content\Handlers\Article\Information\RemoveHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -53,6 +54,16 @@ class ArticleInformationController extends Controller
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
     public function list(ListHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * @param \Notadd\Content\Handlers\Article\Information\RemoveHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     */
+    public function remove(RemoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

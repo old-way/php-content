@@ -26,7 +26,7 @@ class CreateHandler extends Handler
     public function execute()
     {
         $this->validate($this->request, [
-            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:page_categories',
+            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:content_page_categories',
             'title' => 'required',
         ], [
             'alias.required' => '必须填写分类别名',
