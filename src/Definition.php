@@ -60,7 +60,7 @@ class Definition extends AbstractDefinition
      */
     public function name()
     {
-        return '文章CMS';
+        return '';
     }
 
     /**
