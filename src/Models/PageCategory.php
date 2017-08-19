@@ -54,11 +54,11 @@ class PageCategory extends Node
      * @return array
      */
     public function structure() {
-        $list = $this->newQuery()->whereNull('parent_id')->orderBy('order_id', 'asc')->get();
+        $list = $this->newQuery()->whereNull('parent_id')->orderBy('lft', 'desc')->get();
         $list->transform(function (PageCategory $category) {
-            $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
+            $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('lft', 'desc')->get();
             $children->transform(function (PageCategory $category) {
-                $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
+                $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('lft', 'desc')->get();
                 $category->setAttribute('children', $children);
 
                 return $category;
