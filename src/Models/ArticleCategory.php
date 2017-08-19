@@ -10,12 +10,12 @@ namespace Notadd\Content\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
-use Notadd\Foundation\Database\Model;
+use Baum\Node;
 
 /**
  * Class Category.
  */
-class ArticleCategory extends Model
+class ArticleCategory extends Node
 {
     use SoftDeletes;
 
@@ -37,9 +37,7 @@ class ArticleCategory extends Model
         'deleted_at',
         'description',
         'flow_marketing',
-        'order_id',
         'pagination',
-        'parent_id',
         'seo_description',
         'seo_keyword',
         'seo_title',
@@ -53,8 +51,7 @@ class ArticleCategory extends Model
      */
     protected $setters = [
         'enabled'    => 'empty|1',
-        'order_id'   => 'empty|0',
-        'parent_id'  => 'empty|0',
+        'type'       => 'empty|normal',
         'pagination' => 'empty|20',
         'type'       => 'empty|normal',
     ];

@@ -24,10 +24,10 @@ class ListHandler extends Handler
     protected function execute()
     {
         if ($this->request->input('with-children')) {
-            $categories = PageCategory::query()->orderBy('order_id', 'asc')->get();
+            $categories = PageCategory::query()->orderBy('lft', 'asc')->get();
             $categories->transform(function (PageCategory $category) {
                 $children = PageCategory::query()->where('parent_id', $category->getAttribute('id'))
-                    ->orderBy('order_id', 'asc')
+                    ->orderBy('lft', 'asc')
                     ->get();
                 $children->count() && $category->setAttribute('children', $children);
                 return $category;

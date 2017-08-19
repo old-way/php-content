@@ -9,15 +9,15 @@
 namespace Notadd\Content\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Notadd\Foundation\Database\Model;
 use Notadd\Foundation\Database\Traits\HasFlow;
 use Symfony\Component\Workflow\Event\GuardEvent;
 use Symfony\Component\Workflow\Transition;
+use Baum\Node;
 
 /**
  * Class PageCategory.
  */
-class PageCategory extends Model
+class PageCategory extends Node
 {
     use HasFlow, SoftDeletes;
 
@@ -54,11 +54,11 @@ class PageCategory extends Model
      * @return array
      */
     public function structure() {
-        $list = $this->newQuery()->where('parent_id', 0)->orderBy('order_id', 'asc')->get();
+        $list = $this->newQuery()->whereNull('parent_id')->orderBy('lft', 'desc')->get();
         $list->transform(function (PageCategory $category) {
-            $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
+            $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('lft', 'desc')->get();
             $children->transform(function (PageCategory $category) {
-                $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('order_id', 'asc')->get();
+                $children = $category->newQuery()->where('parent_id', $category->getAttribute('id'))->orderBy('lft', 'desc')->get();
                 $category->setAttribute('children', $children);
 
                 return $category;

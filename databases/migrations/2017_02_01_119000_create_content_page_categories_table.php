@@ -13,6 +13,21 @@ use Notadd\Foundation\Database\Migrations\Migration;
  */
 class CreateContentPageCategoriesTable extends Migration
 {
+    // 'parent_id' column name
+    protected $parentColumn = 'parent_id';
+
+    // 'lft' column name
+    protected $leftColumn = 'lft';
+
+    // 'rgt' column name
+    protected $rightColumn = 'rgt';
+
+    // 'depth' column name
+    protected $depthColumn = 'depth';
+
+    // guard attributes from mass-assignment
+    protected $guarded = array('id', 'parent_id', 'lft', 'rgt', 'depth');
+
     /**
      * Run the migrations.
      *
@@ -22,7 +37,11 @@ class CreateContentPageCategoriesTable extends Migration
     {
         $this->schema->create('content_page_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id');
+            $table->integer('parent_id')->nullable();
+            // 添加无限级分类
+            $table->integer('lft')->nullable();
+            $table->integer('rgt')->nullable();
+            $table->integer('depth')->nullable();
             $table->string('title');
             $table->string('alias')->nullable();
             $table->string('description')->nullable();
@@ -33,7 +52,6 @@ class CreateContentPageCategoriesTable extends Migration
             $table->string('background_color')->nullable();
             $table->string('background_image')->nullable();
             $table->string('top_image')->nullable();
-            $table->tinyInteger('order_id')->default(0);
             $table->tinyInteger('pagination')->default(30);
             $table->boolean('enabled')->default(true);
             $table->string('flow_marketing')->nullable();
@@ -49,6 +67,6 @@ class CreateContentPageCategoriesTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('page_categories');
+        $this->schema->dropIfExists('content_page_categories');
     }
 }

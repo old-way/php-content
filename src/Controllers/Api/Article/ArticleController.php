@@ -98,4 +98,17 @@ class ArticleController extends Controller
     {
         return $handler->toResponse()->generateHttpResponse();
     }
+
+    /**
+     * BatchMove handler.
+     *
+     * @param \Notadd\Content\Handlers\Article\BatchMoveHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
+     */
+    public function batchMove(BatchMoveHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
 }

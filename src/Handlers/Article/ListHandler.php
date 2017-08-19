@@ -54,7 +54,7 @@ class ListHandler extends Handler
             $id = $this->request->input('category_id', 0);
             $categories = collect([(int)$id]);
             ArticleCategory::query()
-                ->where('parent_id', $id)
+                ->whereNull('parent_id')
                 ->get()
                 ->each(function (ArticleCategory $category) use ($categories) {
                     $categories->push($category->getAttribute('id'));
@@ -73,14 +73,15 @@ class ListHandler extends Handler
                 });
             $builder->whereIn('category_id', $categories->unique()->toArray());
         } else {
-            $builder->where('category_id', $this->request->input('category_id', 0));
+            $builder->whereNull('category_id');
         }
         if ($this->request->has('keyword')) {
             $keyword = $this->request->input('keyword');
             $builder->where('title', 'like', '%' . $keyword . '%')
                 ->orWhere('content', 'like', '%' . $keyword . '%');
         }
-        $builder->orderBy($this->request->input('sort', 'created_at'), $this->request->input('order', 'desc'));
+        $builder->orderBy('is_sticky', 'desc')
+            ->orderBy($this->request->input('sort', 'created_at'), $this->request->input('order', 'desc'));
         if ($this->request->input('trashed', false)) {
             $builder->onlyTrashed();
         }
