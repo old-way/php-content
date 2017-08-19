@@ -47,6 +47,6 @@ class CreateContentArticlesTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('articles');
+        $this->schema->dropIfExists('content_articles');
     }
 }

@@ -59,7 +59,6 @@ class EditHandler extends Handler
             'background_image',
             'description',
             'enabled',
-            'order_id',
             'pagination',
             'parent_id',
             'seo_title',

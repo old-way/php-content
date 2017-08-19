@@ -13,6 +13,22 @@ use Notadd\Foundation\Database\Migrations\Migration;
  */
 class CreateContentArticleCategoriesTable extends Migration
 {
+
+    // 'parent_id' column name
+    protected $parentColumn = 'parent_id';
+
+    // 'lft' column name
+    protected $leftColumn = 'lft';
+
+    // 'rgt' column name
+    protected $rightColumn = 'rgt';
+
+    // 'depth' column name
+    protected $depthColumn = 'depth';
+
+    // guard attributes from mass-assignment
+    protected $guarded = array('id', 'parent_id', 'lft', 'rgt', 'depth');
+
     /**
      * Run the migrations.
      *
@@ -22,7 +38,7 @@ class CreateContentArticleCategoriesTable extends Migration
     {
         $this->schema->create('content_article_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id');
+            $table->integer('parent_id')->nullable();
             $table->string('title');
             $table->string('alias')->nullable();
             $table->string('description')->nullable();
@@ -35,10 +51,13 @@ class CreateContentArticleCategoriesTable extends Migration
             $table->string('top_image')->nullable();
             $table->tinyInteger('pagination')->default(30);
             $table->boolean('enabled')->default(true);
-            $table->tinyInteger('order_id')->default(0);
             $table->string('flow_marketing')->nullable();
             $table->timestamps();
             $table->softDeletes();
+            // 添加无限级分类
+            $table->integer('lft')->nullable();
+            $table->integer('rgt')->nullable();
+            $table->integer('depth')->nullable();
         });
     }
 
@@ -49,6 +68,6 @@ class CreateContentArticleCategoriesTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('categories');
+        $this->schema->dropIfExists('content_article_categories');
     }
 }

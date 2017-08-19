@@ -51,15 +51,12 @@ class CreateHandler extends Handler
             'background_image',
             'description',
             'enabled',
-            'order_id',
             'pagination',
-            'parent_id',
             'seo_title',
             'seo_keyword',
             'seo_description',
             'title',
             'top_image',
-            'type',
         ]);
         if (ArticleCategory::query()->create($data)) {
             $this->commitTransaction();

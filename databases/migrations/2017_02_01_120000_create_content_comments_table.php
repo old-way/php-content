@@ -50,6 +50,6 @@ class CreateContentCommentsTable extends Migration
      */
     public function down()
     {
-        $this->schema->dropIfExists('comments');
+        $this->schema->dropIfExists('content_comments');
     }
 }

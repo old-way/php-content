@@ -27,7 +27,8 @@
         }
     },
     "require": {
-        "php": ">=7.0"
+        "php": ">=7.0",
+        "baum/baum": "~1.1"
     },
     "require-dev": {
         "notadd/installers": "0.5.*",
