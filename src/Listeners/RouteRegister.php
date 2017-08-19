@@ -37,7 +37,7 @@ class RouteRegister extends AbstractRouteRegister
                 $this->router->post('create', ArticleControllerForAdministration::class . '@create');
                 $this->router->post('edit', ArticleControllerForAdministration::class . '@edit');
                 $this->router->post('remove', ArticleControllerForAdministration::class . '@remove');
-                $this->router->post('batchMove', ArticleControllerForAdministration::class . '@batchMove');
+                $this->router->post('batchMove', ArticleControllerForAdministration::class . '@batchMove');  
                 $this->router->group(['prefix' => 'draft'], function () {
                     $this->router->post('/', ArticleDraftControllerForAdministration::class . '@draft');
                     $this->router->post('create', ArticleDraftControllerForAdministration::class . '@create');
