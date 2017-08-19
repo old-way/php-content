@@ -80,7 +80,8 @@ class ListHandler extends Handler
             $builder->where('title', 'like', '%' . $keyword . '%')
                 ->orWhere('content', 'like', '%' . $keyword . '%');
         }
-        $builder->orderBy($this->request->input('sort', 'created_at'), $this->request->input('order', 'desc'));
+        $builder->orderBy('is_sticky', 'desc')
+            ->orderBy($this->request->input('sort', 'created_at'), $this->request->input('order', 'desc'));
         if ($this->request->input('trashed', false)) {
             $builder->onlyTrashed();
         }

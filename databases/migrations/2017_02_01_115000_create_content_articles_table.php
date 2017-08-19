@@ -33,7 +33,7 @@ class CreateContentArticlesTable extends Migration
             $table->string('description')->nullable();
             $table->integer('hits')->default(0);
             $table->boolean('is_hidden')->default(0);
-            $table->boolean('is_sticky')->default(0);
+            $table->tinyInteger('is_sticky')->default(0);
             $table->string('flow_marketing')->nullable();
             $table->timestamps();
             $table->softDeletes();
