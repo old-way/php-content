@@ -39,6 +39,10 @@ class CreateContentArticleCategoriesTable extends Migration
         $this->schema->create('content_article_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent_id')->nullable();
+            // 添加无限级分类
+            $table->integer('lft')->nullable();
+            $table->integer('rgt')->nullable();
+            $table->integer('depth')->nullable();
             $table->string('title');
             $table->string('alias')->nullable();
             $table->string('description')->nullable();
@@ -54,10 +58,6 @@ class CreateContentArticleCategoriesTable extends Migration
             $table->string('flow_marketing')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            // 添加无限级分类
-            $table->integer('lft')->nullable();
-            $table->integer('rgt')->nullable();
-            $table->integer('depth')->nullable();
         });
     }
 

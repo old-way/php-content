@@ -60,7 +60,6 @@ class EditHandler extends Handler
             'description',
             'enabled',
             'pagination',
-            'parent_id',
             'seo_title',
             'seo_keyword',
             'seo_description',

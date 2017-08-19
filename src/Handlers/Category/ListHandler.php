@@ -37,7 +37,7 @@ class ListHandler extends Handler
         $builder->with('children.children.children');
         // $builder->where('parent_id', $this->request->input('parent_id', 0));
         $builder->whereNull('parent_id');
-        $builder->orderBy($this->request->input('sort', 'order_id'), $this->request->input('order', 'asc'));
+        $builder->orderBy('lft', $this->request->input('order', 'asc'));
         $this->withCode(200)->withData($builder->get())->withMessage('content::category.fetch.success');
     }
 }
