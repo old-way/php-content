@@ -54,7 +54,7 @@ class ListHandler extends Handler
             $id = $this->request->input('category_id', 0);
             $categories = collect([(int)$id]);
             ArticleCategory::query()
-                ->where('parent_id', $id)
+                ->whereNull('parent_id')
                 ->get()
                 ->each(function (ArticleCategory $category) use ($categories) {
                     $categories->push($category->getAttribute('id'));

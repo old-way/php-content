@@ -10,7 +10,6 @@ namespace Notadd\Content\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Collection;
-use Notadd\Foundation\Database\Model;
 use Baum\Node;
 
 /**
