@@ -58,7 +58,7 @@ class RemoveHandler extends Handler
             $this->withCode(200)->withMessage($message);
         } else {
             $this->rollBackTransaction();
-            $this->withCode(500)->withError('删除文章信息失败！');
+            $this->withCode(500)->withError('删除文章信息失败！  ');
         }
     }
 }
