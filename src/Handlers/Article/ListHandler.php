@@ -73,7 +73,7 @@ class ListHandler extends Handler
                 });
             $builder->whereIn('category_id', $categories->unique()->toArray());
         } else {
-            $builder->where('category_id', $this->request->input('category_id', 0));
+            $builder->whereNull('category_id');
         }
         if ($this->request->has('keyword')) {
             $keyword = $this->request->input('keyword');
