@@ -54,8 +54,10 @@ class RemoveHandler extends Handler
             }
         }
         if ($result) {
+            $this->commitTransaction();
             $this->withCode(200)->withMessage($message);
         } else {
+            $this->rollBackTransaction();
             $this->withCode(500)->withError('');
         }
     }
