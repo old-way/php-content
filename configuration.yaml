@@ -30,6 +30,9 @@ permissions:
                 name: 内容管理权限
         identification: content
         name: 内容管理
+publishes:
+    assets/content/administration: resources/mixes/administration/dist/assets/content/administration
+    assets/content/foreground: resources/mixes/foreground/dist/assets/content/foreground
 settings:
     content.seo.article.description: ''
     content.seo.article.keyword: ''
