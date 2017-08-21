@@ -8,8 +8,6 @@
  */
 namespace Notadd\Content;
 
-use Notadd\Content\Injections\Installer;
-use Notadd\Content\Injections\Uninstaller;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
 use Notadd\Content\Managers\PageManager;
@@ -37,16 +35,6 @@ class ModuleServiceProvider extends Module
     }
 
     /**
-     * Install module.
-     *
-     * @return string
-     */
-    public static function install()
-    {
-        return Installer::class;
-    }
-
-    /**
      * Register services.
      */
     public function register()
@@ -69,15 +57,5 @@ class ModuleServiceProvider extends Module
 
             return $manager;
         });
-    }
-
-    /**
-     * Uninstall module.
-     *
-     * @return string
-     */
-    public static function uninstall()
-    {
-        return Uninstaller::class;
     }
 }
