@@ -89,7 +89,7 @@ class RouteRegister extends AbstractRouteRegister
                 $this->router->post('list', CategoryControllerForAdministration::class . '@list');
             });
         });
-        $this->router->group(['middleware' => 'web'], function () {
+        $this->router->group(['middleware' => 'web', 'prefix' => 'content'], function () {
             $this->router->get('/', function () {
                 return $this->container->make('view')->make('content::content');
             });

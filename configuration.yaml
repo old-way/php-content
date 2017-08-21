@@ -16,6 +16,7 @@ csrf:
     - 'api/category*'
     - 'api/content*'
     - 'api/page*'
+entry: '/content'
 events:
     subscribes:
         - Notadd\Content\Listeners\RouteRegister
