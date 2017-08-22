@@ -40,16 +40,16 @@ class GetHandler extends Handler
      */
     protected function execute()
     {
-        $this->success()->withData([
-            'articleDescription' => $this->settings->get('content.seo.article.description', ''),
-            'articleKeyword' => $this->settings->get('content.seo.article.keyword', ''),
-            'articleTitle' => $this->settings->get('content.seo.article.title', ''),
+        $this->withCode(200)->withData([
+            'articleDescription'  => $this->settings->get('content.seo.article.description', ''),
+            'articleKeyword'      => $this->settings->get('content.seo.article.keyword', ''),
+            'articleTitle'        => $this->settings->get('content.seo.article.title', ''),
             'categoryDescription' => $this->settings->get('content.seo.category.description', ''),
-            'categoryKeyword' => $this->settings->get('content.seo.category.keyword', ''),
-            'categoryTitle' => $this->settings->get('content.seo.category.title', ''),
-            'pageDescription' => $this->settings->get('content.seo.page.description', ''),
-            'pageKeyword' => $this->settings->get('content.seo.page.keyword', ''),
-            'pageTitle' => $this->settings->get('content.seo.page.title', ''),
+            'categoryKeyword'     => $this->settings->get('content.seo.category.keyword', ''),
+            'categoryTitle'       => $this->settings->get('content.seo.category.title', ''),
+            'pageDescription'     => $this->settings->get('content.seo.page.description', ''),
+            'pageKeyword'         => $this->settings->get('content.seo.page.keyword', ''),
+            'pageTitle'           => $this->settings->get('content.seo.page.title', ''),
         ])->withMessage('获取组件配置成功！');
     }
 }

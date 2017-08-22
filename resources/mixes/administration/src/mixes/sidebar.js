@@ -11,6 +11,10 @@ export default function (injection) {
                     title: '分类管理',
                 },
                 {
+                    path: '/content/article/information',
+                    title: '信息管理',
+                },
+                {
                     path: '/content/article/recycle',
                     title: '回收站',
                 },

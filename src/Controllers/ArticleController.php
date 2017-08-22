@@ -9,7 +9,7 @@
 namespace Notadd\Content\Controllers;
 
 use Notadd\Content\Handlers\Article\CreateHandler;
-use Notadd\Content\Handlers\Article\DeleteHandler;
+use Notadd\Content\Handlers\Article\RemoveHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -43,12 +43,12 @@ class ArticleController extends Controller
     /**
      * Article destroy.
      *
-     * @param \Notadd\Content\Handlers\Article\DeleteHandler $handler
+     * @param \Notadd\Content\Handlers\Article\RemoveHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function destroy(DeleteHandler $handler)
+    public function destroy(RemoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

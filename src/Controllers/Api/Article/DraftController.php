@@ -9,9 +9,9 @@
 namespace Notadd\Content\Controllers\Api\Article;
 
 use Notadd\Content\Handlers\Article\Draft\CreateHandler;
-use Notadd\Content\Handlers\Article\Draft\DeleteHandler;
-use Notadd\Content\Handlers\Article\Draft\FetchHandler;
-use Notadd\Content\Handlers\Article\Draft\FindHandler;
+use Notadd\Content\Handlers\Article\Draft\RemoveHandler;
+use Notadd\Content\Handlers\Article\Draft\ListHandler;
+use Notadd\Content\Handlers\Article\Draft\DraftHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -35,12 +35,12 @@ class DraftController extends Controller
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Article\Draft\DeleteHandler $handler
+     * @param \Notadd\Content\Handlers\Article\Draft\RemoveHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(DeleteHandler $handler)
+    public function remove(RemoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -48,12 +48,12 @@ class DraftController extends Controller
     /**
      * Fetch handler.
      *
-     * @param \Notadd\Content\Handlers\Article\Draft\FetchHandler $handler
+     * @param \Notadd\Content\Handlers\Article\Draft\ListHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function fetch(FetchHandler $handler)
+    public function list(ListHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -61,12 +61,12 @@ class DraftController extends Controller
     /**
      * Find handler.
      *
-     * @param \Notadd\Content\Handlers\Article\Draft\FindHandler $handler
+     * @param \Notadd\Content\Handlers\Article\Draft\DraftHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function find(FindHandler $handler)
+    public function draft(DraftHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

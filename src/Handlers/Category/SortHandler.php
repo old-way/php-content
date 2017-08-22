@@ -8,7 +8,7 @@
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 
 /**
@@ -22,38 +22,39 @@ class SortHandler extends Handler
     public function execute()
     {
         $data = collect($this->request->input('data'));
-        $data->each(function ($item, $key) {
-            $id = $item['id'];
-            $category = Category::query()->find($id);
-            $category->update([
-                'parent_id' => 0,
-                'order_id'  => $key,
-            ]);
-            $children = collect($item['children']);
-            if ($children->count()) {
-                $children->each(function ($item, $key) use ($id) {
-                    $parentId = $id;
-                    $id = $item['id'];
-                    $category = Category::query()->find($id);
-                    $category->update([
-                        'parent_id' => $parentId,
-                        'order_id'  => $key,
-                    ]);
-                    $children = collect($item['children']);
-                    if ($children->count()) {
-                        $children->each(function ($item, $key) use ($id) {
-                            $parentId = $id;
-                            $id = $item['id'];
-                            $category = Category::query()->find($id);
-                            $category->update([
-                                'parent_id' => $parentId,
-                                'order_id'  => $key,
-                            ]);
-                        });
-                    }
-                });
-            }
-        });
+        $this->beginTransaction();
+        try{
+            $data->each(function ($item, $key) {
+                $id = $item['id'];
+                $category = ArticleCategory::query()->find($id);
+                $category->makeRoot();
+                $children = collect($item['children']);
+                if ($children->count()) {
+                    $children->each(function ($item, $key) use ($id) {
+                        $parentId = $id;
+                        $id = $item['id'];
+                        $parent_category = ArticleCategory::query()->find($parentId);
+                        $child_category = ArticleCategory::query()->find($id);
+                        $child_category->makeChildOf($parent_category);
+                        $children = collect($item['children']);
+                        if ($children->count()) {
+                            $children->each(function ($item, $key) use ($id) {
+                                $parentId = $id;
+                                $id = $item['id'];
+                                $parent_category = ArticleCategory::query()->find($parentId);
+                                $child_category = ArticleCategory::query()->find($id);
+                                $child_category->makeChildOf($parent_category);
+                            });
+                        }
+                    });
+                }
+            });
+        }catch(Exception $e){
+            $this->rollBackTransaction();
+            $message = $e->getMessage();
+            $this->withCode(500)->withMessage($message);
+        }
+        $this->commitTransaction();
         $this->withCode(200)->withMessage('content::category.sort.success');
     }
 }

@@ -5,8 +5,8 @@
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
             injection.http.all([
-                injection.http.post(`${window.api}/content/article/fetch`),
-                injection.http.post(`${window.api}/content/category/fetch`, {
+                injection.http.post(`${window.api}/content/article/list`),
+                injection.http.post(`${window.api}/content/category/list`, {
                     'with-children': true,
                 }),
             ]).then(injection.http.spread((articleData, categoryData) => {
@@ -33,6 +33,7 @@
             });
         },
         data() {
+            const self = this;
             return {
                 categories: {
                     all: [],
@@ -54,8 +55,61 @@
                         width: 60,
                     },
                     {
+                        align: 'center',
+                        key: 'thumb',
+                        render(h, data) {
+                            if (data.row.thumb_image) {
+                                return h('tooltip', {
+                                    props: {
+                                        placement: 'right-end',
+                                    },
+                                    scopedSlots: {
+                                        content() {
+                                            return h('img', {
+                                                domProps: {
+                                                    src: data.row.thumb_image,
+                                                },
+                                                style: {
+                                                    maxWidth: '200px',
+                                                },
+                                            });
+                                        },
+                                        default() {
+                                            return h('icon', {
+                                                props: {
+                                                    type: 'image',
+                                                },
+                                            });
+                                        },
+                                    },
+                                });
+                            }
+                            return '';
+                        },
+                        title: ' ',
+                        width: 20,
+                    },
+                    {
                         key: 'title',
                         title: injection.trans('content.article.table.title'),
+                    },
+                    {
+                        key: 'category',
+                        render(h, data) {
+                            let title = '';
+                            if (data.row.category_id) {
+                                title = data.row.category.title;
+                                if (data.row.category.parent_id) {
+                                    title = `${data.row.category.parent.title} / ${title}`;
+                                    if (data.row.category.parent.parent_id) {
+                                        title = `${data.row.category.parent.parent.title} / ${title}`;
+                                    }
+                                }
+                            }
+                            return title;
+                        },
+                        title: '分类',
+                        width: 200,
                     },
                     {
                         key: 'created_at',
@@ -64,14 +118,44 @@
                     },
                     {
                         key: 'handle',
-                        render(row, column, index) {
-                            return `
-                                    <i-button size="small" type="primary" @click.native="edit(${index})">${injection.trans('content.global.edit.submit')}</i-button>
-                                    <i-button :loading="list[${index}].loading"  size="small" type="error" @click.native="remove(${index})">
-                                        <span v-if="!list[${index}].loading">${injection.trans('content.global.delete.submit')}</span>
-                                        <span v-else>${injection.trans('content.global.delete.loading')}</span>
-                                    </i-button>
-                                    `;
+                        render(h, data) {
+                            let text = '';
+                            if (self.list[data.index].loading) {
+                                text = injection.trans('content.global.delete.loading');
+                            } else {
+                                text = injection.trans('content.global.delete.submit');
+                            }
+                            return h('div', [
+                                h('router-link', {
+                                    props: {
+                                        to: `/content/article/${data.row.id}/edit`,
+                                    },
+                                }, [
+                                    h('i-button', {
+                                        props: {
+                                            size: 'small',
+                                            type: 'primary',
+                                        },
+                                    }, injection.trans('content.global.edit.submit')),
+                                ]),
+                                h('i-button', {
+                                    on: {
+                                        click() {
+                                            self.remove(data.index);
+                                        },
+                                    },
+                                    props: {
+                                        loading: self.list[data.index].loading,
+                                        size: 'small',
+                                        type: 'error',
+                                    },
+                                    style: {
+                                        marginLeft: '10px',
+                                    },
+                                }, [
+                                    h('span', text),
+                                ]),
+                            ]);
                         },
                         title: injection.trans('content.article.table.handle'),
                         width: 200,
@@ -142,7 +226,7 @@
                     }
                 }
                 if (self.categories.id === 'none') {
-                    self.$http.post(`${window.api}/content/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/list`, {
                         'only-no-category': true,
                     }).then(response => {
                         self.list = [];
@@ -153,7 +237,7 @@
                         self.pagination = response.data.pagination;
                     });
                 } else {
-                    self.$http.post(`${window.api}/content/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/list`, {
                         category: self.categories.id,
                     }).then(response => {
                         self.list = [];
@@ -165,16 +249,11 @@
                     });
                 }
             },
-            edit(index) {
-                const self = this;
-                const article = self.list[index];
-                self.$router.push(`/content/article/${article.id}/edit`);
-            },
             paginator(id) {
                 const self = this;
                 self.$loading.start();
                 if (self.categories.id === 'none') {
-                    self.$http.post(`${window.api}/content/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/list`, {
                         'only-no-category': true,
                         page: id,
                     }).then(response => {
@@ -190,7 +269,7 @@
                         self.$loading.fail();
                     });
                 } else {
-                    self.$http.post(`${window.api}/content/article/fetch`, {
+                    self.$http.post(`${window.api}/content/article/list`, {
                         category: self.categories.id,
                         page: id,
                     }).then(response => {
@@ -211,7 +290,7 @@
                 const self = this;
                 const article = self.list[index];
                 article.loading = true;
-                self.$http.post(`${window.api}/content/article/delete`, {
+                self.$http.post(`${window.api}/content/article/remove`, {
                     id: article.id,
                 }).then(response => {
                     const result = response.data;
@@ -237,7 +316,7 @@
                     self.loading = false;
                 } else {
                     self.selections.forEach((article, key) => {
-                        self.$http.post(`${window.api}/content/article/delete`, {
+                        self.$http.post(`${window.api}/content/article/remove`, {
                             id: article.id,
                         }).then(response => {
                             const result = response.data;
@@ -262,7 +341,7 @@
                 const self = this;
                 if (self.keyword.length > 0) {
                     injection.loading.start();
-                    injection.http.post(`${window.api}/content/article/fetch`, {
+                    injection.http.post(`${window.api}/content/article/list`, {
                         search: self.keyword,
                     }).then(response => {
                         const list = response.data.data;

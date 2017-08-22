@@ -29,7 +29,7 @@ class EditHandler extends Handler
             'alias' => [
                 'required',
                 'regex:/^[a-zA-Z\pN_-]+$/u',
-                Rule::unique('pages')->ignore($this->request->input('id'), 'id'),
+                Rule::unique('content_pages')->ignore($this->request->input('id'), 'id'),
             ],
             'title' => 'required',
         ], [
