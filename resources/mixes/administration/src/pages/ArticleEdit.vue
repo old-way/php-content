@@ -5,42 +5,55 @@
     export default {
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
-            injection.http.post(`${window.api}/content/article/find`, {
+            injection.http.post(`${window.api}/content/article`, {
                 id: to.params.id,
             }).then(response => {
                 const article = response.data.data;
                 injection.message.info(injection.trans('content.article.info.get'));
-                injection.http.post(`${window.api}/content/category/fetch`).then(result => {
+                injection.http.post(`${window.api}/content/category/list`).then(result => {
                     const list = result.data.data;
                     next(vm => {
-                        vm.form.category.id = article.category_path ? article.category_path : [];
-                        vm.form.category.list = list.map(first => ({
-                            children: first.children.map(second => ({
-                                children: second.children.map(third => ({
-                                    children: [],
-                                    label: third.title,
-                                    value: third.id,
-                                })),
-                                label: second.title,
-                                value: second.id,
-                            })),
+                        vm.categories = list.map(first => ({
+                            children: Object.keys(first.children).map(i => {
+                                const second = first.children[i];
+                                return {
+                                    children: Object.keys(second.children).map(n => {
+                                        const third = second.children[n];
+                                        return {
+                                            children: [],
+                                            label: third.title,
+                                            value: third.id,
+                                        };
+                                    }),
+                                    label: second.title,
+                                    value: second.id,
+                                };
+                            }),
                             label: first.title,
                             value: first.id,
                         }));
-                        vm.form.title = article.title;
-                        vm.form.date = article.created_at;
+                        vm.form.category = [];
+                        if (article.category_id) {
+                            vm.form.category.unshift(article.category.id);
+                            if (article.category.parent_id) {
+                                vm.form.category.unshift(article.category.parent.id);
+                                if (article.category.parent.parent_id) {
+                                    vm.form.category.unshift(article.category.parent.id);
+                                }
+                            }
+                        }
+                        window.console.log(vm.form);
                         vm.form.content = article.content;
-                        vm.form.summary = article.description;
-                        vm.form.hidden = article.is_hidden === 1;
-                        vm.form.image = article.thumb_image ? `${window.url}/${article.thumb_image}` : '';
-                        vm.form.sticky = article.is_sticky === 1;
-//                    if (article.keyword.length) {
-//                        vm.form.tags = article.keyword.split(',');
-//                    }
+                        vm.form.created_at = article.created_at;
+                        vm.form.description = article.description;
+                        vm.form.image = article.thumb_image;
+                        vm.form.is_hidden = article.is_hidden === 1;
+                        vm.form.is_sticky = article.is_sticky === 1;
                         vm.form.source = {
                             author: article.source_author,
                             link: article.source_link,
                         };
+                        vm.form.title = article.title;
                         injection.loading.finish();
                         injection.message.info(injection.trans('content.article.category.info.get'));
                         injection.sidebar.active('content');
@@ -57,22 +70,21 @@
         },
         data() {
             return {
+                action: `${window.api}/content/upload`,
+                categories: [],
                 form: {
-                    category: {
-                        id: 0,
-                        list: [],
-                    },
+                    category: [],
                     content: '',
-                    date: '',
-                    hidden: false,
+                    created_at: '',
+                    description: '',
                     image: '',
+                    is_hidden: false,
+                    is_sticky: false,
+                    keyword: [],
                     source: {
                         author: '',
                         link: '',
                     },
-                    sticky: false,
-                    summary: '',
-                    tags: [],
                     title: '',
                 },
                 loading: false,
@@ -99,9 +111,6 @@
             };
         },
         methods: {
-            dateChange(val) {
-                this.form.date = val;
-            },
             editor(instance) {
                 const self = this;
                 instance.setContent(self.form.content);
@@ -109,30 +118,37 @@
                     self.form.content = instance.getContent();
                 });
             },
+            removeImage() {
+                this.form.image = '';
+            },
             submit() {
                 const self = this;
                 self.loading = true;
                 self.$refs.form.validate(valid => {
                     if (valid) {
                         const formData = new window.FormData();
-                        formData.append('category_id', self.form.category.id.length ? self.form.category.id[self.form.category.id.length - 1] : 0);
+                        window.console.log(self.form);
+                        formData.append('category_id', self.form.category.length ? self.form.category[self.form.category.length - 1] : 0);
                         formData.append('content', self.form.content);
-                        formData.append('date', self.form.date);
-                        formData.append('hidden', self.form.hidden ? '1' : '0');
+                        formData.append('created_at', self.form.created_at);
+                        formData.append('description', self.form.description);
+                        formData.append('is_hidden', self.form.is_hidden ? '1' : '0');
                         formData.append('id', self.$route.params.id);
-                        formData.append('image', self.form.image);
-                        formData.append('sticky', self.form.sticky ? '1' : '0');
-                        formData.append('summary', self.form.summary);
-                        formData.append('tags', self.form.tags);
+                        formData.append('thumb_image', self.form.image ? self.form.image : '');
+                        formData.append('is_sticky', self.form.is_sticky ? '1' : '0');
+                        formData.append('keyword', self.form.keyword);
                         formData.append('title', self.form.title);
                         formData.append('source_author', self.form.source.author);
                         formData.append('source_link', self.form.source.link);
-                        window.console.log(self.form);
-                        self.$http.post(`${window.api}/content/article/edit`, formData).then(response => {
+                        self.$http.post(`${window.api}/content/article/edit`, formData).then(() => {
                             self.$notice.open({
-                                title: response.data.message,
+                                title: '编辑文章信息成功！',
                             });
                             self.$router.push('/content/article');
+                        }).catch(() => {
+                            self.$notice.error({
+                                title: '编辑文章信息失败！',
+                            });
                         }).finally(() => {
                             self.loading = false;
                         });
@@ -143,6 +159,32 @@
                         });
                     }
                 });
+            },
+            uploadBefore() {
+                this.$loading.start();
+            },
+            uploadError(error, data) {
+                const self = this;
+                self.$loading.error();
+                Object.keys(data.message).forEach(index => {
+                    self.$notice.error({
+                        title: data.message[index],
+                    });
+                });
+            },
+            uploadFormatError(file) {
+                this.$notice.warning({
+                    title: '文件格式不正确',
+                    desc: `文件 ${file.name} 格式不正确，请上传 jpg 或 png 格式的图片。`,
+                });
+            },
+            uploadSuccess(data) {
+                const self = this;
+                self.$loading.finish();
+                self.$notice.open({
+                    title: data.message,
+                });
+                self.form.image = data.data.path;
             },
         },
         watch: {
@@ -177,33 +219,48 @@
                         </card>
                     </i-col>
                     <i-col span="8">
-                        <!--<card :bordered="false">-->
-                        <!--<p slot="title">草稿箱</p>-->
-                        <!--</card>-->
                         <card :bordered="false">
-                            <!--<form-item label="缩略图" prop="image">-->
-                            <!--<upload action="//jsonplaceholder.typicode.com/posts/">-->
-                            <!--<i-button type="ghost" icon="ios-cloud-upload-outline">上传文件</i-button>-->
-                            <!--</upload>-->
-                            <!--</form-item>-->
+                            <form-item label="缩略图" prop="image">
+                                <div class="ivu-upload-wrapper">
+                                    <div class="preview" v-if="form.image">
+                                        <img :src="form.image">
+                                        <icon type="close" @click.native="removeImage"></icon>
+                                    </div>
+                                    <upload :action="action"
+                                            :before-upload="uploadBefore"
+                                            :format="['jpg','jpeg','png']"
+                                            :headers="{
+                                                    Authorization: `Bearer ${$store.state.token.access_token}`
+                                                }"
+                                            :max-size="2048"
+                                            :on-error="uploadError"
+                                            :on-format-error="uploadFormatError"
+                                            :on-success="uploadSuccess"
+                                            ref="upload"
+                                            :show-upload-list="false"
+                                            v-if="form.image === '' || form.image === null">
+                                    </upload>
+                                </div>
+                            </form-item>
                             <form-item :label="trans('content.article.form.category.label')">
-                                <cascader :data="form.category.list" v-model="form.category.id"></cascader>
+                                <cascader :data="categories" v-model="form.category"></cascader>
                             </form-item>
                             <form-item :label="trans('content.article.form.sticky.label')" prop="sticky">
-                                <i-switch v-model="form.sticky" size="large">
+                                <i-switch v-model="form.is_sticky" size="large">
                                     <span slot="open">{{ trans('content.article.form.sticky.open') }}</span>
                                     <span slot="close">{{ trans('content.article.form.sticky.close') }}</span>
                                 </i-switch>
                             </form-item>
                             <form-item :label="trans('content.article.form.hidden.label')" prop="hidden">
-                                <i-switch v-model="form.hidden" size="large">
+                                <i-switch v-model="form.is_hidden" size="large">
                                     <span slot="open">{{ trans('content.article.form.hidden.open') }}</span>
                                     <span slot="close">{{ trans('content.article.form.hidden.close') }}</span>
                                 </i-switch>
                             </form-item>
                             <form-item :label="trans('content.article.form.date.label')">
                                 <date-picker :placeholder="trans('content.article.form.date.placeholder')"
-                                             type="datetime" @on-change="dateChange"></date-picker>
+                                             v-model="form.created_at"
+                                             type="datetime"></date-picker>
                             </form-item>
                             <form-item :label="trans('content.article.form.source.author.label')">
                                 <i-input :placeholder="trans('content.article.form.source.author.placeholder')"

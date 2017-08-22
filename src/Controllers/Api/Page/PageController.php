@@ -9,10 +9,10 @@
 namespace Notadd\Content\Controllers\Api\Page;
 
 use Notadd\Content\Handlers\Page\CreateHandler;
-use Notadd\Content\Handlers\Page\DeleteHandler;
+use Notadd\Content\Handlers\Page\RemoveHandler;
 use Notadd\Content\Handlers\Page\EditHandler;
-use Notadd\Content\Handlers\Page\FetchHandler;
-use Notadd\Content\Handlers\Page\FindHandler;
+use Notadd\Content\Handlers\Page\ListHandler;
+use Notadd\Content\Handlers\Page\PageHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -36,12 +36,12 @@ class PageController extends Controller
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Page\DeleteHandler $handler
+     * @param \Notadd\Content\Handlers\Page\RemoveHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(DeleteHandler $handler)
+    public function remove(RemoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -62,12 +62,12 @@ class PageController extends Controller
     /**
      * Fetch handler.
      *
-     * @param \Notadd\Content\Handlers\Page\FetchHandler $handler
+     * @param \Notadd\Content\Handlers\Page\ListHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function fetch(FetchHandler $handler)
+    public function list(ListHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -75,12 +75,12 @@ class PageController extends Controller
     /**
      * Find handler.
      *
-     * @param \Notadd\Content\Handlers\Page\FindHandler $handler
+     * @param \Notadd\Content\Handlers\Page\PageHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
-    public function find(FindHandler $handler)
+    public function page(PageHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

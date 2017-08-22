@@ -11,6 +11,7 @@ namespace Notadd\Content\Handlers\Article;
 use Carbon\Carbon;
 use Notadd\Content\Models\Article;
 use Notadd\Foundation\Routing\Abstracts\Handler;
+use Notadd\Foundation\Validation\Rule;
 
 /**
  * Class CreateHandler.
@@ -26,33 +27,43 @@ class CreateHandler extends Handler
     public function execute()
     {
         $this->validate($this->request, [
-            'content'     => 'required',
-            'source_link' => 'url',
-            'title'       => 'required',
+            'category_id' => Rule::numeric(),
+            'content'     => Rule::required(),
+            'created_at'  => Rule::dateFormat('Y-m-d H:i:s'),
+            'is_hidden'   => Rule::boolean(),
+            'is_sticky'   => Rule::boolean(),
+            'source_link' => Rule::url(),
+            'title'       => Rule::required(),
         ], [
-            'content.required' => '必须填写文章内容',
-            'source_link.url'  => '来源链接不是合法的URL',
-            'title.required'   => '必须填写文章标题',
+            'category_id.numeric'    => '分类 ID 必须为数值',
+            'content.required'       => '必须填写文章内容',
+            'created_at.date_format' => '创建时间格式错误',
+            'is_hidden.boolean'      => '是否隐藏标识必须为布尔值',
+            'is_sticky.boolean'      => '是否置顶标识必须为布尔值',
+            'source_link.url'        => '来源链接不是合法的URL',
+            'title.required'         => '必须填写文章标题',
         ]);
-        $this->container->make('log')->info('create article:', $this->request->all());
-        if ($article = Article::query()->create([
-            'category_id'   => $this->request->input('category_id', 0),
-            'content'       => $this->request->input('content'),
-            'is_hidden'     => $this->request->input('hidden', false),
-            'is_sticky'     => $this->request->input('sticky', false),
-            'source_author' => $this->request->input('source_author'),
-            'source_link'   => $this->request->input('source_link'),
-            'description'   => $this->request->input('summary'),
-            'keyword'       => $this->request->input('tags'),
-            'title'         => $this->request->input('title'),
-        ])
-        ) {
-            $this->request->has('date') && $article->update([
-                'created_at' => new Carbon($this->request->input('date')),
-            ]);
-            $this->withCode(200)->withMessage('');
+        $this->withCode(500)->withData($this->request->all());
+        $this->beginTransaction();
+        $data = $this->request->only([
+            'category_id',
+            'content',
+            'created_at',
+            'description',
+            'is_hidden',
+            'is_sticky',
+            'keyword',
+            'source_author',
+            'source_link',
+            'thumb_image',
+            'title',
+        ]);
+        if (Article::query()->create($data)) {
+            $this->commitTransaction();
+            $this->withCode(200)->withMessage('创建文章信息成功！');
         } else {
-            $this->withCode(500)->withError('');
+            $this->rollBackTransaction();
+            $this->withCode(500)->withError('创建文章信息失败！');
         }
     }
 }

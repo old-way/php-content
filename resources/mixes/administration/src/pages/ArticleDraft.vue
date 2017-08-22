@@ -8,6 +8,7 @@
             });
         },
         data() {
+            const self = this;
             return {
                 columns: [
                     {
@@ -26,11 +27,33 @@
                     },
                     {
                         key: 'handle',
-                        render(row, column, index) {
-                            return `
-                                    <i-button type="primary" @click.native="edit(${index})">${injection.trans('content.global.edit.submit')}</i-button>
-                                    <i-button type="error" @click.native="remove(${index})">${injection.trans('content.global.delete.submit')}</i-button>
-                                    `;
+                        render(h, data) {
+                            return h('div', [
+                                h('router-link', {
+                                    to: '',
+                                }, [
+                                    h('i-button', {
+                                        on: {
+                                            click() {
+                                                self.edit(data.index);
+                                            },
+                                        },
+                                        props: {
+                                            type: 'primary',
+                                        },
+                                    }, injection.trans('content.global.edit.submit')),
+                                ]),
+                                h('i-button', {
+                                    on: {
+                                        click() {
+                                            self.remove(data.index);
+                                        },
+                                    },
+                                    props: {
+                                        type: 'error',
+                                    },
+                                }, injection.trans('content.global.delete.submit')),
+                            ]);
                         },
                         title: '操作',
                         width: 200,
@@ -68,9 +91,6 @@
             };
         },
         methods: {
-            edit(index) {
-                console.log(index);
-            },
             remove(index) {
                 console.log(index);
             },

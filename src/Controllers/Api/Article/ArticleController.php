@@ -10,10 +10,10 @@ namespace Notadd\Content\Controllers\Api\Article;
 
 use Notadd\Content\Handlers\Article\AutoHandler;
 use Notadd\Content\Handlers\Article\CreateHandler;
-use Notadd\Content\Handlers\Article\DeleteHandler;
+use Notadd\Content\Handlers\Article\RemoveHandler;
 use Notadd\Content\Handlers\Article\EditHandler;
-use Notadd\Content\Handlers\Article\FetchHandler;
-use Notadd\Content\Handlers\Article\FindHandler;
+use Notadd\Content\Handlers\Article\ListHandler;
+use Notadd\Content\Handlers\Article\ArticleHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -50,12 +50,12 @@ class ArticleController extends Controller
     /**
      * Delete handler.
      *
-     * @param \Notadd\Content\Handlers\Article\DeleteHandler $handler
+     * @param \Notadd\Content\Handlers\Article\RemoveHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function delete(DeleteHandler $handler)
+    public function remove(RemoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -76,12 +76,12 @@ class ArticleController extends Controller
     /**
      * Fetch handler.
      *
-     * @param \Notadd\Content\Handlers\Article\FetchHandler $handler
+     * @param \Notadd\Content\Handlers\Article\ListHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
-    public function fetch(FetchHandler $handler)
+    public function list(ListHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -89,12 +89,25 @@ class ArticleController extends Controller
     /**
      * Find handler.
      *
-     * @param \Notadd\Content\Handlers\Article\FindHandler $handler
+     * @param \Notadd\Content\Handlers\Article\ArticleHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function find(FindHandler $handler)
+    public function article(ArticleHandler $handler)
+    {
+        return $handler->toResponse()->generateHttpResponse();
+    }
+
+    /**
+     * BatchMove handler.
+     *
+     * @param \Notadd\Content\Handlers\Article\BatchMoveHandler $handler
+     *
+     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @throws \Exception
+     */
+    public function batchMove(BatchMoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }

@@ -8,9 +8,9 @@
  */
 namespace Notadd\Content\Handlers\Category;
 
-use Illuminate\Validation\Rule;
-use Notadd\Content\Models\Category;
+use Notadd\Content\Models\ArticleCategory;
 use Notadd\Foundation\Routing\Abstracts\Handler;
+use Notadd\Foundation\Validation\Rule;
 
 /**
  * Class EditHandler.
@@ -26,37 +26,53 @@ class EditHandler extends Handler
     public function execute()
     {
         $this->validate($this->request, [
-            'alias' => [
-                'required',
-                'regex:/^[a-zA-Z\pN_-]+$/u',
-                Rule::unique('categories')->ignore($this->request->input('id'), 'id'),
+            'alias'   => [
+                Rule::regex('/^[a-zA-Z\pN_-]+$/u'),
+                Rule::required(),
+                Rule::unique('content_article_categories')->ignore($this->request->input('id'), 'id'),
             ],
-            'title' => 'required',
+            'enabled' => Rule::boolean(),
+            'id'      => [
+                Rule::exists('content_article_categories'),
+                Rule::numeric(),
+                Rule::required(),
+            ],
+            'title'   => Rule::required(),
+            'type'    => Rule::in([
+                'normal',
+            ]),
         ], [
-            'alias.required' => '必须填写分类别名',
-            'alias.regex' => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
-            'alias.unique' => '分类别名已被占用',
-            'title.required' => '必须填写分类标题',
+            'alias.regex'     => '分类别名只能包含英文字母、数字、破折号（ - ）以及下划线（ _ ）',
+            'alias.required'  => '必须填写分类别名',
+            'alias.unique'    => '分类别名已被占用',
+            'enabled.boolean' => '开启状态必须为布尔值',
+            'id.exist'        => '没有对应的文章分类信息',
+            'id.numeric'      => '文章分类 ID 必须为数值',
+            'id.required'     => '文章分类 ID 必须填写',
+            'title.required'  => '必须填写分类标题',
+            'type.in'         => '分类类型必须为 normal',
         ]);
-        $this->container->make('log')->info('edit category', $this->request->all());
-        $data = [
-            'alias'            => $this->request->input('alias'),
-            'background_color' => $this->request->input('background_color'),
-            'background_image' => $this->request->input('background_image'),
-            'description'      => $this->request->input('description'),
-            'enabled'          => $this->request->input('enabled'),
-            'pagination'       => $this->request->input('pagination'),
-            'seo_title'        => $this->request->input('seo_title'),
-            'seo_keyword'      => $this->request->input('seo_keyword'),
-            'seo_description'  => $this->request->input('seo_description'),
-            'top_image'        => $this->request->input('top_image'),
-            'title'            => $this->request->input('name'),
-            'type'             => $this->request->input('type') ?: 'normal',
-        ];
-        $id = $this->request->input('id');
-        if (($category = Category::query()->find($id)) && $category->update($data)) {
+        $this->beginTransaction();
+        $data = $this->request->only([
+            'alias',
+            'background_color',
+            'background_image',
+            'description',
+            'enabled',
+            'pagination',
+            'seo_title',
+            'seo_keyword',
+            'seo_description',
+            'title',
+            'top_image',
+            'type',
+        ]);
+        $category = ArticleCategory::query()->find($this->request->input('id'));
+        if ($category instanceof ArticleCategory && $category->update($data)) {
+            $this->commitTransaction();
             $this->withCode(200)->withMessage('content::category.update.success');
         } else {
+            $this->commitTransaction();
             $this->withCode(500)->withError('content::category.update.fail');
         }
     }

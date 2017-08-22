@@ -26,7 +26,7 @@ class CreateHandler extends Handler
     public function execute()
     {
         $this->validate($this->request, [
-            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:page_categories',
+            'alias' => 'required|regex:/^[a-zA-Z\pN_-]+$/u|unique:content_page_categories',
             'title' => 'required',
         ], [
             'alias.required' => '必须填写分类别名',
@@ -40,9 +40,7 @@ class CreateHandler extends Handler
             'background_image' => $this->request->input('background_image'),
             'description'      => $this->request->input('description'),
             'enabled'          => 1,
-            'order_id'         => 0,
             'pagination'       => $this->request->input('pagination'),
-            'parent_id'        => 0,
             'seo_title'        => $this->request->input('seo_title'),
             'seo_keyword'      => $this->request->input('seo_keyword'),
             'seo_description'  => $this->request->input('seo_description'),

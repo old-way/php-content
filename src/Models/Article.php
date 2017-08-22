@@ -8,8 +8,9 @@
  */
 namespace Notadd\Content\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Notadd\Foundation\Database\Model;
 
 /**
  * Class Article.
@@ -22,21 +23,36 @@ class Article extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id',
-        'created_at',
-        'title',
         'author',
-        'source_author',
-        'source_link',
+        'category_id',
         'content',
-        'keyword',
+        'created_at',
         'description',
-        'thumb_image',
-        'user_id',
+        'flow_marketing',
         'hits',
         'is_hidden',
         'is_sticky',
+        'keyword',
+        'source_author',
+        'source_link',
+        'thumb_image',
+        'title',
+        'user_id',
     ];
+
+    /**
+     * @var array
+     */
+    protected $setters = [
+        'category_id' => 'null|0',
+        'is_hidden'   => 'null|0',
+        'is_sticky'   => 'null|0',
+    ];
+
+    /**
+     * @var string
+     */
+    protected $table = 'content_articles';
 
     /**
      * Relation of category.
@@ -45,6 +61,16 @@ class Article extends Model
      */
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(ArticleCategory::class);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setCreatedAtAttribute($value)
+    {
+        if ($value) {
+            $this->attributes['created_at'] = Carbon::createFromTimestamp(strtotime($value));
+        }
     }
 }

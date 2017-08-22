@@ -9,8 +9,8 @@
 namespace Notadd\Content\Controllers;
 
 use Notadd\Content\Handlers\Page\CreateHandler;
-use Notadd\Content\Handlers\Page\DeleteHandler;
-use Notadd\Content\Handlers\Page\FindHandler;
+use Notadd\Content\Handlers\Page\RemoveHandler;
+use Notadd\Content\Handlers\Page\PageHandler;
 use Notadd\Foundation\Routing\Abstracts\Controller;
 
 /**
@@ -34,12 +34,12 @@ class PageController extends Controller
     /**
      * Page destroy.
      *
-     * @param \Notadd\Content\Handlers\Page\DeleteHandler $handler
+     * @param \Notadd\Content\Handlers\Page\RemoveHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function destroy(DeleteHandler $handler)
+    public function destroy(RemoveHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
@@ -57,12 +57,12 @@ class PageController extends Controller
     /**
      * Page show.
      *
-     * @param \Notadd\Content\Handlers\Page\FindHandler $handler
+     * @param \Notadd\Content\Handlers\Page\PageHandler $handler
      *
      * @return \Notadd\Foundation\Passport\Responses\ApiResponse
      * @throws \Exception
      */
-    public function show(FindHandler $handler)
+    public function show(PageHandler $handler)
     {
         return $handler->toResponse()->generateHttpResponse();
     }
