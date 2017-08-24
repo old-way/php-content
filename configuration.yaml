@@ -20,8 +20,8 @@ entry: '/content'
 events:
     subscribes:
         - Notadd\Content\Listeners\RouteRegister
-installer: Notadd\Content\Injections\Installer
-uninstaller: Notadd\Content\Injections\Uninstaller
+migrations:
+    - databases/migrations
 permissions:
     -
         description: 内容管理权限。
