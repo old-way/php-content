@@ -52,7 +52,7 @@ class SortHandler extends Handler
         }catch(Exception $e){
             $this->rollBackTransaction();
             $message = $e->getMessage();
-            $this->withCode(500)->withMessage($message);
+            $this->withCode(500)->withError($message);
         }
         $this->commitTransaction();
         $this->withCode(200)->withMessage('content::category.sort.success');
