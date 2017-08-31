@@ -53,28 +53,34 @@ class ListHandler extends Handler
         if ($this->request->input('category_level', true)) {
             $id = $this->request->input('category_id', 0);
             $categories = collect([(int)$id]);
-            ArticleCategory::query()
-                ->whereNull('parent_id')
-                ->get()
-                ->each(function (ArticleCategory $category) use ($categories) {
-                    $categories->push($category->getAttribute('id'));
-                    $children = ArticleCategory::query()
-                        ->where('parent_id', $category->getAttribute('id'))
-                        ->get();
-                    $children->count() && $children->each(function (ArticleCategory $category) use ($categories) {
+            if ($id == 2 || $id == 3){
+                $builder->whereIn('category_id', $categories->unique()->toArray());
+            }
+            if ($id == 0){
+                ArticleCategory::query()
+                    ->whereNull('parent_id')
+                    ->get()
+                    ->each(function (ArticleCategory $category) use ($categories) {
                         $categories->push($category->getAttribute('id'));
                         $children = ArticleCategory::query()
                             ->where('parent_id', $category->getAttribute('id'))
                             ->get();
                         $children->count() && $children->each(function (ArticleCategory $category) use ($categories) {
                             $categories->push($category->getAttribute('id'));
+                            $children = ArticleCategory::query()
+                                ->where('parent_id', $category->getAttribute('id'))
+                                ->get();
+                            $children->count() && $children->each(function (ArticleCategory $category) use ($categories) {
+                                $categories->push($category->getAttribute('id'));
+                            });
                         });
                     });
-                });
+            }
             $builder->whereIn('category_id', $categories->unique()->toArray());
         } else {
             $builder->whereNull('category_id');
         }
+
         if ($this->request->has('keyword')) {
             $keyword = $this->request->input('keyword');
             $builder->where('title', 'like', '%' . $keyword . '%')
