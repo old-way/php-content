@@ -35,6 +35,7 @@ class CreateContentArticlesTable extends Migration
             $table->boolean('is_hidden')->default(0);
             $table->tinyInteger('is_sticky')->default(0);
             $table->string('flow_marketing')->nullable();
+            $table->string('summery')->nullable()->comment('简介');
             $table->timestamps();
             $table->softDeletes();
         });
