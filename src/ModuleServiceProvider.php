@@ -29,7 +29,6 @@ class ModuleServiceProvider extends Module
     {
         Article::observe(ArticleObserver::class);
         ArticleDraft::observe(DraftObserver::class);
-        $this->loadMigrationsFrom(realpath(__DIR__ . '/../databases/migrations'));
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/translations'), 'content');
         $this->loadViewsFrom(realpath(__DIR__ . '/../resources/views'), 'content');
     }

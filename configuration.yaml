@@ -20,6 +20,8 @@ entry: '/content'
 events:
     subscribes:
         - Notadd\Content\Listeners\RouteRegister
+migrations:
+    - databases/migrations
 permissions:
     -
         description: 内容管理权限。

@@ -21,12 +21,9 @@ class CreateContentArticleInformationRelationsTable extends Migration
     public function up()
     {
         $this->schema->create('content_article_information_relations', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('category_id');
             $table->integer('information_id');
-            $table->primary([
-                'category_id',
-                'information_id',
-            ]);
         });
     }
 
