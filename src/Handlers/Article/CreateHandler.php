@@ -29,7 +29,7 @@ class CreateHandler extends Handler
         $this->validate($this->request, [
             'category_id' => Rule::numeric(),
             'content'     => Rule::required(),
-            'created_at'  => Rule::dateFormat('Y-m-d H:i:s'),
+//            'created_at'  => Rule::dateFormat('Y-m-d H:i:s'),
             'is_hidden'   => Rule::boolean(),
             'is_sticky'   => Rule::boolean(),
             'source_link' => Rule::url(),
@@ -57,6 +57,7 @@ class CreateHandler extends Handler
             'source_link',
             'thumb_image',
             'title',
+            'summery'
         ]);
         if (Article::query()->create($data)) {
             $this->commitTransaction();
