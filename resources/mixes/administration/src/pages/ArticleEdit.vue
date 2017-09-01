@@ -44,6 +44,7 @@
                         }
                         window.console.log(vm.form);
                         vm.form.content = article.content;
+                        vm.form.summery = article.summery;
                         vm.form.created_at = article.created_at;
                         vm.form.description = article.description;
                         vm.form.image = article.thumb_image;
@@ -81,6 +82,7 @@
                     is_hidden: false,
                     is_sticky: false,
                     keyword: [],
+                    summery: '',
                     source: {
                         author: '',
                         link: '',
@@ -95,6 +97,14 @@
                             required: true,
                             type: 'string',
                             message: injection.trans('content.article.form.content.error'),
+                            trigger: 'change',
+                        },
+                    ],
+                    summery: [
+                        {
+                            required: true,
+                            type: 'string',
+                            message: '简介不能为空',
                             trigger: 'change',
                         },
                     ],
@@ -206,6 +216,10 @@
                             <form-item prop="title">
                                 <i-input :placeholder="trans('content.article.form.title.placeholder')"
                                          v-model="form.title"></i-input>
+                            </form-item>
+                            <form-item prop="summery">
+                                <i-input placeholder="请输入文章简介"
+                                         v-model="form.summery"></i-input>
                             </form-item>
                             <form-item prop="content">
                                 <editor :path="path" @ready="editor"></editor>

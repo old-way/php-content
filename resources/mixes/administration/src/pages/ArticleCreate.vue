@@ -105,7 +105,7 @@
                         const formData = new window.FormData();
                         formData.append('category_id', self.form.category.length ? self.form.category[self.form.category.length - 1] : 0);
                         formData.append('content', self.form.content);
-                        formData.append('content', self.form.summery);
+                        formData.append('summery', self.form.summery);
                         formData.append('created_at', self.form.created_at);
                         formData.append('description', self.form.description);
                         formData.append('thumb_image', self.form.image ? self.form.image : '');
@@ -189,7 +189,7 @@
                                          v-model="form.title"></i-input>
                             </form-item>
                             <form-item prop="summery">
-                                <i-input :placeholder="trans('content.article.form.title.placeholder')"
+                                <i-input placeholder="请输入文章简介"
                                          v-model="form.summery"></i-input>
                             </form-item>
                             <form-item prop="content">
