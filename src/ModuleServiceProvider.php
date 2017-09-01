@@ -27,8 +27,6 @@ class ModuleServiceProvider extends Module
      */
     public function boot()
     {
-        Article::observe(ArticleObserver::class);
-        ArticleDraft::observe(DraftObserver::class);
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/translations'), 'content');
         $this->loadViewsFrom(realpath(__DIR__ . '/../resources/views'), 'content');
     }

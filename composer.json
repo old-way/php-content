@@ -27,11 +27,11 @@
         }
     },
     "replace": {
-        "illuminate/console": "self.version",
-        "illuminate/database": "self.version",
-        "illuminate/events": "self.version",
-        "illuminate/filesystem": "self.version",
-        "illuminate/support": "self.version"
+        "illuminate/console": "5.4.*",
+        "illuminate/database": "5.4.*",
+        "illuminate/events": "5.4.*",
+        "illuminate/filesystem": "5.4.*",
+        "illuminate/support": "5.4.*"
     },
     "require": {
         "php": ">=7.0",
