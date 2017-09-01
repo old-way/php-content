@@ -57,6 +57,7 @@ class UploadHandler extends Handler
         $file = $this->request->file('file');
         $hash = hash_file('md5', $file->getPathname(), false);
         $dictionary = $this->pathSplit($hash, '12', Collection::make([
+            static_path(),
             'uploads',
         ]))->implode(DIRECTORY_SEPARATOR);
         $name = Str::substr($hash, 12, 20) . '.' . $file->getClientOriginalExtension();
