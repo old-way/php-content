@@ -53,10 +53,12 @@ class ListHandler extends Handler
         if ($this->request->input('category_level', true)) {
             $id = $this->request->input('category_id', 0);
             $categories = collect([(int)$id]);
-            if ($id == 2 || $id == 3){
-                $builder->whereIn('category_id', $categories->unique()->toArray());
-            }
-            if ($id == 0){
+
+            if ($id == 4) {
+                $categories = ArticleCategory::query()->where('parent_id', $id)->pluck('id')->toArray();
+                array_push($categories, $id);
+                $builder->whereIn('category_id', $categories);
+            }elseif ($id == 0){
                 ArticleCategory::query()
                     ->whereNull('parent_id')
                     ->get()
@@ -75,8 +77,10 @@ class ListHandler extends Handler
                             });
                         });
                     });
+                $builder->whereIn('category_id', $categories->unique()->toArray());
+            }else{
+                $builder->whereIn('category_id', $categories->unique()->toArray());
             }
-            $builder->whereIn('category_id', $categories->unique()->toArray());
         } else {
             $builder->whereNull('category_id');
         }
