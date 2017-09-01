@@ -38,6 +38,7 @@ class Article extends Model
         'thumb_image',
         'title',
         'user_id',
+        'summery'
     ];
 
     /**
