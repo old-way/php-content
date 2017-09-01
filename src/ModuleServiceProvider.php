@@ -11,10 +11,6 @@ namespace Notadd\Content;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
 use Notadd\Content\Managers\PageManager;
-use Notadd\Content\Models\Article;
-use Notadd\Content\Models\ArticleDraft;
-use Notadd\Content\Observers\ArticleObserver;
-use Notadd\Content\Observers\DraftObserver;
 use Notadd\Foundation\Module\Abstracts\Module;
 
 /**
