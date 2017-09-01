@@ -26,6 +26,13 @@
             "Notadd\\Content\\Tests\\": "tests/"
         }
     },
+    "replace": {
+        "illuminate/console": "self.version",
+        "illuminate/database": "self.version",
+        "illuminate/events": "self.version",
+        "illuminate/filesystem": "self.version",
+        "illuminate/support": "self.version"
+    },
     "require": {
         "php": ">=7.0",
         "baum/baum": "~1.1"
