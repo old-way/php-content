@@ -11,10 +11,6 @@ namespace Notadd\Content;
 use Notadd\Content\Managers\ArticleManager;
 use Notadd\Content\Managers\CategoryManager;
 use Notadd\Content\Managers\PageManager;
-use Notadd\Content\Models\Article;
-use Notadd\Content\Models\ArticleDraft;
-use Notadd\Content\Observers\ArticleObserver;
-use Notadd\Content\Observers\DraftObserver;
 use Notadd\Foundation\Module\Abstracts\Module;
 
 /**
@@ -27,8 +23,6 @@ class ModuleServiceProvider extends Module
      */
     public function boot()
     {
-        Article::observe(ArticleObserver::class);
-        ArticleDraft::observe(DraftObserver::class);
         $this->loadTranslationsFrom(realpath(__DIR__ . '/../resources/translations'), 'content');
         $this->loadViewsFrom(realpath(__DIR__ . '/../resources/views'), 'content');
     }
