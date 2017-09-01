@@ -59,7 +59,8 @@ class CreateHandler extends Handler
             'title',
             'summery'
         ]);
-        if (Article::query()->create($data)) {
+
+        if ($article = Article::query()->create($data)) {
             $this->commitTransaction();
             $this->withCode(200)->withMessage('创建文章信息成功！');
         } else {
