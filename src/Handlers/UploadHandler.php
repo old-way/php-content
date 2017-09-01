@@ -12,6 +12,7 @@ namespace Notadd\Content\Handlers;
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\Foundation\Validation\Rule;
@@ -62,6 +63,7 @@ class UploadHandler extends Handler
         $name = Str::substr($hash, 12, 20) . '.' . $file->getClientOriginalExtension();
         if (!$this->filesystem->exists($dictionary . DIRECTORY_SEPARATOR . $name)) {
             $file->move($dictionary, $name);
+//            Storage::move($dictionary.'/'.$name, 'static/uploads/'.$dictionary.'/'.$name);
         }
         $this->withCode(200)->withData([
             'path' => $this->pathSplit($hash, '12,20', Collection::make([
