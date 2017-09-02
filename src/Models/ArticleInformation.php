@@ -19,6 +19,13 @@ class ArticleInformation extends Model
     /**
      * @var array
      */
+    protected $casts = [
+        'required' => 'boolean',
+    ];
+
+    /**
+     * @var array
+     */
     protected $fillable = [
         'description',
         'length',

@@ -35,7 +35,6 @@ class ListHandler extends Handler
         ]);
         $builder = ArticleCategory::query();
         $builder->with('children.children.children');
-        // $builder->where('parent_id', $this->request->input('parent_id', 0));
         $builder->whereNull('parent_id');
         $builder->orderBy('lft', $this->request->input('order', 'asc'));
         $this->withCode(200)->withData($builder->get())->withMessage('content::category.fetch.success');
