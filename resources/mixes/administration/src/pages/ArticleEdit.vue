@@ -1,5 +1,4 @@
 <script>
-    import Editor from '../components/Editor.vue';
     import injection from '../helpers/injection';
 
     export default {
@@ -65,9 +64,6 @@
             }).catch(() => {
                 injection.loading.fail();
             });
-        },
-        components: {
-            Editor,
         },
         data() {
             return {
@@ -190,13 +186,6 @@
                 self.form.image = data.data.path;
             },
         },
-//        watch: {
-//            'form.content': {
-//                handler() {
-//                    this.$refs.form.validateField('content');
-//                },
-//            },
-//        },
     };
 </script>
 <template>

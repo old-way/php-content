@@ -1,5 +1,4 @@
 <script>
-    import Editor from '../components/Editor.vue';
     import injection from '../helpers/injection';
 
     export default {
@@ -28,9 +27,6 @@
             }).catch(() => {
                 injection.loading.fail();
             });
-        },
-        components: {
-            Editor,
         },
         data() {
             return {
@@ -76,13 +72,6 @@
             };
         },
         methods: {
-            editor(instance) {
-                const self = this;
-                instance.setContent(self.form.content);
-                instance.addListener('contentChange', () => {
-                    self.form.content = instance.getContent();
-                });
-            },
             submit() {
                 const self = this;
                 self.loading = true;
@@ -111,13 +100,6 @@
                 });
             },
         },
-        watch: {
-            'form.content': {
-                handler() {
-                    this.$refs.form.validateField('content');
-                },
-            },
-        },
     };
 </script>
 <template>
@@ -144,7 +126,7 @@
                                 </i-switch>
                             </form-item>
                             <form-item :label="trans('content.page.form.content.label')" prop="content">
-                                <editor :path="path" @ready="editor"></editor>
+                                <editor :path="path"  v-model="form.content"></editor>
                             </form-item>
                             <form-item>
                                 <i-button :loading="loading" type="primary" @click.native="submit">
