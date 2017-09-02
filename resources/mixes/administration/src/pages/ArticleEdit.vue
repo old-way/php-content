@@ -121,13 +121,6 @@
             };
         },
         methods: {
-            editor(instance) {
-                const self = this;
-                instance.setContent(self.form.content);
-                instance.addListener('contentChange', () => {
-                    self.form.content = instance.getContent();
-                });
-            },
             removeImage() {
                 this.form.image = '';
             },
@@ -197,13 +190,13 @@
                 self.form.image = data.data.path;
             },
         },
-        watch: {
-            'form.content': {
-                handler() {
-                    this.$refs.form.validateField('content');
-                },
-            },
-        },
+//        watch: {
+//            'form.content': {
+//                handler() {
+//                    this.$refs.form.validateField('content');
+//                },
+//            },
+//        },
     };
 </script>
 <template>
@@ -222,7 +215,7 @@
                                          v-model="form.summery"></i-input>
                             </form-item>
                             <form-item prop="content">
-                                <editor :path="path" @ready="editor"></editor>
+                                <editor :path="path" v-model="form.content"></editor>
                             </form-item>
                             <form-item>
                                 <i-button :loading="loading" type="primary" @click.native="submit">
