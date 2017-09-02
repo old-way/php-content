@@ -199,10 +199,6 @@
                                 <i-input :placeholder="trans('content.article.form.title.placeholder')"
                                          v-model="form.title"></i-input>
                             </form-item>
-                            <form-item prop="summery">
-                                <i-input placeholder="请输入文章简介"
-                                         v-model="form.summery"></i-input>
-                            </form-item>
                             <form-item prop="content">
                                 <editor :path="path" v-model="form.content"></editor>
                             </form-item>
@@ -240,6 +236,12 @@
                             </form-item>
                             <form-item :label="trans('content.article.form.category.label')">
                                 <cascader :data="categories" v-model="form.category"></cascader>
+                            </form-item>
+                            <form-item label="摘要" prop="summery">
+                                <i-input placeholder="请输入文章简介"
+                                         :rows="4"
+                                         type="textarea"
+                                         v-model="form.summery"></i-input>
                             </form-item>
                             <form-item :label="trans('content.article.form.sticky.label')" prop="sticky">
                                 <i-switch v-model="form.is_sticky" size="large">
