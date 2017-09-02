@@ -113,7 +113,7 @@
                     },
                     {
                         key: 'created_at',
-                        title: injection.trans('content.article.table.date'),
+                        title: '发布时间',
                         width: 200,
                     },
                     {
