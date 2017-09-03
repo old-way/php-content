@@ -44,7 +44,7 @@ class InformationHandler extends Handler
         if ($information instanceof ArticleInformation) {
             $exists = $information->getRelation('categories');
             $exists instanceof Collection && $exists = $exists->keyBy('id');
-            $categories = ArticleCategory::query()->with('children.children.children')->where('parent_id', 0)->get();
+            $categories = ArticleCategory::query()->with('children.children.children')->whereNull('parent_id')->get();
             $categories->transform(function (ArticleCategory $category) use ($exists) {
                 if ($exists->has($category->getAttribute('id'))) {
                     $category->setAttribute('exists', true);

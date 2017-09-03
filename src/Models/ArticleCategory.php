@@ -38,6 +38,7 @@ class ArticleCategory extends Node
         'description',
         'flow_marketing',
         'pagination',
+        'parent_id',
         'seo_description',
         'seo_keyword',
         'seo_title',
@@ -53,7 +54,6 @@ class ArticleCategory extends Node
         'enabled'    => 'empty|1',
         'type'       => 'empty|normal',
         'pagination' => 'empty|20',
-        'type'       => 'empty|normal',
     ];
 
     /**

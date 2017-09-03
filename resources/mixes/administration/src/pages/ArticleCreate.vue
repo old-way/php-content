@@ -1,5 +1,4 @@
 <script>
-    import Editor from '../components/Editor.vue';
     import injection from '../helpers/injection';
 
     export default {
@@ -35,9 +34,6 @@
                 injection.loading.fail();
             });
         },
-        components: {
-            Editor,
-        },
         data() {
             return {
                 action: `${window.api}/content/upload`,
@@ -55,6 +51,7 @@
                         author: '',
                         link: 'http://',
                     },
+                    summery: '',
                     title: '',
                 },
                 loading: false,
@@ -65,6 +62,14 @@
                             required: true,
                             type: 'string',
                             message: injection.trans('content.article.form.content.error'),
+                            trigger: 'change',
+                        },
+                    ],
+                    summery: [
+                        {
+                            required: true,
+                            type: 'string',
+                            message: '简介不能为空',
                             trigger: 'change',
                         },
                     ],
@@ -81,13 +86,6 @@
             };
         },
         methods: {
-            editor(instance) {
-                const self = this;
-                instance.setContent(self.form.content);
-                instance.addListener('contentChange', () => {
-                    self.form.content = instance.getContent();
-                });
-            },
             submit() {
                 const self = this;
                 self.loading = true;
@@ -96,6 +94,7 @@
                         const formData = new window.FormData();
                         formData.append('category_id', self.form.category.length ? self.form.category[self.form.category.length - 1] : 0);
                         formData.append('content', self.form.content);
+                        formData.append('summery', self.form.summery);
                         formData.append('created_at', self.form.created_at);
                         formData.append('description', self.form.description);
                         formData.append('thumb_image', self.form.image ? self.form.image : '');
@@ -158,13 +157,6 @@
                 self.form.image = data.data.path;
             },
         },
-        watch: {
-            'form.content': {
-                handler() {
-                    this.$refs.form.validateField('content');
-                },
-            },
-        },
     };
 </script>
 <template>
@@ -179,7 +171,7 @@
                                          v-model="form.title"></i-input>
                             </form-item>
                             <form-item prop="content">
-                                <editor :path="path" @ready="editor"></editor>
+                                <editor :path="path" v-model="form.content"></editor>
                             </form-item>
                             <form-item>
                                 <i-button :loading="loading" type="primary" @click.native="submit">
@@ -215,6 +207,12 @@
                             </form-item>
                             <form-item :label="trans('content.article.form.category.label')">
                                 <cascader :data="categories" v-model="form.category"></cascader>
+                            </form-item>
+                            <form-item label="摘要" prop="summery">
+                                <i-input placeholder="请输入文章简介"
+                                         :rows="4"
+                                         type="textarea"
+                                         v-model="form.summery"></i-input>
                             </form-item>
                             <form-item :label="trans('content.article.form.sticky.label')" prop="sticky">
                                 <i-switch v-model="form.is_sticky" size="large">
