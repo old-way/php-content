@@ -65,14 +65,6 @@
                             trigger: 'change',
                         },
                     ],
-                    summery: [
-                        {
-                            required: true,
-                            type: 'string',
-                            message: '简介不能为空',
-                            trigger: 'change',
-                        },
-                    ],
                     title: [
                         {
                             required: true,
@@ -208,7 +200,7 @@
                             <form-item :label="trans('content.article.form.category.label')">
                                 <cascader :data="categories" v-model="form.category"></cascader>
                             </form-item>
-                            <form-item label="摘要" prop="summery">
+                            <form-item label="摘要">
                                 <i-input placeholder="请输入文章简介"
                                          :rows="4"
                                          type="textarea"

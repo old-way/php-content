@@ -96,14 +96,6 @@
                             trigger: 'change',
                         },
                     ],
-                    summery: [
-                        {
-                            required: true,
-                            type: 'string',
-                            message: '简介不能为空',
-                            trigger: 'change',
-                        },
-                    ],
                     title: [
                         {
                             required: true,
@@ -129,6 +121,7 @@
                         window.console.log(self.form);
                         formData.append('category_id', self.form.category.length ? self.form.category[self.form.category.length - 1] : 0);
                         formData.append('content', self.form.content);
+                        formData.append('summery', self.form.summery);
                         formData.append('created_at', self.form.created_at);
                         formData.append('description', self.form.description);
                         formData.append('is_hidden', self.form.is_hidden ? '1' : '0');
@@ -237,7 +230,7 @@
                             <form-item :label="trans('content.article.form.category.label')">
                                 <cascader :data="categories" v-model="form.category"></cascader>
                             </form-item>
-                            <form-item label="摘要" prop="summery">
+                            <form-item label="摘要">
                                 <i-input placeholder="请输入文章简介"
                                          :rows="4"
                                          type="textarea"
