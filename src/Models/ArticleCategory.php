@@ -24,6 +24,7 @@ class ArticleCategory extends Node
      */
     protected $appends = [
         'breadcrumb',
+        'path',
     ];
 
     /**
@@ -80,6 +81,35 @@ class ArticleCategory extends Node
         });
 
         return $paths->implode(' / ');
+    }
+
+    /**
+     * @param $value
+     *
+     * @return array
+     */
+    public function getPathAttribute($value)
+    {
+        if ($this->exists) {
+            $paths = collect([$this->attributes['id']]);
+            $this->load('parent');
+            $this->getRelation('parent') instanceof ArticleCategory && $this->parsePath($paths, $this->getRelation('parent'));
+
+            return $paths->toArray();
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * @param \Illuminate\Support\Collection         $paths
+     * @param \Notadd\Content\Models\ArticleCategory $category
+     */
+    protected function parsePath(Collection $paths, ArticleCategory $category)
+    {
+        $paths->prepend($category->getAttribute('id'));
+        $category->load('parent');
+        $category->getRelation('parent') instanceof ArticleCategory && $this->parsePath($paths, $category->getRelation('parent'));
     }
 
     /**
