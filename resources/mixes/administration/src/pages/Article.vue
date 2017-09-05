@@ -292,14 +292,9 @@
                 article.loading = true;
                 self.$http.post(`${window.api}/content/article/remove`, {
                     id: article.id,
-                }).then(response => {
-                    const result = response.data;
-                    result.data.forEach(item => {
-                        item.loading = false;
-                    });
-                    self.list = result.data;
-                    self.pagination = result.pagination;
+                }).then(() => {
                     self.$message.info(injection.trans('content.article.info.delete'));
+                    self.paginator(1);
                 }).finally(() => {
                     article.loading = false;
                 });
