@@ -60,6 +60,7 @@ class EditHandler extends Handler
             'keyword',
             'source_author',
             'source_link',
+            'summery',
             'thumb_image',
             'title',
         ]);
