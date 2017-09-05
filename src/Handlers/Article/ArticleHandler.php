@@ -40,8 +40,43 @@ class ArticleHandler extends Handler
             'id.numeric'  => '文章 ID 必须为数值',
             'id.required' => "文章 ID 必须填写",
         ]);
-        $article = Article::query()->with('category.parent.parent')->find($this->request->input('id'));
+        $builder = Article::query();
+        $builder->with('category.informations');
+        $article = $builder->find($this->request->input('id'));
         if ($article instanceof Article) {
+            $category = $article->getRelation('category');
+            if ($category instanceof Model) {
+                $informations = $category->getRelation('informations');
+                if ($informations instanceof Collection) {
+                    $category->setRelation('informations', $informations->transform(function (ArticleInformation $information) {
+                        switch ($information->getAttribute('type')) {
+                            case 'radio':
+                                $information->setAttribute('opinions', explode(PHP_EOL, $information->getAttribute('opinions')));
+                                break;
+                        }
+                        $rules = [];
+                        if ($information->getAttribute('required')) {
+                            $rules['required'] = true;
+                            $rules['message'] = '请输入' . $information->getAttribute('name');
+                            $rules['trigger'] = 'change';
+                            if (in_array($information->getAttribute('type'), ['date', 'datetime'])) {
+                                $rules['type'] = 'date';
+                            } else {
+                                $rules['type'] = 'string';
+                            }
+                        }
+                        $information->setAttribute('rules', $rules);
+                        $builder = ArticleInformationValue::query();
+                        $builder->where('information_id', $information->getAttribute('id'));
+                        $builder->where('article_id', $this->request->input('id'));
+                        $value = $builder->first();
+                        $information->setAttribute('value', $value instanceof ArticleInformationValue ? $value->getAttribute('value') : '');
+
+                        return $information;
+                    })->keyBy('id'));
+                }
+                $article->setRelation('category', $category);
+            }
             $builder = ArticleCategory::query();
             $builder->with('children.children.children');
             $builder->with('informations');
@@ -66,20 +101,35 @@ class ArticleHandler extends Handler
     protected function formatData(Collection $collection)
     {
         return $collection->transform(function (Model $model) {
-            $model->has('children') && $model->setRelation('children', $this->formatData($model->getRelation('children')));
-            $model->has('informations') && $model->setRelation('informations', $model->getRelation('informations')->transform(function (ArticleInformation $information) {
+            $model->setAttribute('label', $model->getAttribute('title'));
+            $model->setAttribute('value', $model->getAttribute('id'));
+            $model->getRelation('children') instanceof Collection && $model->setRelation('children', $this->formatData($model->getRelation('children')));
+            $model->getRelation('informations') instanceof Collection && $model->setRelation('informations', $model->getRelation('informations')->transform(function (ArticleInformation $information) {
                 switch ($information->getAttribute('type')) {
                     case 'radio':
                         $information->setAttribute('opinions', explode(PHP_EOL, $information->getAttribute('opinions')));
                         break;
                 }
+                $rules = [];
+                if ($information->getAttribute('required')) {
+                    $rules['required'] = true;
+                    $rules['message'] = '请输入' . $information->getAttribute('name');
+                    $rules['trigger'] = 'change';
+                    if (in_array($information->getAttribute('type'), ['date', 'datetime'])) {
+                        $rules['type'] = 'date';
+                    } else {
+                        $rules['type'] = 'string';
+                    }
+                }
+                $information->setAttribute('rules', $rules);
                 $builder = ArticleInformationValue::query();
                 $builder->where('information_id', $information->getAttribute('id'));
                 $builder->where('article_id', $this->request->input('id'));
-                $information->setAttribute('value', $builder->first() instanceof ArticleInformationValue ?: '');
+                $value = $builder->first();
+                $information->setAttribute('value', $value instanceof ArticleInformationValue ? $value->getAttribute('value') : '');
 
                 return $information;
-            }));
+            })->keyBy('id'));
 
             return $model;
         });
