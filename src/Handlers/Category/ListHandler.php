@@ -55,12 +55,26 @@ class ListHandler extends Handler
     protected function formatData(Collection $collection)
     {
         return $collection->transform(function (Model $model) {
+            $model->setAttribute('label', $model->getAttribute('title'));
+            $model->setAttribute('value', $model->getAttribute('id'));
             $model->has('children') && $model->setRelation('children', $this->formatData($model->getRelation('children')));
             $model->has('informations') && $model->setRelation('informations', $model->getRelation('informations')->transform(function (ArticleInformation $information) {
+                $rules = [];
+                if ($information->getAttribute('required')) {
+                    $rules['required'] = true;
+                    $rules['message'] = '请输入' . $information->getAttribute('name');
+                    $rules['trigger'] = 'change';
+                    if (in_array($information->getAttribute('type'), ['date', 'datetime'])) {
+                        $rules['type'] = 'date';
+                    } else {
+                        $rules['type'] = 'string';
+                    }
+                }
+                $information->setAttribute('rules', $rules);
                 $information->setAttribute('value', '');
 
                 return $information;
-            }));
+            })->keyBy('id'));
 
             return $model;
         });
