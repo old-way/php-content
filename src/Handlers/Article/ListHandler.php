@@ -8,8 +8,12 @@
  */
 namespace Notadd\Content\Handlers\Article;
 
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Notadd\Content\Models\Article;
 use Notadd\Content\Models\ArticleCategory;
+use Notadd\Content\Models\ArticleInformation;
+use Notadd\Content\Models\ArticleInformationValue;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\Foundation\Validation\Rule;
 
@@ -49,6 +53,7 @@ class ListHandler extends Handler
             'trashed.boolean'        => '仅删除标识必须为布尔值',
         ]);
         $builder = Article::query();
+        $builder->with('category.informations');
         $builder->with('category.parent.parent');
         if ($this->request->input('category_level', true)) {
             $id = $this->request->input('category_id', 0);
@@ -96,7 +101,26 @@ class ListHandler extends Handler
             $builder->onlyTrashed();
         }
         $pagination = $builder->paginate($this->request->input('paginate', 20));
-        $this->withCode(200)->withData($pagination->items())->withExtra([
+        $this->withCode(200)->withData(collect($pagination->items())->transform(function (Article $article) {
+            $category = $article->getRelation('category');
+            if ($category instanceof Model) {
+                $informations = $category->getRelation('informations');
+                if ($informations instanceof Collection) {
+                    $category->setRelation('informations', $informations->transform(function (ArticleInformation $information) use ($article) {
+                        $builder = ArticleInformationValue::query();
+                        $builder->where('information_id', $information->getAttribute('id'));
+                        $builder->where('article_id', $article->getAttribute('id'));
+                        $value = $builder->first();
+                        $information->setAttribute('value', $value instanceof ArticleInformationValue ? $value->getAttribute('value') : '');
+
+                        return $information;
+                    })->keyBy('id'));
+                }
+                $article->setRelation('category', $category);
+            }
+
+            return $article;
+        }))->withExtra([
             'pagination' => [
                 'total'         => $pagination->total(),
                 'per_page'      => $pagination->perPage(),
