@@ -2,8 +2,8 @@ name: 文章CMS
 identification: notadd/content
 description: 'Notadd 内容管理模块'
 author:
-    - twilroad
-    - 269044570@qq.com
+    - Notadd
+    - notadd@ibenchu.com
 version: 2.0.0
 assets:
     administration:
