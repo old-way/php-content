@@ -25,7 +25,7 @@ menus:
         icon: ios-book
         permission:
         path: '/content'
-        title: CMS
+        text: CMS
 migrations:
     - databases/migrations
 permissions:
