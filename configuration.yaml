@@ -20,6 +20,12 @@ entry: '/content'
 events:
     subscribes:
         - Notadd\Content\Listeners\RouteRegister
+menus:
+    content:
+        icon: ios-book
+        permission:
+        path: '/content'
+        title: CMS
 migrations:
     - databases/migrations
 permissions:
