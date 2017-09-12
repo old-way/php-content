@@ -5,27 +5,8 @@
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
             injection.http.post(`${window.api}/content/category/list`).then(response => {
-                const list = response.data.data;
                 next(vm => {
-                    vm.categories = list.map(first => ({
-                        children: Object.keys(first.children).map(i => {
-                            const second = first.children[i];
-                            return {
-                                children: Object.keys(second.children).map(n => {
-                                    const third = second.children[n];
-                                    return {
-                                        children: [],
-                                        label: third.title,
-                                        value: third.id,
-                                    };
-                                }),
-                                label: second.title,
-                                value: second.id,
-                            };
-                        }),
-                        label: first.title,
-                        value: first.id,
-                    }));
+                    vm.categories = response.data.data;
                     injection.loading.finish();
                     injection.message.info(injection.trans('content.article.category.info.get'));
                     injection.sidebar.active('content');
@@ -44,6 +25,7 @@
                     created_at: '',
                     description: '',
                     image: '',
+                    informations: [],
                     is_hidden: false,
                     is_sticky: false,
                     keyword: [],
@@ -65,14 +47,6 @@
                             trigger: 'change',
                         },
                     ],
-                    summery: [
-                        {
-                            required: true,
-                            type: 'string',
-                            message: '简介不能为空',
-                            trigger: 'change',
-                        },
-                    ],
                     title: [
                         {
                             required: true,
@@ -86,6 +60,11 @@
             };
         },
         methods: {
+            categoryChanged(path, data) {
+                if (data.length) {
+                    this.form.informations = data[data.length - 1].informations;
+                }
+            },
             submit() {
                 const self = this;
                 self.loading = true;
@@ -206,9 +185,9 @@
                                 </div>
                             </form-item>
                             <form-item :label="trans('content.article.form.category.label')">
-                                <cascader :data="categories" v-model="form.category"></cascader>
+                                <cascader :data="categories" v-model="form.category" @on-change="categoryChanged"></cascader>
                             </form-item>
-                            <form-item label="摘要" prop="summery">
+                            <form-item label="摘要">
                                 <i-input placeholder="请输入文章简介"
                                          :rows="4"
                                          type="textarea"
@@ -239,6 +218,46 @@
                                 <i-input :placeholder="trans('content.article.form.source.link.placeholder')"
                                          v-model="form.source.link"></i-input>
                             </form-item>
+                            <template v-for="information in form.informations">
+                                <form-item :label="information.name" :key="information.id" :prop="'informations.' + information.id + '.value'" :rules="form.informations[information.id].rules">
+                                    <i-input v-if="information.type === 'input'" v-model="form.informations[information.id].value"></i-input>
+                                    <i-input :rows="4" type="textarea"
+                                             v-if="information.type === 'textarea'"
+                                             v-model="form.informations[information.id].value"></i-input>
+                                    <date-picker :type="information.type"
+                                                 v-if="information.type === 'date' ||
+                                                       information.type === 'daterange' ||
+                                                       information.type === 'datetime'"
+                                                 v-model="form.informations[information.id].value"></date-picker>
+                                    <radio-group v-model="form.informations[information.id].value" size="large" v-if="information.type === 'radio'">
+                                        <radio :label="option" v-for="option in information.opinions"></radio>
+                                    </radio-group>
+                                    <div class="ivu-upload-wrapper" v-if="information.type === 'picture'">
+                                        <div class="preview" v-if="form.informations[information.id].value">
+                                            <img :src="form.informations[information.id].value">
+                                            <icon type="close" @click.native="remove(information.id)"></icon>
+                                        </div>
+                                        <upload :action="action"
+                                                :data="{
+                                                    id: information.id,
+                                                    type: 'information'
+                                                }"
+                                                :format="['jpg','jpeg','png']"
+                                                :headers="{
+                                                    Authorization: `Bearer ${$store.state.token.access_token}`
+                                                }"
+                                                :max-size="2048"
+                                                :on-error="uploadError"
+                                                :on-format-error="uploadFormatError"
+                                                :on-success="uploadSuccess"
+                                                ref="upload"
+                                                :show-upload-list="false"
+                                                v-if="form.informations[information.id].value === '' || form.informations[information.id].value === null">
+                                        </upload>
+                                    </div>
+                                    <p>{{ information.description }}</p>
+                                </form-item>
+                            </template>
                         </card>
                     </i-col>
                 </row>

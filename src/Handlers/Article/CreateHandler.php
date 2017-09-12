@@ -55,9 +55,9 @@ class CreateHandler extends Handler
             'keyword',
             'source_author',
             'source_link',
+            'summery',
             'thumb_image',
             'title',
-            'summery'
         ]);
 
         if ($article = Article::query()->create($data)) {

@@ -1,8 +1,6 @@
 import $ from 'jquery';
 
 import {
-    mixinBoard,
-    mixinNavigation,
     mixinRouter,
     mixinSidebar,
 } from '../mixes/injection';
@@ -18,8 +16,6 @@ function install(instance) {
         sidebar: instance.sidebar,
         trans: instance.trans,
     });
-    mixinBoard(instance);
-    mixinNavigation(instance);
     mixinRouter(instance);
     mixinSidebar(instance);
 }

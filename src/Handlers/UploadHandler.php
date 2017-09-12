@@ -6,13 +6,11 @@
  * @copyright (c) 2017, notadd.com
  * @datetime 2017-08-08 17:47
  */
-
 namespace Notadd\Content\Handlers;
 
 use Illuminate\Container\Container;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Notadd\Foundation\Routing\Abstracts\Handler;
 use Notadd\Foundation\Validation\Rule;
@@ -58,12 +56,11 @@ class UploadHandler extends Handler
         $file = $this->request->file('file');
         $hash = hash_file('md5', $file->getPathname(), false);
         $dictionary = $this->pathSplit($hash, '12', Collection::make([
-            static_path(),
             'uploads',
         ]))->implode(DIRECTORY_SEPARATOR);
         $name = Str::substr($hash, 12, 20) . '.' . $file->getClientOriginalExtension();
         if (!$this->filesystem->exists($dictionary . DIRECTORY_SEPARATOR . $name)) {
-            $file->move(base_path('statics' . DIRECTORY_SEPARATOR .$dictionary), $name);
+            $file->move(base_path('statics' . DIRECTORY_SEPARATOR . $dictionary), $name);
         }
         $this->withCode(200)->withData([
             'path' => $this->pathSplit($hash, '12,20', Collection::make([
