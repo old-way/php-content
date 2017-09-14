@@ -6,7 +6,7 @@
  * @copyright (c) 2016, notadd.com
  * @datetime 2016-10-08 18:30
  */
-namespace Notadd\Content\Listeners;
+namespace Notadd\Content\Subscribers;
 
 use Notadd\Content\Controllers\Api\Article\ArticleController as ArticleControllerForAdministration;
 use Notadd\Content\Controllers\Api\Article\ArticleInformationController as ArticleInformationControllerForAdministration;

@@ -19,7 +19,7 @@ csrf:
 entry: '/content'
 events:
     subscribes:
-        - Notadd\Content\Listeners\RouteRegister
+        - Notadd\Content\Subscribers\RouteRegister
 menus:
     content:
         icon: ios-book
