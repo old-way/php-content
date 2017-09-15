@@ -17,9 +17,6 @@ csrf:
     - 'api/content*'
     - 'api/page*'
 entry: '/content'
-events:
-    subscribes:
-        - Notadd\Content\Subscribers\RouteRegister
 menus:
     content:
         icon: ios-book
