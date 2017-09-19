@@ -8,8 +8,7 @@
                 order: 'asc',
                 sort: 'order',
             }).then(response => {
-                const data = response.data.data;
-                const pagination = response.data.pagination;
+                const { data, pagination } = response.data;
                 next(vm => {
                     data.forEach(item => {
                         item.loading = false;
@@ -36,7 +35,7 @@
                         align: 'center',
                         key: 'order',
                         render(h, data) {
-                            const row = data.row;
+                            const { row } = data;
                             return h('i-input', {
                                 on: {
                                     'on-change': event => {
@@ -156,8 +155,7 @@
                     order: 'asc',
                     sort: 'order',
                 }).then(response => {
-                    const data = response.data.data;
-                    const pagination = response.data.pagination;
+                    const { data, pagination } = response.data;
                     data.forEach(item => {
                         item.loading = false;
                     });

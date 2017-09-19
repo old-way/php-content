@@ -10,13 +10,12 @@
                     'with-children': true,
                 }),
             ]).then(injection.http.spread((articleData, categoryData) => {
-                const list = articleData.data.data;
-                const pagination = articleData.data.pagination;
+                const { data, pagination } = articleData.data;
                 next(vm => {
-                    list.forEach(article => {
+                    data.forEach(article => {
                         article.loading = false;
                     });
-                    vm.list = list;
+                    vm.list = data;
                     vm.pagination = pagination;
                     vm.categories.all = categoryData.data.data;
                     vm.categories.all.forEach(category => {
@@ -96,17 +95,17 @@
                     {
                         key: 'category',
                         render(h, data) {
-                            let title = '';
+                            let show = '';
                             if (data.row.category_id) {
-                                title = data.row.category.title;
+                                show = data.row.category.title;
                                 if (data.row.category.parent_id) {
-                                    title = `${data.row.category.parent.title} / ${title}`;
+                                    show = `${data.row.category.parent.title} / ${show}`;
                                     if (data.row.category.parent.parent_id) {
-                                        title = `${data.row.category.parent.parent.title} / ${title}`;
+                                        show = `${data.row.category.parent.parent.title} / ${show}`;
                                     }
                                 }
                             }
-                            return title;
+                            return show;
                         },
                         title: '分类',
                         width: 200,

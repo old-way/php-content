@@ -8,7 +8,7 @@
             injection.http.post(`${window.api}/content/article/information`, {
                 id: to.params.id,
             }).then(response => {
-                const categories = response.data.categories;
+                const { categories } = response.data;
                 const informations = response.data.data;
                 next(vm => {
                     vm.form = informations;
@@ -35,8 +35,8 @@
                                                 = categories[index].children[node].children[that].id;
                                             categories[index].children[node].children[that].text
                                                 = categories[index].children[node].children[that].title;
-                                            if (categories[index].children[node]
-                                                    .children[that].exists) {
+                                            if (categories[index]
+                                                .children[node].children[that].exists) {
                                                 vm.form.categories.push(categories[index]
                                                     .children[node].children[that].id);
                                             }
