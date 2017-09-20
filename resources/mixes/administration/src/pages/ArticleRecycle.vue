@@ -8,7 +8,7 @@
                 trashed: true,
             }).then(response => {
                 const list = response.data.data;
-                const pagination = response.data.pagination;
+                const { pagination } = response.data;
                 next(vm => {
                     list.forEach(article => {
                         article.loading = false;

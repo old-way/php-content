@@ -12,7 +12,7 @@
             ]).then(injection.http.spread((pageData, categoryData) => {
                 window.console.log(pageData, categoryData);
                 const list = pageData.data.data;
-                const pagination = pageData.data.pagination;
+                const { pagination } = pageData.data;
                 next(vm => {
                     list.forEach(page => {
                         page.loading = false;

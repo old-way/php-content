@@ -5,7 +5,7 @@
         beforeRouteEnter(to, from, next) {
             injection.loading.start();
             injection.http.post(`${window.api}/content/component/get`).then(response => {
-                const data = response.data.data;
+                const { data } = response.data;
                 next(vm => {
                     injection.loading.finish();
                     injection.sidebar.active('content');

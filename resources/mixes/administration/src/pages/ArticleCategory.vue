@@ -139,7 +139,7 @@
                             id: injection.jquery(third).data('id'),
                         })).get(),
                     }))
-                    .get(),
+                        .get(),
                 })).get();
                 self.$loading.start();
                 self.loading = true;

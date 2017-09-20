@@ -2,15 +2,15 @@ require('./check-versions')();
 
 process.env.NODE_ENV = 'production';
 
-var buildWebpackConfig = require('./webpack.prod.conf');
-var chalk = require('chalk');
-var config = require('../config');
-var merge = require('webpack-merge');
-var rm = require('rimraf');
-var shell = require('shelljs');
-var path = require('path');
-var webpack = require('webpack');
-var webpackConfig = merge(buildWebpackConfig, {
+let buildWebpackConfig = require('./webpack.prod.conf');
+let chalk = require('chalk');
+let config = require('../config');
+let merge = require('webpack-merge');
+let rm = require('rimraf');
+let shell = require('shelljs');
+let path = require('path');
+let webpack = require('webpack');
+let webpackConfig = merge(buildWebpackConfig, {
     plugins: [
         new webpack.ProgressPlugin()
     ]
@@ -27,7 +27,7 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
                 chunks: false,
                 chunkModules: false
             }) + '\n\n');
-        var assetsPath = path.join(__dirname, '../../../../../../statics/assets/content/administration');
+        let assetsPath = path.join(__dirname, '../../../../../../statics/assets/content/administration');
 
         console.log(chalk.cyan('  Moving files to path ' + assetsPath + '\n'));
 
