@@ -9,7 +9,6 @@
                     vm.categories = response.data.data;
                     injection.loading.finish();
                     injection.message.info(injection.trans('content.article.category.info.get'));
-                    injection.sidebar.active('content');
                 });
             }).catch(() => {
                 injection.loading.fail();

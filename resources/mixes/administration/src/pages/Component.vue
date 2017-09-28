@@ -7,9 +7,6 @@
             injection.http.post(`${window.api}/content/component/get`).then(response => {
                 const { data } = response.data;
                 next(vm => {
-                    injection.loading.finish();
-                    injection.sidebar.active('content');
-                    window.console.log(data);
                     vm.form.article.description = data.articleDescription;
                     vm.form.article.keyword = data.articleKeyword;
                     vm.form.article.title = data.articleTitle;
@@ -19,6 +16,7 @@
                     vm.form.page.description = data.pageDescription;
                     vm.form.page.keyword = data.pageKeyword;
                     vm.form.page.title = data.pageTitle;
+                    injection.loading.finish();
                 });
             });
         },

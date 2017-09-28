@@ -26,7 +26,6 @@
                     vm.form.title = article.title;
                     injection.loading.finish();
                     injection.message.info(injection.trans('content.article.info.get'));
-                    injection.sidebar.active('content');
                 });
             }).catch(() => {
                 injection.loading.fail();

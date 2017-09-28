@@ -49,7 +49,6 @@
                     vm.categories = categories;
                     window.console.log(vm.categories);
                     injection.loading.finish();
-                    injection.sidebar.active('content');
                 });
             }).catch(() => {
                 injection.loading.error();
