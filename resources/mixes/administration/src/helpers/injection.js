@@ -1,8 +1,6 @@
 import $ from 'jquery';
 
-import {
-    mixinRouter,
-} from '../mixes/injection';
+import mixinRouter from '../mixes/router';
 
 const injection = {};
 
