@@ -2,7 +2,6 @@ import $ from 'jquery';
 
 import {
     mixinRouter,
-    mixinSidebar,
 } from '../mixes/injection';
 
 const injection = {};
@@ -17,7 +16,6 @@ function install(instance) {
         trans: instance.trans,
     });
     mixinRouter(instance);
-    mixinSidebar(instance);
 }
 
 export default Object.assign(injection, {
