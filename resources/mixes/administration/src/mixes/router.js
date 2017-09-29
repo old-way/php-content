@@ -17,7 +17,8 @@ import PageCreate from '../pages/PageCreate.vue';
 import PageEdit from '../pages/PageEdit.vue';
 
 export default function (injection) {
-    injection.useModuleRoute([
+    injection.routers = [
+        ...injection.routers,
         {
             children: [
                 {
@@ -104,5 +105,5 @@ export default function (injection) {
             component: Layout,
             path: '/content',
         },
-    ]);
+    ];
 }
