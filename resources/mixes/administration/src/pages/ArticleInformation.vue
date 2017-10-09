@@ -16,7 +16,6 @@
                     vm.list = data;
                     vm.pagination = pagination;
                     injection.loading.finish();
-                    injection.sidebar.active('content');
                 });
             }).catch(() => {
                 injection.loading.error();

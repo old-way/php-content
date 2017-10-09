@@ -31,7 +31,6 @@
                         vm.form.content = article.content;
                         injection.loading.finish();
                         injection.message.info(injection.trans('content.page.info.get'));
-                        injection.sidebar.active('content');
                     });
                 }).catch(() => {
                     injection.loading.fail();

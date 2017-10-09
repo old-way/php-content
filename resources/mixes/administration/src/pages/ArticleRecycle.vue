@@ -18,7 +18,6 @@
                     vm.pagination = pagination;
                     injection.loading.finish();
                     injection.message.info(injection.trans('content.article.list.info.get'));
-                    injection.sidebar.active('content');
                 });
             }).catch(() => {
                 injection.loading.fail();

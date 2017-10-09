@@ -22,7 +22,6 @@
                     }));
                     injection.loading.finish();
                     injection.message.info(injection.trans('content.page.category.info.fetch'));
-                    injection.sidebar.active('content');
                 });
             }).catch(() => {
                 injection.loading.fail();

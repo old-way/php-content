@@ -10,7 +10,6 @@
                 next(vm => {
                     vm.categories = categories;
                     injection.loading.finish();
-                    injection.sidebar.active('content');
                 });
             }).catch(() => {
                 injection.loading.error();
