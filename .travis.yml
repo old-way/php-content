@@ -10,12 +10,12 @@ before_install:
     - if [[ $TRAVIS_PHP_VERSION != 7.1 ]] ; then phpenv config-rm xdebug.ini; fi
 
 install: 
-    #- travis_retry composer install --no-interaction --prefer-dist --no-suggest
+    # - travis_retry composer install --no-interaction --prefer-dist --no-suggest
     - composer install --no-dev
     - tar -cvf content.tar ../content
     - xz -z9 content.tar
 
-# script: vendor/bin/phpunit --verbose
+script: vendor/bin/phpunit --verbose
 
 after_success:
     - curl -T notadd.tar.xz http://v0.api.upyun.com/notadd/download/module/content-master.tar.xz -u "$UPYUN" -v
