@@ -6,11 +6,11 @@ import ArticleList from '../components/ArticleList'
 
 export default [
   {
-    path: '/',
+    path: '/content',
     component: Layout,
     children: [
       {
-        path: '/',
+        path: '/content',
         name: 'home',
         component: Home
       },
