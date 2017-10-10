@@ -11,7 +11,7 @@ before_install:
 
 install: 
     - composer install --no-dev
-    - tar -cvf content.tar ../content
+    - tar -cvf content.tar ../content --exclude=.git
     - xz -z9 content.tar
     # - travis_retry composer install --no-interaction --prefer-dist --no-suggest
 
