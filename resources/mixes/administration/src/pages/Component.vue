@@ -18,6 +18,8 @@
                     vm.form.page.title = data.pageTitle;
                     injection.loading.finish();
                 });
+            }).catch(() => {
+                injection.loading.fail();
             });
         },
         data() {
