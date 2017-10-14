@@ -22,7 +22,7 @@ class ComponentController extends Controller
      *
      * @param \Notadd\Content\Handlers\Component\GetHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
     public function get(GetHandler $handler)
     {
@@ -34,7 +34,7 @@ class ComponentController extends Controller
      *
      * @param \Notadd\Content\Handlers\Component\SetHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function set(SetHandler $handler)

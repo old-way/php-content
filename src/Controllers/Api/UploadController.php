@@ -20,7 +20,7 @@ class UploadController extends Controller
     /**
      * @param \Notadd\Content\Handlers\UploadHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      */
     public function handle(UploadHandler $handler)
     {

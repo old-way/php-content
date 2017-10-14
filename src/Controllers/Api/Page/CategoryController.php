@@ -25,7 +25,7 @@ class CategoryController
      *
      * @param \Notadd\Content\Handlers\Page\Category\CreateHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function create(CreateHandler $handler)
@@ -38,7 +38,7 @@ class CategoryController
      *
      * @param \Notadd\Content\Handlers\Page\Category\RemoveHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function remove(RemoveHandler $handler)
@@ -51,7 +51,7 @@ class CategoryController
      *
      * @param \Notadd\Content\Handlers\Page\Category\EditHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function edit(EditHandler $handler)
@@ -64,7 +64,7 @@ class CategoryController
      *
      * @param \Notadd\Content\Handlers\Page\Category\ListHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function list(ListHandler $handler)
@@ -77,7 +77,7 @@ class CategoryController
      *
      * @param \Notadd\Content\Handlers\Page\Category\CategoryHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function category(CategoryHandler $handler)
@@ -88,7 +88,7 @@ class CategoryController
     /**
      * @param \Notadd\Content\Handlers\Page\Category\SortHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function sort(SortHandler $handler)

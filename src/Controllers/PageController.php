@@ -23,7 +23,7 @@ class PageController extends Controller
      *
      * @param \Notadd\Content\Handlers\Page\CreateHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse
      * @throws \Exception
      */
     public function create(CreateHandler $handler)
@@ -36,7 +36,7 @@ class PageController extends Controller
      *
      * @param \Notadd\Content\Handlers\Page\RemoveHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse
      * @throws \Exception
      */
     public function destroy(RemoveHandler $handler)
@@ -59,7 +59,7 @@ class PageController extends Controller
      *
      * @param \Notadd\Content\Handlers\Page\PageHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse
      * @throws \Exception
      */
     public function show(PageHandler $handler)

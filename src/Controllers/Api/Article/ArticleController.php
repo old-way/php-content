@@ -26,7 +26,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\AutoHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function auto(AutoHandler $handler)
@@ -39,7 +39,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\CreateHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function create(CreateHandler $handler)
@@ -52,7 +52,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\RemoveHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function remove(RemoveHandler $handler)
@@ -65,7 +65,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\EditHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function edit(EditHandler $handler)
@@ -78,7 +78,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\ListHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function list(ListHandler $handler)
@@ -91,7 +91,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\ArticleHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse
      * @throws \Exception
      */
     public function article(ArticleHandler $handler)
@@ -104,7 +104,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\BatchMoveHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse
      * @throws \Exception
      */
     public function batchMove(BatchMoveHandler $handler)

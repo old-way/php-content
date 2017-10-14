@@ -25,7 +25,7 @@ class PageController extends Controller
      *
      * @param \Notadd\Content\Handlers\Page\CreateHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function create(CreateHandler $handler)
@@ -38,7 +38,7 @@ class PageController extends Controller
      *
      * @param \Notadd\Content\Handlers\Page\RemoveHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function remove(RemoveHandler $handler)
@@ -51,7 +51,7 @@ class PageController extends Controller
      *
      * @param \Notadd\Content\Handlers\Page\EditHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function edit(EditHandler $handler)
@@ -64,7 +64,7 @@ class PageController extends Controller
      *
      * @param \Notadd\Content\Handlers\Page\ListHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse|\Psr\Http\Message\ResponseInterface|\Zend\Diactoros\Response
      * @throws \Exception
      */
     public function list(ListHandler $handler)
@@ -77,7 +77,7 @@ class PageController extends Controller
      *
      * @param \Notadd\Content\Handlers\Page\PageHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse * @throws \Exception
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse * @throws \Exception
      * @throws \Exception
      */
     public function page(PageHandler $handler)
