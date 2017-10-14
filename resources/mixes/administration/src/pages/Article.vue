@@ -333,8 +333,8 @@
             search() {
                 const self = this;
                 if (self.keyword.length > 0) {
-                    injection.loading.start();
-                    injection.http.post(`${window.api}/content/article/list`, {
+                    self.$loading.start();
+                    self.http.post(`${window.api}/content/article/list`, {
                         search: self.keyword,
                     }).then(response => {
                         const list = response.data.data;
@@ -343,10 +343,10 @@
                         });
                         self.list = list;
                         self.pagination = response.data.pagination;
-                        injection.loading.finish();
-                        injection.message.info(injection.trans('content.article.list.info.get'));
+                        self.$loading.finish();
+                        self.$message.info(injection.trans('content.article.list.info.get'));
                     }).catch(() => {
-                        injection.loading.fail();
+                        self.$loading.fail();
                     });
                 } else {
                     self.$notice.error({

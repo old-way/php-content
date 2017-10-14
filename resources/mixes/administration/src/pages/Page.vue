@@ -284,7 +284,7 @@
             search() {
                 const self = this;
                 if (self.keyword.length > 0) {
-                    injection.loading.start();
+                    self.$loading.start();
                     self.$http.post(`${window.api}/content/page/list`, {
                         search: self.keyword,
                     }).then(response => {
@@ -294,10 +294,10 @@
                         });
                         self.list = list;
                         self.pagination = response.data.pagination;
-                        injection.loading.finish();
-                        injection.message.info(injection.trans('content.page.list.info.get'));
+                        self.$loading.finish();
+                        self.$message.info(injection.trans('content.page.list.info.get'));
                     }).catch(() => {
-                        injection.loading.fail();
+                        self.$loading.fail();
                     });
                 } else {
                     self.$notice.error({
