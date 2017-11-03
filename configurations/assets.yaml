@@ -1,0 +1,5 @@
+administration:
+    notadd/content:
+        permissions: ''
+        scripts: assets/content/administration/js/module.min.js
+        stylesheets: assets/content/administration/css/module.min.css

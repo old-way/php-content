@@ -1,0 +1,15 @@
+name: 文章CMS
+identification: notadd/content
+description: 'Notadd 内容管理模块'
+author:
+    - Notadd
+    - notadd@ibenchu.com
+version: 2.0.0
+csrf:
+    - 'api/article*'
+    - 'api/category*'
+    - 'api/content*'
+    - 'api/page*'
+entry: '/content'
+migrations:
+    - databases/migrations
