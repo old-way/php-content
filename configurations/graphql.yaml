@@ -1,0 +1,6 @@
+schemas:
+    default:
+        query:
+            articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
+types:
+    - Notadd\Content\GrqphQL\Types\ArticleType
