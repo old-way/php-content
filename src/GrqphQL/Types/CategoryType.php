@@ -4,16 +4,16 @@
  *
  * @author        TwilRoad <heshudong@ibenchu.com>
  * @copyright (c) 2017, notadd.com
- * @datetime      2017-11-07 17:14
+ * @datetime      2017-11-07 18:21
  */
 namespace Notadd\Content\GrqphQL\Types;
 
 use Notadd\Foundation\GraphQL\Abstracts\Type as AbstractType;
 
 /**
- * Class ArticleType.
+ * Class CategoryType.
  */
-class ArticleType extends AbstractType
+class CategoryType extends AbstractType
 {
     /**
      * @return array
@@ -28,6 +28,6 @@ class ArticleType extends AbstractType
      */
     public function name()
     {
-        return 'article';
+        return 'category';
     }
 }
