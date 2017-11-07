@@ -1,5 +1,10 @@
 schemas:
     default:
+        mutation:
+            createArticle: Notadd\Content\GrqphQL\Mutations\CreateArticleMutation
+            deleteArticle: Notadd\Content\GrqphQL\Mutations\DeleteArticleMutation
+            restoreArticle: Notadd\Content\GrqphQL\Mutations\RestoreArticleMutation
+            updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
         query:
             articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
 types:
