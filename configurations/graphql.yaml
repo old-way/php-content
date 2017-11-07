@@ -10,3 +10,4 @@ schemas:
 types:
     - Notadd\Content\GrqphQL\Types\ArticleType
     - Notadd\Content\GrqphQL\Types\CategoryType
+    - Notadd\Content\GrqphQL\Types\PageType
