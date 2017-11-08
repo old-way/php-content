@@ -8,6 +8,7 @@ schemas:
             deleteArticle: Notadd\Content\GrqphQL\Mutations\DeleteArticleMutation
             deleteArticleCategory: Notadd\Content\GrqphQL\Mutations\DeleteArticleCategoryMutation
             deletePage: Notadd\Content\GrqphQL\Mutations\DeletePageMutation
+            deletePageCategory: Notadd\Content\GrqphQL\Mutations\DeletePageCategoryMutation
             restoreArticle: Notadd\Content\GrqphQL\Mutations\RestoreArticleMutation
             restorePage: Notadd\Content\GrqphQL\Mutations\RestorePageMutation
             updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
