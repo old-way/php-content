@@ -8,6 +8,7 @@ schemas:
             restoreArticle: Notadd\Content\GrqphQL\Mutations\RestoreArticleMutation
             restorePage: Notadd\Content\GrqphQL\Mutations\RestorePageMutation
             updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
+            updatePage: Notadd\Content\GrqphQL\Mutations\UpdatePageMutation
         query:
             articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
             articleCategories: Notadd\Content\GrqphQL\Queries\ArticleCategoryQuery
