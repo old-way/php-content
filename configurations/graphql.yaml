@@ -12,6 +12,7 @@ schemas:
             restoreArticle: Notadd\Content\GrqphQL\Mutations\RestoreArticleMutation
             restoreArticleCategory: Notadd\Content\GrqphQL\Mutations\RestoreArticleCategoryMutation
             restorePage: Notadd\Content\GrqphQL\Mutations\RestorePageMutation
+            restorePageCategory: Notadd\Content\GrqphQL\Mutations\RestorePageCategoryMutation
             updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
             updatePage: Notadd\Content\GrqphQL\Mutations\UpdatePageMutation
         query:
