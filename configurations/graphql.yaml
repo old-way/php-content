@@ -8,6 +8,7 @@ schemas:
         query:
             articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
             articleCategories: Notadd\Content\GrqphQL\Queries\ArticleCategoryQuery
+            pages: Notadd\Content\GrqphQL\Queries\PageQuery
 types:
     - Notadd\Content\GrqphQL\Types\ArticleType
     - Notadd\Content\GrqphQL\Types\ArticleCategoryType
