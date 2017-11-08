@@ -16,6 +16,7 @@ schemas:
             updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
             updateArticleCategory: Notadd\Content\GrqphQL\Mutations\UpdateArticleCategoryMutation
             updatePage: Notadd\Content\GrqphQL\Mutations\UpdatePageMutation
+            updatePageCategory: Notadd\Content\GrqphQL\Mutations\UpdatePageCategoryMutation
         query:
             articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
             articleCategories: Notadd\Content\GrqphQL\Queries\ArticleCategoryQuery
