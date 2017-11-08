@@ -6,6 +6,7 @@ schemas:
             deleteArticle: Notadd\Content\GrqphQL\Mutations\DeleteArticleMutation
             deletePage: Notadd\Content\GrqphQL\Mutations\DeletePageMutation
             restoreArticle: Notadd\Content\GrqphQL\Mutations\RestoreArticleMutation
+            restorePage: Notadd\Content\GrqphQL\Mutations\RestorePageMutation
             updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
         query:
             articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
