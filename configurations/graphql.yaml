@@ -25,5 +25,6 @@ schemas:
 types:
     - Notadd\Content\GrqphQL\Types\ArticleType
     - Notadd\Content\GrqphQL\Types\ArticleCategoryType
+    - Notadd\Content\GrqphQL\Types\ArticleInformationType
     - Notadd\Content\GrqphQL\Types\PageType
     - Notadd\Content\GrqphQL\Types\PageCategoryType
