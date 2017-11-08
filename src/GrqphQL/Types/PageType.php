@@ -28,6 +28,6 @@ class PageType extends AbstractType
      */
     public function name()
     {
-        // TODO: Implement name() method.
+        return 'page';
     }
 }
