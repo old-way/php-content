@@ -14,6 +14,7 @@ schemas:
             restorePage: Notadd\Content\GrqphQL\Mutations\RestorePageMutation
             restorePageCategory: Notadd\Content\GrqphQL\Mutations\RestorePageCategoryMutation
             updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
+            updateArticleCategory: Notadd\Content\GrqphQL\Mutations\UpdateArticleCategoryMutation
             updatePage: Notadd\Content\GrqphQL\Mutations\UpdatePageMutation
         query:
             articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
