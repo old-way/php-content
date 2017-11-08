@@ -13,7 +13,7 @@ use Notadd\Foundation\GraphQL\Abstracts\Type as AbstractType;
 /**
  * Class CategoryType.
  */
-class CategoryType extends AbstractType
+class ArticleCategoryType extends AbstractType
 {
     /**
      * @return array
@@ -28,6 +28,6 @@ class CategoryType extends AbstractType
      */
     public function name()
     {
-        return 'category';
+        return 'articleCategory';
     }
 }

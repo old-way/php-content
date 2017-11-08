@@ -7,7 +7,8 @@ schemas:
             updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
         query:
             articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
+            articleCategories: Notadd\Content\GrqphQL\Queries\ArticleCategoryQuery
 types:
     - Notadd\Content\GrqphQL\Types\ArticleType
-    - Notadd\Content\GrqphQL\Types\CategoryType
+    - Notadd\Content\GrqphQL\Types\ArticleCategoryType
     - Notadd\Content\GrqphQL\Types\PageType
