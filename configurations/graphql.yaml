@@ -6,6 +6,7 @@ schemas:
             createPage: Notadd\Content\GrqphQL\Mutations\CreatePageMutation
             createPageCategory: Notadd\Content\GrqphQL\Mutations\CreatePageCategoryMutation
             deleteArticle: Notadd\Content\GrqphQL\Mutations\DeleteArticleMutation
+            deleteArticleCategory: Notadd\Content\GrqphQL\Mutations\DeleteArticleCategoryMutation
             deletePage: Notadd\Content\GrqphQL\Mutations\DeletePageMutation
             restoreArticle: Notadd\Content\GrqphQL\Mutations\RestoreArticleMutation
             restorePage: Notadd\Content\GrqphQL\Mutations\RestorePageMutation
