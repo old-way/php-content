@@ -1,0 +1,39 @@
+content:
+    icon: ios-book
+    permission:
+    path: '/content'
+    text: CMS
+    children:
+        -
+            children:
+                -
+                    path: /content/article
+                    text: 全部文章
+                -
+                    path: /content/article/category
+                    text: 分类管理
+                -
+                    path: /content/article/information
+                    text: 信息管理
+                -
+                    path: /content/article/recycle
+                    text: 回收站
+            icon: plus
+            text: 文章管理
+        -
+            children:
+                -
+                    path: /content/page
+                    text: 全部页面
+                -
+                    path: /content/page/category
+                    text: 分类管理
+            icon: plus
+            text: 页面管理
+        -
+            children:
+                -
+                    path: /content/component
+                    text: SEO 配置
+            icon: plus
+            text: 模块管理

@@ -1,0 +1,30 @@
+schemas:
+    default:
+        mutation:
+            createArticle: Notadd\Content\GrqphQL\Mutations\CreateArticleMutation
+            createArticleCategory: Notadd\Content\GrqphQL\Mutations\CreateArticleCategoryMutation
+            createPage: Notadd\Content\GrqphQL\Mutations\CreatePageMutation
+            createPageCategory: Notadd\Content\GrqphQL\Mutations\CreatePageCategoryMutation
+            deleteArticle: Notadd\Content\GrqphQL\Mutations\DeleteArticleMutation
+            deleteArticleCategory: Notadd\Content\GrqphQL\Mutations\DeleteArticleCategoryMutation
+            deletePage: Notadd\Content\GrqphQL\Mutations\DeletePageMutation
+            deletePageCategory: Notadd\Content\GrqphQL\Mutations\DeletePageCategoryMutation
+            restoreArticle: Notadd\Content\GrqphQL\Mutations\RestoreArticleMutation
+            restoreArticleCategory: Notadd\Content\GrqphQL\Mutations\RestoreArticleCategoryMutation
+            restorePage: Notadd\Content\GrqphQL\Mutations\RestorePageMutation
+            restorePageCategory: Notadd\Content\GrqphQL\Mutations\RestorePageCategoryMutation
+            updateArticle: Notadd\Content\GrqphQL\Mutations\UpdateArticleMutation
+            updateArticleCategory: Notadd\Content\GrqphQL\Mutations\UpdateArticleCategoryMutation
+            updatePage: Notadd\Content\GrqphQL\Mutations\UpdatePageMutation
+            updatePageCategory: Notadd\Content\GrqphQL\Mutations\UpdatePageCategoryMutation
+        query:
+            articles: Notadd\Content\GrqphQL\Queries\ArticleQuery
+            articleCategories: Notadd\Content\GrqphQL\Queries\ArticleCategoryQuery
+            pages: Notadd\Content\GrqphQL\Queries\PageQuery
+            pageCategories: Notadd\Content\GrqphQL\Queries\PageCategoryQuery
+types:
+    - Notadd\Content\GrqphQL\Types\ArticleType
+    - Notadd\Content\GrqphQL\Types\ArticleCategoryType
+    - Notadd\Content\GrqphQL\Types\ArticleInformationType
+    - Notadd\Content\GrqphQL\Types\PageType
+    - Notadd\Content\GrqphQL\Types\PageCategoryType

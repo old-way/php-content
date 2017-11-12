@@ -1,0 +1,9 @@
+-
+    description: 内容管理权限。
+    groups:
+        -
+            description: 内容管理权限定义。
+            identification: content
+            name: 内容管理权限
+    identification: content
+    name: 内容管理

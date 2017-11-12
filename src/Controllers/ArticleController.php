@@ -22,7 +22,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\CreateHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse
      * @throws \Exception
      */
     public function create(CreateHandler $handler)
@@ -45,7 +45,7 @@ class ArticleController extends Controller
      *
      * @param \Notadd\Content\Handlers\Article\RemoveHandler $handler
      *
-     * @return \Notadd\Foundation\Passport\Responses\ApiResponse
+     * @return \Notadd\Foundation\Routing\Responses\ApiResponse
      * @throws \Exception
      */
     public function destroy(RemoveHandler $handler)
