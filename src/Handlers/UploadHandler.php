@@ -60,7 +60,7 @@ class UploadHandler extends Handler
         ]))->implode(DIRECTORY_SEPARATOR);
         $name = Str::substr($hash, 12, 20) . '.' . $file->getClientOriginalExtension();
         if (!$this->filesystem->exists($dictionary . DIRECTORY_SEPARATOR . $name)) {
-            $file->move(base_path('statics' . DIRECTORY_SEPARATOR . $dictionary), $name);
+            $file->move(base_path('public' . DIRECTORY_SEPARATOR . $dictionary), $name);
         }
         $this->withCode(200)->withData([
             'path' => $this->pathSplit($hash, '12,20', Collection::make([
