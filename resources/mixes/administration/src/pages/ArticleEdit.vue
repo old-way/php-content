@@ -8,7 +8,6 @@
                 id: to.params.id,
             }).then(response => {
                 const article = response.data.data;
-
                 next(vm => {
                     vm.categories = response.data.categories;
                     vm.form.category = article.category?article.category.path:{};
