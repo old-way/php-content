@@ -1,8 +1,8 @@
 # Notadd Content
 
-[![Build Status](https://travis-ci.org/notadd/content.svg?branch=master)](https://travis-ci.org/notadd/content)
-![Packagist](https://img.shields.io/packagist/v/notadd/content.svg) 
-![Downloads](https://img.shields.io/packagist/dt/notadd/content.svg)
+[![Build Status](https://travis-ci.org/notadd/content.svg?branch=master)](https://img.shields.io/travis/notadd/content/master.svg?style=flat-square)
+![Packagist](https://img.shields.io/packagist/v/notadd/content.svg?style=flat-squar) 
+![Downloads](https://img.shields.io/packagist/dt/notadd/content.svg?style=flat-squar)
 
 Notadd Framework 的 CMS 模块。
 
