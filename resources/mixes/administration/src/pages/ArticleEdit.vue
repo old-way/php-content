@@ -10,13 +10,13 @@
                 const article = response.data.data;
                 next(vm => {
                     vm.categories = response.data.categories;
-                    vm.form.category = article.category.path;
+                    vm.form.category = article.category?article.category.path:{};
                     vm.form.content = article.content;
                     vm.form.summery = article.summery;
                     vm.form.created_at = article.created_at;
                     vm.form.description = article.description;
                     vm.form.image = article.thumb_image;
-                    vm.form.informations = article.category.informations;
+                    vm.form.informations = article.category?article.category.informations:{};
                     vm.form.is_hidden = article.is_hidden === 1;
                     vm.form.is_sticky = article.is_sticky === 1;
                     vm.form.source = {
