@@ -109,7 +109,7 @@
                 });
                 self.$loading.start();
                 self.$http.post(`${window.api}/content/category/list`).then(response => {
-                    self.list = response.data.data;
+                    //self.list = response.data.data;
                     self.$loading.finish();
                     self.$notice.open({
                         title: '刷新数据成功！',
