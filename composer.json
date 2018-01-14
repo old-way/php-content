@@ -44,10 +44,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php notadd cache:clear"
+            "cd ../../ && php notadd cache:clear"
         ],
         "post-update-cmd": [
-            "php notadd cache:clear"
+            "cd ../../ && php notadd cache:clear"
         ]
     }
 }
