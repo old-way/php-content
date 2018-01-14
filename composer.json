@@ -41,13 +41,5 @@
         "notadd/installers": "0.14.*",
         "notadd/testing": "0.4.*",
         "phpunit/phpunit": "~6.0"
-    },
-    "scripts": {
-        "post-install-cmd": [
-            "cd ../../ && php notadd cache:clear"
-        ],
-        "post-update-cmd": [
-            "cd ../../ && php notadd cache:clear"
-        ]
     }
 }
