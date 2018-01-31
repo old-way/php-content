@@ -171,7 +171,7 @@
                                             :before-upload="uploadBefore"
                                             :format="['jpg','jpeg','png']"
                                             :headers="{
-                                                    Authorization: `Bearer ${$store.state.token.access_token}`
+                                                    Authorization: `Bearer ${$store.state.token}`
                                                 }"
                                             :max-size="2048"
                                             :on-error="uploadError"
@@ -243,7 +243,7 @@
                                                 }"
                                                 :format="['jpg','jpeg','png']"
                                                 :headers="{
-                                                    Authorization: `Bearer ${$store.state.token.access_token}`
+                                                    Authorization: `Bearer ${$store.state.token}`
                                                 }"
                                                 :max-size="2048"
                                                 :on-error="uploadError"
